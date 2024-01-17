@@ -7,6 +7,12 @@ dotenv.config();
 
 const app: Application = express();
 
-initDb().then((): void => {
-    expressConfig(app);
-});
+initDb()
+    .then((): void => {
+        expressConfig(app);
+    })
+    .catch((err): void => {
+        if (err) {
+            console.log(err.message);
+        }
+    });

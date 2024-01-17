@@ -4,7 +4,10 @@ import Inventory from './Inventory';
 import { UserStorage } from '../../types/userStorage';
 import { Column, DataType, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
 
-@Table({})
+@Table({
+    tableName: 'user',
+    modelName: 'User',
+})
 class User extends Model implements UserStorage {
     @Column({ type: DataType.INTEGER, autoIncrement: true, primaryKey: true })
     declare id: number;

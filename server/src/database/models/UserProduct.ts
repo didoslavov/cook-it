@@ -2,7 +2,10 @@ import { Model, Table, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import User from './User';
 import Product from './Product';
 
-@Table({})
+@Table({
+    tableName: 'user_product',
+    modelName: 'UserProduct',
+})
 class UserProduct extends Model {
     @ForeignKey(() => User)
     userId: number = 0;

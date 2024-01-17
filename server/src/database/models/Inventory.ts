@@ -3,7 +3,10 @@ import Product from './Product';
 import User from './User';
 import { InventoryStorage } from '../../types/inventoryStorage';
 
-@Table({})
+@Table({
+    tableName: 'inventories',
+    modelName: 'Inventory',
+})
 class Inventory extends Model implements InventoryStorage {
     @Column({ type: DataType.INTEGER, autoIncrement: true, primaryKey: true })
     declare id: number;

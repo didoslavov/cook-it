@@ -2,7 +2,10 @@ import { Model, Table, ForeignKey, BelongsTo, DataType, Column } from 'sequelize
 import List from './List';
 import Product from './Product';
 
-@Table({})
+@Table({
+    tableName: 'list_product',
+    modelName: 'ListProduct',
+})
 class ListProduct extends Model {
     @ForeignKey(() => List)
     @Column({ type: DataType.INTEGER, allowNull: false })

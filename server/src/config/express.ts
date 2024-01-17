@@ -14,5 +14,5 @@ export default (app: Application): void => {
     app.use(cookieParser());
     app.use(errorHandlerMiddleware);
 
-    app.listen(PORT, () => console.log(`Server Running on port: ${PORT}`));
+    app.listen(PORT, (): void => console.log(`Server Running on port: ${PORT}`));
 };

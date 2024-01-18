@@ -9,8 +9,8 @@ import { List } from '../List';
     modelName: 'User',
 })
 class User extends Model implements UserStorage {
-    @Column({ type: DataType.INTEGER, autoIncrement: true, primaryKey: true })
-    declare id: number;
+    @Column({ type: DataType.UUID, defaultValue: DataType.UUIDV4, primaryKey: true })
+    declare id: string;
 
     @Column({ type: DataType.STRING, allowNull: false })
     declare firstName: string;

@@ -8,12 +8,12 @@ import { List } from '../../List';
 })
 class ListProduct extends Model {
     @ForeignKey(() => List)
-    @Column({ type: DataType.INTEGER, allowNull: false })
-    declare listId: number;
+    @Column({ type: DataType.UUID, allowNull: false })
+    declare listId: string;
 
     @ForeignKey(() => Product)
-    @Column({ type: DataType.INTEGER, allowNull: false })
-    declare productId: number;
+    @Column({ type: DataType.UUID, allowNull: false })
+    declare productId: string;
 
     @BelongsTo(() => List)
     declare list: List;

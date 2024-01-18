@@ -9,8 +9,8 @@ import { List } from '../List';
     modelName: 'Product',
 })
 class Product extends Model implements ProductStorage {
-    @Column({ type: DataType.INTEGER, autoIncrement: true, primaryKey: true })
-    declare id: number;
+    @Column({ type: DataType.UUID, defaultValue: DataType.UUIDV4, primaryKey: true })
+    declare id: string;
 
     @Column({ type: DataType.STRING, allowNull: false })
     declare name: string;

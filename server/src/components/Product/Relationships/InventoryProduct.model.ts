@@ -8,12 +8,12 @@ import { Product } from '../../Product';
 })
 class InventoryProduct extends Model {
     @ForeignKey(() => Inventory)
-    @Column({ type: DataType.INTEGER, allowNull: false })
-    declare inventoryId: number;
+    @Column({ type: DataType.UUID, allowNull: false })
+    declare inventoryId: string;
 
     @ForeignKey(() => Product)
-    @Column({ type: DataType.INTEGER, allowNull: false })
-    declare productId: number;
+    @Column({ type: DataType.UUID, allowNull: false })
+    declare productId: string;
 
     @BelongsTo(() => Inventory)
     declare inventory: Inventory;

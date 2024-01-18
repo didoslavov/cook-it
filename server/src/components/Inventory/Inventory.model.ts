@@ -8,15 +8,15 @@ import { Product } from '../Product';
     modelName: 'Inventory',
 })
 class Inventory extends Model implements InventoryStorage {
-    @Column({ type: DataType.INTEGER, autoIncrement: true, primaryKey: true })
-    declare id: number;
+    @Column({ type: DataType.UUID, defaultValue: DataType.UUIDV4, primaryKey: true })
+    declare id: string;
 
     @Column(DataType.STRING)
     declare name: string;
 
     @ForeignKey(() => User)
-    @Column(DataType.INTEGER)
-    declare userId: number;
+    @Column(DataType.UUID)
+    declare userId: string;
 
     @BelongsTo(() => User, 'userId')
     declare user: User;

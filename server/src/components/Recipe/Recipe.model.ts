@@ -8,8 +8,8 @@ import { Product, RecipeProduct } from '../Product';
 })
 class Recipe extends Model {
     @Column({
-        type: DataType.INTEGER,
-        autoIncrement: true,
+        type: DataType.UUID,
+        defaultValue: DataType.UUIDV4,
         primaryKey: true,
     })
     declare id: string;

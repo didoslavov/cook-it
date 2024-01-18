@@ -1,5 +1,5 @@
 export interface ProductStorage {
-    id: number;
+    id: string;
     name: string;
     quantity: number;
     userId?: number[];

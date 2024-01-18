@@ -8,10 +8,10 @@ import { Recipe } from '../../Recipe';
 })
 class RecipeProduct extends Model {
     @ForeignKey(() => Recipe)
-    declare recipeId: number;
+    declare recipeId: string;
 
     @ForeignKey(() => Product)
-    declare productId: number;
+    declare productId: string;
 
     @BelongsTo(() => Recipe)
     declare recipe: Recipe;

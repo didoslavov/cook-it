@@ -1,5 +1,5 @@
 export interface RecipeStorage {
-    id: number;
+    id: string;
     name: string;
     steps: string;
     prepTime: number;

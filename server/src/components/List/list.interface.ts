@@ -1,5 +1,5 @@
 export interface ListStorage {
-    id: number;
+    id: string;
     name: string;
     userId?: number[];
     productId?: number[];

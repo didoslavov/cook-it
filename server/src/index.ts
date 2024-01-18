@@ -1,13 +1,13 @@
 import express, { Application } from 'express';
 import * as dotenv from 'dotenv';
 import expressConfig from './config/express';
-import initDb from './database/index';
+import initializeDatabase from './config/database/initialize';
 
 dotenv.config();
 
 const app: Application = express();
 
-initDb()
+initializeDatabase()
     .then((): void => {
         expressConfig(app);
     })

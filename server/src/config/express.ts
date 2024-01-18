@@ -1,8 +1,7 @@
 import * as dotenv from 'dotenv';
 import { urlencoded, json, Application } from 'express';
-import cors from '../middlewares/cors';
 import cookieParser from 'cookie-parser';
-import errorHandlerMiddleware from '../middlewares/errorHandler';
+import { cors, errorHandlerMiddleware } from '../components/Shared';
 
 dotenv.config();
 const PORT: string | number = process.env.PORT || 3000;

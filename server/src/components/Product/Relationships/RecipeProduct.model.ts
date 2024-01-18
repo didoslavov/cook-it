@@ -3,7 +3,7 @@ import { Product } from '../../Product';
 import { Recipe } from '../../Recipe';
 
 @Table({
-    tableName: 'recipeproduct',
+    tableName: 'recipe_product',
     modelName: 'RecipeProduct',
 })
 class RecipeProduct extends Model {

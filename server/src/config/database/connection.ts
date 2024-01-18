@@ -12,7 +12,7 @@ const sequelize = new Sequelize({
     password: process.env.DB_PASSWORD,
     host: process.env.DB_HOST,
     port: Number(process.env.DB_PORT),
-    models: [List, User, Product, Recipe, Inventory, UserProduct, RecipeProduct, ListProduct, InventoryProduct],
+    models: [User, Product, List, Recipe, Inventory, UserProduct, RecipeProduct, InventoryProduct, ListProduct],
 });
 
 export default sequelize;

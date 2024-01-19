@@ -1,12 +1,26 @@
 import expressAsyncHandler from 'express-async-handler';
-import { createUser, findUser, User } from '.';
+import { createUser, findUser, UserInterface } from '.';
 import { Request, Response } from 'express';
 import { AppError, comparePasswords, createToken } from '../Shared';
 
 const register = expressAsyncHandler(async (req, res): Promise<void> => {
-    const userData: User = req.body;
+    const userData: UserInterface = req.body;
+
+    const duplicateUser = await findUser(userData.email);
+
+    if (duplicateUser) {
+        throw new AppError(409, 'User already exist!');
+    }
 
     const user = await createUser(userData);
+
+    if (!user) {
+        throw new AppError(400, 'Registration faild!');
+    }
+
+    const token = createToken(user);
+
+    res.cookie('auth', token, { httpOnly: true, secure: false });
     res.status(200).json(user);
 });
 

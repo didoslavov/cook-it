@@ -1,5 +1,5 @@
 import { Column, DataType, Model, PrimaryKey, Table } from 'sequelize-typescript';
-import { BlackListed } from './tokenBlacklist.interface';
+import { BlackListed } from './tokensBlacklist.interface';
 
 @Table({
     tableName: 'blacklisted',

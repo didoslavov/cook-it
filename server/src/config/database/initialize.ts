@@ -1,8 +1,8 @@
 import sequelize from './connection';
 
-const initializeDatabase = async (): Promise<void> => {
+export default async (): Promise<void> => {
     try {
-        // await sequelize.sync({ alter: true });
+        await sequelize.sync();
 
         console.log('Database connected successfully...');
     } catch (err: any) {
@@ -11,5 +11,3 @@ const initializeDatabase = async (): Promise<void> => {
         process.exit(1);
     }
 };
-
-export default initializeDatabase;

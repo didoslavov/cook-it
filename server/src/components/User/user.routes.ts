@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { register } from './user.controller';
+import { register } from './auth.controller';
 const usersRouter = Router();
 
 usersRouter.get('/');

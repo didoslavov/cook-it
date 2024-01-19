@@ -2,6 +2,7 @@ export { default as UserList } from './Relationships/UserList/UserList.model';
 export { default as RecipeProduct } from './Relationships/RecipeProduct/RecipeProduct.model';
 export { default as ProductList } from './Relationships/ProductList/ProductList.model';
 export { default as ProductInventory } from './Relationships/ProductInventory/ProductInventory.model';
+export { default as TokensBlacklist } from './TokensBlacklist/TokensBlacklist.model';
 
 export { ProductInventoryInterface } from './Relationships/ProductInventory/ProductInventory.interface';
 export { ProductListInterface } from './Relationships/ProductList/ProductList.interface';

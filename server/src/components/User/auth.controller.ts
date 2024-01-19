@@ -20,7 +20,7 @@ const register = expressAsyncHandler(async (req, res): Promise<void> => {
 
     const token = createToken(user);
 
-    res.cookie('auth', token, { httpOnly: true, secure: false });
+    res.cookie('auth', token, { httpOnly: true, sameSite: 'none', secure: false });
     res.status(200).json(user);
 });
 
@@ -42,8 +42,10 @@ const login = expressAsyncHandler(async (req: Request, res: Response): Promise<v
     const token = createToken(user);
     const userData = { id: user.id, firstName: user.firstName, lastName: user.lastName, email: user.email };
 
-    res.cookie('auth', token, { httpOnly: true, secure: false });
+    res.cookie('auth', token, { httpOnly: true, sameSite: 'none', secure: true });
     res.status(200).json({ user: userData });
 });
 
-export { register, login };
+const logout = async () => {};
+
+export { register, login, logout };

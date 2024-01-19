@@ -1,6 +1,4 @@
-export interface InventoryStorage {
+export interface InventoryInterface {
     id: string;
     name: string;
-    userId: string;
-    productId?: string[];
 }

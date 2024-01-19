@@ -1,28 +1,21 @@
-import { Model, Column, DataType, Table, BelongsTo, HasMany, ForeignKey } from 'sequelize-typescript';
-import { User } from '../User';
-import { InventoryStorage } from '../Inventory';
+import { Model, Column, DataType, Table, BelongsToMany } from 'sequelize-typescript';
 import { Product } from '../Product';
+import { ProductInventory } from '../Shared';
+import { InventoryInterface } from './inventory.inrerface';
 
 @Table({
     tableName: 'inventories',
     modelName: 'Inventory',
 })
-class Inventory extends Model implements InventoryStorage {
+class Inventory extends Model<Inventory> implements InventoryInterface {
     @Column({ type: DataType.UUID, defaultValue: DataType.UUIDV4, primaryKey: true })
     declare id: string;
 
     @Column(DataType.STRING)
     declare name: string;
 
-    @ForeignKey(() => User)
-    @Column(DataType.UUID)
-    declare userId: string;
-
-    @BelongsTo(() => User, 'userId')
-    declare user: User;
-
-    @HasMany(() => Product, 'inventoryId')
-    declare products: Product;
+    @BelongsToMany(() => Product, () => ProductInventory)
+    declare product: Product;
 }
 
 export default Inventory;

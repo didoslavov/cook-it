@@ -1,14 +1,15 @@
-import { Column, DataType, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
-import { UserStorage } from './';
+import { BelongsToMany, Column, DataType, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
+import { UserInterface } from './';
 import { Inventory } from '../Inventory';
 import { Recipe } from '../Recipe';
 import { List } from '../List';
+import { UserList } from '../Shared';
 
 @Table({
     tableName: 'user',
     modelName: 'User',
 })
-class User extends Model implements UserStorage {
+class User extends Model<User> implements UserInterface {
     @Column({ type: DataType.UUID, defaultValue: DataType.UUIDV4, primaryKey: true })
     declare id: string;
 
@@ -25,11 +26,11 @@ class User extends Model implements UserStorage {
     declare password: string;
 
     @HasOne(() => Inventory, 'userId')
-    declare inventoryId?: number;
+    declare inventoryId: number;
     @HasMany(() => Recipe, 'userId')
-    declare recipeId?: number[];
-    @HasMany(() => List, 'userId')
-    declare listId?: number[];
+    declare recipes: Recipe[];
+    @BelongsToMany(() => List, () => UserList)
+    declare listId: number[];
 }
 
 export default User;

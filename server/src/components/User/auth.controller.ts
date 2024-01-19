@@ -1,12 +1,12 @@
 import expressAsyncHandler from 'express-async-handler';
-import { createUser, findUser, UserInterface } from '.';
+import { createUser, findUserByEmail, UserInterface } from '.';
 import { Request, Response } from 'express';
-import { AppError, comparePasswords, createToken } from '../Shared';
+import { AppError, blackListToken, comparePasswords, createToken } from '../Shared';
 
 const register = expressAsyncHandler(async (req, res): Promise<void> => {
     const userData: UserInterface = req.body;
 
-    const duplicateUser = await findUser(userData.email);
+    const duplicateUser = await findUserByEmail(userData.email);
 
     if (duplicateUser) {
         throw new AppError(409, 'User already exist!');
@@ -27,13 +27,13 @@ const register = expressAsyncHandler(async (req, res): Promise<void> => {
 const login = expressAsyncHandler(async (req: Request, res: Response): Promise<void> => {
     const { email, password } = req.body;
 
-    const user = await findUser(email);
+    const user = await findUserByEmail(email);
 
     if (!user) {
         throw new AppError(401, "User or password don't match!");
     }
 
-    const isPasswordMatch = comparePasswords(user.password, password);
+    const isPasswordMatch = await comparePasswords(user.password, password);
 
     if (!isPasswordMatch) {
         throw new AppError(401, "User or password don't match!");
@@ -46,6 +46,17 @@ const login = expressAsyncHandler(async (req: Request, res: Response): Promise<v
     res.status(200).json({ user: userData });
 });
 
-const logout = async () => {};
+const logout = expressAsyncHandler(async (req: Request, res: Response): Promise<void> => {
+    const token = req.cookies.auth;
+
+    const blacklisted = await blackListToken(token);
+
+    if (!blacklisted) {
+        throw new AppError(401, 'Something went wrong, token not blacklistet');
+    }
+
+    res.clearCookie('auth');
+    res.status(204).json({ message: 'Logged out!' });
+});
 
 export { register, login, logout };

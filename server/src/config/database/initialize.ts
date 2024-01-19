@@ -2,7 +2,7 @@ import sequelize from './connection';
 
 const initializeDatabase = async (): Promise<void> => {
     try {
-        // await sequelize.sync({ alter: true });
+        await sequelize.sync({ alter: true });
 
         console.log('Database connected successfully...');
     } catch (err: any) {

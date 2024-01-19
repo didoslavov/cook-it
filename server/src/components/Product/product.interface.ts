@@ -1,4 +1,4 @@
-export interface ProductStorage {
+export interface ProductInterface {
     id: string;
     name: string;
     quantity: number;

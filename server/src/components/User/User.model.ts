@@ -1,15 +1,15 @@
-import { BelongsToMany, Column, DataType, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
+import { BeforeSave, BelongsToMany, Column, DataType, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
 import { UserInterface } from './';
 import { Inventory } from '../Inventory';
 import { Recipe } from '../Recipe';
 import { List } from '../List';
-import { UserList } from '../Shared';
+import { UserList, hashPassword } from '../Shared';
 
 @Table({
-    tableName: 'user',
+    tableName: 'users',
     modelName: 'User',
 })
-class User extends Model<User> implements UserInterface {
+class User extends Model<UserInterface> {
     @Column({ type: DataType.UUID, defaultValue: DataType.UUIDV4, primaryKey: true })
     declare id: string;
 
@@ -31,6 +31,13 @@ class User extends Model<User> implements UserInterface {
     declare recipes: Recipe[];
     @BelongsToMany(() => List, () => UserList)
     declare listId: number[];
+
+    @BeforeSave
+    static async hashUserPassword(user: User, options: any): Promise<void> {
+        if (user.changed('password')) {
+            user.password = await hashPassword(user.password);
+        }
+    }
 }
 
 export default User;

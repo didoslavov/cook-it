@@ -1,20 +1,31 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Response } from 'express';
 import { verifyToken } from '../utils/jwt';
-import { UserRequest } from '../../User';
+import { UserRequest, findUserById } from '../../User';
+import { getBlacklistedToken } from '..';
 
-const authMiddleware = (req: UserRequest, res: Response, next: NextFunction) => {
+const authMiddleware = async (req: UserRequest, res: Response, next: NextFunction) => {
     const token = req.cookies.token;
 
     try {
-        const data = verifyToken(token);
+        const [data, blackListedToken] = await Promise.all([verifyToken(token), getBlacklistedToken(token)]);
 
-        req.user = data;
-    } catch (err) {
-        res.clearCookie(token);
+        if (blackListedToken) {
+            throw new Error('blacklisted token');
+        }
 
-        return res.status(403).json({ message: 'Invalid token!' });
+        if (typeof data === 'string') {
+            throw new Error('Invalid token data');
+        }
+
+        const user = findUserById(data?.id);
+
+        req.user = user;
+        next();
+    } catch (err: unknown) {
+        if (err instanceof Error && err.message == 'blacklisted token') {
+            return res.status(401).json({ message: 'Invalid token!' });
+        }
     }
-    next();
 };
 
 export default authMiddleware;

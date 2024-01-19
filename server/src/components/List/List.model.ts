@@ -1,12 +1,14 @@
-import { Model, DataType, Table, BelongsTo, HasMany, Column } from 'sequelize-typescript';
+import { Model, DataType, Table, Column, BelongsToMany } from 'sequelize-typescript';
 import { User } from '../User';
 import { Product } from '../Product';
+import { ProductList, UserList } from '../Shared';
+import { ListInterface } from './list.interface';
 
 @Table({
     tableName: 'lists',
     modelName: 'List',
 })
-class List extends Model {
+class List extends Model<List> implements ListInterface {
     @Column({
         type: DataType.UUID,
         defaultValue: DataType.UUIDV4,
@@ -20,10 +22,10 @@ class List extends Model {
     })
     declare name: string;
 
-    @BelongsTo(() => User, 'userId')
-    declare user: User;
+    @BelongsToMany(() => User, () => UserList)
+    declare user: User[];
 
-    @HasMany(() => Product, 'productId')
+    @BelongsToMany(() => Product, () => ProductList)
     declare products: Product[];
 }
 

@@ -1,6 +1,4 @@
-export interface ListStorage {
+export interface ListInterface {
     id: string;
     name: string;
-    userId?: number[];
-    productId?: number[];
 }

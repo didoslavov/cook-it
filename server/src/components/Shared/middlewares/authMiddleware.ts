@@ -1,9 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { verifyToken } from '../utils/jwt';
-
-interface UserRequest extends Request {
-    user?: object;
-}
+import { UserRequest } from '../../User';
 
 const authMiddleware = (req: UserRequest, res: Response, next: NextFunction) => {
     const token = req.cookies.token;

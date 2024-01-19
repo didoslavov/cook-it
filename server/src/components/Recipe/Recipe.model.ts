@@ -1,12 +1,14 @@
 import { Model, DataType, Table, BelongsTo, BelongsToMany, Column } from 'sequelize-typescript';
 import { User } from '../User';
-import { Product, RecipeProduct } from '../Product';
+import { Product } from '../Product';
+import { RecipeProduct } from '../Shared';
+import { RecipeInterface } from './recipe.interface';
 
 @Table({
     tableName: 'recipes',
     modelName: 'Recipe',
 })
-class Recipe extends Model {
+class Recipe extends Model<Recipe> implements RecipeInterface {
     @Column({
         type: DataType.UUID,
         defaultValue: DataType.UUIDV4,
@@ -31,17 +33,23 @@ class Recipe extends Model {
         defaultValue: 0,
     })
     declare prepTime: number;
+
     @Column({
         type: DataType.INTEGER,
         defaultValue: 0,
     })
     declare cookTime: number;
+
     @Column({
         type: DataType.STRING,
     })
     declare img: string;
+
+    @Column({ type: DataType.UUID, allowNull: false })
+    declare userId: string;
+
     @BelongsTo(() => User, 'userId')
-    user: User | undefined;
+    declare user: User;
 
     @BelongsToMany(() => Product, () => RecipeProduct)
     declare products: Product[];

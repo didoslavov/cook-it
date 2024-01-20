@@ -2,9 +2,17 @@ import { Request, Response } from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import { ProductInterface } from './product.interface';
 import { findAllProducts, findProductByPk, insertProduct } from './product.service';
-import { AppError } from '../Shared';
+import { AppError, mapValidationError } from '../Shared';
+import { validationResult } from 'express-validator';
 
 const createProduct = expressAsyncHandler(async (req: Request, res: Response) => {
+    const validations = validationResult(req);
+    const errors = validations.array();
+
+    if (errors.length) {
+        throw new AppError(400, errors.map(mapValidationError).join('; '));
+    }
+
     const productData: ProductInterface = req.body;
 
     const product = await insertProduct(productData);

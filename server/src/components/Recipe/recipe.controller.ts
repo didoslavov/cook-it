@@ -2,9 +2,17 @@ import { Request, Response } from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import { RecipeInterface } from './recipe.interface';
 import { findAllRecipes, findRecipeByPk, insertRecipe } from './recipe.service';
-import { AppError } from '../Shared';
+import { AppError, mapValidationError } from '../Shared';
+import { validationResult } from 'express-validator';
 
 const createRecipe = expressAsyncHandler(async (req: Request, res: Response) => {
+    const validations = validationResult(req);
+    const errors = validations.array();
+
+    if (errors.length) {
+        throw new AppError(400, errors.map(mapValidationError).join('; '));
+    }
+
     const recipeData: RecipeInterface = req.body;
 
     const recipe = await insertRecipe(recipeData);

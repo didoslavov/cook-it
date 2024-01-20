@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import authMiddleware from '../Shared/middlewares/authMiddleware';
 import { createInventory, getInventories, getInventoryById } from './inventory.controller';
-import { inventoryValidation } from './inventory.validations';
+import { nameValidation } from '../Shared';
 const inventoryRouter = Router();
 
 inventoryRouter.get('/', getInventories);
 inventoryRouter.get('/:inventoryId', getInventoryById);
-inventoryRouter.post('/create', authMiddleware(), inventoryValidation, createInventory);
+inventoryRouter.post('/create', authMiddleware(), nameValidation, createInventory);
 
 export default inventoryRouter;

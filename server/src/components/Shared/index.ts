@@ -1,3 +1,4 @@
+export { nameValidation } from './validations/name.validations';
 export { default as mapValidationError } from './utils/mapValidationError';
 
 export { default as UserList } from './Relationships/UserList/UserList.model';

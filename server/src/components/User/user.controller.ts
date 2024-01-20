@@ -27,7 +27,7 @@ const updateUser = expressAsyncHandler(async (req: Request, res: Response) => {
     const updatedUser = await updateById(userId, updateData);
 
     if (!updatedUser) {
-        throw new AppError(400, 'User not found!');
+        throw new AppError(404, 'User not found!');
     }
 
     res.status(200).json(updatedUser);

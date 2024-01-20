@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import { ProductInterface } from './product.interface';
-import { getAllProducts, insertProduct } from './product.service';
+import { findAllProducts, findProductByPk, insertProduct } from './product.service';
 import { AppError } from '../Shared';
 
 const createProduct = expressAsyncHandler(async (req: Request, res: Response) => {
@@ -17,7 +17,7 @@ const createProduct = expressAsyncHandler(async (req: Request, res: Response) =>
 });
 
 const getProducts = expressAsyncHandler(async (req: Request, res: Response) => {
-    const products = await getAllProducts();
+    const products = await findAllProducts();
 
     if (!products) {
         throw new AppError(400, 'Error getting products...');
@@ -30,4 +30,15 @@ const getProducts = expressAsyncHandler(async (req: Request, res: Response) => {
     res.status(200).json(products);
 });
 
-export { getProducts, createProduct };
+const getProductById = expressAsyncHandler(async (req: Request, res: Response) => {
+    const productId: string = req.params.productId;
+    const product = await findProductByPk(productId);
+
+    if (!product) {
+        throw new AppError(400, 'No such product...');
+    }
+
+    res.status(200).json(product);
+});
+
+export { getProducts, createProduct, getProductById };

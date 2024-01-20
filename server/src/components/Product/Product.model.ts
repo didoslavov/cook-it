@@ -8,9 +8,10 @@ import { ProductInterface } from './product.interface';
 @Table({
     tableName: 'products',
     modelName: 'Product',
+    timestamps: false,
 })
 class Product extends Model<ProductInterface> {
-    @Column({ type: DataType.UUID, defaultValue: DataType.UUIDV4, primaryKey: true })
+    @Column({ type: DataType.UUID, defaultValue: DataType.UUIDV4, primaryKey: true, allowNull: false })
     declare id: string;
 
     @Column({ type: DataType.STRING, allowNull: false, unique: true })

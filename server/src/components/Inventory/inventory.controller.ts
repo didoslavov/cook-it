@@ -2,9 +2,17 @@ import { Request, Response } from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import { InventoryInterface } from './inventory.inrerface';
 import { findAllInventories, findInventoryByPk, insertInventory } from './inventory.service';
-import { AppError } from '../Shared';
+import { AppError, mapValidationError } from '../Shared';
+import { validationResult } from 'express-validator';
 
 const createInventory = expressAsyncHandler(async (req: Request, res: Response) => {
+    const validations = validationResult(req);
+    const errors = validations.array();
+
+    if (errors.length) {
+        throw new AppError(400, errors.map(mapValidationError).join('; '));
+    }
+
     const inventoryData: InventoryInterface = req.body;
 
     const inventory = await insertInventory(inventoryData);

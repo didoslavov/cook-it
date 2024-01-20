@@ -1,3 +1,5 @@
+export { default as mapValidationError } from './utils/mapValidationError';
+
 export { default as UserList } from './Relationships/UserList/UserList.model';
 export { default as ProductRecipe } from './Relationships/ProductRecipe/ProductRecipe.model';
 export { default as ProductList } from './Relationships/ProductList/ProductList.model';

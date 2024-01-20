@@ -8,7 +8,7 @@ import { RecipeInterface } from './recipe.interface';
     tableName: 'recipes',
     modelName: 'Recipe',
 })
-class Recipe extends Model<Recipe> implements RecipeInterface {
+class Recipe extends Model<RecipeInterface> {
     @Column({
         type: DataType.UUID,
         defaultValue: DataType.UUIDV4,

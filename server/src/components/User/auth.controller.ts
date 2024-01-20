@@ -1,10 +1,18 @@
 import expressAsyncHandler from 'express-async-handler';
 import { createUser, findUserByEmail, UserInterface } from '.';
 import { Request, Response } from 'express';
-import { AppError, blackListToken, comparePasswords, createToken } from '../Shared';
+import { AppError, blackListToken, comparePasswords, createToken, mapValidationError } from '../Shared';
+import { validationResult } from 'express-validator';
 
 const register = expressAsyncHandler(async (req: Request, res: Response): Promise<void> => {
     const userData: UserInterface = req.body;
+
+    const validations = validationResult(req);
+    const errors = validations.array();
+
+    if (errors.length) {
+        throw new AppError(400, errors.map(mapValidationError).join('; '));
+    }
 
     const duplicateUser = await findUserByEmail(userData.email);
 
@@ -25,6 +33,13 @@ const register = expressAsyncHandler(async (req: Request, res: Response): Promis
 });
 
 const login = expressAsyncHandler(async (req: Request, res: Response): Promise<void> => {
+    const validations = validationResult(req);
+    const errors = validations.array();
+
+    if (errors.length) {
+        throw new AppError(400, errors.map(mapValidationError).join('; '));
+    }
+
     const { email, password } = req.body;
 
     const user = await findUserByEmail(email);

@@ -9,7 +9,10 @@ const errorHandlerMiddleware = (
 ): Response<any, Record<string, any>> => {
     if (error instanceof AppError) {
         console.error(error);
-        return res.status(error.status).json({ error: error.message });
+
+        const errors = typeof error.message === 'string' ? [error.message] : error.message;
+
+        return res.status(error.status).json(errors);
     } else {
         console.error(error);
         return res.status(500).json({ error: 'Internal Server Error' });

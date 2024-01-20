@@ -1,6 +1,6 @@
 import { Model, DataType, Column, Table, BelongsToMany } from 'sequelize-typescript';
 import { Recipe } from '../Recipe';
-import { ProductInventory, ProductList, RecipeProduct } from '../Shared';
+import { ProductInventory, ProductList, ProductRecipe } from '../Shared';
 import { List } from '../List';
 import { Inventory } from '../Inventory';
 import { ProductInterface } from './product.interface';
@@ -9,17 +9,14 @@ import { ProductInterface } from './product.interface';
     tableName: 'products',
     modelName: 'Product',
 })
-class Product extends Model<Product> implements ProductInterface {
+class Product extends Model<ProductInterface> {
     @Column({ type: DataType.UUID, defaultValue: DataType.UUIDV4, primaryKey: true })
     declare id: string;
 
-    @Column({ type: DataType.STRING, allowNull: false })
+    @Column({ type: DataType.STRING, allowNull: false, unique: true })
     declare name: string;
 
-    @Column({ type: DataType.INTEGER, defaultValue: 0 })
-    declare quantity: number;
-
-    @BelongsToMany(() => Recipe, () => RecipeProduct)
+    @BelongsToMany(() => Recipe, () => ProductRecipe)
     declare recipes: Recipe[];
 
     @BelongsToMany(() => List, () => ProductList)

@@ -2,9 +2,17 @@ import { Request, Response } from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import { ListInterface } from './list.interface';
 import { findAllLists, findListByPk, insertList } from './list.service';
-import { AppError } from '../Shared';
+import { AppError, mapValidationError } from '../Shared';
+import { validationResult } from 'express-validator';
 
 const createList = expressAsyncHandler(async (req: Request, res: Response) => {
+    const validations = validationResult(req);
+    const errors = validations.array();
+
+    if (errors.length) {
+        throw new AppError(400, errors.map(mapValidationError).join('; '));
+    }
+
     const listData: ListInterface = req.body;
 
     const list = await insertList(listData);

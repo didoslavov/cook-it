@@ -10,7 +10,7 @@ export default () =>
         }
 
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS');
-        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Auth');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, auth');
         res.setHeader('access-control-expose-headers', 'Set-Cookie');
         res.setHeader('Access-Control-Allow-Credentials', 'true');
 

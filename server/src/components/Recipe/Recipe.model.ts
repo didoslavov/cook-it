@@ -1,7 +1,7 @@
 import { Model, DataType, Table, BelongsTo, BelongsToMany, Column } from 'sequelize-typescript';
 import { User } from '../User';
 import { Product } from '../Product';
-import { RecipeProduct } from '../Shared';
+import { ProductRecipe } from '../Shared';
 import { RecipeInterface } from './recipe.interface';
 
 @Table({
@@ -51,7 +51,7 @@ class Recipe extends Model<Recipe> implements RecipeInterface {
     @BelongsTo(() => User, 'userId')
     declare user: User;
 
-    @BelongsToMany(() => Product, () => RecipeProduct)
+    @BelongsToMany(() => Product, () => ProductRecipe)
     declare products: Product[];
 }
 

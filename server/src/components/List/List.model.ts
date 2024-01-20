@@ -8,7 +8,7 @@ import { ListInterface } from './list.interface';
     tableName: 'lists',
     modelName: 'List',
 })
-class List extends Model<List> implements ListInterface {
+class List extends Model<ListInterface> {
     @Column({
         type: DataType.UUID,
         defaultValue: DataType.UUIDV4,

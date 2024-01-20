@@ -8,7 +8,7 @@ import { User } from '../User';
     tableName: 'inventories',
     modelName: 'Inventory',
 })
-class Inventory extends Model<Inventory> implements InventoryInterface {
+class Inventory extends Model<InventoryInterface> {
     @Column({ type: DataType.UUID, defaultValue: DataType.UUIDV4, primaryKey: true })
     declare id: string;
 

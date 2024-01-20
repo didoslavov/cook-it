@@ -3,7 +3,7 @@ import { createUser, findUserByEmail, UserInterface } from '.';
 import { Request, Response } from 'express';
 import { AppError, blackListToken, comparePasswords, createToken } from '../Shared';
 
-const register = expressAsyncHandler(async (req, res): Promise<void> => {
+const register = expressAsyncHandler(async (req: Request, res: Response): Promise<void> => {
     const userData: UserInterface = req.body;
 
     const duplicateUser = await findUserByEmail(userData.email);

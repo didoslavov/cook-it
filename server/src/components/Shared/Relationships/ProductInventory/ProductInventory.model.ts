@@ -15,6 +15,9 @@ class ProductInventory extends Model<ProductInventory> implements ProductInvento
     @ForeignKey(() => Inventory)
     @Column({ type: DataType.UUID, allowNull: false })
     declare inventoryId: string;
+
+    @Column({ type: DataType.INTEGER, defaultValue: 0 })
+    declare quantity: number;
 }
 
 export default ProductInventory;

@@ -15,6 +15,9 @@ class ProductList extends Model<ProductList> implements ProductListInterface {
     @ForeignKey(() => List)
     @Column({ type: DataType.UUID, allowNull: false })
     declare listId: string;
+
+    @Column({ type: DataType.INTEGER, defaultValue: 0 })
+    declare quantity: number;
 }
 
 export default ProductList;

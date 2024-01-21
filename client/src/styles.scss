@@ -1,3 +1,149 @@
+:root {
+  --color-primary: #3d503a;
+  --color-primary-dark: #273d24;
+  --color-primary-light: #e9ece9;
+  --font-color-dark: #10180e;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* 10px / 16px = 0.625 = 62.5% */
+  /* Percentage of user's browser font-size setting */
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+
 body {
-  font-family: "Josefin Sans", sans-serif;
+  font-family: "Josefin-Sans", sans-serif;
+  line-height: 1;
+  font-weight: 400;
+  color: var(--font-color-dark);
+  background-color: var(--color-primary-light);
+}
+
+.container {
+  /* 1140px */
+  max-width: 120rem;
+  padding: 0 3.2rem;
+  margin: 0 auto;
+}
+
+.heading-primary,
+.heading-secondary,
+.heading-tertiary {
+  font-weight: 700;
+  color: var(--font-color-dark);
+  letter-spacing: -0.5px;
+}
+
+.heading-primary {
+  font-size: 5.2rem;
+  line-height: 1.05;
+  // margin-bottom: 3.2rem;
+}
+
+.heading-secondary {
+  font-size: 4.4rem;
+  line-height: 1.2;
+  // margin-bottom: 9.6rem;
+}
+
+.heading-tertiary {
+  font-size: 3rem;
+  line-height: 1.2;
+  // margin-bottom: 3.2rem;
+}
+
+.subheading {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--color-primary-dark);
+  text-transform: uppercase;
+  margin-bottom: 1.6rem;
+  letter-spacing: 0.75px;
+}
+
+/** Buttons and links */
+
+.btn,
+.btn:link,
+.btn:visited {
+  display: inline-block;
+
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: 600;
+  padding: 1.6rem 3.2rem;
+  border-radius: 9px;
+
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+
+  transition: all 0.3s;
+}
+
+.btn--full,
+.btn--full:link,
+.btn--full:visited {
+  background-color: var(--color-primary);
+  color: var(--color-primary-light);
+}
+
+.btn--full:hover,
+.btn--full:active {
+  background-color: var(--color-primary-dark);
+}
+
+.btn--outline:link,
+.btn--outline:visited {
+  background-color: var(--color-primary);
+  color: var(--color-primary-light);
+}
+
+.btn--outline:hover,
+.btn--outline:active {
+  background-color: var(--color-primary-light);
+  color: var(--font-color-dark);
+  box-shadow: inset 0 0 0 2px var(--color-primary);
+}
+
+.link:link,
+.link:visited {
+  display: inline-block;
+  color: var(--color-primary-dark);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  transition: all 0.3s;
+}
+
+.link:hover,
+.link:active {
+  color: var(--color-primary);
+  border-bottom: 1px solid transparent;
+}
+
+/** HELPER CLASSES */
+
+.mt-md {
+  margin-top: 4.8rem !important;
+}
+
+.mr-sm {
+  margin-right: 1.6rem !important;
+}
+
+.mb-md {
+  margin-bottom: 4.8rem !important;
+}
+
+.center-text {
+  text-align: center;
 }

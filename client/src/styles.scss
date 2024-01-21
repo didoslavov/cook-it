@@ -1,8 +1,23 @@
 :root {
+  /** COLORS**/
   --color-primary: #3d503a;
   --color-primary-dark: #273d24;
   --color-primary-light: #e9ece9;
+  --color-accent: #e9ca72;
+  --color-accent-dark: #baa25b;
+  --color-accent-light: #f0da9c;
+  --font-color: #1b2b19;
   --font-color-dark: #10180e;
+
+  /** FONT WEIGHT */
+
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-semi: 600;
+  --fw-bold: 700;
+
+  /** SHADOWS**/
+  --shadow: 0 2.4rem 4.8rem rgba(39, 61, 36, 0.3);
 }
 
 * {
@@ -63,7 +78,7 @@ body {
   display: block;
   font-size: 1.6rem;
   font-weight: 500;
-  color: var(--color-primary-dark);
+  color: var(--color-accent-dark);
   text-transform: uppercase;
   margin-bottom: 1.6rem;
   letter-spacing: 0.75px;
@@ -86,32 +101,32 @@ body {
   cursor: pointer;
   font-family: inherit;
 
-  transition: all 0.3s;
+  transition: all 0.7s;
 }
 
 .btn--full,
 .btn--full:link,
 .btn--full:visited {
-  background-color: var(--color-primary);
+  background-color: var(--color-primary-dark);
   color: var(--color-primary-light);
 }
 
 .btn--full:hover,
 .btn--full:active {
-  background-color: var(--color-primary-dark);
+  background-color: var(--color-primary);
 }
 
 .btn--outline:link,
 .btn--outline:visited {
-  background-color: var(--color-primary);
-  color: var(--color-primary-light);
+  background-color: var(--color-primary-light);
+  color: var(--font-color-dark);
+  box-shadow: var(--shadow);
 }
 
 .btn--outline:hover,
 .btn--outline:active {
-  background-color: var(--color-primary-light);
+  background-color: var(--color-accent);
   color: var(--font-color-dark);
-  box-shadow: inset 0 0 0 2px var(--color-primary);
 }
 
 .link:link,
@@ -146,4 +161,11 @@ body {
 
 .center-text {
   text-align: center;
+}
+
+/** TESTING **/
+
+.link {
+  margin-top: 3rem;
+  font-size: 1.6rem;
 }

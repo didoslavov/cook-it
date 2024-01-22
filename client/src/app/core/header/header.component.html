@@ -5,14 +5,31 @@
     <nav class="main-nav">
         <ul class="main-nav-list">
             <li><a class="main-nav-link" href="#how">How it works</a></li>
-            <li><a class="main-nav-link" href="#meals">Meals</a></li>
             <li><a class="main-nav-link" href="#testimonials">Recipes</a></li>
             <li><a class="main-nav-link" href="#pricing">Dashboard</a></li>
+            <li><a class="main-nav-link" href="#meals">About</a></li>
             <li><a class="btn btn--cta" href="/auth/register">Join now</a></li>
         </ul>
     </nav>
-    <button class="btn-mobile-nav">
-        <i class="fa-light fa-bars"></i>
-        <i class="fa-solid fa-xmark"></i>
+    <button class="main-nav__mobile-button" (click)="toggleMobileNav()">
+        @if(!showMobileNav) {
+        <fa-icon [icon]="faBars" class="main-nav__mobile-icon"></fa-icon>
+        } @else if(showMobileNav) {
+        <fa-icon [icon]="faCircleXmark" class="main-nav__mobile-icon"></fa-icon>
+        }
     </button>
+    @if(showMobileNav){
+    <div class="main-nav__mobile-overlay">
+        <ul class="main-nav__mobile-list">
+            <li><a class="main-nav-link main-nav__mobile-link" href="#how" (click)="closeMobileNav()">How it works</a>
+            </li>
+            <li><a class="main-nav-link main-nav__mobile-link" href="#testimonials"
+                    (click)="closeMobileNav()">Recipes</a></li>
+            <li><a class="main-nav-link main-nav__mobile-link" href="#pricing" (click)="closeMobileNav()">Dashboard</a>
+            </li>
+            <li><a class="main-nav-link main-nav__mobile-link" href="#meals" (click)="closeMobileNav()">About</a></li>
+            <li><a class="btn btn--cta" href="/auth/register" (click)="closeMobileNav()">Join now</a></li>
+        </ul>
+    </div>
+    }
 </header>

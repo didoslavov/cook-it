@@ -7,12 +7,12 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: space-around;
-  // gap: 9.6rem;
+  justify-content: flex-start;
+  gap: 12.8rem;
   height: 100%;
 
   &__heading {
-    margin-right: 12.8rem;
+    margin: 9.6rem 12.8rem 0 0;
 
     &-icon-container {
       display: inline-block;
@@ -64,5 +64,34 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .hero {
+    justify-content: flex-start;
+    gap: 8rem;
+
+    &__heading {
+      margin-top: 8rem;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 9.6rem;
+
+    &__heading {
+      margin: 0;
+    }
+
+    &__cta {
+      margin: 0 0 14.2rem 0;
+    }
   }
 }

@@ -7,8 +7,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: center;
-  gap: 9.6rem;
+  justify-content: space-around;
+  // gap: 9.6rem;
   height: 100%;
 
   &__heading {
@@ -39,7 +39,7 @@
   }
 
   &__cta {
-    margin-right: 12.8rem;
+    margin: 0 12.8rem 9.6rem 0;
 
     &-description {
       font-size: 2rem;

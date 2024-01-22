@@ -141,6 +141,19 @@ body {
   color: var(--font-color-dark);
 }
 
+.btn--accent:link,
+.btn--accent:visited {
+  background-color: var(--color-accent);
+  color: var(--font-color-dark);
+  box-shadow: var(--shadow);
+}
+
+.btn--accent:hover,
+.btn--accent:active {
+  background-color: var(--color-primary-dark);
+  color: var(--color-primary-light);
+}
+
 .link:link,
 .link:visited {
   display: inline-block;

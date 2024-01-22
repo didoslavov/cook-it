@@ -206,3 +206,9 @@ body {
   margin-top: 3rem;
   font-size: 1.6rem;
 }
+
+@media screen and (max-width: 1200px) {
+  html {
+    font-size: 50%;
+  }
+}

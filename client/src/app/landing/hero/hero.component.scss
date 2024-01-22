@@ -1,0 +1,68 @@
+.section-hero {
+  position: relative;
+  height: 100vh;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 9.6rem;
+  height: 100%;
+
+  &__heading {
+    margin-right: 12.8rem;
+
+    &-icon-container {
+      display: inline-block;
+      position: relative;
+    }
+
+    &-icon {
+      position: absolute;
+      width: 4.8rem;
+      height: 4.8rem;
+      top: 0;
+      right: 0;
+      margin-top: -3rem;
+      margin-right: -5rem;
+    }
+
+    &-primary {
+      text-transform: uppercase;
+    }
+
+    &-slogan {
+      color: var(--font-color-light);
+    }
+  }
+
+  &__cta {
+    margin-right: 12.8rem;
+
+    &-description {
+      font-size: 2rem;
+      font-weight: var(--fw-bold);
+      color: var(--font-color-dark);
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.3;
+  overflow: hidden;
+
+  &__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

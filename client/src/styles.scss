@@ -8,6 +8,7 @@
   --color-accent-light: #f0da9c;
   --font-color: #1b2b19;
   --font-color-dark: #10180e;
+  --font-color-light: #687766;
 
   /** FONT WEIGHT */
 
@@ -106,9 +107,18 @@ body {
 
 .btn--full,
 .btn--full:link,
-.btn--full:visited {
+.btn--full:visited,
+.btn--cta,
+.btn--cta:link,
+.btn--cta:visited {
   background-color: var(--color-primary-dark);
   color: var(--color-primary-light);
+}
+
+.btn--cta:hover,
+.btn--cta:active {
+  background-color: var(--color-accent);
+  color: var(--color-primary-dark);
 }
 
 .btn--full:hover,
@@ -148,15 +158,27 @@ body {
 /** HELPER CLASSES */
 
 .mt-md {
-  margin-top: 4.8rem !important;
+  margin-top: 4.4rem !important;
 }
 
 .mr-sm {
   margin-right: 1.6rem !important;
 }
 
+.mr-big {
+  margin-right: 5.2rem !important;
+}
+
 .mb-md {
-  margin-bottom: 4.8rem !important;
+  margin-bottom: 4.4rem !important;
+}
+
+.mb-sm {
+  margin-bottom: 1.6rem;
+}
+
+.mb-big {
+  margin-bottom: 5.2rem !important;
 }
 
 .center-text {

@@ -233,6 +233,12 @@ body {
   }
 }
 
+@media screen and (max-width: 1200px) {
+  html {
+    font-size: 45%;
+  }
+}
+
 @media screen and (max-width: 450px) {
   html {
     font-size: 40%;

@@ -1,0 +1,72 @@
+.about {
+  height: 100vh;
+  margin-top: 45rem;
+  background-color: var(--color-primary-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9.6rem;
+
+  &__bubles {
+    width: 40%;
+
+    &--img {
+      mask: url(https://assets.codepen.io/1101822/circles-mask-whole.svg)
+        no-repeat center;
+      max-width: 100%;
+    }
+  }
+
+  &__content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 9.6rem;
+    padding-top: 9.6rem;
+    gap: 2rem;
+    &--heading {
+      font-size: 9.8rem;
+    }
+
+    &--agenda {
+      width: 80%;
+      list-style: none;
+      font-size: 2rem;
+      letter-spacing: 0.5px;
+      line-height: 1.6;
+      color: var(--color-primary-light);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+
+      &-item {
+        display: flex;
+        align-items: center;
+      }
+
+      &-icon {
+        font-size: 1.2rem;
+        color: var(--color-accent-dark);
+        margin-right: 1.2rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .about {
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+
+    &__bubles {
+      margin-top: 2rem;
+    }
+
+    &__content {
+      margin-top: 0;
+      align-items: center;
+    }
+  }
+}

@@ -1,7 +1,6 @@
 .how {
   max-width: 90%;
   height: 90vh;
-
   &__heading {
     padding: 4.8rem;
     margin-bottom: 0;
@@ -116,6 +115,9 @@
 
 @media screen and (max-width: 900px) {
   .how {
+    margin: 0 auto;
+    padding: 0;
+
     &__heading {
       padding: 3.2rem;
     }
@@ -125,7 +127,7 @@
     }
 
     &__steps {
-      grid-template-columns: 1fr;
+      grid-template-columns: auto;
       gap: 2.4rem;
       padding-top: 0;
 
@@ -133,6 +135,7 @@
       &--2,
       &--4 {
         padding: 3.2rem;
+        margin-right: 2.4rem;
 
         &-icon {
           align-self: center;
@@ -141,19 +144,32 @@
       }
 
       &--1 {
-        grid-area: 3 / -1;
+        grid-area: 2 / -1;
       }
 
       &--2 {
-        grid-area: 2 / -1;
+        grid-area: 3 / -1;
       }
 
       &--3 {
         grid-area: 1 / -1;
+        margin-right: 2.4rem;
       }
 
       &--4 {
         grid-area: 4 / -1;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .how {
+    &__steps {
+      padding: 0;
+
+      &:last-child {
+        margin-bottom: 3.2rem;
       }
     }
   }

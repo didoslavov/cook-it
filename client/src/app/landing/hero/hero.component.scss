@@ -90,3 +90,9 @@
     }
   }
 }
+
+@media screen and (max-width: 450px) {
+  .hero {
+    justify-content: space-around;
+  }
+}

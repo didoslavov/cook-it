@@ -8,7 +8,8 @@
             <li><a class="main-nav-link" href="#testimonials">Recipes</a></li>
             <li><a class="main-nav-link" href="#pricing">Dashboard</a></li>
             <li><a class="main-nav-link" href="#meals">About</a></li>
-            <li><a class="btn btn--cta" href="/auth/register">Join now</a></li>
+            <li><a class="btn btn--cta" [ngClass]="attentionSeeker" (mouseover)="attentionSeekerAnimation($event)"
+                    (mouseout)="attentionSeekerAnimationRemove($event)" href="/auth/register">Join now</a></li>
         </ul>
     </nav>
     <button class="main-nav__mobile-button" (click)="toggleMobileNav()">

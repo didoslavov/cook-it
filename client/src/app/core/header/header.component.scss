@@ -6,9 +6,10 @@
   height: 9.6rem;
   padding: 0 4.8rem 0 4.8rem;
 
-  // position: sticky;
-  // top: 0;
-  // width: 100%;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
 }
 
 .logo {

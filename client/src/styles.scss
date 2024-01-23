@@ -5,6 +5,7 @@
   /** COLORS**/
   --color-primary: #3d503a;
   --color-primary-dark: #273d24;
+  --color-primary-bg: #687766;
   --color-primary-light: #e9ece9;
   --color-accent: #e9ca72;
   --color-accent-dark: #baa25b;
@@ -201,11 +202,29 @@ body {
   text-align: center;
 }
 
-/** TESTING **/
+.grid {
+  display: grid;
+  gap: 9.6rem 6.4rem;
+}
 
-.link {
-  margin-top: 3rem;
-  font-size: 1.6rem;
+.grid--2-cols {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid--3-cols {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid--4-cols {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.grid--5-cols {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.grid--center-v {
+  align-items: center;
 }
 
 @media screen and (max-width: 1200px) {

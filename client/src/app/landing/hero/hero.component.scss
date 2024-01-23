@@ -67,14 +67,9 @@
   }
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1200px) {
   .hero {
-    justify-content: flex-start;
     gap: 8rem;
-
-    &__heading {
-      margin-top: 8rem;
-    }
   }
 }
 

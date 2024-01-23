@@ -18,7 +18,8 @@ export class HeaderComponent {
 
   attentionSeekerAnimation($event: Event) {
     if ($event.type) {
-      this.attentionSeeker = 'animate__animated animate__pulse';
+      this.attentionSeeker =
+        'animate__animated animate__pulse animate__infinite';
     }
   }
 

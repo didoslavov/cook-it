@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-left: 4rem;
   gap: 9.6rem;
 
   &__bubles {
@@ -56,17 +57,42 @@
 
 @media screen and (max-width: 900px) {
   .about {
+    height: fit-content;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    margin-top: 2rem;
     gap: 0;
 
     &__bubles {
-      margin-top: 2rem;
+      margin: 4rem 0 4rem 0;
     }
 
     &__content {
-      margin-top: 0;
+      margin-top: 2rem;
+      padding-top: 0;
+      height: fit-content;
       align-items: center;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .about {
+    flex-direction: column-reverse;
+
+    &__bubles {
+      margin: 1rem 0 0 0;
+    }
+
+    &__content {
+      margin-bottom: 4.8rem;
+      &--heading {
+        font-size: 6.4rem;
+      }
+
+      &--subheading {
+        margin: 1rem 0 0 0;
+      }
     }
   }
 }

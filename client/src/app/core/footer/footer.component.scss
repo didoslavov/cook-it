@@ -1,6 +1,6 @@
 .footer {
   display: grid;
-  grid-template-columns: 1fr 1fr 2fr 2fr 2fr;
+  grid-template-columns: 1fr 1fr repeat(2, 2fr) auto;
   background-color: var(--color-primary-light);
   font-size: 1.4rem;
   color: var(--color-primary-dark);
@@ -29,16 +29,17 @@
     background-size: cover;
     background-position: center;
     margin-left: 1rem;
+    width: 140%;
   }
 
   &__logo {
     display: inline-block;
     text-align: start;
     grid-area: 1 / 4;
-    transform: translateY(-50%);
+    transform: translate(5%, -40%);
 
     &--img {
-      width: 25rem;
+      width: 50%;
       height: auto;
     }
 
@@ -82,17 +83,41 @@
   &__copyright {
     display: flex;
     flex-direction: column;
-    gap: 3.6rem;
-    padding: 3.8rem 2rem 3.6rem 0;
+    gap: 1.4rem;
+    padding: 4.2rem 3.6rem 3.6rem 0;
 
-    &-text {
+    &--text {
       font-size: 1.8rem;
       line-height: 1.2;
       letter-spacing: 0.75px;
+      width: fit-content;
 
-      &-icon {
-        color: var(--color-accent-dark);
-        font-size: 1.4rem;
+      &--icons {
+        display: flex;
+        gap: 2.4rem;
+        height: 100%;
+
+        &-angular,
+        &-node,
+        &-express,
+        &-mysql {
+          width: 10%;
+          height: 3rem;
+          background-color: var(--color-accent-dark);
+        }
+
+        &-angular {
+          mask: url(../../../assets/icons/angular.svg) no-repeat center;
+        }
+        &-node {
+          mask: url(../../../assets/icons/node.svg) no-repeat center;
+        }
+        &-express {
+          mask: url(../../../assets/icons/express.svg) no-repeat center;
+        }
+        &-mysql {
+          mask: url(../../../assets/icons/mysql.svg) no-repeat center;
+        }
       }
     }
 
@@ -102,6 +127,17 @@
       justify-content: flex-end;
       align-items: center;
       gap: 1rem;
+
+      &-link {
+        width: 10%;
+        height: 4rem;
+        background-color: var(--color-primary-dark);
+        mask: url(../../../assets/icons/github.svg) no-repeat center;
+        &-icon {
+          color: var(--color-accent-dark);
+          font-size: 1.4rem;
+        }
+      }
 
       &-heading {
         margin-bottom: 0;

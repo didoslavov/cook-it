@@ -119,6 +119,19 @@
           mask: url(../../../assets/icons/mysql.svg) no-repeat center;
         }
       }
+
+      &-created {
+        &-name:link,
+        &-name:visited {
+          border-bottom: none;
+        }
+
+        &-name:hover,
+        &-name:active {
+          color: var(--color-accent-dark);
+          box-shadow: inset 0 -1px 0 var(--color-accent-dark);
+        }
+      }
     }
 
     &--header {

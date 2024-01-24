@@ -93,6 +93,7 @@
 
 @media screen and (max-width: 450px) {
   .hero {
-    justify-content: space-around;
+    justify-content: flex-end;
+    gap: 20rem;
   }
 }

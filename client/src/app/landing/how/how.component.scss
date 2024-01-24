@@ -154,6 +154,9 @@
 
       &--3 {
         grid-area: 1 / -1;
+        height: fit-content;
+        width: 70%;
+        justify-self: center;
         margin-right: 2.4rem;
       }
 
@@ -166,6 +169,8 @@
 
 @media screen and (max-width: 500px) {
   .how {
+    height: fit-content;
+
     &__steps {
       padding: 0;
 

@@ -5,7 +5,6 @@ import {
   GenericAuthFormData,
   GenericAuthFormModel,
 } from './generic-auth-form.model';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-auth-generic-form',
@@ -16,7 +15,7 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AuthGenericFormComponent implements OnInit {
   @Input() formData!: GenericAuthFormData;
-  @Input() formType: 'registration' | 'login' = 'registration';
+  @Input() formType!: 'registration' | 'login';
   @Output() formSubmit = new EventEmitter<GenericAuthFormData>();
   buttonText: string = this.isRegistrationForm() ? 'Sign Up' : 'Sign In';
 

@@ -13,6 +13,7 @@
                 <input id="lastName" class="form__container--content-controls-input" formControlName="lastName" />
                 <label for="lastName" class="form__container--content-controls-label">Last Name</label>
             </div>
+            }
             @if(isLoginForm() || isRegistrationForm()) {
             <div class="form__container--content-controls">
                 <input id="email" class="form__container--content-controls-input" formControlName="email" />
@@ -25,12 +26,14 @@
                 <label for="password" class="form__container--content-controls-label">Password</label>
             </div>
             }
+            @if (isRegistrationForm()){
             <div class="form__container--content-controls">
                 <input id="rePass" class="form__container--content-controls-input" type="password"
                     formControlName="rePassword" />
                 <label for="rePass" class="form__container--content-controls-label">Re Password</label>
             </div>
             }
+
             <input class="form__container--content-form-btn btn btn--full" type="submit" [value]="buttonText" />
         </form>
     </div>

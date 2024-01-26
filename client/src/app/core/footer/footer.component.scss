@@ -194,7 +194,12 @@
 
 @media screen and (max-width: 500px) {
   .footer {
+    width: 100%;
     grid-template-columns: auto auto auto 30rem;
+
+    &__bg {
+      background-color: var(--color-primary-light);
+    }
 
     &__nav {
       justify-content: flex-start;

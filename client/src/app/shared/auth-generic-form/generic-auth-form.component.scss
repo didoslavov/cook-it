@@ -52,9 +52,12 @@
         font-size: 1.6rem;
         color: var(--color-primary-bg);
         transition: all 0.3s cubic-bezier(0.4, 0.39, 1, 1);
+        color: var(--color-primary-bg);
       }
 
       &-input {
+        font-weight: var(--fw-light);
+        background-color: var(--color-primary-light);
         border: none;
         padding: 1rem;
         outline: none;
@@ -73,7 +76,7 @@
           text-align: center;
           transform: translate(-85%, 1%);
           color: var(--color-primary-light);
-          font-weight: var(--fw-semi-bold);
+          font-weight: var(--fw-light);
           background-color: var(--color-primary-bg);
           border-radius: 6rem;
           padding: 1.2rem;

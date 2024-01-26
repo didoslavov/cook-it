@@ -1,15 +1,16 @@
 <header class="header">
-    <a href="/">
+    <a routerLink="/">
         <img class="logo" src="../../../assets/logo.png" alt="Omnifood Logo" />
     </a>
     <nav class="main-nav">
         <ul class="main-nav-list">
-            <li><a class="main-nav-link" href="#how">How it works</a></li>
-            <li><a class="main-nav-link" href="#testimonials">Recipes</a></li>
-            <li><a class="main-nav-link" href="#pricing">Dashboard</a></li>
-            <li><a class="main-nav-link" href="#meals">About</a></li>
+            <li><a class="main-nav-link" routerLink="/how-it-works">How it works</a></li>
+            <li><a class="main-nav-link" routerLink="/recipes">Recipes</a></li>
+            <li><a class="main-nav-link" routerLink="/dashboard">Dashboard</a></li>
+            <li><a class="main-nav-link" routerLink="/about">About</a></li>
             <li><a class="btn btn--cta" [ngClass]="attentionSeeker" (mouseover)="attentionSeekerAnimation($event)"
-                    (mouseout)="attentionSeekerAnimationRemove($event)" href="/auth/register">Join now</a></li>
+                    (mouseout)="attentionSeekerAnimationRemove($event)" routerLink="/auth/register">Join now</a>
+            </li>
         </ul>
     </nav>
     <button class="main-nav__mobile-button" (click)="toggleMobileNav()">
@@ -22,14 +23,17 @@
     @if(showMobileNav){
     <div class="main-nav__mobile-overlay animate__animated animate__fadeInRight">
         <ul class="main-nav__mobile-list">
-            <li><a class="main-nav-link main-nav__mobile-link" href="#how" (click)="closeMobileNav()">How it works</a>
+            <li><a class="main-nav-link main-nav__mobile-link" routerLink="#how" (click)="closeMobileNav()">How it
+                    works</a>
             </li>
-            <li><a class="main-nav-link main-nav__mobile-link" href="#testimonials"
+            <li><a class="main-nav-link main-nav__mobile-link" routerLink="#testimonials"
                     (click)="closeMobileNav()">Recipes</a></li>
-            <li><a class="main-nav-link main-nav__mobile-link" href="#pricing" (click)="closeMobileNav()">Dashboard</a>
+            <li><a class="main-nav-link main-nav__mobile-link" routerLink="#pricing"
+                    (click)="closeMobileNav()">Dashboard</a>
             </li>
-            <li><a class="main-nav-link main-nav__mobile-link" href="#meals" (click)="closeMobileNav()">About</a></li>
-            <li><a class="btn btn--cta" href="/auth/register" (click)="closeMobileNav()">Join now</a></li>
+            <li><a class="main-nav-link main-nav__mobile-link" routerLink="#meals" (click)="closeMobileNav()">About</a>
+            </li>
+            <li><a class="btn btn--cta" routerLink="/auth/register" (click)="closeMobileNav()">Join now</a></li>
         </ul>
     </div>
     }

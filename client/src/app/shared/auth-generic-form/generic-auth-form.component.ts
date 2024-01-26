@@ -5,6 +5,7 @@ import {
   GenericAuthFormData,
   GenericAuthFormModel,
 } from './generic-auth-form.model';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-auth-generic-form',

@@ -1,0 +1,17 @@
+.scroll-top {
+  font-size: 3rem;
+  color: var(--color-primary-dark);
+  text-align: center;
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  height: 6.2rem;
+  width: 6.2rem;
+  background-color: var(--color-primary-light);
+  border: 2px solid var(--color-primary-dark);
+  border-radius: 50%;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

@@ -120,8 +120,9 @@
         }
       }
 
-      &-created {
+      &-creator {
         color: var(--color-primary-bg);
+        align-self: flex-end;
 
         &-name:link,
         &-name:visited {

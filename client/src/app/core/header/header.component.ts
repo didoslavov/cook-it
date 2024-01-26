@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBars, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
@@ -11,11 +11,24 @@ import { faBars, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   declare attentionSeeker: string;
   faCircleXmark = faCircleXmark;
   faBars = faBars;
   showMobileNav = false;
+
+  constructor(private activatedRoute: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.activatedRoute.fragment.subscribe(
+      (fragment: string | null) => fragment && this.scrollTo(fragment)
+    );
+  }
+
+  scrollTo(section: string | null) {
+    section &&
+      document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
+  }
 
   attentionSeekerAnimation($event: Event) {
     if ($event.type) {

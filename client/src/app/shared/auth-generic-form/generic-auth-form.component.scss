@@ -4,22 +4,23 @@
   background-size: cover;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-content: end;
 
   &--content {
-    height: 70%;
+    height: 90%;
     width: 60%;
-    border-radius: 9px;
-    box-shadow: var(--shadow);
-    align-self: center;
+    padding: 9.6rem;
     justify-self: center;
+    align-self: self-start;
     background-color: var(--color-primary-bg-opacity);
+    box-shadow: var(--shadow);
+    border-radius: 9px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 3rem;
-    padding: 9.6rem;
 
     &-heading {
     }

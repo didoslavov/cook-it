@@ -1,26 +1,37 @@
 <div class="form__container">
-    <h2 class="form__heading">{{isRegistrationForm() ? 'Register' : 'Login'}}</h2>
-    <form [formGroup]="formModel.form" class="form">
+    <div class="form__container--content">
+        <h2 class="form__container--content-heading heading-tertiary">
+            {{isRegistrationForm() ? 'Welcome' : 'Welcome back'}}
+        </h2>
+        <form [formGroup]="formModel.form" class="form__container--content-form">
+            @if (isRegistrationForm() && !isLoginForm()) {
+            <div class="form__container--content-controls">
+                <input id="firstName" class="form__container--content-controls-input" formControlName="firstName" />
+                <label for="firstName" class="form__container--content-controls-label">First Name</label>
+            </div>
+            <div class="form__container--content-controls">
+                <input id="lastName" class="form__container--content-controls-input" formControlName="lastName" />
+                <label for="lastName" class="form__container--content-controls-label">Last Name</label>
+            </div>
+            @if(isLoginForm() || isRegistrationForm()) {
+            <div class="form__container--content-controls">
+                <input id="email" class="form__container--content-controls-input" formControlName="email" />
+                <label for="email" class="form__container--content-controls-label">Email</label>
+            </div>
 
-        @if (isRegistrationForm()) {
-        <label class="form__label">First Name:</label>
-        <input class="form__input" formControlName="firstName" />
-
-        <label class="form__label">Last Name:</label>
-        <input class="form__input" formControlName="lastName" />
-
-        @if(isLoginForm()) {
-        <label class="form__label">Email:</label>
-        <input class="form__input" formControlName="email" />
-
-        <label class="form__label">Password:</label>
-        <input class="form__input" type="password" formControlName="password" />
-        }
-
-        <label class="form__label">Re-enter Password:</label>
-        <input class="form__input" type="password" formControlName="rePassword" />
-        }
-
-        <input class="form__btn" type="submit" />
-    </form>
+            <div class="form__container--content-controls">
+                <input id="password" class="form__container--content-controls-input" type="password"
+                    formControlName="password" />
+                <label for="password" class="form__container--content-controls-label">Password</label>
+            </div>
+            }
+            <div class="form__container--content-controls">
+                <input id="rePass" class="form__container--content-controls-input" type="password"
+                    formControlName="rePassword" />
+                <label for="rePass" class="form__container--content-controls-label">Re Password</label>
+            </div>
+            }
+            <input class="form__container--content-form-btn btn btn--full" type="submit" [value]="buttonText" />
+        </form>
+    </div>
 </div>

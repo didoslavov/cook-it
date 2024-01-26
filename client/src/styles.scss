@@ -6,6 +6,7 @@
   --color-primary: #3d503a;
   --color-primary-dark: #273d24;
   --color-primary-bg: #687766;
+  --color-primary-bg-opacity: #68776655;
   --color-primary-light: #e9ece9;
   --color-accent: #e9ca72;
   --color-accent-dark: #baa25b;
@@ -176,6 +177,10 @@ body {
 
 .mt-md {
   margin-top: 4.4rem;
+}
+
+.mt-sm {
+  margin-top: 2.4rem;
 }
 
 .mr-sm {

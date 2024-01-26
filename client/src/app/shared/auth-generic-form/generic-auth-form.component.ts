@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
   GenericAuthFormData,
@@ -16,6 +16,8 @@ import {
 export class AuthGenericFormComponent implements OnInit {
   @Input() formData!: GenericAuthFormData;
   @Input() formType: 'registration' | 'login' = 'registration';
+  @Output() formSubmit = new EventEmitter<GenericAuthFormData>();
+  buttonText: string = this.isRegistrationForm() ? 'Sign Up' : 'Sign In';
 
   formModel!: GenericAuthFormModel;
 
@@ -29,5 +31,9 @@ export class AuthGenericFormComponent implements OnInit {
 
   isLoginForm(): boolean {
     return this.formType === 'login';
+  }
+
+  onSubmit(): void {
+    this.formSubmit.emit(this.formModel.form.value);
   }
 }

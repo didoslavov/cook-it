@@ -5,11 +5,12 @@ import {
   GenericAuthFormData,
   GenericAuthFormModel,
 } from './generic-auth-form.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-auth-generic-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './generic-auth-form.component.html',
   styleUrl: './generic-auth-form.component.scss',
 })
@@ -17,12 +18,13 @@ export class AuthGenericFormComponent implements OnInit {
   @Input() formData!: GenericAuthFormData;
   @Input() formType!: 'registration' | 'login';
   @Output() formSubmit = new EventEmitter<GenericAuthFormData>();
-  buttonText: string = this.isRegistrationForm() ? 'Sign Up' : 'Sign In';
+  buttonText!: string;
 
   formModel!: GenericAuthFormModel;
 
   ngOnInit(): void {
     this.formModel = new GenericAuthFormModel(this.formData);
+    this.buttonText = this.isRegistrationForm() ? 'Sign Up' : 'Sign In';
   }
 
   isRegistrationForm(): boolean {

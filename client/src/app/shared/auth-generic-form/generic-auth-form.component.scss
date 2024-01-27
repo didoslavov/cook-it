@@ -60,7 +60,6 @@
         font-size: 1.4rem;
         color: var(--color-primary-bg);
         transition: all 0.3s cubic-bezier(0.4, 0.39, 1, 1);
-        color: var(--color-primary-bg);
       }
 
       &-input {
@@ -179,7 +178,7 @@
           &:focus + {
             .form__container--content-controls-label {
               transform: translate(-160%, 0);
-              width: minmax(max-content, max-content);
+              width: auto;
             }
           }
         }

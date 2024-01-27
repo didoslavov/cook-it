@@ -157,6 +157,20 @@ body {
   color: var(--color-primary-light);
 }
 
+.form-link:link,
+.form-link:visited {
+  color: var(--color-primary-bg);
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.form-link:hover,
+.form-link:active {
+  padding-bottom: 0.2rem;
+  color: var(--color-accent-dark);
+  border-bottom: 1px solid var(--color-accent-dark);
+}
+
 .link:link,
 .link:visited {
   display: inline-block;

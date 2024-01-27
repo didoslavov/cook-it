@@ -44,6 +44,10 @@ body {
   background-color: var(--color-primary-light);
 }
 
+main {
+  position: relative;
+}
+
 .heading-primary,
 .heading-secondary,
 .heading-tertiary {

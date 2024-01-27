@@ -11,9 +11,11 @@ export const routes: Routes = [
   {
     path: 'auth/register',
     component: RegisterComponent,
+    data: { animation: 'isRight' },
   },
   {
     path: 'auth/login',
     component: LoginComponent,
+    data: { animation: 'isLeft' },
   },
 ];

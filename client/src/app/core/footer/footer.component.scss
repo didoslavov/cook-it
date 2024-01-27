@@ -6,7 +6,7 @@
   color: var(--color-primary-dark);
 
   &__bg {
-    background-color: var(--color-primary-bg);
+    background-color: var(--color-primary);
     position: relative;
 
     &::before {
@@ -121,7 +121,7 @@
       }
 
       &-creator {
-        color: var(--color-primary-bg);
+        color: var(--color-primary);
         align-self: flex-end;
 
         &-name:link,

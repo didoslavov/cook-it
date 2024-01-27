@@ -12,7 +12,7 @@
     padding: 9.6rem;
     justify-self: center;
     align-self: self-start;
-    background-color: var(--color-primary-bg-opacity);
+    background-color: var(--color-primary-opacity);
     box-shadow: var(--shadow);
     border-radius: 9px;
 
@@ -42,7 +42,7 @@
 
       &-link {
         font-size: 1.2rem;
-        color: var(--color-primary-bg);
+        color: var(--color-primary);
         font-weight: var(--fw-light);
       }
     }
@@ -58,7 +58,7 @@
         position: absolute;
         left: 4.6rem;
         font-size: 1.4rem;
-        color: var(--color-primary-bg);
+        color: var(--color-primary);
         transition: all 0.3s cubic-bezier(0.4, 0.39, 1, 1);
       }
 
@@ -74,7 +74,7 @@
         position: relative;
 
         &::selection {
-          background-color: var(--color-primary-bg-opacity);
+          background-color: var(--color-primary-opacity);
         }
 
         &::placeholder {
@@ -91,7 +91,7 @@
             transform: translate(-85%, 1%);
             color: var(--color-primary-light);
             font-weight: var(--fw-light);
-            background-color: var(--color-primary-bg);
+            background-color: var(--color-primary);
             border-radius: 6rem;
             padding: 1.3rem 0;
           }

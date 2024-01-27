@@ -10,6 +10,7 @@
   background-color: var(--color-primary-light);
   border: 2px solid var(--color-primary-dark);
   border-radius: 50%;
+  box-shadow: var(--shadow);
 
   &:hover {
     cursor: pointer;

@@ -23,7 +23,7 @@
   --fw-bold: 700;
 
   /** SHADOWS**/
-  --shadow: 0 2.4rem 4.8rem rgba(39, 61, 36, 0.3);
+  --shadow: 0 1rem 3rem rgba(39, 61, 36, 0.3);
 }
 
 * {
@@ -118,6 +118,7 @@ body {
 .btn--cta:visited {
   background-color: var(--color-primary-dark);
   color: var(--color-primary-light);
+  box-shadow: var(--shadow);
 }
 
 .btn--cta:hover,

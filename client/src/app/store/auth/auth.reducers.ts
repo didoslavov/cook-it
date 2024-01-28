@@ -31,7 +31,8 @@ const authReducer = createReducer(
     error,
   })),
   on(AuthPageActions.registerClicked, (state) => state),
-  on(AuthPageActions.loginClicked, (state) => state)
+  on(AuthPageActions.loginClicked, (state) => state),
+  on(AuthApiActions.logout, () => initialState)
 );
 
 export function reducer(state: AuthState, action: Action): AuthState {

@@ -1,5 +1,5 @@
-import { AuthGenericFormComponent } from '../shared/auth-generic-form/generic-auth-form.component';
-import { GenericAuthFormData } from '../shared/auth-generic-form/generic-auth-form.model';
+import { AuthGenericFormComponent } from '../../shared/auth-generic-form/generic-auth-form.component';
+import { GenericAuthFormData } from '../../shared/auth-generic-form/generic-auth-form.model';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 

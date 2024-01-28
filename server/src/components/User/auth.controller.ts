@@ -68,7 +68,7 @@ const logout = expressAsyncHandler(async (req: Request, res: Response): Promise<
     const blacklisted = await blackListToken(token);
 
     if (!blacklisted) {
-        throw new AppError(401, 'Something went wrong, token not blacklistet');
+        throw new AppError(500, 'Something went wrong, please try again.');
     }
 
     res.clearCookie('auth');

@@ -7,7 +7,7 @@ import { AuthApiActions } from './auth.actions';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
 
-export const appInterceptor: HttpInterceptorFn = (req, next) => {
+export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
   const store = inject(Store);
   const cookieService = inject(CookieService);

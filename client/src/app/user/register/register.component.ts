@@ -2,16 +2,14 @@ import { AuthGenericFormComponent } from '../../shared/auth-generic-form/generic
 import { GenericAuthFormData } from '../../shared/auth-generic-form/generic-auth-form.model';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthApiActions, AuthPageActions } from '../../store/auth/auth.actions';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [AuthGenericFormComponent],
-  template: `<app-auth-generic-form
-    [formType]="'registration'"
-    [formData]="registrationData"
-    (formSubmit)="onFormSubmit()"
-  ></app-auth-generic-form>`,
+  templateUrl: './register.component.html',
 })
 export class RegisterComponent {
   registrationData: GenericAuthFormData = {
@@ -22,10 +20,12 @@ export class RegisterComponent {
     rePassword: '',
   };
 
-  constructor(private router: Router) {}
+  constructor(private store: Store, private router: Router) {}
 
-  onFormSubmit(): void {
-    //
-    // this.router.navigate(['/dashboard']);
+  onSubmit(formData: GenericAuthFormData): void {
+    const userData = { ...formData };
+    this.store.dispatch(AuthApiActions.registerUser({ userData }));
+
+    this.router.navigate(['/']);
   }
 }

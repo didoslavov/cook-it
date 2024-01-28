@@ -1,5 +1,5 @@
-import { AuthGenericFormComponent } from '../shared/auth-generic-form/generic-auth-form.component';
-import { GenericAuthFormData } from '../shared/auth-generic-form/generic-auth-form.model';
+import { AuthGenericFormComponent } from '../../shared/auth-generic-form/generic-auth-form.component';
+import { GenericAuthFormData } from '../../shared/auth-generic-form/generic-auth-form.model';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -7,11 +7,8 @@ import { Router } from '@angular/router';
   selector: 'app-login',
   standalone: true,
   imports: [AuthGenericFormComponent],
-  template: `<app-auth-generic-form
-    [formType]="'login'"
-    [formData]="loginData"
-    (formSubmit)="onFormSubmit()"
-  ></app-auth-generic-form>`,
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent {
   loginData: GenericAuthFormData = {
@@ -22,7 +19,6 @@ export class LoginComponent {
   constructor(private router: Router) {}
 
   onFormSubmit(): void {
-    //
     // this.router.navigate(['/dashboard']);
   }
 }

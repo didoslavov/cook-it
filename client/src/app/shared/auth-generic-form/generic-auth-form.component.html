@@ -3,7 +3,7 @@
         <h2 class="form__container--content-heading subheading">
             {{isRegistrationForm() ? 'Sign Up for a Delicious Journey' : 'Let\'s Get Cooking'}}
         </h2>
-        <form [formGroup]="formModel.form" class="form__container--content-form">
+        <form [formGroup]="formModel.form" class="form__container--content-form" (ngSubmit)="onSubmit()">
             @if (isRegistrationForm() && !isLoginForm()) {
             <div class="form__container--content-controls">
                 <input placeholder="placeholder" id="firstName" class="form__container--content-controls-input"

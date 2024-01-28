@@ -2,7 +2,7 @@ import sequelize from './connection';
 
 export default async (): Promise<void> => {
     try {
-        await sequelize.sync({ force: true });
+        await sequelize.sync();
 
         console.log('Database connected successfully...');
     } catch (err: any) {

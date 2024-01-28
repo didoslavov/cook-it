@@ -18,10 +18,10 @@ export interface Credentials {
 }
 
 export interface UserData {
-  firstName: string;
-  lastName: string;
+  firstName?: string | undefined;
+  lastName?: string | undefined;
   email: string;
   avatar?: string;
   password: string;
-  rePass: string;
+  rePassword?: string | undefined;
 }

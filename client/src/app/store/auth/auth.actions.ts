@@ -19,5 +19,7 @@ export const AuthApiActions = createActionGroup({
     loginSuccess: props<{ user: User }>(),
     loginFailure: props<{ error: string }>(),
     logout: emptyProps(),
+    logoutSuccess: emptyProps(),
+    logoutFailure: props<{ error: string }>(),
   },
 });

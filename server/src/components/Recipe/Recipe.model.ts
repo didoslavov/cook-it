@@ -26,6 +26,12 @@ class Recipe extends Model<RecipeInterface> {
         type: DataType.TEXT,
         allowNull: false,
     })
+    declare description: string;
+
+    @Column({
+        type: DataType.TEXT,
+        allowNull: false,
+    })
     declare steps: string;
 
     @Column({

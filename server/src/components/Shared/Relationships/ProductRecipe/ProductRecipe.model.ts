@@ -18,6 +18,9 @@ class ProductRecipe extends Model<ProductRecipe> implements ProductRecipeInterfa
 
     @Column({ type: DataType.INTEGER, defaultValue: 0 })
     declare quantity: number;
+
+    @Column({ type: DataType.INTEGER, defaultValue: 0 })
+    declare quantity_unit: number;
 }
 
 export default ProductRecipe;

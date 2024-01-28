@@ -22,6 +22,9 @@ class User extends Model<UserInterface> {
     @Column({ type: DataType.STRING, allowNull: false })
     declare email: string;
 
+    @Column({ type: DataType.STRING, allowNull: true })
+    declare avatar: string | undefined;
+
     @Column({ type: DataType.STRING, allowNull: false })
     declare password: string;
 

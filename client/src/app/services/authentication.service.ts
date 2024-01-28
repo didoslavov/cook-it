@@ -23,7 +23,7 @@ export class AuthenticationService {
 
   register(userData: UserData): Observable<User> {
     return this.http
-      .post<User>('/auth/register', userData)
+      .post<User>('/users/register', userData)
       .pipe(
         tap((user) =>
           this.store.dispatch(AuthApiActions.registrationSuccess({ user }))
@@ -33,7 +33,7 @@ export class AuthenticationService {
 
   login(credentials: Credentials): Observable<User> {
     return this.http
-      .post<User>('/auth/login', credentials)
+      .post<User>('/users/login', credentials)
       .pipe(
         tap((user) =>
           this.store.dispatch(AuthApiActions.loginSuccess({ user }))
@@ -42,6 +42,6 @@ export class AuthenticationService {
   }
 
   logout(): Observable<Object> {
-    return this.http.post('/auth/logout', null);
+    return this.http.post('/users/logout', null);
   }
 }

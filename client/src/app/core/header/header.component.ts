@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBars, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import { AuthState, User, UserData } from '../../store/auth/user.model';
+import { Store, select } from '@ngrx/store';
+import { getUserData } from '../../store/auth/auth.selectors';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -13,13 +17,20 @@ import { faBars, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 })
 export class HeaderComponent implements OnInit {
   declare attentionSeeker: string;
+  declare user: User | null;
+
   faCircleXmark = faCircleXmark;
   faBars = faBars;
   showMobileNav = false;
 
-  constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(private activatedRoute: ActivatedRoute, private store: Store) {}
 
   ngOnInit(): void {
+    this.store.pipe(select(getUserData)).subscribe((user: any) => {
+      this.user = user.user;
+      console.log(user?.user.firstName);
+    });
+
     this.activatedRoute.fragment.subscribe(
       (fragment: string | null) => fragment && this.scrollTo(fragment)
     );

@@ -2,6 +2,9 @@
     <a routerLink="/">
         <img class="logo" src="../../../assets/logo.png" alt="Omnifood Logo" />
     </a>
+    <div *ngIf="user">
+        <p>{{ user.firstName }} </p>
+    </div>
     <nav class="main-nav">
         <ul class="main-nav-list">
             <li><a class="main-nav-link" routerLink="" fragment="How">How it works</a></li>

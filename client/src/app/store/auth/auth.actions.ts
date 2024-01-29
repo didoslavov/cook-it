@@ -6,6 +6,8 @@ export const AuthPageActions = createActionGroup({
   events: {
     registerClicked: emptyProps(),
     loginClicked: emptyProps(),
+    loadStateFromLocalStorage: emptyProps(),
+    loadStateFromLocalStorageSuccess: emptyProps(),
   },
 });
 

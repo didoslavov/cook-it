@@ -1,6 +1,15 @@
-import { Action, State, createReducer, on } from '@ngrx/store';
+import {
+  Action,
+  ActionReducer,
+  ActionReducerMap,
+  MetaReducer,
+  State,
+  createReducer,
+  on,
+} from '@ngrx/store';
 import { AuthState } from './user.model';
 import { AuthApiActions, AuthPageActions } from './auth.actions';
+import { localStorageSync } from 'ngrx-store-localstorage';
 
 export const initialState: AuthState = {
   user: null,
@@ -44,6 +53,18 @@ const authReducer = createReducer(
     error,
   }))
 );
+
+export function localStorageSyncReducer(
+  reducer: ActionReducer<any>
+): ActionReducer<any> {
+  return localStorageSync({ keys: ['userData'], rehydrate: true })(reducer);
+}
+export const featureReducers: ActionReducerMap<any> = {
+  auth: authReducer,
+};
+export const metaReducers: Array<MetaReducer<any, any>> = [
+  localStorageSyncReducer,
+];
 
 export function reducer(state: AuthState, action: Action): AuthState {
   return authReducer(state, action);

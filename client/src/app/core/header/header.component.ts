@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit {
     this.renderer.listen('window', 'click', (e: Event) => {
       if (
         e.target !== this.menuBtn.nativeElement &&
-        e.target !== this.userMenuComponent.menu.nativeElement
+        e.target !== this.userMenuComponent?.menu.nativeElement
       ) {
         this.showUserMenu = false;
       }

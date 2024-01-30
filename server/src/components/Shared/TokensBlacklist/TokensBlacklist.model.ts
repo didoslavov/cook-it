@@ -4,10 +4,11 @@ import { BlackListed } from './tokensBlacklist.interface';
 @Table({
     tableName: 'blacklisted',
     modelName: 'TokensBlacklist',
+    timestamps: false,
 })
 class TokensBlacklist extends Model<BlackListed> {
     @PrimaryKey
-    @Column({ type: DataType.UUID })
+    @Column({ type: DataType.STRING(767) })
     declare token: string;
 }
 

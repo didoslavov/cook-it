@@ -16,7 +16,7 @@ export { default as AppError } from './errors/appError';
 export { default as cors } from './middlewares/cors';
 export { default as errorHandlerMiddleware } from './middlewares/errorHandler';
 export { default as authMiddleware } from './middlewares/authMiddleware';
-export { blackListToken, getBlacklistedToken } from './TokensBlacklist/tokensBlacklist.sercvice';
+export { blackListToken, getBlacklistedToken } from './TokensBlacklist/tokensBlacklist.service';
 
 export { default as extractUser } from './utils/extractUser';
 export * from './utils/bcrypt';

@@ -55,7 +55,7 @@ const login = expressAsyncHandler(async (req: Request, res: Response): Promise<v
     }
 
     const token = createToken(user);
-    const userData = { id: user.id, firstName: user.firstName, lastName: user.lastName, email: user.email };
+    const userData = { id: user.id, firstName: user.firstName, lastName: user.lastName, avatar: user.avatar, email: user.email };
 
     res.cookie('auth', token, { httpOnly: true, sameSite: 'lax', secure: false });
 
@@ -65,7 +65,7 @@ const login = expressAsyncHandler(async (req: Request, res: Response): Promise<v
 const logout = expressAsyncHandler(async (req: Request, res: Response): Promise<void> => {
     const token = req.cookies.auth;
 
-    const blacklisted = await blackListToken(token);
+    const blacklisted: any = await blackListToken(token);
 
     if (!blacklisted) {
         throw new AppError(500, 'Something went wrong, please try again.');

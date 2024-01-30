@@ -5,7 +5,7 @@ import { getBlacklistedToken } from '..';
 
 const authMiddleware = (redirectUnauthenticated: boolean = true) => {
     return async (req: UserRequest, res: Response, next: NextFunction) => {
-        const token = req.cookies.token;
+        const token = req.cookies.auth;
 
         try {
             const [data, blackListedToken] = await Promise.all([verifyToken(token), getBlacklistedToken(token)]);

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faBowlRice,
@@ -9,7 +10,7 @@ import {
 @Component({
   selector: 'app-how',
   standalone: true,
-  imports: [FontAwesomeModule],
+  imports: [FontAwesomeModule, RouterModule],
   templateUrl: './how.component.html',
   styleUrl: './how.component.scss',
 })

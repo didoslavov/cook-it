@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit {
   ) {
     this.renderer.listen('window', 'click', (e: Event) => {
       if (
-        e.target !== this.menuBtn.nativeElement &&
+        e.target !== this.menuBtn?.nativeElement &&
         e.target !== this.userMenuComponent?.menu.nativeElement
       ) {
         this.showUserMenu = false;
@@ -50,7 +50,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.pipe(select(getUserData)).subscribe((user: any) => {
-      this.user = user.user;
+      this.user = user?.user;
     });
 
     this.activatedRoute.fragment.subscribe(

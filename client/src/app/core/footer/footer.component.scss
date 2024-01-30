@@ -100,7 +100,9 @@
         &-angular,
         &-node,
         &-express,
-        &-mysql {
+        &-mysql,
+        &-html,
+        &-sass {
           width: 10%;
           height: 3rem;
           background-color: var(--color-accent-dark);
@@ -117,6 +119,12 @@
         }
         &-mysql {
           mask: url(../../../assets/icons/mysql.svg) no-repeat center;
+        }
+        &-html {
+          mask: url(../../../assets/icons/html.svg) no-repeat center;
+        }
+        &-sass {
+          mask: url(../../../assets/icons/sass.svg) no-repeat center;
         }
       }
 

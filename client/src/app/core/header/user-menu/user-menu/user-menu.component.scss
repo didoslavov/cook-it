@@ -1,0 +1,88 @@
+.user-menu {
+  width: 20rem;
+  height: 20rem;
+  font-size: 1.8rem;
+  font-weight: var(--fw-bold);
+  color: var(--color-primary-dark);
+  background-color: var(--color-primary-opacity-light);
+  position: absolute;
+  top: 12rem;
+  right: 1.5rem;
+  display: grid;
+  border-radius: 9px;
+  box-shadow: var(--shadow);
+
+  animation: fadeInDown 0.5s ease-in-out;
+
+  @keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  ::before {
+    content: "";
+    width: 3rem;
+    height: 2rem;
+    background-color: var(--color-primary-dark);
+    position: absolute;
+    top: -2rem;
+    right: 2rem;
+    clip-path: polygon(52% 35%, 0% 100%, 100% 100%);
+  }
+
+  &__list {
+    justify-self: center;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.6rem;
+
+    &--item {
+      display: inline-block;
+
+      &-icon {
+        margin-right: 1rem;
+      }
+
+      &-logout {
+        font-size: inherit;
+        font-weight: inherit;
+        color: var(--color-primary-dark);
+        border: none;
+        transition: all 0.3s;
+
+        &:hover {
+          background-color: inherit;
+          cursor: pointer;
+          color: var(--color-accent-dark);
+        }
+      }
+
+      &-link:link,
+      &-link:visited {
+        display: inline-block;
+        text-decoration: none;
+        color: var(--color-primary-dark);
+        background-color: var(--color-primary-light);
+        font-weight: var(--fw-bold);
+        font-size: 1.8rem;
+
+        transition: all 300ms;
+      }
+
+      &-link:hover,
+      &-link:active {
+        color: var(--color-accent-dark);
+      }
+    }
+  }
+}

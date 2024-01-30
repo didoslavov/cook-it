@@ -2,19 +2,28 @@
     <a routerLink="/">
         <img class="logo" src="../../../assets/logo.png" alt="Omnifood Logo" />
     </a>
-    <div *ngIf="user">
-        <p>{{ user.firstName }} </p>
-    </div>
     <nav class="main-nav">
         <ul class="main-nav-list">
             <li><a class="main-nav-link" routerLink="" fragment="How">How it works</a></li>
             <li><a class="main-nav-link" routerLink="/recipes">Recipes</a></li>
             <li><a class="main-nav-link" routerLink="/dashboard">Dashboard</a></li>
             <li><a class="main-nav-link" routerLink="" fragment="About">About</a></li>
+            @if(!user) {
             <li><a class="btn btn--cta" [ngClass]="attentionSeeker" (mouseover)="attentionSeekerAnimation($event)"
                     (mouseout)="attentionSeekerAnimationRemove($event)" routerLink="/auth/register">Join now</a>
             </li>
+            }
+            @if(user) {
+            <li class="main-nav-list__item-user"><button #menuBtn class="main-nav-list__item-btn"
+                    (click)="toggleUserMenu()">{{user.firstName}}</button><img class="main-nav-list__item-img"
+                    src="{{user.avatar || ('../../../assets/useravatar.png')}}" alt="user avatar" />
+
+            </li>
+            }
         </ul>
+        @if(showUserMenu) {
+        <app-user-menu />
+        }
     </nav>
     <button class="main-nav__mobile-button" (click)="toggleMobileNav()">
         @if(!showMobileNav) {
@@ -29,14 +38,20 @@
             <li><a class="main-nav-link main-nav__mobile-link" routerLink="#how" (click)="closeMobileNav()">How it
                     works</a>
             </li>
-            <li><a class="main-nav-link main-nav__mobile-link" routerLink="#testimonials"
-                    (click)="closeMobileNav()">Recipes</a></li>
-            <li><a class="main-nav-link main-nav__mobile-link" routerLink="#pricing"
-                    (click)="closeMobileNav()">Dashboard</a>
+            <li><a class="main-nav-link main-nav__mobile-link" routerLink="#" (click)="closeMobileNav()">Recipes</a>
             </li>
-            <li><a class="main-nav-link main-nav__mobile-link" routerLink="#meals" (click)="closeMobileNav()">About</a>
+            <li><a class="main-nav-link main-nav__mobile-link" routerLink="#" (click)="closeMobileNav()">Dashboard</a>
             </li>
+            <li><a class="main-nav-link main-nav__mobile-link" routerLink="#about" (click)="closeMobileNav()">About</a>
+            </li>
+            @if (!user) {
             <li><a class="btn btn--cta" routerLink="/auth/register" (click)="closeMobileNav()">Join now</a></li>
+            } @else {
+            <li><a class="main-nav-link main-nav__mobile-link" routerLink="#" (click)="closeMobileNav()">Profile</a>
+            </li>
+            <li><a class="main-nav-link main-nav__mobile-link" routerLink="#" (click)="closeMobileNav()">Logout</a>
+            </li>
+            }
         </ul>
     </div>
     }

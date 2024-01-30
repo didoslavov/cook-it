@@ -7,6 +7,7 @@
   --color-primary-dark: #273d24;
   --color-primary-light: #e9ece9;
   --color-primary-opacity: #68776655;
+  --color-primary-opacity-light: #e9ece9fa;
   --color-accent: #e9ca72;
   --color-accent-dark: #baa25b;
   --font-color: #1b2b19;
@@ -160,8 +161,8 @@ main {
   margin-right: 5.2rem;
 }
 
-.mb-sm {
-  margin-bottom: 1.6rem;
+.mt-sm {
+  margin-top: 2rem;
 }
 
 /* RESPONSIVE */

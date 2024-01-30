@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export interface GenericAuthFormData {
   firstName?: string;
   lastName?: string;
+  avatar?: string;
   email: string;
   password: string;
   rePassword?: string;
@@ -17,6 +18,7 @@ export class GenericAuthFormModel {
     this.form = new FormGroup({
       firstName: new FormControl(data.firstName),
       lastName: new FormControl(data.lastName),
+      avatar: new FormControl(data.avatar),
       email: new FormControl(data.email, [
         Validators.required,
         Validators.email,

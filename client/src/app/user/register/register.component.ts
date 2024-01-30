@@ -15,6 +15,7 @@ export class RegisterComponent {
   registrationData: GenericAuthFormData = {
     firstName: '',
     lastName: '',
+    avatar: '',
     email: '',
     password: '',
     rePassword: '',

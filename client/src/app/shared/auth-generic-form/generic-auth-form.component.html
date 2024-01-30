@@ -15,6 +15,11 @@
                     formControlName="lastName" />
                 <label for="lastName" class="form__container--content-controls-label">Last Name</label>
             </div>
+            <div class="form__container--content-controls">
+                <input placeholder="placeholder" id="avatar" class="form__container--content-controls-input"
+                    formControlName="avatar" />
+                <label for="avatar" class="form__container--content-controls-label">Avatar</label>
+            </div>
             }
             @if(isLoginForm() || isRegistrationForm()) {
             <div class="form__container--content-controls">
@@ -22,7 +27,6 @@
                     formControlName="email" />
                 <label for="email" class="form__container--content-controls-label">Email</label>
             </div>
-
             <div class="form__container--content-controls">
                 <input placeholder="placeholder" id="password" class="form__container--content-controls-input"
                     type="password" formControlName="password" />

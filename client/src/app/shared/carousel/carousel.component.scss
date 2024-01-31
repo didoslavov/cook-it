@@ -1,0 +1,47 @@
+.carousel {
+  max-width: 100%;
+  background-color: var(--color-primary-opacity-light);
+  backdrop-filter: blur(2px);
+  border-radius: 9px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: end;
+  //   gap: 4.8rem;
+  padding: 8rem 6rem;
+  position: relative;
+
+  &__arrows {
+    position: absolute;
+    top: 20rem;
+    left: 4.8rem;
+    font-size: 4rem;
+    font-weight: var(--fw-bold);
+    color: var(--color-primary-dark);
+    display: flex;
+    flex-direction: column;
+    gap: 8rem;
+
+    &--up,
+    &--down {
+      border: 2px solid var(--color-accent-dark);
+      border-radius: 9px;
+      padding: 0.5rem;
+      text-align: center;
+      transition: all 0.2s;
+
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.2);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .carousel {
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    gap: 2rem 0;
+    padding: 4rem 0;
+  }
+}

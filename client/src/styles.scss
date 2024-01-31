@@ -7,7 +7,7 @@
   --color-primary-dark: #273d24;
   --color-primary-light: #e9ece9;
   --color-primary-opacity: #68776655;
-  --color-primary-opacity-light: #e9ece9fa;
+  --color-primary-opacity-light: #e9ece9c7;
   --color-accent: #e9ca72;
   --color-accent-dark: #baa25b;
   --font-color: #1b2b19;
@@ -47,6 +47,7 @@ body {
 
 main {
   position: relative;
+  height: 90vh;
 }
 
 .heading-primary,

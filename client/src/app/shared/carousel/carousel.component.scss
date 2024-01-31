@@ -1,19 +1,14 @@
 .carousel {
-  max-width: 100%;
+  width: 100%;
   background-color: var(--color-primary-opacity-light);
   backdrop-filter: blur(2px);
-  border-radius: 9px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: max-content repeat(4, 1fr);
   justify-items: end;
-  //   gap: 4.8rem;
   padding: 8rem 6rem;
-  position: relative;
 
   &__arrows {
-    position: absolute;
-    top: 20rem;
-    left: 4.8rem;
+    align-self: center;
     font-size: 4rem;
     font-weight: var(--fw-bold);
     color: var(--color-primary-dark);
@@ -37,11 +32,28 @@
   }
 }
 
+@media screen and (max-width: 1500px) {
+  .carousel {
+    gap: 2rem;
+  }
+}
+
 @media screen and (max-width: 900px) {
   .carousel {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: minmax(12.6rem, max-content) repeat(2, 40%);
+    grid-template-rows: auto;
     justify-items: center;
     gap: 2rem 0;
     padding: 4rem 0;
+
+    &__arrows {
+      grid-area: 1 / 1 / span 2;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .carousel {
+    gap: 2rem;
   }
 }

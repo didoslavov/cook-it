@@ -1,0 +1,120 @@
+.recipe-card {
+  height: 48rem;
+  max-width: 36rem;
+  border-radius: 9px;
+  overflow: hidden;
+  transform: scale(0.95);
+  transition: box-shadow 0.5s, transform 0.5s;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 5px 20px 30px var(--color-primary-opacity);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20%;
+    background: linear-gradient(
+      to top right,
+      var(--color-primary),
+      var(--color-primary-light)
+    );
+
+    &--heading {
+      font-size: 2rem;
+      font-weight: var(--fw-bold);
+      color: var(--font-color-dark);
+    }
+  }
+
+  &__img {
+    transform: scale(101%);
+    width: 100%;
+    height: 80%;
+    object-fit: cover;
+  }
+
+  &__content {
+    height: 100%;
+    padding: 5%;
+    opacity: 0;
+    transform: scale(0.5);
+    transform: translateY(-200%);
+    transition: opacity 0.2s, transform 0.8s;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    &--times {
+      font-size: 1.4rem;
+      font-weight: var(--fw-light);
+      padding: 1rem;
+      color: var(--font-color);
+      background-color: var(--color-primary-light);
+      border-radius: 9px;
+      border: 1px solid var(--color-primary-dark);
+
+      &-icon {
+        color: var(--color-accent-dark);
+        margin-right: 0.4rem;
+      }
+    }
+
+    &--description {
+      color: var(--font-color-dark);
+      font-size: 1.6rem;
+      font-weight: var(--fw-semi);
+      margin-bottom: 8rem;
+    }
+  }
+
+  &__info {
+    z-index: 10;
+    background: linear-gradient(
+      to bottom right,
+      rgba(#3d503a, 0.9),
+      rgba(#e9ece9, 0.9)
+    );
+    width: 14rem;
+    height: 14rem;
+    position: absolute;
+    top: -7rem;
+    right: -7rem;
+    border-radius: 0px 0px 20rem 20rem;
+    transition: all 0.5s, border-radius 2s, top 1s;
+    overflow: hidden;
+
+    &--icon {
+      position: absolute;
+      right: 9.5rem;
+      top: 8.5rem;
+      font-size: 2rem;
+      color: var(--color-primary-light);
+      opacity: 1;
+    }
+
+    &:hover {
+      height: 81%;
+      width: 100%;
+      right: 0;
+      top: 0;
+      border-radius: 0;
+
+      .recipe-card__info--icon {
+        opacity: 0;
+        right: 15px;
+        top: 15px;
+      }
+
+      .recipe-card__content {
+        margin-bottom: 8rem;
+        opacity: 1;
+        transform: scale(1);
+        transform: translateY(0);
+      }
+    }
+  }
+}

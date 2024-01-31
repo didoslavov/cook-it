@@ -38,9 +38,11 @@
             <li><a class="main-nav-link main-nav__mobile-link" routerLink="#how" (click)="closeMobileNav()">How it
                     works</a>
             </li>
-            <li><a class="main-nav-link main-nav__mobile-link" routerLink="#" (click)="closeMobileNav()">Recipes</a>
+            <li><a class="main-nav-link main-nav__mobile-link" routerLink="#" (click)="closeMobileNav()">Personal
+                    Recipes</a>
             </li>
-            <li><a class="main-nav-link main-nav__mobile-link" routerLink="#" (click)="closeMobileNav()">Dashboard</a>
+            <li><a class="main-nav-link main-nav__mobile-link" routerLink="/dashboard"
+                    (click)="closeMobileNav()">Recipes</a>
             </li>
             <li><a class="main-nav-link main-nav__mobile-link" routerLink="#about" (click)="closeMobileNav()">About</a>
             </li>
@@ -49,7 +51,7 @@
             } @else {
             <li><a class="main-nav-link main-nav__mobile-link" routerLink="#" (click)="closeMobileNav()">Profile</a>
             </li>
-            <li><a class="main-nav-link main-nav__mobile-link" routerLink="#" (click)="closeMobileNav()">Logout</a>
+            <li><a class="main-nav-link main-nav__mobile-link" routerLink="" (click)="closeMobileNav()">Logout</a>
             </li>
             }
         </ul>

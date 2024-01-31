@@ -7,11 +7,18 @@ import { slider } from './route-animations';
 import { AuthPageActions } from './store/auth/auth.actions';
 import { Store } from '@ngrx/store';
 import { User } from './store/auth/user.model';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HeaderComponent, FooterComponent],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    HeaderComponent,
+    FooterComponent,
+    DashboardComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   animations: [slider],

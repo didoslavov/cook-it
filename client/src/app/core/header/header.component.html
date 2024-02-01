@@ -6,6 +6,7 @@
         <ul class="main-nav-list">
             <li><a class="main-nav-link" routerLink="" fragment="How">How it works</a></li>
             <li><a class="main-nav-link" routerLink="/recipes">Recipes</a></li>
+            <li><a class="main-nav-link" routerLink="/create-recipe">Create Recipe</a></li>
             <li><a class="main-nav-link" routerLink="/dashboard">Dashboard</a></li>
             <li><a class="main-nav-link" routerLink="" fragment="About">About</a></li>
             @if(!user) {
@@ -38,7 +39,8 @@
             <li><a class="main-nav-link main-nav__mobile-link" routerLink="#how" (click)="closeMobileNav()">How it
                     works</a>
             </li>
-            <li><a class="main-nav-link main-nav__mobile-link" routerLink="#" (click)="closeMobileNav()">Personal
+            <li><a class="main-nav-link main-nav__mobile-link" routerLink="/my-recipes"
+                    (click)="closeMobileNav()">Personal
                     Recipes</a>
             </li>
             <li><a class="main-nav-link main-nav__mobile-link" routerLink="/dashboard"

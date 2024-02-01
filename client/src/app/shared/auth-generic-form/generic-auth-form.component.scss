@@ -102,6 +102,7 @@
           text-indent: 0;
 
           + .form__container--content-controls-label {
+            transform: translate(-30%);
             opacity: 0;
           }
         }
@@ -142,8 +143,8 @@
         &-input {
           &:focus + {
             .form__container--content-controls-label {
-              transform: translate(-85%, -2%);
-              padding: 1.55rem;
+              transform: translate(-85%, -1%);
+              padding: 1.7rem;
             }
           }
         }

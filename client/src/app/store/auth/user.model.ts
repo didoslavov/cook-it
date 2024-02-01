@@ -3,7 +3,7 @@ export interface User {
   firstName: string;
   lastName: string;
   email: string;
-  avatar?: string;
+  avatar: string;
 }
 
 export interface AuthState {
@@ -13,15 +13,15 @@ export interface AuthState {
 }
 
 export interface Credentials {
-  email: string;
-  password: string;
+  email?: string | undefined;
+  password?: string | undefined;
 }
 
 export interface UserData {
   firstName?: string | undefined;
   lastName?: string | undefined;
-  email: string;
-  avatar?: string;
-  password: string;
+  email?: string | undefined;
+  avatar?: string | undefined;
+  password?: string | undefined;
   rePassword?: string | undefined;
 }

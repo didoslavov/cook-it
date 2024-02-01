@@ -1,7 +1,7 @@
 <div class="form__container">
     <div class="form__container--content">
         <h2 class="form__container--content-heading subheading">
-            {{isRegistrationForm() ? 'Sign Up for a Delicious Journey' : 'Let\'s Get Cooking'}}
+            {{headingText}}
         </h2>
         <form [formGroup]="formModel.form" class="form__container--content-form" (ngSubmit)="onSubmit()">
             @if (isRegistrationForm() && !isLoginForm()) {
@@ -39,19 +39,13 @@
                     type="password" formControlName="rePassword" />
                 <label for="rePass" class="form__container--content-controls-label">Re Password</label>
             </div>
-            }
-            <input class="form__container--content-form-btn btn btn--full" type="submit" [value]="buttonText" />
-            @if (isRegistrationForm()) {
             <p class="form__container--content-form-link">Already have an account? <a routerLink="/auth/login"
-                    class="link">Sign in
-                    here!</a></p>
+                    class="link">Sign in here!</a></p>
             } @else if(isLoginForm()) {
             <p class="form__container--content-form-link">Don't have and account? <a routerLink="/auth/register"
-                    class="link">Sign
-                    up
-                    here!</a></p>
+                    class="link">Sign up here!</a></p>
             }
-            @if(isRecipeForm()) {
+            @if(isRecipeEditForm() || isRecipeCreateForm()) {
             <div class="form__container--content-controls">
                 <input placeholder="placeholder" id="name" class="form__container--content-controls-input"
                     formControlName="name" />
@@ -60,7 +54,7 @@
             <div class="form__container--content-controls">
                 <input placeholder="placeholder" id="prepTime" class="form__container--content-controls-input"
                     formControlName="prepTime" />
-                <label for="prepTime" class="form__container--content-controls-label">Preparation Time (min)</label>
+                <label for="prepTime" class="form__container--content-controls-label">Prep Time (min)</label>
             </div>
             <div class="form__container--content-controls">
                 <input placeholder="placeholder" id="cookTime" class="form__container--content-controls-input"
@@ -73,16 +67,22 @@
                 <label for="img" class="form__container--content-controls-label">Image</label>
             </div>
             <div class="form__container--content-controls">
-                <textarea placeholder="placeholder" id="Ingredients" class="form__container--content-controls-input"
-                    formControlName="Ingredients"></textarea>
-                <label for="Ingredients" class="form__container--content-controls-label">Ingredients</label>
+                <input placeholder="placeholder" id="ingredients" class="form__container--content-controls-input"
+                    formControlName="ingredients" />
+                <label for="ingredients" class="form__container--content-controls-label">Ingredients</label>
             </div>
             <div class="form__container--content-controls">
-                <textarea placeholder="placeholder" id="steps" class="form__container--content-controls-input"
-                    formControlName="steps"></textarea>
+                <input placeholder="placeholder" id="steps" class="form__container--content-controls-input"
+                    formControlName="steps" />
                 <label for="steps" class="form__container--content-controls-label">Cooking Steps</label>
             </div>
+            <div class="form__container--content-controls">
+                <input placeholder="placeholder" id="description" class="form__container--content-controls-input"
+                    formControlName="description" />
+                <label for="description" class="form__container--content-controls-label">Cooking Description</label>
+            </div>
             }
+            <input class="form__container--content-form-btn btn btn--full" type="submit" [value]="buttonText" />
         </form>
     </div>
 </div>

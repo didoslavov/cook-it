@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AuthGenericFormComponent } from './generic-form.component';
+import { GenericFormComponent } from './generic-form.component';
 
 describe('AuthGenericFormComponent', () => {
-  let component: AuthGenericFormComponent;
-  let fixture: ComponentFixture<AuthGenericFormComponent>;
+  let component: GenericFormComponent;
+  let fixture: ComponentFixture<GenericFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AuthGenericFormComponent],
+      imports: [GenericFormComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AuthGenericFormComponent);
+    fixture = TestBed.createComponent(GenericFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

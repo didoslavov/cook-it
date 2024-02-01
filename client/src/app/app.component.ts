@@ -7,7 +7,7 @@ import { slider } from './route-animations';
 import { AuthPageActions } from './store/auth/auth.actions';
 import { Store } from '@ngrx/store';
 import { User } from './store/auth/user.model';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { RecipesComponent } from './recipes/recipes.component';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     RouterOutlet,
     HeaderComponent,
     FooterComponent,
-    DashboardComponent,
+    RecipesComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

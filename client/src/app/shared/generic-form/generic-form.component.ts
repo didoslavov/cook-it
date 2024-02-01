@@ -4,19 +4,19 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {
   GenericAuthFormData,
   GenericAuthFormModel,
-} from './generic-auth-form.model';
+} from './generic-form.model';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-auth-generic-form',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
-  templateUrl: './generic-auth-form.component.html',
-  styleUrl: './generic-auth-form.component.scss',
+  templateUrl: './generic-form.component.html',
+  styleUrl: './generic-form.component.scss',
 })
 export class AuthGenericFormComponent implements OnInit {
   @Input() formData!: GenericAuthFormData;
-  @Input() formType!: 'registration' | 'login';
+  @Input() formType!: 'registration' | 'login' | 'recipe';
   @Output() formSubmit = new EventEmitter<GenericAuthFormData>();
   buttonText!: string;
 
@@ -33,6 +33,10 @@ export class AuthGenericFormComponent implements OnInit {
 
   isLoginForm(): boolean {
     return this.formType === 'login';
+  }
+
+  isRecipeForm(): boolean {
+    return this.formType === 'recipe';
   }
 
   onSubmit(): void {

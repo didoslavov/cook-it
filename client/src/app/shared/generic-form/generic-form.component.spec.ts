@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AuthGenericFormComponent } from './generic-auth-form.component';
+import { AuthGenericFormComponent } from './generic-form.component';
 
 describe('AuthGenericFormComponent', () => {
   let component: AuthGenericFormComponent;

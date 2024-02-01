@@ -45,11 +45,43 @@
             <p class="form__container--content-form-link">Already have an account? <a routerLink="/auth/login"
                     class="link">Sign in
                     here!</a></p>
-            } @else {
+            } @else if(isLoginForm()) {
             <p class="form__container--content-form-link">Don't have and account? <a routerLink="/auth/register"
                     class="link">Sign
                     up
                     here!</a></p>
+            }
+            @if(isRecipeForm()) {
+            <div class="form__container--content-controls">
+                <input placeholder="placeholder" id="name" class="form__container--content-controls-input"
+                    formControlName="name" />
+                <label for="name" class="form__container--content-controls-label">Name</label>
+            </div>
+            <div class="form__container--content-controls">
+                <input placeholder="placeholder" id="prepTime" class="form__container--content-controls-input"
+                    formControlName="prepTime" />
+                <label for="prepTime" class="form__container--content-controls-label">Preparation Time (min)</label>
+            </div>
+            <div class="form__container--content-controls">
+                <input placeholder="placeholder" id="cookTime" class="form__container--content-controls-input"
+                    formControlName="cookTime" />
+                <label for="cookTime" class="form__container--content-controls-label">Cook Time (min)</label>
+            </div>
+            <div class="form__container--content-controls">
+                <input placeholder="placeholder" id="img" class="form__container--content-controls-input"
+                    formControlName="img" />
+                <label for="img" class="form__container--content-controls-label">Image</label>
+            </div>
+            <div class="form__container--content-controls">
+                <textarea placeholder="placeholder" id="Ingredients" class="form__container--content-controls-input"
+                    formControlName="Ingredients"></textarea>
+                <label for="Ingredients" class="form__container--content-controls-label">Ingredients</label>
+            </div>
+            <div class="form__container--content-controls">
+                <textarea placeholder="placeholder" id="steps" class="form__container--content-controls-input"
+                    formControlName="steps"></textarea>
+                <label for="steps" class="form__container--content-controls-label">Cooking Steps</label>
+            </div>
             }
         </form>
     </div>

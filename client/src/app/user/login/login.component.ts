@@ -1,6 +1,6 @@
 import { Store } from '@ngrx/store';
-import { AuthGenericFormComponent } from '../../shared/auth-generic-form/generic-auth-form.component';
-import { GenericAuthFormData } from '../../shared/auth-generic-form/generic-auth-form.model';
+import { AuthGenericFormComponent } from '../../shared/generic-form/generic-form.component';
+import { GenericAuthFormData } from '../../shared/generic-form/generic-form.model';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthApiActions } from '../../store/auth/auth.actions';

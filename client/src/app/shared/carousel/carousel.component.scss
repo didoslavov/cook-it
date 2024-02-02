@@ -41,7 +41,7 @@
 @media screen and (max-width: 900px) {
   .carousel {
     grid-template-columns: minmax(12.6rem, max-content) repeat(2, 40%);
-    grid-template-rows: auto;
+    grid-template-rows: 2;
     justify-items: center;
     gap: 2rem 0;
     padding: 4rem 0;
@@ -54,6 +54,11 @@
 
 @media screen and (max-width: 500px) {
   .carousel {
+    grid-template-columns: minmax(8rem, max-content) repeat(2, 40%);
+
     gap: 2rem;
+
+    &__arrows {
+    }
   }
 }

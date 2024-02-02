@@ -93,7 +93,7 @@
                 <p class="ingredients__heading">Ingredients</p>
                 <ul class="ingredients__list">
                     @for (ingredient of ingredients; track ingredient) {
-                    <li class="ingredients__list--item">{{ingredient}}</li>
+                    <li (click)="onEditIngredient(ingredient)" class="ingredients__list--item">{{ingredient}}</li>
                     }
                 </ul>
             </div>
@@ -101,7 +101,7 @@
                 <p class="steps__heading">Steps</p>
                 <ul class="steps__list">
                     @for (step of steps; track step) {
-                    <li class="steps__list--item">{{step}}</li>
+                    <li (click)="onEditSteps(step)" class="steps__list--item">{{step}}</li>
                     }
                 </ul>
             </div>

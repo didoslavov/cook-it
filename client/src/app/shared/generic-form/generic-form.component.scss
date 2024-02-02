@@ -174,11 +174,24 @@
   opacity: 1;
   visibility: visible;
   transition: all 0.8s ease-out;
-  padding: 0 3rem;
+  padding: 0 1rem;
 
   display: flex;
   justify-content: flex-end;
   gap: 2.4rem;
+}
+
+.ingredients {
+  position: relative;
+
+  &::before {
+    content: "";
+    height: 80%;
+    border: 1px solid var(--color-primary);
+    position: absolute;
+    top: 10%;
+    right: -1.2rem;
+  }
 }
 
 .ingredients,
@@ -195,18 +208,44 @@
   }
 
   &__list {
-    list-style: decimal;
+    overflow: scroll;
+    scroll-behavior: smooth;
+    scrollbar-color: var(--color-primary-light) var(--color-primary);
+    scrollbar-width: thin;
+    height: 80%;
+    list-style: none;
     font-size: 2rem;
     line-height: 1;
     color: var(--font-color-dark);
-    padding-left: 2rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
 
     &--item {
-      width: 100%;
-      overflow-wrap: break-word;
+      overflow-wrap: anywhere;
+      transition: all 0.4s ease-in-out;
+      display: flex;
+      align-items: center;
+      transform: scale(0.9);
+
+      &::before {
+        content: "•";
+        color: var(--color-accent-dark);
+        font-size: 3rem;
+        margin-right: 0.5rem;
+      }
+
+      &:hover {
+        cursor: pointer;
+        color: var(--color-accent-dark);
+        list-style: none;
+        margin-left: 0;
+        display: flex;
+        position: relative;
+        text-align: start;
+        transform: scale(1);
+        transition: all 0.4s ease-in-out;
+      }
     }
   }
 }
@@ -233,7 +272,9 @@
     align-content: center;
 
     &--content {
-      width: 50%;
+      margin-left: 3.6rem;
+      width: 40%;
+      justify-self: start;
 
       &-form {
         width: 60%;
@@ -256,7 +297,7 @@
 @media screen and (max-width: 900px) {
   .form__container {
     &--content {
-      width: 70%;
+      width: 50%;
 
       &-controls {
         &-input {
@@ -273,8 +314,23 @@
 
 @media screen and (max-width: 500px) {
   .form__container {
+    margin-top: 3.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     &--content {
+      border-radius: 9px 9px 0 0;
+      height: 60%;
+      width: 80%;
+      padding: 0;
+
       &-controls {
+        &-btn {
+          top: 0.5rem;
+          right: -3rem;
+        }
+
         &-input {
           &:focus + {
             .form__container--content-controls-label {
@@ -285,5 +341,12 @@
         }
       }
     }
+  }
+
+  .opened {
+    transform: translateY(150%);
+    width: 100%;
+    height: 50%;
+    border-radius: 0 0 9px 9px;
   }
 }

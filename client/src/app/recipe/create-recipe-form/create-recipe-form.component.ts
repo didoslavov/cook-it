@@ -30,8 +30,16 @@ export class RecipeFormComponent {
     this.ingredients.push(ingredient);
   }
 
+  onUpdateIngredients(ingredients: string[]): void {
+    this.ingredients = ingredients;
+  }
+
   onAddStep(step: string) {
     this.steps.push(step);
+  }
+
+  onUpdateSteps(steps: string[]): void {
+    this.steps = steps;
   }
 
   onSubmit(formData: GenericFormData): void {

@@ -16,11 +16,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 export class GenericFormComponent implements OnInit {
   @Input() formData!: GenericFormData;
   @Input() formType!: 'registration' | 'login' | 'recipe';
-  @Input() ingredients!: string[];
-  @Input() steps!: string[];
+  @Input() ingredients: string[] = [];
+  @Input() steps: string[] = [];
+
   @Output() formSubmit = new EventEmitter<GenericFormData>();
   @Output() addIngredient = new EventEmitter<string>();
+  @Output() updateIngredients = new EventEmitter<string[]>();
   @Output() addStep = new EventEmitter<string>();
+  @Output() updateSteps = new EventEmitter<string[]>();
 
   buttonText!: string;
   headingText!: string;
@@ -73,9 +76,23 @@ export class GenericFormComponent implements OnInit {
     const ingredientsControl = this.formModel.form.get('ingredients');
 
     if (ingredientsControl && ingredientsControl.value) {
-      this.addIngredient.emit(ingredientsControl.value);
+      const ingredient = ingredientsControl.value;
+
+      if (!this.ingredients.includes(ingredient)) {
+        this.addIngredient.emit(ingredient);
+      }
+
       ingredientsControl.setValue('');
     }
+  }
+
+  onEditIngredient(item: string): void {
+    const ingredientsControl = this.formModel.form.get('ingredients');
+
+    this.ingredients = this.ingredients.filter((i) => i !== item);
+    this.updateIngredients.emit([...this.ingredients]);
+
+    ingredientsControl?.setValue(item);
   }
 
   onAddStep(): void {
@@ -85,6 +102,15 @@ export class GenericFormComponent implements OnInit {
       this.addStep.emit(stepsControl.value);
       stepsControl.setValue('');
     }
+  }
+
+  onEditSteps(item: string): void {
+    const stepsControl = this.formModel.form.get('steps');
+
+    this.steps = this.steps.filter((i) => i !== item);
+    this.updateSteps.emit([...this.steps]);
+
+    stepsControl?.setValue(item);
   }
 
   onSubmit(): void {

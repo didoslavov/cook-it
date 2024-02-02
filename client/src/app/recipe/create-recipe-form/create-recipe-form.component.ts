@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
   styleUrl: './create-recipe-form.component.scss',
 })
 export class RecipeFormComponent {
+  ingredients: string[] = [];
+  steps: string[] = [];
+
   recipeData: GenericFormData = {
     name: '',
     prepTime: '',
@@ -22,6 +25,14 @@ export class RecipeFormComponent {
   };
 
   constructor(private router: Router) {}
+
+  onAddIngredient(ingredient: string): void {
+    this.ingredients.push(ingredient);
+  }
+
+  onAddStep(step: string) {
+    this.steps.push(step);
+  }
 
   onSubmit(formData: GenericFormData): void {
     const recipeData = { ...formData };

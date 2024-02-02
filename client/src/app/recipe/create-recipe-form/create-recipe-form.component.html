@@ -1,2 +1,3 @@
-<app-auth-generic-form [formType]="'recipe'" [formData]="recipeData"
-    (formSubmit)="onSubmit($event)"></app-auth-generic-form>
+<app-generic-form [formType]="'recipe'" [formData]="recipeData" [ingredients]="ingredients" [steps]="steps"
+    (addIngredient)="onAddIngredient($event)" (addStep)="onAddStep($event)"
+    (formSubmit)="onSubmit($event)"></app-generic-form>

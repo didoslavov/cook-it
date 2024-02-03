@@ -6,6 +6,6 @@ const recipeRouter = Router();
 
 recipeRouter.get('/', getRecipes);
 recipeRouter.get('/:recipeId', getRecipeById);
-recipeRouter.post('/:recipeId/create', authMiddleware(), nameValidation, createRecipe);
+recipeRouter.post('/create', authMiddleware(), nameValidation, createRecipe);
 
 export default recipeRouter;

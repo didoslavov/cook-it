@@ -3,7 +3,7 @@ import { RegisterComponent } from './user/register/register.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './user/login/login.component';
 import { RecipesComponent } from './recipes/recipes.component';
-import { RecipeFormComponent } from './recipe/create-recipe-form/create-recipe-form.component';
+import { RecipeFormComponent } from './recipes/create-recipe-form/create-recipe-form.component';
 
 export const routes: Routes = [
   {

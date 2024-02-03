@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Credentials, User, UserData } from '../store/auth/user.model';
-import { Observable, catchError, of, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthApiActions } from '../store/auth/auth.actions';

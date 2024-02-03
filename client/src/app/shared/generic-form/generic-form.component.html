@@ -67,11 +67,22 @@
                 <label for="img" class="form__container--content-controls-label">Image</label>
             </div>
             <div class="form__container--content-controls">
-                <input type="text" placeholder="placeholder" id="ingredients"
-                    class="form__container--content-controls-input" formControlName="ingredients" />
-                <label for="ingredients" class="form__container--content-controls-label">Ingredients</label>
+                <input type="text" placeholder="placeholder" id="ingredient"
+                    class="form__container--content-controls-input" formControlName="ingredient" />
+                <label for="ingredient" class="form__container--content-controls-label">Ingredient</label>
                 <button class="form__container--content-controls-btn" (click)="onAddIngredient()"><fa-icon
                         [icon]="faBtn" /></button>
+            </div>
+            <div class="form__container--content-controls form__container--content-controls-qty">
+                <fa-icon [icon]="faList" />
+                <input type="number" min="0" max="99" name="quantity" id="quantity" formControlName="quantity">
+                <fa-icon [icon]="faSpoon" />
+                <select name="unit" id="unit" formControlName="unit">
+                    <option value="" disabled selected>Units</option>
+                    @for(unit of units; track unit) {
+                    <option [ngValue]="unit">{{unit}}</option>
+                    }
+                </select>
             </div>
             <div class="form__container--content-controls">
                 <input type="text" placeholder="placeholder" id="steps" class="form__container--content-controls-input"
@@ -93,7 +104,9 @@
                 <p class="ingredients__heading">Ingredients</p>
                 <ul class="ingredients__list">
                     @for (ingredient of ingredients; track ingredient) {
-                    <li (click)="onEditIngredient(ingredient)" class="ingredients__list--item">{{ingredient}}</li>
+                    <li (click)="onEditIngredient(ingredient)" class="ingredients__list--item">
+                        <span>{{ingredient.name}}</span> <span>{{ingredient.quantity}} {{ingredient.unit}}</span>
+                    </li>
                     }
                 </ul>
             </div>

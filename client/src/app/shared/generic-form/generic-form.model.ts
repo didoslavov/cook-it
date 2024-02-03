@@ -1,6 +1,7 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 export interface GenericFormData {
+  userId?: string;
   firstName?: string;
   lastName?: string;
   avatar?: string;
@@ -8,11 +9,13 @@ export interface GenericFormData {
   password?: string;
   rePassword?: string;
   name?: string;
-  prepTime?: string;
-  cookTime?: string;
+  prepTime?: number;
+  cookTime?: number;
   img?: string;
-  ingredients?: string;
-  steps?: string;
+  ingredient?: string;
+  quantity?: number;
+  unit?: string;
+  steps?: string[];
   description?: string;
 }
 
@@ -36,7 +39,9 @@ export class GenericFormModel {
       prepTime: new FormControl(data.prepTime),
       cookTime: new FormControl(data.cookTime),
       img: new FormControl(data.img),
-      ingredients: new FormControl(data.ingredients),
+      ingredient: new FormControl(data.ingredient),
+      quantity: new FormControl(Number(data.quantity)),
+      unit: new FormControl(data.unit),
       steps: new FormControl(data.steps),
       description: new FormControl(data.description),
     });

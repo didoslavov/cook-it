@@ -3,8 +3,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { GenericFormData, GenericFormModel } from './generic-form.model';
 import { RouterLink } from '@angular/router';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faListOl, faPlus, faSpoon } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Ingredient } from '../../recipes/recipe.model';
 
 @Component({
   selector: 'app-generic-form',
@@ -16,12 +17,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 export class GenericFormComponent implements OnInit {
   @Input() formData!: GenericFormData;
   @Input() formType!: 'registration' | 'login' | 'recipe';
-  @Input() ingredients: string[] = [];
+  @Input() ingredients: Ingredient[] = [];
   @Input() steps: string[] = [];
+  @Input() units: string[] = [];
 
   @Output() formSubmit = new EventEmitter<GenericFormData>();
-  @Output() addIngredient = new EventEmitter<string>();
-  @Output() updateIngredients = new EventEmitter<string[]>();
+  @Output() addIngredient = new EventEmitter<Ingredient>();
+  @Output() updateIngredients = new EventEmitter<Ingredient[]>();
   @Output() addStep = new EventEmitter<string>();
   @Output() updateSteps = new EventEmitter<string[]>();
 
@@ -30,6 +32,8 @@ export class GenericFormComponent implements OnInit {
   formModel!: GenericFormModel;
 
   faBtn = faPlus;
+  faSpoon = faSpoon;
+  faList = faListOl;
 
   ngOnInit(): void {
     this.formModel = new GenericFormModel(this.formData);
@@ -73,26 +77,51 @@ export class GenericFormComponent implements OnInit {
   }
 
   onAddIngredient(): void {
-    const ingredientsControl = this.formModel.form.get('ingredients');
+    const ingredientControl = this.formModel.form.get('ingredient');
+    const quantityControl = this.formModel.form.get('quantity');
+    const unitControl = this.formModel.form.get('unit');
 
-    if (ingredientsControl && ingredientsControl.value) {
-      const ingredient = ingredientsControl.value;
+    if (
+      ingredientControl &&
+      ingredientControl.value &&
+      quantityControl &&
+      quantityControl.value &&
+      unitControl &&
+      unitControl.value
+    ) {
+      const ingredient = {
+        name: ingredientControl.value,
+        quantity: quantityControl.value,
+        unit: unitControl.value,
+      };
 
-      if (!this.ingredients.includes(ingredient)) {
+      if (
+        !this.ingredients.some(
+          (ingredient) => ingredient.name !== ingredientControl?.value
+        )
+      ) {
         this.addIngredient.emit(ingredient);
       }
-
-      ingredientsControl.setValue('');
     }
+
+    ingredientControl?.setValue('');
+    quantityControl?.setValue(0);
+    unitControl?.setValue('');
   }
 
-  onEditIngredient(item: string): void {
-    const ingredientsControl = this.formModel.form.get('ingredients');
+  onEditIngredient(ingredient: Ingredient): void {
+    const ingredientControl = this.formModel.form.get('ingredient');
+    const quantityControl = this.formModel.form.get('quantity');
+    const unitControl = this.formModel.form.get('unit');
 
-    this.ingredients = this.ingredients.filter((i) => i !== item);
+    this.ingredients = this.ingredients.filter(
+      (i) => i.name !== ingredient.name
+    );
     this.updateIngredients.emit([...this.ingredients]);
 
-    ingredientsControl?.setValue(item);
+    ingredientControl?.setValue(ingredient.name);
+    quantityControl?.setValue(ingredient.quantity);
+    unitControl?.setValue(ingredient.unit);
   }
 
   onAddStep(): void {

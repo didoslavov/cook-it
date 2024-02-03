@@ -22,7 +22,7 @@ export class GenericFormComponent implements OnInit {
   @Input() units: string[] = [];
 
   @Output() formSubmit = new EventEmitter<GenericFormData>();
-  @Output() addIngredient = new EventEmitter<Ingredient>();
+  @Output() addIngredient = new EventEmitter<Ingredient[]>();
   @Output() updateIngredients = new EventEmitter<Ingredient[]>();
   @Output() addStep = new EventEmitter<string>();
   @Output() updateSteps = new EventEmitter<string[]>();
@@ -95,18 +95,16 @@ export class GenericFormComponent implements OnInit {
         unit: unitControl.value,
       };
 
-      if (
-        !this.ingredients.some(
-          (ingredient) => ingredient.name !== ingredientControl?.value
-        )
-      ) {
-        this.addIngredient.emit(ingredient);
-      }
-    }
+      this.ingredients = this.ingredients.filter(
+        (i) => i.name !== ingredient.name
+      );
 
-    ingredientControl?.setValue('');
-    quantityControl?.setValue(0);
-    unitControl?.setValue('');
+      this.addIngredient.emit([...this.ingredients, ingredient]);
+
+      ingredientControl?.setValue('');
+      quantityControl?.setValue(0);
+      unitControl?.setValue('');
+    }
   }
 
   onEditIngredient(ingredient: Ingredient): void {

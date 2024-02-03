@@ -70,7 +70,7 @@
                 <input type="text" placeholder="placeholder" id="ingredient"
                     class="form__container--content-controls-input" formControlName="ingredient" />
                 <label for="ingredient" class="form__container--content-controls-label">Ingredient</label>
-                <button class="form__container--content-controls-btn" (click)="onAddIngredient()"><fa-icon
+                <button type="button" class="form__container--content-controls-btn" (click)="onAddIngredient()"><fa-icon
                         [icon]="faBtn" /></button>
             </div>
             <div class="form__container--content-controls form__container--content-controls-qty">
@@ -88,7 +88,7 @@
                 <input type="text" placeholder="placeholder" id="steps" class="form__container--content-controls-input"
                     formControlName="steps" />
                 <label for="steps" class="form__container--content-controls-label">Cooking Steps</label>
-                <button class="form__container--content-controls-btn" (click)="onAddStep()"><fa-icon
+                <button type="button" class="form__container--content-controls-btn" (click)="onAddStep()"><fa-icon
                         [icon]="faBtn" /></button>
             </div>
             <div class="form__container--content-controls">

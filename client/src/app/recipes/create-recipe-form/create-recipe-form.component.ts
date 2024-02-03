@@ -45,10 +45,8 @@ export class RecipeFormComponent implements OnInit {
     });
   }
 
-  onAddIngredient(ingredient: Ingredient): void {
-    this.ingredients.push(ingredient);
-
-    console.log(this.ingredients);
+  onAddIngredient(ingredients: Ingredient[]): void {
+    this.ingredients = ingredients;
   }
 
   onUpdateIngredients(ingredients: Ingredient[]): void {
@@ -74,6 +72,8 @@ export class RecipeFormComponent implements OnInit {
       description: formData.description,
       userId: this.user?.id,
     };
+
+    console.log(recipeData);
 
     // this.recipeService.addRecipe(recipeData);
     // this.router.navigate(['/recipes']);

@@ -1,0 +1,4 @@
+<app-generic-form [formType]="'recipe'" [formData]="recipeData" [units]="units" [ingredients]="ingredients"
+    [steps]="steps" (addIngredient)="onAddIngredient($event)" (updateIngredients)="onUpdateIngredients($event)"
+    (addStep)="onAddStep($event)" (updateSteps)="onUpdateSteps($event)"
+    (formSubmit)="onSubmit($event)"></app-generic-form>

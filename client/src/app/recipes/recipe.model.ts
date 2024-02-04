@@ -3,7 +3,7 @@ export interface Recipe {
   prepTime?: number;
   cookTime?: number;
   img?: string;
-  ingredients?: string[];
+  ingredients?: Ingredient[];
   steps?: string[];
   description?: string;
 }

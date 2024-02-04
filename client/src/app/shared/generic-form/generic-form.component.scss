@@ -13,6 +13,7 @@
     justify-self: center;
     align-self: center;
     background-color: var(--color-primary-opacity);
+    backdrop-filter: blur(1rem);
     box-shadow: var(--shadow);
     border-radius: 9px;
 
@@ -202,6 +203,7 @@
       width: 90%;
       height: 60%;
       background-color: var(--color-primary-opacity);
+      backdrop-filter: blur(1rem);
       border-radius: 0 9px 9px 0;
       position: absolute;
       right: 0;

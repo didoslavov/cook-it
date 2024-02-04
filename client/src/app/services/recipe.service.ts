@@ -15,15 +15,13 @@ export class RecipeService {
   }
 
   addRecipe(recipeData: RecipeData) {
-    console.log(recipeData);
-
-    this.http.post<RecipeData>('/recipes/create', recipeData).subscribe(
-      (res) => {
+    this.http.post<RecipeData>('/recipes/create', recipeData).subscribe({
+      next: (res) => {
         console.log('Recipe added successfully:', res);
       },
-      (err) => {
+      error: (err) => {
         console.error('Error adding recipe:', err);
-      }
-    );
+      },
+    });
   }
 }

@@ -1,19 +1,17 @@
+import { Ingredient } from '../Product';
+import { StepInterface } from '../Step';
+
 export interface RecipeInterface {
-    id: string;
+    id?: string;
     name: string;
-    steps: string;
     prepTime: number;
     cookTime: number;
     img: string;
+    description: string;
     userId: string;
 }
 
 export interface RecipeData extends RecipeInterface {
     ingredients: Ingredient[];
-}
-
-export interface Ingredient {
-    name: string;
-    quantity: number;
-    unit: string;
+    steps: StepInterface[];
 }

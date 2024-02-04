@@ -1,18 +1,16 @@
 <div class="recipe-card">
-    <img src="../../assets/how-it-works-small.jpg" alt="food image" class="recipe-card__img">
+    <img src="{{recipe.img}}" alt="food image" class="recipe-card__img">
     <div class="recipe-card__header">
-        <h4 class="recipe-card__header--heading">Recipe Name</h4>
+        <h4 class="recipe-card__header--heading">{{recipe.name}}</h4>
     </div>
     <div class="recipe-card__info">
         <fa-icon [icon]="faInfo" class="recipe-card__info--icon" />
         <div class="recipe-card__content">
             <div class="recipe-card__content--times">
                 <p class="recipe-card__content--times-prep"><fa-icon class="recipe-card__content--times-icon"
-                        [icon]="faClock" />10min</p>
+                        [icon]="faClock" />{{recipe.cookTime}}</p>
             </div>
-            <p class="recipe-card__content--description">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Facere,
-                laborum?</p>
+            <p class="recipe-card__content--description">{{recipe.description}}</p>
         </div>
     </div>
 </div>

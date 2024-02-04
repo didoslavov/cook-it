@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faClock, faInfo } from '@fortawesome/free-solid-svg-icons';
+import { RecipeData } from '../../recipes/recipe.model';
 
 @Component({
   selector: 'app-recipe-card',
@@ -10,6 +11,8 @@ import { faClock, faInfo } from '@fortawesome/free-solid-svg-icons';
   styleUrl: './recipe-card.component.scss',
 })
 export class RecipeCardComponent {
+  @Input() recipe: RecipeData = {};
+
   faInfo = faInfo;
   faClock = faClock;
 }

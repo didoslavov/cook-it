@@ -7,7 +7,7 @@ import { ProductRecipeInterface } from '../..';
     tableName: 'product_recipe',
     modelName: 'ProductRecipe',
 })
-class ProductRecipe extends Model<ProductRecipe> implements ProductRecipeInterface {
+class ProductRecipe extends Model implements ProductRecipeInterface {
     @Column
     @ForeignKey(() => Recipe)
     declare recipeId: string;
@@ -16,11 +16,11 @@ class ProductRecipe extends Model<ProductRecipe> implements ProductRecipeInterfa
     @ForeignKey(() => Product)
     declare productId: string;
 
-    @Column({ type: DataType.INTEGER, defaultValue: 0 })
+    @Column({ type: DataType.DECIMAL(10, 3) })
     declare quantity: number;
 
-    @Column({ type: DataType.INTEGER, defaultValue: 0 })
-    declare quantity_unit: number;
+    @Column({ type: DataType.STRING })
+    declare quantity_unit: string;
 }
 
 export default ProductRecipe;

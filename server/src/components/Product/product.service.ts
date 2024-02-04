@@ -1,5 +1,5 @@
 import Product from './Product.model';
-import { ProductInterface } from './product.interface';
+import { Ingredient, ProductInterface } from './product.interface';
 
 export const findAllProducts = async (): Promise<ProductInterface[]> => {
     const products = await Product.findAll();
@@ -14,4 +14,8 @@ export const insertProduct = async (product: ProductInterface): Promise<ProductI
 export const findProductByPk = async (productId: string): Promise<ProductInterface | undefined> => {
     const product = await Product.findByPk(productId);
     return product?.toJSON();
+};
+
+export const insertIngredients = async (ingredients: Ingredient[]): Promise<ProductInterface[]> => {
+    return await Product.bulkCreate(ingredients.map((i) => ({ name: i.name })));
 };

@@ -74,6 +74,6 @@ export class RecipeFormComponent implements OnInit {
     };
 
     this.recipeService.addRecipe(recipeData);
-    // this.router.navigate(['/recipes']);
+    this.router.navigate(['/recipes']);
   }
 }

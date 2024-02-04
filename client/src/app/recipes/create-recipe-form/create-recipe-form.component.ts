@@ -73,9 +73,7 @@ export class RecipeFormComponent implements OnInit {
       userId: this.user?.id,
     };
 
-    console.log(recipeData);
-
-    // this.recipeService.addRecipe(recipeData);
+    this.recipeService.addRecipe(recipeData);
     // this.router.navigate(['/recipes']);
   }
 }

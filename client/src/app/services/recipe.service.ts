@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class RecipeService {
-  declare recipe: Recipe;
   constructor(private http: HttpClient, private router: Router) {}
 
   getAllRecipes() {
@@ -16,8 +15,15 @@ export class RecipeService {
   }
 
   addRecipe(recipeData: RecipeData) {
-    return this.http
-      .post<Recipe>('/recipes/create', recipeData)
-      .pipe(tap(() => this.router.navigate(['/recipes'])));
+    console.log(recipeData);
+
+    this.http.post<RecipeData>('/recipes/create', recipeData).subscribe(
+      (res) => {
+        console.log('Recipe added successfully:', res);
+      },
+      (err) => {
+        console.error('Error adding recipe:', err);
+      }
+    );
   }
 }

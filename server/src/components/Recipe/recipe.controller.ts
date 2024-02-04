@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import expressAsyncHandler from 'express-async-handler';
-import { RecipeData, RecipeInterface } from './recipe.interface';
+import { RecipeData } from './recipe.interface';
 import { findAllRecipes, findRecipeByPk, insertRecipe } from './recipe.service';
 import { AppError, mapValidationError } from '../Shared';
 import { validationResult } from 'express-validator';

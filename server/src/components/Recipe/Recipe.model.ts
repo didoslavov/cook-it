@@ -7,6 +7,7 @@ import { RecipeInterface } from './recipe.interface';
 @Table({
     tableName: 'recipes',
     modelName: 'Recipe',
+    timestamps: false,
 })
 class Recipe extends Model<RecipeInterface> {
     @Column({
@@ -27,12 +28,6 @@ class Recipe extends Model<RecipeInterface> {
         allowNull: false,
     })
     declare description: string;
-
-    @Column({
-        type: DataType.TEXT,
-        allowNull: false,
-    })
-    declare steps: string;
 
     @Column({
         type: DataType.INTEGER,

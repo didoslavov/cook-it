@@ -73,7 +73,9 @@ export class RecipeFormComponent implements OnInit {
       userId: this.user?.id,
     };
 
-    this.recipeService.addRecipe(recipeData);
-    this.router.navigate(['/recipes']);
+    this.recipeService.addRecipe(recipeData).subscribe({
+      next: (v) => this.router.navigate(['/recipes']),
+      error: (err) => console.error(err),
+    });
   }
 }

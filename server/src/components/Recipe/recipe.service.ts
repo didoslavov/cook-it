@@ -55,3 +55,7 @@ export const findRecipeByPk = async (recipeId: string): Promise<RecipeInterface 
     const recipe = await Recipe.findByPk(recipeId);
     return recipe?.toJSON();
 };
+
+export const destroyRecipe = async (recipeId: string): Promise<number> => {
+    return await Recipe.destroy({ where: { id: recipeId } });
+};

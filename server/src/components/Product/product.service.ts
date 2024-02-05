@@ -17,5 +17,18 @@ export const findProductByPk = async (productId: string): Promise<ProductInterfa
 };
 
 export const insertIngredients = async (ingredients: Ingredient[]): Promise<ProductInterface[]> => {
-    return await Product.bulkCreate(ingredients.map((i) => ({ name: i.name })));
+    const createdProducts: Product[] = [];
+
+    for (const ingredient of ingredients) {
+        const existingProduct = await Product.findOne({ where: { name: ingredient.name } });
+
+        if (existingProduct) {
+            createdProducts.push(existingProduct);
+        } else {
+            const newProduct = await Product.create({ name: ingredient.name });
+            createdProducts.push(newProduct);
+        }
+    }
+
+    return createdProducts;
 };

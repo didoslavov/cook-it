@@ -1,8 +1,10 @@
 <div class="recipe-card">
     <img src="{{recipe.img}}" alt="food image" class="recipe-card__img">
-    <div class="recipe-card__header">
-        <h4 class="recipe-card__header--heading">{{recipe.name}}</h4>
-    </div>
+    <a routerLink="/recipes/{{recipe.id}}/details" class="link">
+        <div class="recipe-card__header">
+            <h4 class="recipe-card__header--heading">{{recipe.name}}</h4>
+        </div>
+    </a>
     <div class="recipe-card__info">
         <fa-icon [icon]="faInfo" class="recipe-card__info--icon" />
         <div class="recipe-card__content">

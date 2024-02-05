@@ -11,26 +11,4 @@ import { Subscription } from 'rxjs';
   templateUrl: './recipes.component.html',
   styleUrl: './recipes.component.scss',
 })
-export class RecipesComponent implements OnInit, OnDestroy {
-  recipes: RecipeData[] = [];
-  private subscription!: Subscription;
-
-  constructor(private recipeService: RecipeService) {}
-
-  ngOnInit(): void {
-    this.subscription = this.recipeService.getAllRecipes().subscribe({
-      next: (recipes: RecipeData[]) => {
-        this.recipes = recipes;
-      },
-      error: (error) => {
-        console.error('Error fetching recipes:', error);
-      },
-    });
-  }
-
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
-}
+export class RecipesComponent {}

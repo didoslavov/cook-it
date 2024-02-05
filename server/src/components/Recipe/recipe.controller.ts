@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import { RecipeData } from './recipe.interface';
-import { findAllRecipes, findRecipeByPk, insertRecipe } from './recipe.service';
+import { destroyRecipe, findAllRecipes, findRecipeByPk, insertRecipe } from './recipe.service';
 import { AppError, mapValidationError } from '../Shared';
 import { validationResult } from 'express-validator';
 
@@ -49,4 +49,16 @@ const getRecipeById = expressAsyncHandler(async (req: Request, res: Response) =>
     res.status(200).json(recipe);
 });
 
-export { getRecipes, createRecipe, getRecipeById };
+const deleteRecipe = expressAsyncHandler(async (req: Request, res: Response) => {
+    const { recipeId } = req.params;
+
+    const deletedRecipe = await destroyRecipe(recipeId);
+
+    if (!deletedRecipe) {
+        throw new AppError(204, 'No recipe deleted!');
+    }
+
+    res.status(200).json('Recipe deleted');
+});
+
+export { getRecipes, createRecipe, getRecipeById, deleteRecipe };

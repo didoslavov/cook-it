@@ -8,8 +8,12 @@ import { createSteps } from '../Step/step.service';
 import Recipe from './Recipe.model';
 import { RecipeData, RecipeInterface } from './recipe.interface';
 
-export const findAllRecipes = async (): Promise<RecipeInterface[]> => {
-    const recipes = await Recipe.findAll();
+export const findRecipes = async (limit: number, offset: number): Promise<RecipeInterface[]> => {
+    const recipes = await Recipe.findAll({
+        limit,
+        offset,
+    });
+
     return recipes.map((p): RecipeInterface => p.toJSON());
 };
 

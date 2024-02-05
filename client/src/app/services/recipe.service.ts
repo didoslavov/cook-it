@@ -15,13 +15,6 @@ export class RecipeService {
   }
 
   addRecipe(recipeData: RecipeData) {
-    this.http.post<RecipeData>('/recipes/create', recipeData).subscribe({
-      next: (res) => {
-        console.log('Recipe added successfully:', res);
-      },
-      error: (err) => {
-        console.error('Error adding recipe:', err);
-      },
-    });
+    return this.http.post<RecipeData>('/recipes/create', recipeData);
   }
 }

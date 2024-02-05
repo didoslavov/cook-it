@@ -18,14 +18,14 @@ export class RecipesComponent implements OnInit, OnDestroy {
   constructor(private recipeService: RecipeService) {}
 
   ngOnInit(): void {
-    this.subscription = this.recipeService.getAllRecipes().subscribe(
-      (recipes: RecipeData[]) => {
+    this.subscription = this.recipeService.getAllRecipes().subscribe({
+      next: (recipes: RecipeData[]) => {
         this.recipes = recipes;
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching recipes:', error);
-      }
-    );
+      },
+    });
   }
 
   ngOnDestroy(): void {

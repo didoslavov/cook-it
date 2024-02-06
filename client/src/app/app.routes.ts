@@ -21,6 +21,11 @@ export const routes: Routes = [
     data: { animation: 'isRight' },
   },
   {
+    path: 'recipes/:recipeId/details',
+    component: RecipesComponent,
+    data: { animation: 'isLeft' },
+  },
+  {
     path: 'auth/register',
     component: RegisterComponent,
     data: { animation: 'isLeft' },

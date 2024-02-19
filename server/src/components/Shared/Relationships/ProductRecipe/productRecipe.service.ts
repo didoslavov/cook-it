@@ -6,7 +6,7 @@ export const createProductRecipe = async (recipeId: string, ingredients: Ingredi
         ingredients.map((i) => ({
             recipeId,
             productId: i.id,
-            quantity: Number(i.quantity),
+            quantity: i.quantity,
             quantity_unit: i.unit,
         }))
     );

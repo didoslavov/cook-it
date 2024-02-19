@@ -17,7 +17,7 @@ class ProductInventory extends Model<ProductInventory> implements ProductInvento
     declare inventoryId: string;
 
     @Column({ type: DataType.INTEGER, defaultValue: 0 })
-    declare quantity: number;
+    declare quantity: string;
 }
 
 export default ProductInventory;

@@ -15,6 +15,6 @@ export interface RecipeData extends Recipe {
 
 export interface Ingredient {
   name: string;
-  quantity: number;
+  quantity: string;
   unit: string;
 }

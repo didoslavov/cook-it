@@ -13,7 +13,7 @@ export interface GenericFormData {
   cookTime?: number;
   img?: string;
   ingredient?: string;
-  quantity?: number;
+  quantity?: string;
   unit?: string;
   steps?: string[];
   description?: string;
@@ -40,7 +40,7 @@ export class GenericFormModel {
       cookTime: new FormControl(data.cookTime),
       img: new FormControl(data.img),
       ingredient: new FormControl(data.ingredient),
-      quantity: new FormControl(Number(data.quantity)),
+      quantity: new FormControl(data.quantity),
       unit: new FormControl(data.unit),
       steps: new FormControl(data.steps),
       description: new FormControl(data.description),

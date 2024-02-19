@@ -102,7 +102,7 @@ export class GenericFormComponent implements OnInit {
       this.addIngredient.emit([...this.ingredients, ingredient]);
 
       ingredientControl?.setValue('');
-      quantityControl?.setValue(0);
+      quantityControl?.setValue('');
       unitControl?.setValue('');
     }
   }

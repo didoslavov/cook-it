@@ -27,7 +27,7 @@ export class RecipeFormComponent implements OnInit {
     cookTime: undefined,
     img: '',
     ingredient: undefined,
-    quantity: 0,
+    quantity: '',
     unit: '',
     steps: undefined,
     description: '',

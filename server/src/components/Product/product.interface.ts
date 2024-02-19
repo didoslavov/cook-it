@@ -4,6 +4,6 @@ export interface ProductInterface {
 }
 
 export interface Ingredient extends ProductInterface {
-    quantity: number;
+    quantity: string;
     unit: string;
 }

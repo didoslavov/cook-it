@@ -17,7 +17,7 @@ class ProductRecipe extends Model implements ProductRecipeInterface {
     declare productId: string;
 
     @Column({ type: DataType.DECIMAL(10, 3) })
-    declare quantity: number;
+    declare quantity: string;
 
     @Column({ type: DataType.STRING })
     declare quantity_unit: string;

@@ -6,13 +6,19 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  RouterModule,
+} from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBars, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { User } from '../../store/auth/user.model';
 import { Store, select } from '@ngrx/store';
 import { getUserData } from '../../store/auth/auth.selectors';
 import { UserMenuComponent } from './user-menu/user-menu/user-menu.component';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -27,6 +33,7 @@ export class HeaderComponent implements OnInit {
 
   declare attentionSeeker: string;
   declare user: User | null;
+  declare isHomePage: boolean;
 
   faCircleXmark = faCircleXmark;
   faBars = faBars;
@@ -34,6 +41,7 @@ export class HeaderComponent implements OnInit {
   showUserMenu = false;
 
   constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private store: Store,
     private renderer: Renderer2
@@ -49,6 +57,13 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.router.events.subscribe(
+      (e) =>
+        e instanceof NavigationEnd &&
+        (this.isHomePage =
+          this.router.url === '/' || this.router.url.includes('#'))
+    );
+
     this.store.pipe(select(getUserData)).subscribe((user: any) => {
       this.user = user?.user;
     });

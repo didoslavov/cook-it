@@ -19,7 +19,7 @@ export class RecipeFormComponent implements OnInit {
   ingredients: Ingredient[] = [];
   steps: string[] = [];
   user!: User;
-  units: string[] = ['cup', 'tbsp', 'tsp', 'g', 'kg', 'l', 'ml', 'oz'];
+  units: string[] = ['cup', 'tbsp', 'tsp', 'g', 'kg', 'l', 'ml', 'oz', 'pc'];
 
   recipeData: GenericFormData = {
     name: '',

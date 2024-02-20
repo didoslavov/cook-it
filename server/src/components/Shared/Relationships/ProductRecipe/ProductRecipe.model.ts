@@ -16,7 +16,7 @@ class ProductRecipe extends Model implements ProductRecipeInterface {
     @ForeignKey(() => Product)
     declare productId: string;
 
-    @Column({ type: DataType.DECIMAL(10, 3) })
+    @Column({ type: DataType.STRING })
     declare quantity: string;
 
     @Column({ type: DataType.STRING })

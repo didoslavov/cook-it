@@ -36,16 +36,20 @@ export const insertRecipe = async (recipeData: RecipeData): Promise<RecipeInterf
     }
 
     const createdIngredients = await insertIngredients(ingredients);
+
     const createdSteps = await createSteps(createdRecipe.id, steps);
 
     const mappedIngredients = createdIngredients.map((createdIngredient): Ingredient => {
         const correspondingIngredient = ingredients.find((ingredient) => ingredient.name === createdIngredient.name);
 
+        console.log(correspondingIngredient);
         return {
             id: createdIngredient.id,
             name: correspondingIngredient!.name,
-            quantity: correspondingIngredient!.quantity,
-            unit: correspondingIngredient!.unit,
+            ProductRecipe: {
+                quantity: correspondingIngredient!.ProductRecipe.quantity,
+                unit: correspondingIngredient!.ProductRecipe.unit,
+            },
         };
     });
 
@@ -61,7 +65,7 @@ export const findRecipeByPk = async (recipeId: string): Promise<RecipeData | und
             {
                 model: Product,
                 attributes: ['name'],
-                through: { attributes: ['quantity', 'quantity_unit'] },
+                through: { attributes: ['quantity', 'unit'] },
             },
             {
                 model: Step,

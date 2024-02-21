@@ -20,7 +20,7 @@ class ProductRecipe extends Model implements ProductRecipeInterface {
     declare quantity: string;
 
     @Column({ type: DataType.STRING })
-    declare quantity_unit: string;
+    declare unit: string;
 }
 
 export default ProductRecipe;

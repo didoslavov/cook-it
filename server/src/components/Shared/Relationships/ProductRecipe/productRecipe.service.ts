@@ -6,8 +6,8 @@ export const createProductRecipe = async (recipeId: string, ingredients: Ingredi
         ingredients.map((i) => ({
             recipeId,
             productId: i.id,
-            quantity: i.quantity,
-            quantity_unit: i.unit,
+            quantity: i.ProductRecipe.quantity,
+            unit: i.ProductRecipe.unit,
         }))
     );
 };

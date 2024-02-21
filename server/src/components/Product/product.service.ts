@@ -16,7 +16,7 @@ export const findProductByPk = async (productId: string): Promise<ProductInterfa
     return product?.toJSON();
 };
 
-export const insertIngredients = async (ingredients: Ingredient[]): Promise<ProductInterface[]> => {
+export const insertIngredients = async (ingredients: Ingredient[]): Promise<Product[]> => {
     const createdProducts: Product[] = [];
 
     for (const ingredient of ingredients) {
@@ -25,7 +25,7 @@ export const insertIngredients = async (ingredients: Ingredient[]): Promise<Prod
         if (existingProduct) {
             createdProducts.push(existingProduct);
         } else {
-            const newProduct = await Product.create({ name: ingredient.name });
+            const newProduct = await Product.create({ name: ingredient.name, ProductRecipe: { quantity: '', unit: '' } });
             createdProducts.push(newProduct);
         }
     }

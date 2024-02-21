@@ -13,8 +13,14 @@ export interface RecipeData extends Recipe {
   userId?: string;
 }
 
+export interface Step {
+  step: string;
+}
+
 export interface Ingredient {
   name: string;
-  quantity: string;
-  unit: string;
+  ProductRecipe: {
+    quantity: string;
+    unit: string;
+  };
 }

@@ -1,1 +1,25 @@
-<p>details works!</p>
+<section class="details">
+    <img class="details__img" src="{{recipe.img}}" alt="Good looking meal">
+    <header class="details__header">
+        <h2 class="details__heading">{{recipe.name}}</h2>
+        <p class="details__description">{{recipe.description}}</p>
+    </header>
+    <section class="details__ingredients">
+        <h3 class="details__ingredients--heading">Ingredients</h3>
+        <ul class="details__ingredients--list">
+            @for (ingredient of recipe.ingredients; track $index) {
+            <li class="details__ingredients--list-item">
+                {{ingredient.ProductRecipe.quantity}}{{ingredient.ProductRecipe.unit}} {{ingredient.name}}
+            </li>
+            }
+        </ul>
+    </section>
+    <section class="details__steps">
+        <h3 class="details__steps--heading">Directions</h3>
+        <ul class="details__steps--list">
+            @for (step of recipe.steps; track $index) {
+            <li class="details__steps--list-item">{{step}}</li>
+            }
+        </ul>
+    </section>
+</section>

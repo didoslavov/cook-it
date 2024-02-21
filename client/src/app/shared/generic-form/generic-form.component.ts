@@ -91,8 +91,10 @@ export class GenericFormComponent implements OnInit {
     ) {
       const ingredient = {
         name: ingredientControl.value,
-        quantity: quantityControl.value,
-        unit: unitControl.value,
+        ProductRecipe: {
+          quantity: quantityControl.value,
+          unit: unitControl.value,
+        },
       };
 
       this.ingredients = this.ingredients.filter(
@@ -118,8 +120,8 @@ export class GenericFormComponent implements OnInit {
     this.updateIngredients.emit([...this.ingredients]);
 
     ingredientControl?.setValue(ingredient.name);
-    quantityControl?.setValue(ingredient.quantity);
-    unitControl?.setValue(ingredient.unit);
+    quantityControl?.setValue(ingredient.ProductRecipe.quantity);
+    unitControl?.setValue(ingredient.ProductRecipe.unit);
   }
 
   onAddStep(): void {

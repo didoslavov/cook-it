@@ -105,7 +105,8 @@
                 <ul class="ingredients__list">
                     @for (ingredient of ingredients; track ingredient) {
                     <li (click)="onEditIngredient(ingredient)" class="ingredients__list--item">
-                        <span>{{ingredient.name}}</span> <span>{{ingredient.quantity}} {{ingredient.unit}}</span>
+                        <span>{{ingredient.name}}</span> <span>{{ingredient.ProductRecipe.quantity}}
+                            {{ingredient.ProductRecipe.unit}}</span>
                     </li>
                     }
                 </ul>

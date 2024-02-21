@@ -20,6 +20,12 @@ export class RecipeService {
       .pipe(tap((recipes) => recipes));
   }
 
+  getRecipeById(recipeId: string) {
+    return this.http
+      .get<Recipe>('/recipes/' + recipeId)
+      .pipe(tap((recipe) => recipe));
+  }
+
   addRecipe(recipeData: RecipeData) {
     return this.http.post<RecipeData>('/recipes/create', recipeData);
   }

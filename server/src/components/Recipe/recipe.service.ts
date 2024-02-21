@@ -1,9 +1,9 @@
-import { Ingredient } from '../Product';
+import { Ingredient, Product, ProductInterface } from '../Product';
 import { insertIngredients } from '../Product/product.service';
-import { AppError } from '../Shared';
+import { AppError, ProductRecipe } from '../Shared';
 import { createProductRecipe } from '../Shared/Relationships/ProductRecipe/productRecipe.service';
 import { createStepRecipe } from '../Shared/Relationships/StepRecipe/stepRecipe.service';
-import { StepInterface } from '../Step';
+import { Step, StepInterface } from '../Step';
 import { createSteps } from '../Step/step.service';
 import Recipe from './Recipe.model';
 import { RecipeData, RecipeInterface } from './recipe.interface';
@@ -19,7 +19,7 @@ export const findRecipes = async (limit: number, offset: number): Promise<Recipe
 
 export const insertRecipe = async (recipeData: RecipeData): Promise<RecipeInterface> => {
     const ingredients: Ingredient[] = recipeData.ingredients;
-    const steps: StepInterface[] = recipeData.steps;
+    const steps: string[] = recipeData.steps;
     const recipe: RecipeInterface = {
         name: recipeData.name,
         prepTime: Number(recipeData.prepTime),
@@ -55,9 +55,27 @@ export const insertRecipe = async (recipeData: RecipeData): Promise<RecipeInterf
     return createdRecipe.toJSON();
 };
 
-export const findRecipeByPk = async (recipeId: string): Promise<RecipeInterface | undefined> => {
-    const recipe = await Recipe.findByPk(recipeId);
-    return recipe?.toJSON();
+export const findRecipeByPk = async (recipeId: string): Promise<RecipeData | undefined> => {
+    const recipe = await Recipe.findByPk(recipeId, {
+        include: [
+            {
+                model: Product,
+                attributes: ['name'],
+                through: { attributes: ['quantity', 'quantity_unit'] },
+            },
+            {
+                model: Step,
+                attributes: ['step'],
+                through: { attributes: [] },
+            },
+        ],
+    });
+
+    if (recipe) {
+        const steps = recipe.steps.map((s) => s.step);
+
+        return { ...recipe.toJSON(), steps, ingredients: recipe.ingredients };
+    }
 };
 
 export const destroyRecipe = async (recipeId: string): Promise<number> => {

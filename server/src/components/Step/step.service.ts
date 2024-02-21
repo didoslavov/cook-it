@@ -1,10 +1,8 @@
 import Step from './Step.model';
-import { StepInterface } from './step.interface';
 
-export const createSteps = async (recipeId: string, steps: StepInterface[]): Promise<Step[]> => {
+export const createSteps = async (recipeId: string, steps: string[]): Promise<Step[]> => {
     const createdSteps: Step[] = [];
 
-    console.log(steps);
     for (const step of steps) {
         const existingStep = await Step.findOne({ where: { step } });
 

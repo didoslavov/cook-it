@@ -13,5 +13,5 @@ export interface RecipeInterface {
 
 export interface RecipeData extends RecipeInterface {
     ingredients: Ingredient[];
-    steps: StepInterface[];
+    steps: string[];
 }

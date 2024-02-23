@@ -10,9 +10,45 @@
     ),
     url(../../../assets/details-bg.jpg);
 
+  &__header {
+    &--heading {
+      font-size: 4.4rem;
+      text-shadow: 2px 2px 2px var(--color-primary);
+      margin-bottom: 2rem;
+    }
+
+    &--description {
+      font-size: 1.6rem;
+      color: var(--color-primary);
+      max-width: 70%;
+      line-height: 1.6;
+      letter-spacing: 0.05rem;
+      margin-bottom: 4rem;
+    }
+
+    &--chips {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 6rem;
+
+      &-times {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--color-accent-dark);
+        padding: 0.4rem 0.6rem;
+        border: 1px solid var(--color-primary);
+        border-radius: 1rem;
+
+        i {
+          color: var(--color-primary-dark);
+        }
+      }
+    }
+  }
+
   &__container {
     height: auto;
-    padding: 8rem;
+    padding: 10rem;
     display: flex;
     gap: 4rem;
     background-color: var(--color-primary-opacity-light);
@@ -26,7 +62,7 @@
       filter: drop-shadow(1.4rem 1.4rem 0.6rem var(--color-primary-dark));
       position: relative;
       position: sticky;
-      top: 18rem;
+      top: 20rem;
 
       &--owner-btns {
         position: absolute;
@@ -89,11 +125,6 @@
 
       img {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: flex;
-        justify-content: center;
-        align-items: center;
       }
     }
 
@@ -101,7 +132,7 @@
       display: flex;
       flex-direction: column;
       flex: 1 1 50%;
-      padding: 4rem 6rem 0 6rem;
+      padding: 0 6rem;
 
       &-btns {
         display: flex;
@@ -210,23 +241,6 @@
         transition: height 0.3s ease-in-out;
         overflow: hidden;
       }
-    }
-  }
-
-  &__header {
-    &--heading {
-      font-size: 4.4rem;
-      text-shadow: 2px 2px 2px var(--color-primary);
-      margin-bottom: 2rem;
-    }
-
-    &--description {
-      font-size: 1.6rem;
-      color: var(--color-primary);
-      max-width: 70%;
-      line-height: 1.6;
-      letter-spacing: 0.05rem;
-      margin-bottom: 8rem;
     }
   }
 }

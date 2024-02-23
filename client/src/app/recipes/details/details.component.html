@@ -17,6 +17,12 @@
             <header class="details__header">
                 <h2 class="details__header--heading">{{recipe.name}}</h2>
                 <p class="details__header--description">{{recipe.description}}</p>
+                <div class="details__header--chips">
+                    <p class="details__header--chips-times"><i class="fa-regular fa-clock"></i> Prep Time:
+                        {{recipe.prepTime}}</p>
+                    <p class="details__header--chips-times"><i class="fa-solid fa-clock"></i> Cook Time:
+                        {{recipe.cookTime}}</p>
+                </div>
             </header>
             <div class="details__container--content-btns">
                 <button class="details__container--content-btns-btn" [class.active]="showIngredients"

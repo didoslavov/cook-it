@@ -162,16 +162,17 @@
 
           &-item {
             font-size: 2rem;
-            flex: 0 1 calc(50% - 1rem);
+            flex: 0 1 calc(40% - 1rem);
             display: flex;
             align-items: center;
-            gap: 4rem;
+            gap: 2rem;
 
             & > span {
               color: var(--color-primary-dark);
               border: 2px solid var(--color-accent-dark);
               border-radius: 1rem;
               padding: 0.2rem 0.7rem;
+              display: ruby;
             }
           }
         }
@@ -183,7 +184,7 @@
           list-style: numeric inside;
           display: flex;
           flex-wrap: wrap;
-          gap: 1rem;
+          gap: 1rem 4rem;
           padding: 4rem;
           border-left: 2px solid var(--color-primary);
           border-top: 2px solid var(--color-primary);

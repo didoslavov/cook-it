@@ -26,8 +26,10 @@
     margin-top: 12.8rem;
     padding-top: 12.8rem;
     gap: 2rem;
+
     &--heading {
       font-size: 9.8rem;
+      text-shadow: 2px 1px 0px var(--color-primary-light);
     }
 
     &--agenda {

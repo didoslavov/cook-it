@@ -41,6 +41,7 @@
     &--img {
       width: 50%;
       height: auto;
+      filter: drop-shadow(-0.2rem 0.2rem 0.2rem var(--color-primary));
     }
 
     &--heading {

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
-import { slider } from './route-animations';
+import { slider } from './animations';
 import { AuthPageActions } from './store/auth/auth.actions';
 import { Store } from '@ngrx/store';
 import { User } from './store/auth/user.model';

@@ -1,6 +1,7 @@
 import {
   trigger,
   transition,
+  state,
   style,
   query,
   group,
@@ -48,3 +49,15 @@ function slideTo(direction: string) {
     ]),
   ];
 }
+
+export const ingredientsState = trigger('ingredientsState', [
+  state('inactive', style({ opacity: '0', transform: 'translate(-10rem)' })),
+  state('active', style({ opacity: '1', transform: 'translate(0)' })),
+  transition('inactive <=> active', animate('700ms ease-in-out')),
+]);
+
+export const directionsState = trigger('directionsState', [
+  state('inactive', style({ opacity: '0', transform: 'translate(-10rem)' })),
+  state('active', style({ opacity: '1', transform: 'translate(0)' })),
+  transition('inactive <=> active', animate('700ms ease-in-out')),
+]);

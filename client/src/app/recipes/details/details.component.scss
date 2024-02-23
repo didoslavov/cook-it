@@ -5,13 +5,13 @@
   height: fit-content;
   background: linear-gradient(
       0deg,
-      rgba(104, 119, 102, 0.6) 0%,
-      rgba(104, 119, 102, 0.6) 100%
+      rgba(104, 119, 102, 0.8) 0%,
+      rgba(104, 119, 102, 0.8) 100%
     ),
-    url(../../../assets/details-bg.jpg) center / cover no-repeat;
+    url(../../../assets/details-bg.jpg);
 
   &__container {
-    height: 100vh;
+    height: auto;
     padding: 8rem;
     display: flex;
     gap: 4rem;
@@ -23,8 +23,69 @@
       overflow: hidden;
       flex: 0 1 40%;
       height: fit-content;
-      align-self: center;
       filter: drop-shadow(1.4rem 1.4rem 0.6rem var(--color-primary-dark));
+      position: relative;
+      position: sticky;
+      top: 18rem;
+
+      &--owner-btns {
+        position: absolute;
+        top: 2rem;
+        left: 2rem;
+        display: flex;
+        width: 100%;
+        align-items: center;
+        gap: 4rem;
+        text-align: center;
+
+        &-btn:link,
+        &-btn:active {
+          font-size: 3rem;
+          color: var(--color-primary);
+          text-decoration: none;
+          padding: 0.5rem 1rem;
+          background-color: var(--color-primary-light);
+          border-radius: 1rem;
+          filter: drop-shadow(0.4rem 0.4rem 0.3rem var(--color-primary-dark));
+          transition: all 0.3s ease-in;
+        }
+
+        &-btn:hover,
+        &-btn:visited {
+          transform: scale(1.1);
+          background-color: var(--color-accent);
+          color: var(--color-primary-dark);
+        }
+
+        .edit::after {
+          content: "Edit recipe";
+        }
+
+        .delete::after {
+          content: "Delete recipe";
+        }
+
+        .edit::after,
+        .delete::after {
+          width: max-content;
+          background-color: var(--color-primary-light);
+          color: var(--color-primary);
+          font-size: 1.2rem;
+          position: absolute;
+          bottom: -3rem;
+          right: -2rem;
+          padding: 0.2rem 0.5rem;
+          border-radius: 1rem;
+          text-align: center;
+          opacity: 0;
+          transition: all 0.5s cubic-bezier(0.85, 0.19, 0.29, 0.82);
+        }
+
+        .edit:hover::after,
+        .delete:hover::after {
+          opacity: 1;
+        }
+      }
 
       img {
         width: 100%;
@@ -91,37 +152,62 @@
           list-style: none;
           display: flex;
           flex-wrap: wrap;
-          gap: 1rem;
-          padding: 2rem;
+          gap: 2rem;
+          padding: 4rem;
           border-left: 2px solid var(--color-primary);
           border-top: 2px solid var(--color-primary);
           border-radius: 4rem;
           margin-bottom: 4rem;
+          color: var(--color-primary);
 
           &-item {
             font-size: 2rem;
-            flex: 1 1 calc(50% - 1rem);
+            flex: 0 1 calc(50% - 1rem);
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+
+            & > span {
+              color: var(--color-primary-dark);
+              border: 2px solid var(--color-accent-dark);
+              border-radius: 1rem;
+              padding: 0.2rem 0.7rem;
+            }
           }
         }
       }
 
       &-steps {
         &--list {
-          height: 100%;
+          height: fit-content;
           list-style: numeric inside;
           display: flex;
           flex-wrap: wrap;
           gap: 1rem;
-          padding: 2rem;
+          padding: 4rem;
           border-left: 2px solid var(--color-primary);
           border-top: 2px solid var(--color-primary);
           border-radius: 4rem;
 
           &-item {
             font-size: 2rem;
-            flex: 1 1 calc(50% - 1rem);
+            color: var(--color-primary);
+            line-height: 1.8;
+
+            &::marker {
+              line-height: 1;
+              color: var(--color-accent-dark);
+              font-size: 6rem;
+              font-weight: 700;
+            }
           }
         }
+      }
+
+      &-ingredients,
+      &-steps {
+        transition: height 0.3s ease-in-out;
+        overflow: hidden;
       }
     }
   }
@@ -145,7 +231,12 @@
 }
 
 .hidden {
-  display: none;
+  height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .active {

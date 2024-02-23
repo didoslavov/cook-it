@@ -18,7 +18,6 @@ import { User } from '../../store/auth/user.model';
 import { Store, select } from '@ngrx/store';
 import { getUserData } from '../../store/auth/auth.selectors';
 import { UserMenuComponent } from './user-menu/user-menu/user-menu.component';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'app-header',

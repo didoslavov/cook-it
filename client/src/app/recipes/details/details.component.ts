@@ -1,28 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
-import { Recipe } from '../recipe.model';
-import { ActivatedRoute } from '@angular/router';
+import { Recipe, RecipeData } from '../recipe.model';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { directionsState, ingredientsState } from '../../animations';
+import { User } from '../../store/auth/user.model';
+import { Store, select } from '@ngrx/store';
+import { getUserData } from '../../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
+  animations: [ingredientsState, directionsState],
 })
 export class DetailsComponent implements OnInit {
-  recipe: Recipe = {};
+  recipe: RecipeData = {};
   recipeId: string = '';
   showIngredients: boolean = true;
   showDirections: boolean = false;
 
+  declare user: User | null;
+
   constructor(
     private route: ActivatedRoute,
-    private recipeService: RecipeService
+    private recipeService: RecipeService,
+    private store: Store
   ) {}
 
   ngOnInit() {
+    this.store.pipe(select(getUserData)).subscribe((user: any) => {
+      this.user = user?.user;
+    });
+
     this.route.params.subscribe((params) => {
       this.recipeId = params['recipeId'];
 

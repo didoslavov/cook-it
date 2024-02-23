@@ -1,8 +1,14 @@
 .dashboard {
   width: 100%;
   height: 90vh;
-  background-image: url(../../assets/dashboard-bg.jpg);
+  background-image: linear-gradient(
+      0deg,
+      rgb(233, 236, 233, 0.8) 0%,
+      rgb(233, 236, 233, 0.8) 100%
+    ),
+    url(../../assets/dashboard-bg.jpg);
   background-size: cover;
+  backdrop-filter: blur(2px);
 
   display: flex;
   align-items: center;

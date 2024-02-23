@@ -1,7 +1,13 @@
 .form__container {
   height: 90vh;
-  background-image: url(../../../assets/generic-form-bg.jpg);
+  background-image: linear-gradient(
+      0deg,
+      rgb(233, 236, 233, 0.8) 0%,
+      rgb(233, 236, 233, 0.8) 100%
+    ),
+    url(../../../assets/generic-form-bg.jpg);
   background-size: cover;
+  backdrop-filter: blur(2px);
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-content: end;

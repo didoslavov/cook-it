@@ -1,7 +1,5 @@
 .carousel {
   width: 100%;
-  background-color: var(--color-primary-opacity-light);
-  backdrop-filter: blur(2px);
   display: grid;
   grid-template-columns: max-content repeat(4, 1fr);
   justify-items: end;

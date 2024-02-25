@@ -24,3 +24,7 @@ export interface Ingredient {
     unit: string;
   };
 }
+
+export interface IngredientWithId extends Ingredient {
+  id?: string;
+}

@@ -29,4 +29,8 @@ export class RecipeService {
   addRecipe(recipeData: RecipeData) {
     return this.http.post<RecipeData>('/recipes/create', recipeData);
   }
+
+  editRecipe(recipeId: string, recipeData: RecipeData) {
+    return this.http.put<RecipeData>(`/recipes/${recipeId}/edit`, recipeData);
+  }
 }

@@ -1,9 +1,9 @@
-import { Ingredient, Product, ProductInterface } from '../Product';
+import { Ingredient, Product } from '../Product';
 import { insertIngredients } from '../Product/product.service';
 import { AppError, ProductRecipe } from '../Shared';
-import { createProductRecipe } from '../Shared/Relationships/ProductRecipe/productRecipe.service';
-import { createStepRecipe } from '../Shared/Relationships/StepRecipe/stepRecipe.service';
-import { Step, StepInterface } from '../Step';
+import { createProductRecipe, updateIngredientRecipe } from '../Shared/Relationships/ProductRecipe/productRecipe.service';
+import { createStepRecipe, updateStepRecipe } from '../Shared/Relationships/StepRecipe/stepRecipe.service';
+import { Step } from '../Step';
 import { createSteps } from '../Step/step.service';
 import Recipe from './Recipe.model';
 import { RecipeData, RecipeInterface } from './recipe.interface';
@@ -42,7 +42,6 @@ export const insertRecipe = async (recipeData: RecipeData): Promise<RecipeInterf
     const mappedIngredients = createdIngredients.map((createdIngredient): Ingredient => {
         const correspondingIngredient = ingredients.find((ingredient) => ingredient.name === createdIngredient.name);
 
-        console.log(correspondingIngredient);
         return {
             id: createdIngredient.id,
             name: correspondingIngredient!.name,
@@ -59,12 +58,88 @@ export const insertRecipe = async (recipeData: RecipeData): Promise<RecipeInterf
     return createdRecipe.toJSON();
 };
 
+export const updateRecipe = async (recipeId: string, recipeData: RecipeData): Promise<RecipeInterface> => {
+    const existingRecipe = await Recipe.findByPk(recipeId, {
+        include: [
+            { model: Product, attributes: ['id', 'name'], through: { attributes: ['quantity', 'unit'] } },
+            { model: Step, attributes: ['id', 'step'], through: { attributes: [] } },
+        ],
+    });
+
+    if (!existingRecipe) {
+        throw new AppError(404, 'Recipe not found!');
+    }
+
+    existingRecipe.name = recipeData.name;
+    existingRecipe.prepTime = Number(recipeData.prepTime);
+    existingRecipe.cookTime = Number(recipeData.cookTime);
+    existingRecipe.img = recipeData.img;
+    existingRecipe.userId = recipeData.userId;
+    existingRecipe.description = recipeData.description;
+
+    await existingRecipe.save();
+
+    for (const ingredient of recipeData.ingredients) {
+        if (ingredient.id) {
+            await updateIngredientRecipe(
+                existingRecipe.id,
+                ingredient.id,
+                ingredient.name,
+                ingredient.ProductRecipe.quantity,
+                ingredient.ProductRecipe.unit
+            );
+        } else {
+            const existingIngredient = await Product.findOne({ where: { name: ingredient.name } });
+
+            if (existingIngredient) {
+                // If the ingredient already exists, update its quantity and unit in the recipe
+                await updateIngredientRecipe(
+                    existingRecipe.id,
+                    existingIngredient.id,
+                    ingredient.name,
+                    ingredient.ProductRecipe.quantity,
+                    ingredient.ProductRecipe.unit
+                );
+            } else {
+                const createdIngredient = await insertIngredients([ingredient]);
+
+                // Create the corresponding product recipe entry
+                await createProductRecipe(existingRecipe.id, [
+                    {
+                        id: createdIngredient[0].id,
+                        name: ingredient.name,
+                        ProductRecipe: {
+                            quantity: ingredient.ProductRecipe.quantity,
+                            unit: ingredient.ProductRecipe.unit,
+                        },
+                    },
+                ]);
+            }
+        }
+    }
+
+    const newSteps = recipeData.steps;
+    const existingStepNames = existingRecipe.steps.map((step) => step.step);
+
+    const stepsToRemove = existingStepNames.filter((step) => !newSteps.includes(step));
+    for (const step of stepsToRemove) {
+        await updateStepRecipe(step, '');
+    }
+
+    const stepsToAdd = newSteps.filter((step) => !existingStepNames.includes(step));
+    for (const step of stepsToAdd) {
+        await updateStepRecipe('', step, recipeId);
+    }
+
+    return existingRecipe.toJSON();
+};
+
 export const findRecipeByPk = async (recipeId: string): Promise<RecipeData | undefined> => {
     const recipe = await Recipe.findByPk(recipeId, {
         include: [
             {
                 model: Product,
-                attributes: ['name'],
+                attributes: ['id', 'name'],
                 through: { attributes: ['quantity', 'unit'] },
             },
             {

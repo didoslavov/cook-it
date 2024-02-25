@@ -1,7 +1,11 @@
 import { Ingredient, Product } from '../Product';
 import { insertIngredients } from '../Product/product.service';
 import { AppError, ProductRecipe } from '../Shared';
-import { createProductRecipe, updateIngredientRecipe } from '../Shared/Relationships/ProductRecipe/productRecipe.service';
+import {
+    createProductRecipe,
+    removeIngredientFromRecipe,
+    updateIngredientRecipe,
+} from '../Shared/Relationships/ProductRecipe/productRecipe.service';
 import { createStepRecipe, updateStepRecipe } from '../Shared/Relationships/StepRecipe/stepRecipe.service';
 import { Step } from '../Step';
 import { createSteps } from '../Step/step.service';
@@ -114,6 +118,14 @@ export const updateRecipe = async (recipeId: string, recipeData: RecipeData): Pr
                 ]);
             }
         }
+    }
+
+    const ingredientIdsInRecipe = recipeData.ingredients.map((ingredient) => ingredient.id);
+    const allIngredientIdsInRecipe = existingRecipe.ingredients.map((ingredient) => ingredient.id);
+
+    const ingredientsToRemove = allIngredientIdsInRecipe.filter((id) => !ingredientIdsInRecipe.includes(id));
+    for (const ingredientId of ingredientsToRemove) {
+        await removeIngredientFromRecipe(existingRecipe.id, ingredientId);
     }
 
     const newSteps = recipeData.steps;

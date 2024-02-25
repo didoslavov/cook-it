@@ -17,10 +17,10 @@ class ProductRecipe extends Model implements ProductRecipeInterface {
     declare productId: string;
 
     @Column({ type: DataType.STRING })
-    declare quantity: string;
+    declare quantity: string | undefined;
 
     @Column({ type: DataType.STRING })
-    declare unit: string;
+    declare unit: string | undefined;
 }
 
 export default ProductRecipe;

@@ -10,6 +10,7 @@
 
   &__bubles {
     width: 40%;
+    filter: drop-shadow(2.2rem 2rem 0.8rem var(--color-primary-dark));
 
     &--img {
       mask: url(https://assets.codepen.io/1101822/circles-mask-whole.svg)

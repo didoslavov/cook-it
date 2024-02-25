@@ -20,6 +20,7 @@
     background-size: cover;
     text-align: end;
     border-radius: 0 5rem 5rem 0;
+    filter: drop-shadow(0.6rem 0.6rem 0.5rem var(--color-primary));
 
     &--heading {
       padding: 8rem 8rem;
@@ -87,6 +88,7 @@
     &--3 {
       display: grid;
       grid-area: 2 / 1 / span 2 / span 2;
+      filter: drop-shadow(0 0 0.9rem var(--color-primary-dark));
     }
 
     &--4 {

@@ -4,10 +4,10 @@
             <img class="" src="{{recipe.img}}" alt="Good looking meal">
             @if (user?.id === recipe.userId) {
             <div class="details__container--img--owner-btns">
-                <a routerLink="/details/{{recipe.id}}/edit" class="details__container--img--owner-btns-btn edit">
+                <a routerLink="/recipes/{{recipe.id}}/edit" class="details__container--img--owner-btns-btn edit">
                     <i class="fa-regular fa-pen-to-square"></i>
                 </a>
-                <a routerLink="/details/{{recipe.id}}/delete" class="details__container--img--owner-btns-btn delete">
+                <a routerLink="/recipes/{{recipe.id}}/delete" class="details__container--img--owner-btns-btn delete">
                     <i class="fa-solid fa-trash"></i>
                 </a>
             </div>

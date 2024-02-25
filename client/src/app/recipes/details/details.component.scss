@@ -81,17 +81,20 @@
           color: var(--color-primary);
           text-decoration: none;
           padding: 0.5rem 1rem;
-          background-color: var(--color-primary-light);
           border-radius: 1rem;
+          background-color: var(--color-primary-light);
           filter: drop-shadow(0.4rem 0.4rem 0.3rem var(--color-primary-dark));
           transition: all 0.3s ease-in;
         }
 
         &-btn:hover,
         &-btn:visited {
+          color: var(--color-primary-dark);
+        }
+
+        &-btn:hover {
           transform: scale(1.1);
           background-color: var(--color-accent);
-          color: var(--color-primary-dark);
         }
 
         .edit::after {
@@ -104,6 +107,7 @@
 
         .edit::after,
         .delete::after {
+          pointer-events: none;
           width: max-content;
           background-color: var(--color-primary-light);
           color: var(--color-primary);

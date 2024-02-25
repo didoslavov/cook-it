@@ -1,7 +1,7 @@
 .carousel {
-  width: 100%;
+  max-width: 100%;
   display: grid;
-  grid-template-columns: max-content repeat(4, 1fr);
+  grid-template-columns: max-content repeat(4, auto);
   justify-items: end;
   padding: 8rem 6rem;
 

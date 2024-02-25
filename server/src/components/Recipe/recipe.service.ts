@@ -92,7 +92,6 @@ export const updateRecipe = async (recipeId: string, recipeData: RecipeData): Pr
             const existingIngredient = await Product.findOne({ where: { name: ingredient.name } });
 
             if (existingIngredient) {
-                // If the ingredient already exists, update its quantity and unit in the recipe
                 await updateIngredientRecipe(
                     existingRecipe.id,
                     existingIngredient.id,
@@ -103,7 +102,6 @@ export const updateRecipe = async (recipeId: string, recipeData: RecipeData): Pr
             } else {
                 const createdIngredient = await insertIngredients([ingredient]);
 
-                // Create the corresponding product recipe entry
                 await createProductRecipe(existingRecipe.id, [
                     {
                         id: createdIngredient[0].id,
@@ -119,11 +117,12 @@ export const updateRecipe = async (recipeId: string, recipeData: RecipeData): Pr
     }
 
     const newSteps = recipeData.steps;
+
     const existingStepNames = existingRecipe.steps.map((step) => step.step);
 
     const stepsToRemove = existingStepNames.filter((step) => !newSteps.includes(step));
     for (const step of stepsToRemove) {
-        await updateStepRecipe(step, '');
+        await updateStepRecipe(step, '', recipeId);
     }
 
     const stepsToAdd = newSteps.filter((step) => !existingStepNames.includes(step));

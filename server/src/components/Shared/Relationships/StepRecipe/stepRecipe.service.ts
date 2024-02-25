@@ -9,6 +9,11 @@ export const updateStepRecipe = async (stepName: string, newStepName: string, re
     try {
         let step = await Step.findOne({ where: { step: stepName } });
 
+        if (!newStepName) {
+            await StepRecipe.destroy({ where: { recipeId, stepId: step?.id } });
+            return null;
+        }
+
         if (step) {
             step.step = newStepName;
 

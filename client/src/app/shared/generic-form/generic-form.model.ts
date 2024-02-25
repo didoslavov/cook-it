@@ -12,7 +12,7 @@ export interface GenericFormData {
   prepTime?: number;
   cookTime?: number;
   img?: string;
-  ingredient?: string;
+  ingredient?: string[];
   quantity?: string;
   unit?: string;
   steps?: string[];

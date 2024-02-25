@@ -1,11 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { GenericFormData, GenericFormModel } from './generic-form.model';
 import { RouterLink } from '@angular/router';
 import { faListOl, faPlus, faSpoon } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { Ingredient } from '../../recipes/recipe.model';
+import {
+  Ingredient,
+  IngredientWithId,
+  Recipe,
+  RecipeData,
+} from '../../recipes/recipe.model';
 
 @Component({
   selector: 'app-generic-form',
@@ -16,7 +28,12 @@ import { Ingredient } from '../../recipes/recipe.model';
 })
 export class GenericFormComponent implements OnInit {
   @Input() formData!: GenericFormData;
-  @Input() formType!: 'registration' | 'login' | 'recipe';
+  @Input() formType!:
+    | 'registration'
+    | 'login'
+    | 'create recipe'
+    | 'edit recipe';
+  @Input() recipe: Recipe = {};
   @Input() ingredients: Ingredient[] = [];
   @Input() steps: string[] = [];
   @Input() units: string[] = [];
@@ -30,10 +47,27 @@ export class GenericFormComponent implements OnInit {
   buttonText!: string;
   headingText!: string;
   formModel!: GenericFormModel;
+  ingredientToEdit!: IngredientWithId | undefined;
 
   faBtn = faPlus;
   faSpoon = faSpoon;
   faList = faListOl;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if ('recipe' in changes && this.isRecipeEditForm()) {
+      this.populateFormWithRecipeData();
+    }
+  }
+
+  populateFormWithRecipeData(): void {
+    this.formModel.form.patchValue({
+      name: this.recipe.name,
+      prepTime: this.recipe.prepTime,
+      cookTime: this.recipe.cookTime,
+      img: this.recipe.img,
+      description: this.recipe.description,
+    });
+  }
 
   ngOnInit(): void {
     this.formModel = new GenericFormModel(this.formData);
@@ -69,11 +103,11 @@ export class GenericFormComponent implements OnInit {
   }
 
   isRecipeEditForm(): boolean {
-    return this.formType === 'recipe';
+    return this.formType === 'edit recipe';
   }
 
   isRecipeCreateForm(): boolean {
-    return this.formType === 'recipe';
+    return this.formType === 'create recipe';
   }
 
   onAddIngredient(): void {
@@ -90,6 +124,7 @@ export class GenericFormComponent implements OnInit {
       unitControl.value
     ) {
       const ingredient = {
+        id: this.ingredientToEdit?.id,
         name: ingredientControl.value,
         ProductRecipe: {
           quantity: quantityControl.value,
@@ -114,9 +149,14 @@ export class GenericFormComponent implements OnInit {
     const quantityControl = this.formModel.form.get('quantity');
     const unitControl = this.formModel.form.get('unit');
 
+    this.ingredientToEdit = this.ingredients.find((i) => {
+      return i.name === ingredient.name;
+    });
+
     this.ingredients = this.ingredients.filter(
       (i) => i.name !== ingredient.name
     );
+
     this.updateIngredients.emit([...this.ingredients]);
 
     ingredientControl?.setValue(ingredient.name);
@@ -143,6 +183,22 @@ export class GenericFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.formSubmit.emit(this.formModel.form.value);
+    const formData = this.formModel.form.value;
+
+    if (this.isRecipeEditForm()) {
+      const updatedRecipe: Recipe = {
+        name: formData.name,
+        prepTime: formData.prepTime,
+        cookTime: formData.cookTime,
+        img: formData.img,
+        ingredients: this.ingredients,
+        steps: this.steps,
+        description: formData.description,
+      };
+
+      this.formSubmit.emit(updatedRecipe);
+    } else {
+      this.formSubmit.emit(formData);
+    }
   }
 }

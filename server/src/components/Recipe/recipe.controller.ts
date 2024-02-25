@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import { RecipeData } from './recipe.interface';
-import { destroyRecipe, findRecipes, findRecipeByPk, insertRecipe } from './recipe.service';
+import { destroyRecipe, findRecipes, findRecipeByPk, insertRecipe, updateRecipe } from './recipe.service';
 import { AppError, mapValidationError } from '../Shared';
 import { validationResult } from 'express-validator';
 
@@ -19,6 +19,27 @@ const createRecipe = expressAsyncHandler(async (req: Request, res: Response) => 
 
     if (!recipe) {
         throw new AppError(400, 'Adding recipe failed!');
+    }
+
+    res.status(200).json(recipe);
+});
+
+const editRecipe = expressAsyncHandler(async (req: Request, res: Response) => {
+    const recipeId: string = req.params.recipeId;
+    const validations = validationResult(req);
+    const errors = validations.array();
+
+    if (errors.length) {
+        throw new AppError(400, errors.map(mapValidationError).join('; '));
+    }
+
+    const recipeData: RecipeData = req.body;
+    console.log(recipeData);
+
+    const recipe = await updateRecipe(recipeId, recipeData);
+
+    if (!recipe) {
+        throw new AppError(400, 'Editing recipe failed!');
     }
 
     res.status(200).json(recipe);
@@ -63,4 +84,4 @@ const deleteRecipe = expressAsyncHandler(async (req: Request, res: Response) => 
     res.status(200).json('Recipe deleted');
 });
 
-export { getRecipes, createRecipe, getRecipeById, deleteRecipe };
+export { getRecipes, createRecipe, getRecipeById, editRecipe, deleteRecipe };

@@ -34,7 +34,6 @@ const editRecipe = expressAsyncHandler(async (req: Request, res: Response) => {
     }
 
     const recipeData: RecipeData = req.body;
-    console.log(recipeData);
 
     const recipe = await updateRecipe(recipeId, recipeData);
 

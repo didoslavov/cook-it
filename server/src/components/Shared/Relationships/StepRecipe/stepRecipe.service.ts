@@ -14,11 +14,11 @@ export const updateStepRecipe = async (stepName: string, newStepName: string, re
             return null;
         }
 
-        if (step) {
-            step.step = newStepName;
+        const existingStep = await Step.findOne({ where: { step: newStepName } });
 
-            await step.save();
-            return step;
+        if (existingStep) {
+            await StepRecipe.findOrCreate({ where: { recipeId, stepId: existingStep.id } });
+            step = existingStep;
         } else {
             step = await Step.create({ step: newStepName });
             await StepRecipe.create({ recipeId, stepId: step.id });

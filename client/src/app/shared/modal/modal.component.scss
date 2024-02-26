@@ -1,16 +1,15 @@
 .modal {
-  width: 40%;
   padding: 6rem;
-  margin: 20rem auto;
   background-color: var(--color-primary);
   border-radius: 1rem;
   filter: drop-shadow(1rem 1rem 0.6rem var(--color-primary-dark));
   position: relative;
+  max-width: 100%;
 
   &__icon {
     position: absolute;
-    top: -1rem;
-    right: -1rem;
+    top: -2rem;
+    right: -2rem;
     width: 4rem;
     height: 4rem;
     font-size: 3rem;

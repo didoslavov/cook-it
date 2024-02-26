@@ -1,8 +1,8 @@
 <div class="modal">
-    <button class="modal__icon"><fa-icon [icon]="xIcon" /></button>
+    <button class="modal__icon" (click)="onClose(false)"><fa-icon [icon]="xIcon" /></button>
     <h4 class="modal__confirmation">Are you sure you want to delete this recipe?</h4>
     <div class="modal__btns">
-        <button class="modal__btns--btn btn btn--cta">confirm</button>
-        <button class="modal__btns--btn btn btn--accent">decline</button>
+        <button class="modal__btns--btn btn btn--cta" (click)="onClose(true)">confirm</button>
+        <button class="modal__btns--btn btn btn--accent" (click)="onClose(false)">decline</button>
     </div>
 </div>

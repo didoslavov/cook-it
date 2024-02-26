@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
@@ -11,4 +11,12 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 })
 export class ModalComponent {
   xIcon = faXmark;
+
+  @Input() recipeId?: string;
+
+  @Output() closeModal = new EventEmitter<boolean>();
+
+  onClose(confirmed: boolean) {
+    this.closeModal.emit(confirmed);
+  }
 }

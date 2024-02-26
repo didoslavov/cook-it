@@ -6,6 +6,7 @@ import {
     removeIngredientFromRecipe,
     updateIngredientRecipe,
 } from '../Shared/Relationships/ProductRecipe/productRecipe.service';
+import StepRecipe from '../Shared/Relationships/StepRecipe/StepRecipe.model';
 import { createStepRecipe, updateStepRecipe } from '../Shared/Relationships/StepRecipe/stepRecipe.service';
 import { Step } from '../Step';
 import { createSteps } from '../Step/step.service';
@@ -169,5 +170,8 @@ export const findRecipeByPk = async (recipeId: string): Promise<RecipeData | und
 };
 
 export const destroyRecipe = async (recipeId: string): Promise<number> => {
+    await ProductRecipe.destroy({ where: { id: recipeId } });
+    await StepRecipe.destroy({ where: { id: recipeId } });
+
     return await Recipe.destroy({ where: { id: recipeId } });
 };

@@ -1,1 +1,5 @@
-<app-modal />
+<section class="delete">
+    <div class="delete__container">
+        <app-modal [recipeId]="recipeId" (closeModal)="onClose($event)" />
+    </div>
+</section>

@@ -6,6 +6,7 @@ import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeFormComponent } from './recipes/create-recipe-form/create-recipe-form.component';
 import { DetailsComponent } from './recipes/details/details.component';
 import { EditRecipeFormComponent } from './recipes/edit-recipe-form/edit-recipe-form.component';
+import { DeleteComponent } from './shared/delete/delete.component';
 
 export const routes: Routes = [
   {
@@ -28,9 +29,14 @@ export const routes: Routes = [
     data: { animation: 'isLeft' },
   },
   {
+    path: 'recipes/:recipeId/delete',
+    component: DeleteComponent,
+    data: { animation: 'isRight' },
+  },
+  {
     path: 'recipes/:recipeId/edit',
     component: EditRecipeFormComponent,
-    data: { animation: 'isLeft' },
+    data: { animation: 'isRight' },
   },
   {
     path: 'auth/register',

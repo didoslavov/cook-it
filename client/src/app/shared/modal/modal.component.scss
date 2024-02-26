@@ -1,0 +1,50 @@
+.modal {
+  width: 40%;
+  padding: 6rem;
+  margin: 20rem auto;
+  background-color: var(--color-primary);
+  border-radius: 1rem;
+  filter: drop-shadow(1rem 1rem 0.6rem var(--color-primary-dark));
+  position: relative;
+
+  &__icon {
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    width: 4rem;
+    height: 4rem;
+    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    border: none;
+    background-color: var(--color-primary-dark);
+    color: var(--color-primary-light);
+    cursor: pointer;
+    padding: 1rem;
+    filter: drop-shadow(0 0 0.5rem var(--color-accent-dark));
+    transition: all 0.3s ease-in;
+
+    &:hover {
+      background-color: var(--color-accent);
+      color: var(--color-primary-dark);
+      filter: drop-shadow(0 0 0.5rem var(--color-primary-dark));
+    }
+  }
+
+  &__confirmation {
+    font-size: 2.4rem;
+    text-align: center;
+    margin-bottom: 12rem;
+  }
+
+  &__btns {
+    display: flex;
+    justify-content: space-around;
+
+    &--btn {
+      text-transform: uppercase;
+    }
+  }
+}

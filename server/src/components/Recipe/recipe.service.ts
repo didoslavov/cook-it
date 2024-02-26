@@ -170,8 +170,8 @@ export const findRecipeByPk = async (recipeId: string): Promise<RecipeData | und
 };
 
 export const destroyRecipe = async (recipeId: string): Promise<number> => {
-    await ProductRecipe.destroy({ where: { id: recipeId } });
-    await StepRecipe.destroy({ where: { id: recipeId } });
+    await ProductRecipe.destroy({ where: { recipeId } });
+    await StepRecipe.destroy({ where: { recipeId } });
 
     return await Recipe.destroy({ where: { id: recipeId } });
 };

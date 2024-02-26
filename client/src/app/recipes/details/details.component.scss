@@ -1,8 +1,4 @@
 .details {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: fit-content;
   background: linear-gradient(
       0deg,
       rgba(104, 119, 102, 0.8) 0%,
@@ -48,7 +44,7 @@
 
   &__container {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     padding: 10rem;
     display: flex;
     gap: 4rem;

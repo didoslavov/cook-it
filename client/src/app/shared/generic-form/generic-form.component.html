@@ -1,124 +1,126 @@
-<div class="form__container">
-    <div class="form__container--content">
-        <h2 class="form__container--content-heading subheading">
-            {{headingText}}
-        </h2>
-        <form [formGroup]="formModel.form" class="form__container--content-form" (ngSubmit)="onSubmit()">
-            @if (isRegistrationForm() && !isLoginForm()) {
-            <div class="form__container--content-controls">
-                <input type="text" placeholder="placeholder" id="firstName"
-                    class="form__container--content-controls-input" formControlName="firstName" />
-                <label for="firstName" class="form__container--content-controls-label">First Name</label>
-            </div>
-            <div class="form__container--content-controls">
-                <input type="text" placeholder="placeholder" id="lastName"
-                    class="form__container--content-controls-input" formControlName="lastName" />
-                <label for="lastName" class="form__container--content-controls-label">Last Name</label>
-            </div>
-            <div class="form__container--content-controls">
-                <input type="text" placeholder="placeholder" id="avatar" class="form__container--content-controls-input"
-                    formControlName="avatar" />
-                <label for="avatar" class="form__container--content-controls-label">Avatar</label>
-            </div>
-            }
-            @if(isLoginForm() || isRegistrationForm()) {
-            <div class="form__container--content-controls">
-                <input type="text" placeholder="placeholder" id="email" class="form__container--content-controls-input"
-                    formControlName="email" />
-                <label for="email" class="form__container--content-controls-label">Email</label>
-            </div>
-            <div class="form__container--content-controls">
-                <input placeholder="placeholder" id="password" class="form__container--content-controls-input"
-                    type="password" formControlName="password" />
-                <label for="password" class="form__container--content-controls-label">Password</label>
-            </div>
-            }
-            @if (isRegistrationForm()){
-            <div class="form__container--content-controls">
-                <input placeholder="placeholder" id="rePass" class="form__container--content-controls-input"
-                    type="password" formControlName="rePassword" />
-                <label for="rePass" class="form__container--content-controls-label">Re Password</label>
-            </div>
-            <p class="form__container--content-form-link">Already have an account? <a routerLink="/auth/login"
-                    class="link">Sign in here!</a></p>
-            } @else if(isLoginForm()) {
-            <p class="form__container--content-form-link">Don't have and account? <a routerLink="/auth/register"
-                    class="link">Sign up here!</a></p>
-            }
-            @if(isRecipeEditForm() || isRecipeCreateForm()) {
-            <div class="form__container--content-controls">
-                <input type="text" placeholder="placeholder" id="name" class="form__container--content-controls-input"
-                    formControlName="name" />
-                <label for="name" class="form__container--content-controls-label">Name</label>
-            </div>
-            <div class="form__container--content-controls">
-                <input type="text" placeholder="placeholder" id="prepTime"
-                    class="form__container--content-controls-input" formControlName="prepTime" />
-                <label for="prepTime" class="form__container--content-controls-label">Prep Time (min)</label>
-            </div>
-            <div class="form__container--content-controls">
-                <input type="text" placeholder="placeholder" id="cookTime"
-                    class="form__container--content-controls-input" formControlName="cookTime" />
-                <label for="cookTime" class="form__container--content-controls-label">Cook Time (min)</label>
-            </div>
-            <div class="form__container--content-controls">
-                <input type="text" placeholder="placeholder" id="img" class="form__container--content-controls-input"
-                    formControlName="img" />
-                <label for="img" class="form__container--content-controls-label">Image</label>
-            </div>
-            <div class="form__container--content-controls">
-                <input type="text" placeholder="placeholder" id="ingredient"
-                    class="form__container--content-controls-input" formControlName="ingredient" />
-                <label for="ingredient" class="form__container--content-controls-label">Ingredient</label>
-                <button type="button" class="form__container--content-controls-btn" (click)="onAddIngredient()"><fa-icon
-                        [icon]="faBtn" /></button>
-            </div>
-            <div class="form__container--content-controls form__container--content-controls-qty">
-                <fa-icon [icon]="faList" />
-                <input type="text" name="quantity" id="quantity" formControlName="quantity">
-                <fa-icon [icon]="faSpoon" />
-                <select name="unit" id="unit" formControlName="unit">
-                    <option value="" disabled selected>Units</option>
-                    @for(unit of units; track unit) {
-                    <option [ngValue]="unit">{{unit}}</option>
-                    }
-                </select>
-            </div>
-            <div class="form__container--content-controls">
-                <input type="text" placeholder="placeholder" id="steps" class="form__container--content-controls-input"
-                    formControlName="steps" />
-                <label for="steps" class="form__container--content-controls-label">Cooking Steps</label>
-                <button type="button" class="form__container--content-controls-btn" (click)="onAddStep()"><fa-icon
-                        [icon]="faBtn" /></button>
-            </div>
-            <div class="form__container--content-controls">
-                <input type="text" placeholder="placeholder" id="description"
-                    class="form__container--content-controls-input" formControlName="description" />
-                <label for="description" class="form__container--content-controls-label">Cooking Description</label>
-            </div>
-            }
-            <input class="form__container--content-form-btn btn btn--full" type="submit" [value]="buttonText" />
-        </form>
-        <div [ngClass]="ingredients.length || steps.length ? 'opened' : ''" class="form__container--content-info">
-            <div class="ingredients">
-                <p class="ingredients__heading">Ingredients</p>
-                <ul class="ingredients__list">
-                    @for (ingredient of ingredients; track ingredient) {
-                    <li (click)="onEditIngredient(ingredient)" class="ingredients__list--item">
-                        <span>{{ingredient.name}}</span> <span>{{ingredient.ProductRecipe.quantity}}
-                            {{ingredient.ProductRecipe.unit}}</span>
-                    </li>
-                    }
-                </ul>
-            </div>
-            <div class="steps">
-                <p class="steps__heading">Steps</p>
-                <ul class="steps__list">
-                    @for (step of steps; track step) {
-                    <li (click)="onEditSteps(step)" class="steps__list--item">{{step}}</li>
-                    }
-                </ul>
+<section class="form">
+    <div class="form__container">
+        <div class="form__container--content">
+            <h2 class="form__container--content-heading subheading">
+                {{headingText}}
+            </h2>
+            <form [formGroup]="formModel.form" class="form__container--content-form" (ngSubmit)="onSubmit()">
+                @if (isRegistrationForm() && !isLoginForm()) {
+                <div class="form__container--content-controls">
+                    <input type="text" placeholder="placeholder" id="firstName"
+                        class="form__container--content-controls-input" formControlName="firstName" />
+                    <label for="firstName" class="form__container--content-controls-label">First Name</label>
+                </div>
+                <div class="form__container--content-controls">
+                    <input type="text" placeholder="placeholder" id="lastName"
+                        class="form__container--content-controls-input" formControlName="lastName" />
+                    <label for="lastName" class="form__container--content-controls-label">Last Name</label>
+                </div>
+                <div class="form__container--content-controls">
+                    <input type="text" placeholder="placeholder" id="avatar"
+                        class="form__container--content-controls-input" formControlName="avatar" />
+                    <label for="avatar" class="form__container--content-controls-label">Avatar</label>
+                </div>
+                }
+                @if(isLoginForm() || isRegistrationForm()) {
+                <div class="form__container--content-controls">
+                    <input type="text" placeholder="placeholder" id="email"
+                        class="form__container--content-controls-input" formControlName="email" />
+                    <label for="email" class="form__container--content-controls-label">Email</label>
+                </div>
+                <div class="form__container--content-controls">
+                    <input placeholder="placeholder" id="password" class="form__container--content-controls-input"
+                        type="password" formControlName="password" />
+                    <label for="password" class="form__container--content-controls-label">Password</label>
+                </div>
+                }
+                @if (isRegistrationForm()){
+                <div class="form__container--content-controls">
+                    <input placeholder="placeholder" id="rePass" class="form__container--content-controls-input"
+                        type="password" formControlName="rePassword" />
+                    <label for="rePass" class="form__container--content-controls-label">Re Password</label>
+                </div>
+                <p class="form__container--content-form-link">Already have an account? <a routerLink="/auth/login"
+                        class="link">Sign in here!</a></p>
+                } @else if(isLoginForm()) {
+                <p class="form__container--content-form-link">Don't have and account? <a routerLink="/auth/register"
+                        class="link">Sign up here!</a></p>
+                }
+                @if(isRecipeEditForm() || isRecipeCreateForm()) {
+                <div class="form__container--content-controls">
+                    <input type="text" placeholder="placeholder" id="name"
+                        class="form__container--content-controls-input" formControlName="name" />
+                    <label for="name" class="form__container--content-controls-label">Name</label>
+                </div>
+                <div class="form__container--content-controls">
+                    <input type="text" placeholder="placeholder" id="prepTime"
+                        class="form__container--content-controls-input" formControlName="prepTime" />
+                    <label for="prepTime" class="form__container--content-controls-label">Prep Time (min)</label>
+                </div>
+                <div class="form__container--content-controls">
+                    <input type="text" placeholder="placeholder" id="cookTime"
+                        class="form__container--content-controls-input" formControlName="cookTime" />
+                    <label for="cookTime" class="form__container--content-controls-label">Cook Time (min)</label>
+                </div>
+                <div class="form__container--content-controls">
+                    <input type="text" placeholder="placeholder" id="img"
+                        class="form__container--content-controls-input" formControlName="img" />
+                    <label for="img" class="form__container--content-controls-label">Image</label>
+                </div>
+                <div class="form__container--content-controls">
+                    <input type="text" placeholder="placeholder" id="ingredient"
+                        class="form__container--content-controls-input" formControlName="ingredient" />
+                    <label for="ingredient" class="form__container--content-controls-label">Ingredient</label>
+                    <button type="button" class="form__container--content-controls-btn"
+                        (click)="onAddIngredient()"><fa-icon [icon]="faBtn" /></button>
+                </div>
+                <div class="form__container--content-controls form__container--content-controls-qty">
+                    <fa-icon [icon]="faList" />
+                    <input type="text" name="quantity" id="quantity" formControlName="quantity">
+                    <fa-icon [icon]="faSpoon" />
+                    <select name="unit" id="unit" formControlName="unit">
+                        <option value="" disabled selected>Units</option>
+                        @for(unit of units; track unit) {
+                        <option [ngValue]="unit">{{unit}}</option>
+                        }
+                    </select>
+                </div>
+                <div class="form__container--content-controls">
+                    <input type="text" placeholder="placeholder" id="steps"
+                        class="form__container--content-controls-input" formControlName="steps" />
+                    <label for="steps" class="form__container--content-controls-label">Cooking Steps</label>
+                    <button type="button" class="form__container--content-controls-btn" (click)="onAddStep()"><fa-icon
+                            [icon]="faBtn" /></button>
+                </div>
+                <div class="form__container--content-controls">
+                    <input type="text" placeholder="placeholder" id="description"
+                        class="form__container--content-controls-input" formControlName="description" />
+                    <label for="description" class="form__container--content-controls-label">Cooking Description</label>
+                </div>
+                }
+                <input class="form__container--content-form-btn btn btn--full" type="submit" [value]="buttonText" />
+            </form>
+            <div [ngClass]="ingredients.length || steps.length ? 'opened' : ''" class="form__container--content-info">
+                <div class="ingredients">
+                    <p class="ingredients__heading">Ingredients</p>
+                    <ul class="ingredients__list">
+                        @for (ingredient of ingredients; track ingredient) {
+                        <li (click)="onEditIngredient(ingredient)" class="ingredients__list--item">
+                            <span>{{ingredient.name}}</span> <span>{{ingredient.ProductRecipe.quantity}}
+                                {{ingredient.ProductRecipe.unit}}</span>
+                        </li>
+                        }
+                    </ul>
+                </div>
+                <div class="steps">
+                    <p class="steps__heading">Steps</p>
+                    <ul class="steps__list">
+                        @for (step of steps; track step) {
+                        <li (click)="onEditSteps(step)" class="steps__list--item">{{step}}</li>
+                        }
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>

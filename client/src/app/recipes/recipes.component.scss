@@ -3,10 +3,10 @@
   height: 90vh;
   background-image: linear-gradient(
       0deg,
-      rgb(233, 236, 233, 0.8) 0%,
-      rgb(233, 236, 233, 0.8) 100%
+      rgba(104, 119, 102, 0.7) 0%,
+      rgba(104, 119, 102, 0.7) 100%
     ),
-    url(../../assets/dashboard-bg.jpg);
+    url("../../assets/dashboard-bg.jpg");
   background-size: cover;
   backdrop-filter: blur(2px);
 

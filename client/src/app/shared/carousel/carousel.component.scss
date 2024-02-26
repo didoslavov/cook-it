@@ -4,6 +4,10 @@
   grid-template-columns: max-content repeat(4, auto);
   justify-items: end;
   padding: 8rem 6rem;
+  height: 90vh;
+  align-items: center;
+  background-color: var(--color-primary-opacity-light);
+  backdrop-filter: blur(2px);
 
   &__arrows {
     align-self: center;

@@ -7,6 +7,7 @@ import { RecipeFormComponent } from './recipes/create-recipe-form/create-recipe-
 import { DetailsComponent } from './recipes/details/details.component';
 import { EditRecipeFormComponent } from './recipes/edit-recipe-form/edit-recipe-form.component';
 import { DeleteComponent } from './shared/delete/delete.component';
+import { NotFoundComponent } from './shared/not-found/not-found.component';
 
 export const routes: Routes = [
   {
@@ -47,5 +48,10 @@ export const routes: Routes = [
     path: 'auth/login',
     component: LoginComponent,
     data: { animation: 'isRight' },
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
+    data: { animation: 'isLeft' },
   },
 ];

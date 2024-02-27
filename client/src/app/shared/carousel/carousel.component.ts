@@ -1,9 +1,9 @@
-import { Component, Input, OnInit, HostListener } from '@angular/core';
-import { RecipeCardComponent } from '../recipe-card/recipe-card.component';
+import { Component, OnInit } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { RecipeData } from '../../recipes/recipe.model';
 import { RecipeService } from '../../services/recipe.service';
+import { RecipeCardComponent } from '../../recipes/recipe-card/recipe-card.component';
 
 @Component({
   selector: 'app-carousel',

@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output,
+} from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
@@ -18,5 +24,10 @@ export class ModalComponent {
 
   onClose(confirmed: boolean) {
     this.closeModal.emit(confirmed);
+  }
+
+  @HostListener('document:keydown.escape', ['$event'])
+  onEscKeydown(event: KeyboardEvent): void {
+    this.onClose(false);
   }
 }

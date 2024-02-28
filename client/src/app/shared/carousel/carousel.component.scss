@@ -32,6 +32,24 @@
       }
     }
   }
+
+  &__no-content {
+    grid-area: 1 / 2 / 1 / span 2;
+    text-align: center;
+
+    & > a {
+      filter: drop-shadow(0.4rem 0.4rem 0.3rem var(--color-primary-dark));
+    }
+  }
+
+  .no-recipes {
+    display: block;
+    font-size: 5.2rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 12rem;
+    text-shadow: 2px 2px 2px var(--color-primary);
+  }
 }
 
 @media screen and (max-width: 1500px) {

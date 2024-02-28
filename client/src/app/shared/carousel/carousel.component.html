@@ -3,7 +3,21 @@
         <fa-icon [icon]="faArrowUp" class="carousel__arrows--up" (click)="showPreviousRecipes()" />
         <fa-icon [icon]="faArrowDown" class="carousel__arrows--down" (click)="showNextRecipes()" />
     </div>
+    @if (recipes.length) {
     @for (recipe of recipes; track recipe.id) {
     <app-recipe-card [recipe]="recipe" />
+    }
+    } @else {
+    <div class="carousel__no-content">
+        @if(!currentOffset) {
+
+        <p class="no-recipes">No recipes found</p>
+        } @else {
+        <p class="no-recipes">No more recipes found</p>
+        }
+        @if(user) {
+        <a href="/recipes/create" class="btn btn--accent">Create one</a>.
+        }
+    </div>
     }
 </div>

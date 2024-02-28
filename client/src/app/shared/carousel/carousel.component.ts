@@ -4,6 +4,9 @@ import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { RecipeData } from '../../recipes/recipe.model';
 import { RecipeService } from '../../services/recipe.service';
 import { RecipeCardComponent } from '../../recipes/recipe-card/recipe-card.component';
+import { Store, select } from '@ngrx/store';
+import { getUserData } from '../../store/auth/auth.selectors';
+import { User } from '../../store/auth/user.model';
 
 @Component({
   selector: 'app-carousel',
@@ -17,30 +20,42 @@ export class CarouselComponent implements OnInit {
   faArrowUp = faAngleUp;
   faArrowDown = faAngleDown;
 
-  private currentOffset = 0;
+  declare user: User | null;
 
-  constructor(private recipeService: RecipeService) {}
+  currentOffset = 0;
+  limit = 4;
+
+  constructor(private recipeService: RecipeService, private store: Store) {}
 
   ngOnInit(): void {
     this.fetchRecipes(this.currentOffset);
+
+    this.store.pipe(select(getUserData)).subscribe((user: any) => {
+      this.user = user?.user;
+    });
   }
 
   private fetchRecipes(offset: number, limit: number = 4): void {
-    this.recipeService.getRecipes(offset, limit).subscribe((recipes) => {
-      this.recipes = recipes;
+    this.recipeService.getRecipes(offset, limit).subscribe({
+      next: (recipes) => {
+        this.recipes = recipes;
+      },
+      error: () => {
+        this.recipes = [];
+      },
     });
   }
 
   showNextRecipes(): void {
-    if (this.recipes.length < 4) return;
+    if (!this.recipes.length) return;
 
-    this.currentOffset += 4;
+    this.currentOffset += this.limit;
 
     this.fetchRecipes(this.currentOffset);
   }
 
   showPreviousRecipes(): void {
-    this.currentOffset -= 4;
+    this.currentOffset -= this.limit;
 
     if (this.currentOffset < 0) {
       this.currentOffset = 0;

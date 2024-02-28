@@ -18,7 +18,7 @@ const authMiddleware = (redirectUnauthenticated: boolean = true) => {
                 throw new Error('Invalid token data');
             }
 
-            const user = findUserById(data?.id);
+            const user = await findUserById(data?.id);
 
             req.user = user;
             next();

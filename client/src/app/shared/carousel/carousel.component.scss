@@ -9,6 +9,14 @@
   background-color: var(--color-primary-opacity-light);
   backdrop-filter: blur(2px);
 
+  &__heading {
+    grid-area: 1/1/1 / span 5;
+    justify-self: center;
+    font-size: 4.4rem;
+    text-shadow: 2px 2px 2px var(--color-primary-dark);
+    margin-bottom: 8rem;
+  }
+
   &__arrows {
     align-self: center;
     font-size: 4rem;

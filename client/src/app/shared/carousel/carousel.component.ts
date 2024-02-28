@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { RecipeData } from '../../recipes/recipe.model';
@@ -18,6 +18,9 @@ import { HttpParams } from '@angular/common/http';
   styleUrl: './carousel.component.scss',
 })
 export class CarouselComponent implements OnInit {
+  @Input() carouselType: 'all' | 'user' = 'all';
+  @Input() title: string = '';
+
   recipes: RecipeData[] = [];
   faArrowUp = faAngleUp;
   faArrowDown = faAngleDown;
@@ -30,7 +33,11 @@ export class CarouselComponent implements OnInit {
   private currentUrlTree: UrlTree;
 
   private createUrlTree(): void {
-    this.currentUrlTree = this.router.createUrlTree(['/recipes'], {
+    let urlSegment = '/recipes';
+    if (this.carouselType === 'user') {
+      urlSegment = '/user/recipes';
+    }
+    this.currentUrlTree = this.router.createUrlTree([urlSegment], {
       queryParams: { offset: this.currentOffset, limit: this.limit },
     });
   }
@@ -64,14 +71,25 @@ export class CarouselComponent implements OnInit {
       .set('offset', offset.toString())
       .set('limit', limit.toString());
 
-    this.recipeService.getRecipes(params).subscribe({
-      next: (recipes) => {
-        this.recipes = recipes;
-      },
-      error: () => {
-        this.recipes = [];
-      },
-    });
+    if (this.carouselType === 'user') {
+      this.recipeService.getUserRecipes(params).subscribe({
+        next: (recipes) => {
+          this.recipes = recipes;
+        },
+        error: () => {
+          this.recipes = [];
+        },
+      });
+    } else {
+      this.recipeService.getRecipes(params).subscribe({
+        next: (recipes) => {
+          this.recipes = recipes;
+        },
+        error: () => {
+          this.recipes = [];
+        },
+      });
+    }
   }
 
   showNextRecipes(): void {

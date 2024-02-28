@@ -18,6 +18,13 @@ export class RecipeService {
       .get<Recipe[]>('/recipes', { params })
       .pipe(tap((recipes) => recipes));
   }
+
+  getUserRecipes(params: HttpParams) {
+    return this.http
+      .get<Recipe[]>('/user/recipes', { params })
+      .pipe(tap((recipes) => recipes));
+  }
+
   getRecipeById(recipeId: string) {
     return this.http
       .get<Recipe>('/recipes/' + recipeId)

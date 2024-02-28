@@ -45,7 +45,7 @@ export class CarouselComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
+    this.route.queryParamMap.subscribe((params) => {
       this.currentOffset = Number(params.get('offset'));
     });
 

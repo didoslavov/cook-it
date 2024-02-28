@@ -45,13 +45,13 @@ const login = expressAsyncHandler(async (req: Request, res: Response): Promise<v
     const user = await findUserByEmail(email);
 
     if (!user) {
-        throw new AppError(401, "User or password don't match!");
+        throw new AppError(400, "User or password don't match!");
     }
 
     const isPasswordMatch = await comparePasswords(user.password, password);
 
     if (!isPasswordMatch) {
-        throw new AppError(401, "User or password don't match!");
+        throw new AppError(400, "User or password don't match!");
     }
 
     const token = createToken(user);

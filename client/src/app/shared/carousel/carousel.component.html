@@ -1,8 +1,5 @@
-<div class="carousel">
-    <div class="carousel__arrows">
-        <fa-icon [icon]="faArrowUp" class="carousel__arrows--up" (click)="showPreviousRecipes()" />
-        <fa-icon [icon]="faArrowDown" class="carousel__arrows--down" (click)="showNextRecipes()" />
-    </div>
+<section class="carousel">
+    <h2 class="carousel__heading">{{title}}</h2>
     @if (recipes.length) {
     @for (recipe of recipes; track recipe.id) {
     <app-recipe-card [recipe]="recipe" />
@@ -20,4 +17,8 @@
         }
     </div>
     }
-</div>
+    <div class="carousel__arrows">
+        <fa-icon [icon]="faArrowUp" class="carousel__arrows--up" (click)="showPreviousRecipes()" />
+        <fa-icon [icon]="faArrowDown" class="carousel__arrows--down" (click)="showNextRecipes()" />
+    </div>
+</section>

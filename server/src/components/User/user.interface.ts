@@ -10,7 +10,7 @@ export interface UserInterface {
 }
 
 export interface UserRequest extends Request {
-    user?: {};
+    user?: UserInterface;
 }
 
 export interface UserDataRequest extends Request {

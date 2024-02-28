@@ -23,14 +23,23 @@
     &--header {
       &-heading {
         font-size: 40rem;
-        letter-spacing: 6rem;
+        letter-spacing: 3rem;
         background: url("../../../assets/heading-bg-clip.jpg") -3rem -14rem /
           cover;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         filter: drop-shadow(1rem 1rem 1rem var(--color-primary-dark));
         user-select: none;
-        margin-bottom: 2rem;
+        margin: 0 0 2rem -2rem;
+
+        & > span {
+          display: inline-block;
+          width: 23rem;
+          height: 32rem;
+          background: url("../../../assets/avocado.png") center 2rem / cover
+            no-repeat;
+          margin-right: 3rem;
+        }
       }
 
       &-sub {

@@ -7,6 +7,8 @@ import { RecipeCardComponent } from '../../recipes/recipe-card/recipe-card.compo
 import { Store, select } from '@ngrx/store';
 import { getUserData } from '../../store/auth/auth.selectors';
 import { User } from '../../store/auth/user.model';
+import { ActivatedRoute, Router, UrlTree } from '@angular/router';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-carousel',
@@ -25,9 +27,31 @@ export class CarouselComponent implements OnInit {
   currentOffset = 0;
   limit = 4;
 
-  constructor(private recipeService: RecipeService, private store: Store) {}
+  private currentUrlTree: UrlTree;
+
+  private createUrlTree(): void {
+    this.currentUrlTree = this.router.createUrlTree(['/recipes'], {
+      queryParams: { offset: this.currentOffset, limit: this.limit },
+    });
+  }
+
+  constructor(
+    private recipeService: RecipeService,
+    private store: Store,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.currentUrlTree = this.router.createUrlTree(['/recipes']);
+  }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      this.currentOffset = Number(params.get('offset'));
+    });
+
+    this.createUrlTree();
+
+    this.router.navigateByUrl(this.currentUrlTree);
     this.fetchRecipes(this.currentOffset);
 
     this.store.pipe(select(getUserData)).subscribe((user: any) => {
@@ -36,7 +60,11 @@ export class CarouselComponent implements OnInit {
   }
 
   private fetchRecipes(offset: number, limit: number = this.limit): void {
-    this.recipeService.getRecipes(offset, limit).subscribe({
+    const params = new HttpParams()
+      .set('offset', offset.toString())
+      .set('limit', limit.toString());
+
+    this.recipeService.getRecipes(params).subscribe({
       next: (recipes) => {
         this.recipes = recipes;
       },
@@ -51,6 +79,9 @@ export class CarouselComponent implements OnInit {
 
     this.currentOffset += this.limit;
 
+    this.createUrlTree();
+    this.router.navigateByUrl(this.currentUrlTree);
+
     this.fetchRecipes(this.currentOffset);
   }
 
@@ -61,6 +92,9 @@ export class CarouselComponent implements OnInit {
       this.currentOffset = 0;
       return;
     }
+
+    this.createUrlTree();
+    this.router.navigateByUrl(this.currentUrlTree);
 
     this.fetchRecipes(this.currentOffset);
   }

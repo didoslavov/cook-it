@@ -35,7 +35,7 @@ export class CarouselComponent implements OnInit {
     });
   }
 
-  private fetchRecipes(offset: number, limit: number = 4): void {
+  private fetchRecipes(offset: number, limit: number = this.limit): void {
     this.recipeService.getRecipes(offset, limit).subscribe({
       next: (recipes) => {
         this.recipes = recipes;

@@ -22,6 +22,16 @@ export const findRecipes = async (limit: number, offset: number): Promise<Recipe
     return recipes.map((p): RecipeInterface => p.toJSON());
 };
 
+export const findUserRecipes = async (limit: number, offset: number, userId: string | undefined): Promise<RecipeInterface[]> => {
+    const recipes = await Recipe.findAll({
+        limit,
+        offset,
+        where: { userId },
+    });
+
+    return recipes.map((p): RecipeInterface => p.toJSON());
+};
+
 export const insertRecipe = async (recipeData: RecipeData): Promise<RecipeInterface> => {
     const ingredients: Ingredient[] = recipeData.ingredients;
     const steps: string[] = recipeData.steps;

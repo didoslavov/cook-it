@@ -5,7 +5,7 @@ import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
-import { authInterceptor } from './store/auth/auth.interceptor';
+import { authInterceptor } from './interceptors/auth.interceptor';
 import { AuthEffects } from './store/auth/auth.effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { featureReducers, metaReducers } from './store/auth/auth.reducers';

@@ -15,14 +15,14 @@ export const routes: Routes = [
     component: LandingComponent,
   },
   {
-    path: 'create-recipe',
-    component: RecipeFormComponent,
-    data: { animation: 'isLeft' },
-  },
-  {
     path: 'recipes',
     component: RecipesComponent,
     data: { animation: 'isRight' },
+  },
+  {
+    path: 'recipes/create',
+    component: RecipeFormComponent,
+    data: { animation: 'isLeft' },
   },
   {
     path: 'recipes/:recipeId/details',

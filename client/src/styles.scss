@@ -43,6 +43,7 @@ body {
   font-weight: 400;
   color: var(--font-color-dark);
   background-color: var(--color-primary-light);
+  user-select: none;
 }
 
 main {

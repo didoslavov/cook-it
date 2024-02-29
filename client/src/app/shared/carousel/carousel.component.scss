@@ -1,8 +1,7 @@
 .carousel {
   max-width: 100%;
   display: grid;
-  grid-template-columns: max-content repeat(4, auto);
-  justify-items: end;
+  grid-template-columns: repeat(4, 1fr) max-content;
   padding: 8rem 6rem;
   height: 90vh;
   align-items: center;
@@ -18,13 +17,14 @@
   }
 
   &__arrows {
-    align-self: center;
+    margin-top: 12rem;
     font-size: 4rem;
     font-weight: var(--fw-bold);
     color: var(--color-primary-dark);
     display: flex;
     flex-direction: column;
     gap: 8rem;
+    grid-area: 1 / 5 / 4 / -1;
 
     &--up,
     &--down {
@@ -42,7 +42,7 @@
   }
 
   &__no-content {
-    grid-area: 1 / 2 / 1 / span 2;
+    grid-area: 1 / 2 / 3 / span 2;
     text-align: center;
 
     & > a {
@@ -68,22 +68,47 @@
 
 @media screen and (max-width: 900px) {
   .carousel {
-    grid-template-columns: minmax(12.6rem, max-content) repeat(2, 40%);
-    grid-template-rows: 2;
+    height: 100vh;
+    grid-template-columns: repeat(2, 40%) minmax(12.6rem, max-content);
+    grid-template-rows: repeat(3, 1fr);
     justify-items: center;
     gap: 2rem 0;
     padding: 4rem 0;
+    overflow: scroll;
+    justify-content: center;
 
-    &__arrows {
-      grid-area: 1 / 1 / span 2;
+    .carousel__heading {
+      grid-area: 1 / 1 / 2 / -1;
+      justify-self: center;
+    }
+
+    .carousel__arrows {
+      grid-area: 2 / 3 / 4 / -1;
+      margin: 0;
+      align-self: center;
     }
   }
 }
 
 @media screen and (max-width: 500px) {
   .carousel {
-    grid-template-columns: minmax(8rem, max-content) repeat(2, 40%);
+    grid-template-columns: 1fr;
 
-    gap: 2rem;
+    gap: 4rem;
+
+    & __no-content,
+    &__heading {
+      grid-area: 1 / 1 / 2 / -1;
+      justify-self: center;
+      margin-bottom: 2rem;
+    }
+
+    .carousel__arrows {
+      grid-area: auto; /* Let browser determine placement for now */
+      justify-self: center; /* Keep centering horizontally */
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
   }
 }

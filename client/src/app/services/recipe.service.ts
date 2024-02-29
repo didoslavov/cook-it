@@ -2,16 +2,13 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Recipe, RecipeData } from '../recipes/recipe.model';
 import { tap } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeService {
-  constructor(
-    private http: HttpClient,
-    private activatedRoute: ActivatedRoute
-  ) {}
+  constructor(private http: HttpClient) {}
 
   getRecipes(params: HttpParams) {
     return this.http
@@ -21,7 +18,7 @@ export class RecipeService {
 
   getUserRecipes(params: HttpParams) {
     return this.http
-      .get<Recipe[]>('/user/recipes', { params })
+      .get<Recipe[]>('/users/recipes', { params })
       .pipe(tap((recipes) => recipes));
   }
 

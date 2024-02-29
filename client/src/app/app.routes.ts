@@ -8,6 +8,8 @@ import { DetailsComponent } from './recipes/details/details.component';
 import { EditRecipeFormComponent } from './recipes/edit-recipe-form/edit-recipe-form.component';
 import { DeleteComponent } from './shared/delete/delete.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
+import { ProfileComponent } from './user/profile/profile.component';
+import { UserRecipesComponent } from './user/profile/user-recipes/user-recipes.component';
 
 export const routes: Routes = [
   {
@@ -37,6 +39,17 @@ export const routes: Routes = [
   {
     path: 'recipes/:recipeId/edit',
     component: EditRecipeFormComponent,
+    data: { animation: 'isRight' },
+  },
+  {
+    path: 'user',
+    component: ProfileComponent,
+    children: [
+      {
+        path: 'recipes',
+        component: UserRecipesComponent,
+      },
+    ],
     data: { animation: 'isRight' },
   },
   {

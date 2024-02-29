@@ -1,0 +1,72 @@
+.profile {
+  display: flex;
+
+  &__aside {
+    border-right: 5px solid var(--color-primary-dark);
+    border-bottom-right-radius: 20rem;
+    height: 90vh;
+
+    &--nav {
+      &-list {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        list-style: none;
+        gap: 8rem;
+        padding: 4rem;
+
+        &-item {
+          background-color: var(--color-primary-dark);
+          border-radius: 1rem;
+          text-align: center;
+          filter: drop-shadow(0.4rem 0.4rem 0.4rem var(--color-primary-dark));
+          transition: all 0.3s ease-in-out;
+
+          &:hover {
+            transform: scale(1.1);
+          }
+
+          &-link {
+            transition: all 0.4s ease-in-out;
+          }
+
+          &-link:link,
+          &-link:visited {
+            display: block;
+            font-size: 1.6rem;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--color-primary-light);
+            padding: 1.6rem 2rem;
+          }
+
+          &-link:hover,
+          &-link:active {
+            cursor: pointer;
+            background-color: var(--color-accent);
+            color: var(--color-primary-dark);
+            border-radius: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  &__content {
+    flex: 1;
+  }
+}
+
+.selected {
+  background-color: var(--color-accent);
+
+  .profile__aside--nav-list-item-link {
+    color: var(--color-primary-dark);
+
+    &:hover {
+      color: var(--color-primary-light);
+      background-color: var(--color-primary-dark);
+    }
+  }
+}

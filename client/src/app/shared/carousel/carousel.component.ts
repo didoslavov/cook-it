@@ -10,6 +10,8 @@ import { User } from '../../store/auth/user.model';
 import { ActivatedRoute, Router, UrlTree } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
 
+type RecipeServiceMethod = 'getRecipes' | 'getUserRecipes';
+
 @Component({
   selector: 'app-carousel',
   standalone: true,
@@ -31,6 +33,7 @@ export class CarouselComponent implements OnInit {
   limit = 4;
 
   private currentUrlTree: UrlTree;
+  private fetchMethod: RecipeServiceMethod = 'getRecipes';
 
   private createUrlTree(): void {
     let urlSegment = '/recipes';
@@ -52,6 +55,9 @@ export class CarouselComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fetchMethod =
+      this.carouselType === 'user' ? 'getUserRecipes' : 'getRecipes';
+
     this.route.queryParamMap.subscribe((params) => {
       this.currentOffset = Number(params.get('offset'));
     });
@@ -59,37 +65,30 @@ export class CarouselComponent implements OnInit {
     this.createUrlTree();
 
     this.router.navigateByUrl(this.currentUrlTree);
-    this.fetchRecipes(this.currentOffset);
+    this.fetchRecipes(this.fetchMethod, this.currentOffset);
 
     this.store.pipe(select(getUserData)).subscribe((user: any) => {
       this.user = user?.user;
     });
   }
 
-  private fetchRecipes(offset: number, limit: number = this.limit): void {
+  private fetchRecipes(
+    method: RecipeServiceMethod,
+    offset: number,
+    limit: number = this.limit
+  ): void {
     const params = new HttpParams()
       .set('offset', offset.toString())
       .set('limit', limit.toString());
 
-    if (this.carouselType === 'user') {
-      this.recipeService.getUserRecipes(params).subscribe({
-        next: (recipes) => {
-          this.recipes = recipes;
-        },
-        error: () => {
-          this.recipes = [];
-        },
-      });
-    } else {
-      this.recipeService.getRecipes(params).subscribe({
-        next: (recipes) => {
-          this.recipes = recipes;
-        },
-        error: () => {
-          this.recipes = [];
-        },
-      });
-    }
+    this.recipeService[method](params).subscribe({
+      next: (recipes: RecipeData[]) => {
+        this.recipes = recipes;
+      },
+      error: () => {
+        this.recipes = [];
+      },
+    });
   }
 
   showNextRecipes(): void {
@@ -100,7 +99,7 @@ export class CarouselComponent implements OnInit {
     this.createUrlTree();
     this.router.navigateByUrl(this.currentUrlTree);
 
-    this.fetchRecipes(this.currentOffset);
+    this.fetchRecipes(this.fetchMethod, this.currentOffset);
   }
 
   showPreviousRecipes(): void {
@@ -114,6 +113,6 @@ export class CarouselComponent implements OnInit {
     this.createUrlTree();
     this.router.navigateByUrl(this.currentUrlTree);
 
-    this.fetchRecipes(this.currentOffset);
+    this.fetchRecipes(this.fetchMethod, this.currentOffset);
   }
 }

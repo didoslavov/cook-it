@@ -26,15 +26,18 @@ export class ProfileComponent implements OnInit {
       this.userId = params['userId'];
     });
 
+    this.setRecipesRoute();
+  }
+
+  private setRecipesRoute(): void {
+    this.isRecipesRoute =
+      this.route.snapshot.firstChild?.routeConfig?.path === 'recipes';
+
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe(() => {
         this.isRecipesRoute =
           this.route.snapshot.firstChild?.routeConfig?.path === 'recipes';
       });
-  }
-
-  setRecipesLoaded(status: boolean): void {
-    this.isRecipesRoute = status;
   }
 }

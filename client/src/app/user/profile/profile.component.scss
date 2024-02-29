@@ -1,10 +1,20 @@
+.aside__container {
+  background-color: var(--color-primary-opacity-light);
+}
+
 .profile {
   display: flex;
+  background: linear-gradient(
+      0deg,
+      rgba(104, 119, 102, 0.8) 0%,
+      rgba(104, 119, 102, 0.8) 100%
+    ),
+    url(../../../assets/details-bg.jpg);
 
   &__aside {
+    height: 90vh;
     border-right: 5px solid var(--color-primary-dark);
     border-bottom-right-radius: 20rem;
-    height: 90vh;
 
     &--nav {
       &-list {
@@ -55,6 +65,7 @@
 
   &__content {
     flex: 1;
+    background-color: var(--color-primary-opacity-light);
   }
 }
 
@@ -69,4 +80,8 @@
       background-color: var(--color-primary-dark);
     }
   }
+}
+
+.bg {
+  background-color: transparent;
 }

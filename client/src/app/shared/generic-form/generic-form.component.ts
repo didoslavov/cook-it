@@ -3,6 +3,7 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
   SimpleChanges,
@@ -26,7 +27,7 @@ import {
   templateUrl: './generic-form.component.html',
   styleUrl: './generic-form.component.scss',
 })
-export class GenericFormComponent implements OnInit {
+export class GenericFormComponent implements OnInit, OnChanges {
   @Input() formData!: GenericFormData;
   @Input() formType!:
     | 'registration'

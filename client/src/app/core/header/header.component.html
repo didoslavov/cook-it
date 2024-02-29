@@ -52,7 +52,7 @@
             @if (!user) {
             <li><a class="btn btn--cta" routerLink="/auth/register" (click)="closeMobileNav()">Join now</a></li>
             } @else {
-            <li><a class="main-nav-link main-nav__mobile-link" routerLink="#" (click)="closeMobileNav()">Profile</a>
+            <li><a class="main-nav-link main-nav__mobile-link" routerLink="/user" (click)="closeMobileNav()">Profile</a>
             </li>
             <li><a class="main-nav-link main-nav__mobile-link" routerLink="" (click)="closeMobileNav()">Logout</a>
             </li>

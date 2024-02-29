@@ -20,6 +20,10 @@
 }
 
 @media screen and (max-width: 900px) {
+  .dashboard {
+    height: 100vh;
+  }
+
   .app-carousel {
     width: 100%;
   }

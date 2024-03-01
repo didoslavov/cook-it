@@ -1,7 +1,7 @@
 <div class="user-menu" #menu>
     <ul class="user-menu__list">
-        <li class="user-menu__list--item mt-sm"><a routerLink="/user" class="user-menu__list--item-link"><fa-icon
-                    [icon]="faUser" class="user-menu__list--item-icon" />
+        <li class="user-menu__list--item mt-sm"><a routerLink="/profile/{{userId}}"
+                class="user-menu__list--item-link"><fa-icon [icon]="faUser" class="user-menu__list--item-icon" />
                 Profile</a>
         </li>
         <li class="user-menu__list--item"><button (click)="logout()" class="user-menu__list--item-logout"><fa-icon

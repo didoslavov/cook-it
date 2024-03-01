@@ -38,7 +38,7 @@ export class CarouselComponent implements OnInit {
   private createUrlTree(): void {
     let urlSegment = '/recipes';
     if (this.carouselType === 'user') {
-      urlSegment = '/user/recipes';
+      urlSegment = `/profile/${this.user?.id}/recipes`;
     }
     this.currentUrlTree = this.router.createUrlTree([urlSegment], {
       queryParams: { offset: this.currentOffset, limit: this.limit },
@@ -55,6 +55,10 @@ export class CarouselComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store.pipe(select(getUserData)).subscribe((user: any) => {
+      this.user = user?.user;
+    });
+
     this.fetchMethod =
       this.carouselType === 'user' ? 'getUserRecipes' : 'getRecipes';
 
@@ -66,10 +70,6 @@ export class CarouselComponent implements OnInit {
 
     this.router.navigateByUrl(this.currentUrlTree);
     this.fetchRecipes(this.fetchMethod, this.currentOffset);
-
-    this.store.pipe(select(getUserData)).subscribe((user: any) => {
-      this.user = user?.user;
-    });
   }
 
   private fetchRecipes(

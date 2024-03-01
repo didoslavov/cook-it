@@ -9,7 +9,7 @@ import { EditRecipeFormComponent } from './recipes/edit-recipe-form/edit-recipe-
 import { DeleteComponent } from './shared/delete/delete.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { ProfileComponent } from './user/profile/profile.component';
-import { UserRecipesComponent } from './user/profile/user-recipes/user-recipes.component';
+import { ProfileRecipesComponent } from './user/profile/profile-recipes/profile-recipes.component';
 
 export const routes: Routes = [
   {
@@ -42,12 +42,12 @@ export const routes: Routes = [
     data: { animation: 'isRight' },
   },
   {
-    path: 'user',
+    path: 'profile/:userId',
     component: ProfileComponent,
     children: [
       {
         path: 'recipes',
-        component: UserRecipesComponent,
+        component: ProfileRecipesComponent,
       },
     ],
     data: { animation: 'isRight' },

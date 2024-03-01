@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "start": "nodemon --exec ts-node src/index.ts",
-        "build": "tsc",
+        "build": "npm i",
         "serve": "node dist/index.js"
     },
     "repository": {

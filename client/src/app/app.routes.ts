@@ -10,6 +10,7 @@ import { DeleteComponent } from './shared/delete/delete.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { ProfileRecipesComponent } from './user/profile/profile-recipes/profile-recipes.component';
+import { ProfileHomeComponent } from './user/profile/profile-search/profile-search.component';
 
 export const routes: Routes = [
   {
@@ -46,8 +47,17 @@ export const routes: Routes = [
     component: ProfileComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'search',
+        pathMatch: 'full',
+      },
+      {
         path: 'recipes',
         component: ProfileRecipesComponent,
+      },
+      {
+        path: 'search',
+        component: ProfileHomeComponent,
       },
     ],
     data: { animation: 'isRight' },

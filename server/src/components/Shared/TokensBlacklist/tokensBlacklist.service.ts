@@ -2,8 +2,6 @@ import TokensBlacklist from './TokensBlacklist.model';
 import { BlackListed } from './tokensBlacklist.interface';
 
 const blackListToken = async (token: string): Promise<BlackListed> => {
-    console.log('TOKEN TOKEN TOKEN ', token);
-
     return await TokensBlacklist.create({ token }).then((token): BlackListed => token.toJSON());
 };
 

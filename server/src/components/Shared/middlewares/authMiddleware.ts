@@ -2,6 +2,7 @@ import { NextFunction, Response } from 'express';
 import { verifyToken } from '../utils/jwt';
 import { UserRequest, findUserById } from '../../User';
 import { getBlacklistedToken } from '..';
+import { TokenExpiredError } from 'jsonwebtoken';
 
 const authMiddleware = (redirectUnauthenticated: boolean = true) => {
     return async (req: UserRequest, res: Response, next: NextFunction) => {
@@ -22,13 +23,16 @@ const authMiddleware = (redirectUnauthenticated: boolean = true) => {
 
             req.user = user;
             next();
-        } catch (err: unknown) {
+        } catch (err) {
             if (!redirectUnauthenticated) {
                 next();
                 return;
             }
 
-            if (err instanceof Error && ['token expired', 'jwt must be provided', 'blacklisted token'].includes(err.message)) {
+            if (
+                err instanceof TokenExpiredError &&
+                ['token expired', 'jwt must be provided', 'blacklisted token'].includes(err.message)
+            ) {
                 return res.status(401).send({ message: 'Invalid token!' });
             }
             next(err);

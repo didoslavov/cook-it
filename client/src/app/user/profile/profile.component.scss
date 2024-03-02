@@ -1,5 +1,6 @@
 .aside__container {
   background-color: var(--color-primary-opacity-light);
+  flex: 0 1 12%;
 }
 
 .profile {
@@ -15,6 +16,9 @@
     height: 90vh;
     border-right: 5px solid var(--color-primary-dark);
     border-bottom-right-radius: 20rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 20%;
 
     &--nav {
       &-list {
@@ -22,7 +26,7 @@
         flex-direction: column;
         justify-content: center;
         list-style: none;
-        gap: 8rem;
+        gap: 4rem;
         padding: 4rem;
 
         &-item {
@@ -38,6 +42,7 @@
 
           &-link {
             transition: all 0.4s ease-in-out;
+            white-space: nowrap;
           }
 
           &-link:link,
@@ -59,6 +64,18 @@
             border-radius: 1rem;
           }
         }
+      }
+    }
+
+    &--bubles {
+      display: flex;
+      margin-top: 4rem;
+      filter: drop-shadow(0 0 1rem var(--color-accent-dark));
+
+      &-img {
+        mask: url(https://assets.codepen.io/1101822/circles-mask-whole.svg)
+          no-repeat center;
+        width: 100%;
       }
     }
   }

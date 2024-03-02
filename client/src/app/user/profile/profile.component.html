@@ -4,6 +4,8 @@
             <nav class="profile__aside--nav">
                 <ul class="profile__aside--nav-list">
                     <li class="profile__aside--nav-list-item" routerLinkActive="selected"><a
+                            class="profile__aside--nav-list-item-link" routerLink="search">Search</a></li>
+                    <li class="profile__aside--nav-list-item" routerLinkActive="selected"><a
                             class="profile__aside--nav-list-item-link" routerLink="edit">Edit
                             Profile</a></li>
                     <li class="profile__aside--nav-list-item" routerLinkActive="selected"><a
@@ -16,6 +18,10 @@
                             Recipes</a></li>
                 </ul>
             </nav>
+            <div class="profile__aside--bubles">
+                <img class="profile__aside--bubles-img" src="../../../assets/profile-bubles.jpg"
+                    alt="Nice arranged dish">
+            </div>
         </aside>
     </div>
     <article class="profile__content" [ngClass]="{'bg': isRecipesRoute}">

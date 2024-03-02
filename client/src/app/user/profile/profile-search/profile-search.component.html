@@ -1,10 +1,11 @@
 <section class="search">
     <h2 class="search__heading subheading">Turn ingredients into inspiration</h2>
-    <form class="search__form">
+    <form class="search__form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
         <div class="search__form--controls">
-            <input type="text" placeholder="placeholder" id="search" class="search__form--controls-input" />
+            <input type="text" placeholder="placeholder" id="search" class="search__form--controls-input"
+                formControlName="searchQuery" />
             <label for="search" class="search__form--controls-label">Search</label>
         </div>
-        <input type="button" value="Search" class="search__form--btn btn btn--full" />
+        <button type="submit" class="search__form--btn btn btn--full">Search</button>
     </form>
 </section>

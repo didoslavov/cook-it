@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import { Ingredient, Product } from '../Product';
 import { insertIngredients } from '../Product/product.service';
 import { AppError, ProductRecipe } from '../Shared';
@@ -13,13 +14,34 @@ import { createSteps } from '../Step/step.service';
 import Recipe from './Recipe.model';
 import { RecipeData, RecipeInterface } from './recipe.interface';
 
+export const searchRecipe = async (ingredients: string[], offset: number, limit: number): Promise<RecipeInterface[]> => {
+    const recipes = await Recipe.findAll({
+        include: [
+            {
+                model: Product,
+                attributes: ['name'],
+                through: { attributes: [] },
+                where: {
+                    name: {
+                        [Op.in]: ingredients,
+                    },
+                },
+            },
+        ],
+        limit,
+        offset,
+    });
+
+    return recipes.map((r): RecipeInterface => r.toJSON());
+};
+
 export const findRecipes = async (limit: number, offset: number): Promise<RecipeInterface[]> => {
     const recipes = await Recipe.findAll({
         limit,
         offset,
     });
 
-    return recipes.map((p): RecipeInterface => p.toJSON());
+    return recipes.map((r): RecipeInterface => r.toJSON());
 };
 
 export const findUserRecipes = async (limit: number, offset: number, userId: string | undefined): Promise<RecipeInterface[]> => {
@@ -29,7 +51,7 @@ export const findUserRecipes = async (limit: number, offset: number, userId: str
         where: { userId },
     });
 
-    return recipes.map((p): RecipeInterface => p.toJSON());
+    return recipes.map((r): RecipeInterface => r.toJSON());
 };
 
 export const insertRecipe = async (recipeData: RecipeData): Promise<RecipeInterface> => {

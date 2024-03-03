@@ -10,7 +10,10 @@ import { User } from '../../store/auth/user.model';
 import { ActivatedRoute, Router, UrlTree } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
 
-type RecipeServiceMethod = 'getRecipes' | 'getUserRecipes';
+type RecipeServiceMethod =
+  | 'getRecipes'
+  | 'getUserRecipes'
+  | 'searchRecipesByIngredients';
 
 @Component({
   selector: 'app-carousel',
@@ -20,8 +23,9 @@ type RecipeServiceMethod = 'getRecipes' | 'getUserRecipes';
   styleUrl: './carousel.component.scss',
 })
 export class CarouselComponent implements OnInit {
-  @Input() carouselType: 'all' | 'user' = 'all';
+  @Input() carouselType: 'all' | 'user' | 'search' = 'all';
   @Input() title: string = '';
+  @Input() ingredients: string[] = [];
 
   recipes: RecipeData[] = [];
   faArrowUp = faAngleUp;
@@ -34,16 +38,6 @@ export class CarouselComponent implements OnInit {
 
   private currentUrlTree: UrlTree;
   private fetchMethod: RecipeServiceMethod = 'getRecipes';
-
-  private createUrlTree(): void {
-    let urlSegment = '/recipes';
-    if (this.carouselType === 'user') {
-      urlSegment = `/profile/${this.user?.id}/recipes`;
-    }
-    this.currentUrlTree = this.router.createUrlTree([urlSegment], {
-      queryParams: { offset: this.currentOffset, limit: this.limit },
-    });
-  }
 
   constructor(
     private recipeService: RecipeService,
@@ -59,27 +53,62 @@ export class CarouselComponent implements OnInit {
       this.user = user?.user;
     });
 
-    this.fetchMethod =
-      this.carouselType === 'user' ? 'getUserRecipes' : 'getRecipes';
-
     this.route.queryParamMap.subscribe((params) => {
-      this.currentOffset = Number(params.get('offset'));
+      this.currentOffset = Number(params.get('offset')) || 0;
     });
 
-    this.createUrlTree();
+    if (this.carouselType === 'user') {
+      this.fetchMethod = 'getUserRecipes';
+      const userId = this.user ? this.user.id : '';
+      this.currentUrlTree = this.router.createUrlTree(
+        [`/profile/${userId}/recipes`],
+        {
+          queryParams: {
+            offset: this.currentOffset.toString(),
+            limit: this.limit.toString(),
+          },
+        }
+      );
+    } else if (this.carouselType === 'search' && this.ingredients.length > 0) {
+      this.fetchMethod = 'searchRecipesByIngredients';
+      const ingredientsString = this.ingredients.join(',');
+      this.currentUrlTree = this.router.createUrlTree(
+        [`/profile/${this.user?.id}/search`],
+        {
+          queryParams: {
+            ingredients: ingredientsString,
+            offset: this.currentOffset.toString(),
+            limit: this.limit.toString(),
+          },
+        }
+      );
+    } else {
+      this.fetchMethod = 'getRecipes';
+      this.currentUrlTree = this.router.createUrlTree(['/recipes'], {
+        queryParams: {
+          offset: this.currentOffset.toString(),
+          limit: this.limit.toString(),
+        },
+      });
+    }
 
     this.router.navigateByUrl(this.currentUrlTree);
-    this.fetchRecipes(this.fetchMethod, this.currentOffset);
+    this.fetchRecipes(this.fetchMethod);
   }
 
   private fetchRecipes(
     method: RecipeServiceMethod,
-    offset: number,
+    offset: number = this.currentOffset,
     limit: number = this.limit
   ): void {
-    const params = new HttpParams()
+    let params = new HttpParams()
       .set('offset', offset.toString())
       .set('limit', limit.toString());
+
+    if (this.carouselType === 'search' && this.ingredients.length > 0) {
+      const ingredientsString = this.ingredients.join(',');
+      params = params.set('ingredients', ingredientsString);
+    }
 
     this.recipeService[method](params).subscribe({
       next: (recipes: RecipeData[]) => {
@@ -96,10 +125,7 @@ export class CarouselComponent implements OnInit {
 
     this.currentOffset += this.limit;
 
-    this.createUrlTree();
-    this.router.navigateByUrl(this.currentUrlTree);
-
-    this.fetchRecipes(this.fetchMethod, this.currentOffset);
+    this.navigateToRecipes();
   }
 
   showPreviousRecipes(): void {
@@ -110,9 +136,22 @@ export class CarouselComponent implements OnInit {
       return;
     }
 
-    this.createUrlTree();
-    this.router.navigateByUrl(this.currentUrlTree);
+    this.navigateToRecipes();
+  }
 
+  private navigateToRecipes(): void {
+    let url = '';
+
+    if (this.carouselType === 'search') {
+      const ingredientsString = this.ingredients.join(',');
+      url = `/profile/${this.user?.id}/search?ingredients=${ingredientsString}&offset=${this.currentOffset}&limit=${this.limit}`;
+    } else if (this.carouselType === 'user') {
+      url = `/profile/${this.user?.id}/recipes?offset=${this.currentOffset}&limit=${this.limit}`;
+    } else {
+      url = `/recipes?offset=${this.currentOffset}&limit=${this.limit}`;
+    }
+
+    this.router.navigateByUrl(url);
     this.fetchRecipes(this.fetchMethod, this.currentOffset);
   }
 }

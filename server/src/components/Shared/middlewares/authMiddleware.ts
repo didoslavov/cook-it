@@ -31,7 +31,7 @@ const authMiddleware = (redirectUnauthenticated: boolean = true) => {
 
             if (
                 err instanceof TokenExpiredError &&
-                ['token expired', 'jwt must be provided', 'blacklisted token'].includes(err.message)
+                ['jwt expired', 'jwt must be provided', 'blacklisted token'].includes(err.message)
             ) {
                 return res.status(401).send({ message: 'Invalid token!' });
             }

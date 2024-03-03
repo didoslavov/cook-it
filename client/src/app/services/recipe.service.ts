@@ -1,13 +1,19 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Recipe, RecipeData } from '../recipes/recipe.model';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeService {
   constructor(private http: HttpClient) {}
+
+  searchRecipesByIngredients(params: HttpParams): Observable<Recipe[]> {
+    return this.http
+      .get<Recipe[]>('/recipes/search', { params })
+      .pipe(tap((recipes) => recipes));
+  }
 
   getRecipes(params: HttpParams) {
     return this.http

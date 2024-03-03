@@ -9,6 +9,6 @@
         <button type="submit" class="search__form--btn btn btn--full">Search</button>
     </form>
     @if(recipes?.length) {
-    <app-carousel [carouselType]="'search'" [ingredients]="ingredients" />
+    <app-carousel class="app-carousel" [carouselType]="'search'" [ingredients]="ingredients" />
     }
 </section>

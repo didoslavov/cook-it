@@ -31,6 +31,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
           break;
         case 401:
           cookieService.delete('auth');
+          store.dispatch(AuthApiActions.logout());
           router.navigate(['/auth/login']);
           return throwError(() => 'Token is expired.');
         case 409:

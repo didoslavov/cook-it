@@ -103,8 +103,8 @@
     }
 
     .carousel__arrows {
-      grid-area: auto; /* Let browser determine placement for now */
-      justify-self: center; /* Keep centering horizontally */
+      grid-area: auto;
+      justify-self: center;
       display: flex;
       flex-direction: row;
       justify-content: space-between;

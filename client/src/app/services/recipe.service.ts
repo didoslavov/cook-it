@@ -17,7 +17,9 @@ export class RecipeService {
       .set('page', page.toString())
       .set('apikey', environment.newsApiKey);
 
-    return this.http.get<any>(environment.newsApiUrl, { params });
+    return this.http
+      .get<any>(environment.newsApiUrl, { params })
+      .pipe(tap((news) => news));
   }
 
   searchRecipesByIngredients(params: HttpParams): Observable<Recipe[]> {

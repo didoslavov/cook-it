@@ -2,7 +2,7 @@
     (scrolled)="onScroll()">
     <div class="news__container">
 
-        @for (article of mockedNews; track $index) {
+        @for (article of news; track $index) {
         <article class="news__card"
             [ngClass]="{'reversed': $index % 2 === 0, 'border-odd': $index % 2 === 0, 'border-even': $index % 2 !== 0}">
             <div class="news__card--img"

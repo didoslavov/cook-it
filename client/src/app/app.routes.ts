@@ -49,7 +49,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'news',
+        redirectTo: 'search',
         pathMatch: 'full',
       },
       {

@@ -12,6 +12,10 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const store = inject(Store);
   const cookieService = inject(CookieService);
 
+  if (req.url.startsWith(environment.newsApiUrl)) {
+    return next(req);
+  }
+
   const modifiedReq = req.clone({
     url: environment.apiUrl + req.url,
     withCredentials: true,
@@ -28,6 +32,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
               ? AuthApiActions.loginFailure({ error: error.message })
               : AuthApiActions.registrationFailure({ error: error.message })
           );
+          router.navigate(['/no-content']);
           break;
         case 401:
           cookieService.delete('auth');

@@ -1,0 +1,24 @@
+<section class="news" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="150"
+    (scrolled)="onScroll()">
+    <div class="news__container">
+
+        @for (article of mockedNews; track $index) {
+        <article class="news__card"
+            [ngClass]="{'reversed': $index % 2 === 0, 'border-odd': $index % 2 === 0, 'border-even': $index % 2 !== 0}">
+            <div class="news__card--img"
+                [ngClass]="{'polygon-even': $index % 2 === 0, 'polygon-odd': $index % 2 !== 0}">
+                <img src="{{article.urlToImage}}" alt="News image">
+            </div>
+            <div class="news__card--content">
+                <h2 class="news__card--content-heading">{{article.title}}</h2>
+                <p class="news__card--content-published"><fa-icon [icon]="faCalendar"
+                        class="news__card--content-published-icon" />{{article.publishedAt | date: 'MMM d, y'}}</p>
+                <div class="news__card--content-bar"></div>
+                <p class="news__card--content-description">{{article.description}}</p>
+                <a href="{{article.url}}" target="_blank" class="news__card--content-link">Learn More &rarr;</a>
+                <div class="news__card--content-link-underline"></div>
+            </div>
+        </article>
+        }
+    </div>
+</section>

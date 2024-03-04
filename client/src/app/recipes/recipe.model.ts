@@ -28,3 +28,17 @@ export interface Ingredient {
 export interface IngredientWithId extends Ingredient {
   id?: string;
 }
+
+export interface NewsData {
+  author: string;
+  title: string;
+  description: string;
+  content: string;
+  url: string;
+  urlToImage: string;
+  publishedAt: string;
+  source: {
+    name: string;
+    id: string;
+  };
+}

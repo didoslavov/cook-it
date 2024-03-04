@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CarouselComponent } from '../../../shared/carousel/carousel.component';
 import { RecipeService } from '../../../services/recipe.service';
 import { NewsData } from '../../../recipes/recipe.model';
@@ -21,16 +21,14 @@ import { Subscription, filter } from 'rxjs';
   templateUrl: './news.component.html',
   styleUrl: './news.component.scss',
 })
-export class NewsComponent implements OnInit {
+export class NewsComponent implements OnInit, OnDestroy {
   news: NewsData[] = [];
   visibleNews: NewsData[] = [];
   page = 1;
   pageSize = 20;
-  initialScrollPosition = 0;
-  previousScrollPosition = 0;
+  declare faCalendar;
 
   private declare navigationEndSubscription: Subscription;
-  declare faCalendar;
 
   constructor(
     private newsService: RecipeService,
@@ -41,9 +39,16 @@ export class NewsComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (!this.route.snapshot.queryParams['page']) {
+      this.router.navigate([], { queryParams: { page: 1 } });
+    }
+
     this.route.queryParams.subscribe((params) => {
       this.page = parseInt(params['page'] || '1', 10);
-      this.loadNews();
+
+      if (this.page !== 1) {
+        this.loadNews();
+      }
     });
 
     this.navigationEndSubscription = this.router.events
@@ -51,10 +56,10 @@ export class NewsComponent implements OnInit {
       .subscribe(() => {
         this.loadNews();
       });
+  }
 
-    if (!this.route.snapshot.queryParams['page']) {
-      this.router.navigate([], { queryParams: { page: 1 } });
-    }
+  ngOnDestroy() {
+    this.navigationEndSubscription.unsubscribe();
   }
 
   loadNews() {

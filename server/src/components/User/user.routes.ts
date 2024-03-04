@@ -9,7 +9,7 @@ const usersRouter = Router();
 usersRouter.get('/', getUsers);
 usersRouter.post('/login', loginValidation, login);
 usersRouter.post('/register', registerValidation, register);
-usersRouter.post('/logout', authMiddleware(), logout);
+usersRouter.post('/logout', logout);
 usersRouter.patch('/:userId/update', updateUser);
 usersRouter.get('/recipes', authMiddleware(), getUserRecipes);
 

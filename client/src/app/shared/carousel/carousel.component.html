@@ -1,6 +1,8 @@
 <section class="carousel">
     @if (recipes.length) {
+    @if (carouselType !== 'search') {
     <h2 class="carousel__heading">{{title}}</h2>
+    }
     @for (recipe of recipes; track recipe.id) {
     <app-recipe-card [recipe]="recipe" />
     }

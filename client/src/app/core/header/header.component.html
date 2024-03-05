@@ -4,12 +4,17 @@
     </a>
     <nav class="main-nav">
         <ul class="main-nav-list">
+            @if (!isRecipePage) {
             <li><a class="main-nav-link" routerLink="/recipes">Recipes</a></li>
+            }
+            @if (user) {
             <li><a class="main-nav-link" routerLink="/recipes/create">Create Recipe</a></li>
-            <li><a class="main-nav-link" routerLink="/">Home</a></li>
+            }
             @if (isHomePage) {
             <li><a class="main-nav-link" routerLink="" fragment="How">How it works</a></li>
             <li><a class="main-nav-link" routerLink="" fragment="About">About</a></li>
+            } @else {
+            <li><a class="main-nav-link" routerLink="/">Home</a></li>
             }
             @if(!user) {
             <li><a class="btn btn--cta" [ngClass]="attentionSeeker" (mouseover)="attentionSeekerAnimation($event)"

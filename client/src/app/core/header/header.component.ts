@@ -33,6 +33,7 @@ export class HeaderComponent implements OnInit {
   declare attentionSeeker: string;
   declare user: User | null;
   declare isHomePage: boolean;
+  declare isRecipePage: boolean;
 
   faCircleXmark = faCircleXmark;
   faBars = faBars;
@@ -56,12 +57,16 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.router.events.subscribe(
-      (e) =>
-        e instanceof NavigationEnd &&
-        (this.isHomePage =
-          this.router.url === '/' || this.router.url.includes('#'))
-    );
+    this.router.events.subscribe((e) => {
+      if (e instanceof NavigationEnd) {
+        this.isHomePage =
+          this.router.url === '/' || this.router.url.includes('#');
+
+        this.isRecipePage =
+          this.router.url.includes('/recipes') &&
+          !this.router.url.includes('profile');
+      }
+    });
 
     this.store.pipe(select(getUserData)).subscribe((user: any) => {
       this.user = user?.user;

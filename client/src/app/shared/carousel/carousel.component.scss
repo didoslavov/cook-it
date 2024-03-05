@@ -2,7 +2,8 @@
   max-width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr) max-content;
-  padding: 8rem 6rem;
+  row-gap: 4rem;
+  padding: 2rem 6rem;
   height: 90vh;
   align-items: center;
   backdrop-filter: blur(2px);
@@ -12,18 +13,16 @@
     justify-self: center;
     font-size: 4.4rem;
     text-shadow: 2px 2px 2px var(--color-primary-dark);
-    margin-bottom: 8rem;
   }
 
   &__arrows {
-    margin-top: 12rem;
     font-size: 4rem;
     font-weight: var(--fw-bold);
     color: var(--color-primary-dark);
     display: flex;
-    flex-direction: column;
     gap: 8rem;
-    grid-area: 1 / 5 / 4 / -1;
+    grid-area: 3/1/3/-1;
+    justify-content: center;
 
     &--up,
     &--down {
@@ -61,6 +60,9 @@
 
 .search {
   align-items: start;
+  padding-top: 0;
+  height: auto;
+  row-gap: 2rem;
 }
 
 @media screen and (max-width: 1500px) {

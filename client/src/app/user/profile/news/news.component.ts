@@ -39,17 +39,13 @@ export class NewsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (!this.route.snapshot.queryParams['page']) {
-      this.router.navigate([], { queryParams: { page: 1 } });
-    }
-
     this.route.queryParams.subscribe((params) => {
       this.page = parseInt(params['page'] || '1', 10);
-
-      if (this.page !== 1) {
-        this.loadNews();
-      }
     });
+
+    if (!this.route.snapshot.queryParams['page']) {
+      this.router.navigate([], { queryParams: { page: this.page } });
+    }
 
     this.navigationEndSubscription = this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
@@ -67,26 +63,19 @@ export class NewsComponent implements OnInit, OnDestroy {
       .getLatestNews(this.page, this.pageSize)
       .subscribe((news) => {
         this.news = news.articles;
+        this.visibleNews = [...this.visibleNews, ...this.news];
         this.loadMoreNews();
       });
   }
 
   loadMoreNews() {
-    if (this.page !== 1) {
-      this.page++;
-    }
-
-    this.newsService
-      .getLatestNews(this.page, this.pageSize)
-      .subscribe((news) => {
-        const nextBatch = news.articles;
-        this.visibleNews = [...this.visibleNews, ...nextBatch];
-
-        this.router.navigate([], { queryParams: { page: this.page } });
-      });
+    this.router.navigate([], { queryParams: { page: this.page } });
   }
 
   onScroll() {
+    this.page++;
+    console.log('Loaded recipes ', this.page);
+
     this.loadMoreNews();
   }
 }

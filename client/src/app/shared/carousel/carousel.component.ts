@@ -1,4 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  SimpleChanges,
+  OnChanges,
+} from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { RecipeData } from '../../recipes/recipe.model';
@@ -9,6 +15,7 @@ import { getUserData } from '../../store/auth/auth.selectors';
 import { User } from '../../store/auth/user.model';
 import { ActivatedRoute, Router, UrlTree } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 type RecipeServiceMethod =
   | 'getRecipes'
@@ -18,11 +25,11 @@ type RecipeServiceMethod =
 @Component({
   selector: 'app-carousel',
   standalone: true,
-  imports: [RecipeCardComponent, FontAwesomeModule],
+  imports: [RecipeCardComponent, FontAwesomeModule, CommonModule],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
 })
-export class CarouselComponent implements OnInit {
+export class CarouselComponent implements OnInit, OnChanges {
   @Input() carouselType: 'all' | 'user' | 'search' = 'all';
   @Input() title: string = '';
   @Input() ingredients: string[] = [];
@@ -46,6 +53,12 @@ export class CarouselComponent implements OnInit {
     private router: Router
   ) {
     this.currentUrlTree = this.router.createUrlTree(['/recipes']);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['ingredients']) {
+      this.fetchRecipes(this.fetchMethod, 0, this.limit);
+    }
   }
 
   ngOnInit(): void {

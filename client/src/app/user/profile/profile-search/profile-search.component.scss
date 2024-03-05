@@ -10,6 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 16rem;
 
     &--controls {
       width: 50%;
@@ -83,6 +84,19 @@
       font-size: 1.6rem;
       margin-left: -2rem;
       padding: 0.8rem 1.9rem;
+    }
+  }
+
+  &__no-content {
+    text-align: center;
+    font-size: 4.4rem;
+    font-weight: 700;
+    text-shadow: 0.2rem 0.2rem 1rem var(--color-primary);
+
+    &--icon {
+      margin-left: 2rem;
+      color: var(--color-accent-dark);
+      filter: drop-shadow(0.4rem 0.4rem 0.2rem var(--color-primary));
     }
   }
 }

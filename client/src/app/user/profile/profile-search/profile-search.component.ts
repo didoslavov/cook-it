@@ -9,11 +9,13 @@ import {
 import { RecipeService } from '../../../services/recipe.service';
 import { CarouselComponent } from '../../../shared/carousel/carousel.component';
 import { HttpParams } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faTurnUp } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-profile-home',
   standalone: true,
-  imports: [ReactiveFormsModule, CarouselComponent],
+  imports: [ReactiveFormsModule, CarouselComponent, FontAwesomeModule],
   templateUrl: './profile-search.component.html',
   styleUrl: './profile-search.component.scss',
 })
@@ -22,10 +24,13 @@ export class ProfileHomeComponent implements OnInit {
   recipes: Recipe[] | null = [];
   ingredients: string[] = [];
 
+  declare faArrowUp;
+
   constructor(
     private formBuilder: FormBuilder,
     private recipeService: RecipeService
   ) {
+    this.faArrowUp = faTurnUp;
     this.searchForm = this.formBuilder.group({
       searchQuery: ['', Validators.required],
     });

@@ -10,5 +10,8 @@
     </form>
     @if(recipes?.length) {
     <app-carousel class="app-carousel" [carouselType]="'search'" [ingredients]="ingredients" />
+    } @else {
+    <p class="search__no-content">Try searching for ingredients <fa-icon [icon]="faArrowUp"
+            class="search__no-content--icon" /></p>
     }
 </section>

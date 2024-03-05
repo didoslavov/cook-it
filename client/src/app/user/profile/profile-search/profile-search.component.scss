@@ -10,7 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 16rem;
+    margin-bottom: 6rem;
 
     &--controls {
       width: 50%;
@@ -88,6 +88,7 @@
   }
 
   &__no-content {
+    margin-top: 12rem;
     text-align: center;
     font-size: 4.4rem;
     font-weight: 700;

@@ -74,7 +74,6 @@ export class NewsComponent implements OnInit, OnDestroy {
 
   onScroll() {
     this.page++;
-    console.log('Loaded recipes ', this.page);
 
     this.loadMoreNews();
   }

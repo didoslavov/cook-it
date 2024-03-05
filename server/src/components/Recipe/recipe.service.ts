@@ -22,9 +22,11 @@ export const searchRecipe = async (ingredients: string[], offset: number, limit:
                 attributes: ['name'],
                 through: { attributes: [] },
                 where: {
-                    name: {
-                        [Op.in]: ingredients,
-                    },
+                    [Op.or]: ingredients.map((ingredient) => ({
+                        name: {
+                            [Op.like]: `%${ingredient}%`,
+                        },
+                    })),
                 },
             },
         ],

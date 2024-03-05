@@ -93,10 +93,14 @@
     font-weight: 700;
     text-shadow: 0.2rem 0.2rem 1rem var(--color-primary);
 
+    span {
+      display: inline-block;
+    }
+
     &--icon {
       margin-left: 2rem;
       color: var(--color-accent-dark);
-      filter: drop-shadow(0.4rem 0.4rem 0.2rem var(--color-primary));
+      filter: drop-shadow(0.1rem 0.1rem 0.2rem var(--color-primary));
     }
   }
 }

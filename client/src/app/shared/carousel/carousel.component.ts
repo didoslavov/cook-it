@@ -6,7 +6,12 @@ import {
   OnChanges,
 } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
+import {
+  faAngleDown,
+  faAngleLeft,
+  faAngleRight,
+  faAngleUp,
+} from '@fortawesome/free-solid-svg-icons';
 import { RecipeData } from '../../recipes/recipe.model';
 import { RecipeService } from '../../services/recipe.service';
 import { RecipeCardComponent } from '../../recipes/recipe-card/recipe-card.component';
@@ -35,8 +40,8 @@ export class CarouselComponent implements OnInit, OnChanges {
   @Input() ingredients: string[] = [];
 
   recipes: RecipeData[] = [];
-  faArrowUp = faAngleUp;
-  faArrowDown = faAngleDown;
+  faArrowLeft = faAngleLeft;
+  faArrowRight = faAngleRight;
 
   declare user: User | null;
 

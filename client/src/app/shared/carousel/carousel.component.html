@@ -1,4 +1,4 @@
-<section class="carousel">
+<section class="carousel" [ngClass]="{'search': carouselType === 'search'}">
     @if (recipes.length) {
     @if (carouselType !== 'search') {
     <h2 class="carousel__heading">{{title}}</h2>

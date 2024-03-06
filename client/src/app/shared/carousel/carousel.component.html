@@ -8,19 +8,28 @@
     }
     } @else {
     <div class="carousel__no-content">
-        @if(!currentOffset) {
-
         <p class="no-recipes">No recipes found</p>
-        } @else {
-        <p class="no-recipes">No more recipes found</p>
-        }
         @if(user) {
-        <a href="/recipes/create" class="btn btn--accent">Create one</a>.
+        <a routerLink="/recipes/create" class="btn btn--accent">Create one</a>.
         }
     </div>
     }
-    <div class="carousel__arrows">
-        <fa-icon [icon]="faArrowLeft" class="carousel__arrows--up" (click)="showPreviousRecipes()" />
-        <fa-icon [icon]="faArrowRight" class="carousel__arrows--down" (click)="showNextRecipes()" />
+    @if (recipes.length) {
+    <div class="carousel__pagination">
+        <a [routerLink]="['.']" [queryParams]="{ offset: currentOffset * limit, limit: limit }"
+            class="carousel__pagination--up">
+            <fa-icon [icon]="faArrowLeft"></fa-icon>
+        </a>
+        <div class="carousel__pagination--pages">
+            @for (page of pagination; track $index) {
+            <a [routerLink]="['.']" [queryParams]="{ offset: $index * limit, limit: limit }" queryParamsHandling="merge"
+                class="carousel__pagination--page link">{{ $index + 1 }}</a>
+            }
+        </div>
+        <a [routerLink]="['.']" [queryParams]="{ offset: currentOffset + limit, limit: limit }"
+            class="carousel__pagination--down">
+            <fa-icon [icon]="faArrowRight"></fa-icon>
+        </a>
     </div>
+    }
 </section>

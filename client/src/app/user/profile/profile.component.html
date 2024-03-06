@@ -8,7 +8,8 @@
                     <li class="profile__aside--nav-list-item" routerLinkActive="selected"><a
                             class="profile__aside--nav-list-item-link" routerLink="news">News</a></li>
                     <li class="profile__aside--nav-list-item" routerLinkActive="selected"><a
-                            class="profile__aside--nav-list-item-link" routerLink="recipes">My Recipes</a></li>
+                            class="profile__aside--nav-list-item-link" routerLink="recipes"
+                            [queryParams]="{ offset: 0, limit: 4 }">My Recipes</a></li>
                     <li class="profile__aside--nav-list-item" routerLinkActive="selected"><a
                             class="profile__aside--nav-list-item-link" routerLink="#">Liked
                             Recipes</a></li>

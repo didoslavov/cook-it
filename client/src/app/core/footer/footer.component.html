@@ -14,9 +14,11 @@
                     routerLink="/auth/register">Register</a>
             </li>
             }
-            <li class="footer__nav--list-item"><a class="footer__nav--list-link" routerLink="/dashboard">Recipes</a>
+            <li class="footer__nav--list-item"><a class="footer__nav--list-link" routerLink="/recipes"
+                    [queryParams]="{ offset: 0, limit: 4 }">All Recipes</a>
             </li>
-            <li class="footer__nav--list-item"><a class="footer__nav--list-link" routerLink="#">Personal Recipes</a>
+            <li class="footer__nav--list-item"><a class="footer__nav--list-link"
+                    routerLink="profile/{{user?.id}}/recipes" [queryParams]="{ offset: 0, limit: 4 }">My Recipes</a>
             </li>
         </ul>
     </nav>

@@ -22,21 +22,21 @@ export class RecipeService {
       .pipe(tap((news) => news));
   }
 
-  searchRecipesByIngredients(params: HttpParams): Observable<Recipe[]> {
+  searchRecipesByIngredients(params: HttpParams) {
     return this.http
-      .get<Recipe[]>('/recipes/search', { params })
+      .get<RecipeData>('/recipes/search', { params })
       .pipe(tap((recipes) => recipes));
   }
 
   getRecipes(params: HttpParams) {
     return this.http
-      .get<Recipe[]>('/recipes', { params })
+      .get<RecipeData>('/recipes', { params })
       .pipe(tap((recipes) => recipes));
   }
 
   getUserRecipes(params: HttpParams) {
     return this.http
-      .get<Recipe[]>('/users/recipes', { params })
+      .get<RecipeData>('/users/recipes', { params })
       .pipe(tap((recipes) => recipes));
   }
 
@@ -46,11 +46,11 @@ export class RecipeService {
       .pipe(tap((recipe) => recipe));
   }
 
-  addRecipe(recipeData: RecipeData) {
+  addRecipe(recipeData: Recipe) {
     return this.http.post<RecipeData>('/recipes/create', recipeData);
   }
 
-  editRecipe(recipeId: string, recipeData: RecipeData) {
+  editRecipe(recipeId: string, recipeData: Recipe) {
     return this.http.put<RecipeData>(`/recipes/${recipeId}/edit`, recipeData);
   }
 

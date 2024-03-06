@@ -7,10 +7,12 @@ export interface Recipe {
   ingredients?: Ingredient[];
   steps?: string[];
   description?: string;
+  userId?: string;
 }
 
-export interface RecipeData extends Recipe {
-  userId?: string;
+export interface RecipeData {
+  recipes: Recipe[];
+  count: number;
 }
 
 export interface Step {

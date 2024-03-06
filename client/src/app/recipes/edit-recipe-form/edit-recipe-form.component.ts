@@ -77,7 +77,7 @@ export class EditRecipeFormComponent {
     this.steps = steps;
   }
 
-  onSubmit(formData: RecipeData): void {
+  onSubmit(formData: Recipe): void {
     const recipeData = {
       name: formData.name,
       prepTime: Number(formData.prepTime),

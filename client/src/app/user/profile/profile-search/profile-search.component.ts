@@ -23,6 +23,7 @@ export class ProfileHomeComponent implements OnInit {
   searchForm: FormGroup;
   recipes: Recipe[] | null = [];
   ingredients: string[] = [];
+  pagination: number = 0;
 
   declare faArrowUp;
 
@@ -51,8 +52,9 @@ export class ProfileHomeComponent implements OnInit {
       });
 
       this.recipeService.searchRecipesByIngredients(params).subscribe({
-        next: (recipes) => {
-          this.recipes = recipes;
+        next: (recipeData) => {
+          this.recipes = recipeData.recipes;
+          this.pagination = recipeData.count;
         },
         error: (error) => {
           console.error('Error searching recipes:', error);

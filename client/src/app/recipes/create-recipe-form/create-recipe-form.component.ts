@@ -6,7 +6,7 @@ import { User } from '../../store/auth/user.model';
 import { Store, select } from '@ngrx/store';
 import { getUserData } from '../../store/auth/auth.selectors';
 import { RecipeService } from '../../services/recipe.service';
-import { Ingredient, RecipeData } from '../recipe.model';
+import { Ingredient, Recipe, RecipeData } from '../recipe.model';
 
 @Component({
   selector: 'app-recipe-form',
@@ -61,7 +61,7 @@ export class RecipeFormComponent implements OnInit {
     this.steps = steps;
   }
 
-  onSubmit(formData: RecipeData): void {
+  onSubmit(formData: Recipe): void {
     const recipeData = {
       name: formData.name,
       prepTime: Number(formData.prepTime),

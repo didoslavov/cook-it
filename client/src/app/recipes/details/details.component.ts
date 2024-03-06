@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
-import { RecipeData } from '../recipe.model';
+import { Recipe } from '../recipe.model';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { directionsState, ingredientsState } from '../../animations';
@@ -17,7 +17,7 @@ import { getUserData } from '../../store/auth/auth.selectors';
   animations: [ingredientsState, directionsState],
 })
 export class DetailsComponent implements OnInit {
-  recipe: RecipeData = {};
+  recipe: Recipe = {};
   recipeId: string = '';
   showIngredients: boolean = true;
   showDirections: boolean = false;

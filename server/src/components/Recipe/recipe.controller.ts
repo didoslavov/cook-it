@@ -56,7 +56,7 @@ const editRecipe = expressAsyncHandler(async (req: Request, res: Response) => {
 const getRecipes = expressAsyncHandler(async (req: Request, res: Response) => {
     const limit = req.query.limit ? Number(req.query.limit) : 4;
     const offset = req.query.offset ? Number(req.query.offset) : 1;
-    const recipes = await findRecipes(limit, offset);
+    const { recipes, count } = await findRecipes(limit, offset);
 
     if (!recipes) {
         throw new AppError(400, 'Error getting recipes...');
@@ -66,7 +66,7 @@ const getRecipes = expressAsyncHandler(async (req: Request, res: Response) => {
         throw new AppError(404, 'No recipes found...');
     }
 
-    res.status(200).json(recipes);
+    res.status(200).json({ recipes, count });
 });
 
 const searchRecipesByIngredients = expressAsyncHandler(async (req: Request, res: Response) => {
@@ -74,7 +74,7 @@ const searchRecipesByIngredients = expressAsyncHandler(async (req: Request, res:
     const offset = req.query.offset ? Number(req.query.offset) : 1;
     const ingredients: string[] = (req.query.ingredients as string).split(' ');
 
-    const recipes = await searchRecipe(ingredients, offset, limit);
+    const { recipes, count } = await searchRecipe(ingredients, offset, limit);
 
     if (!recipes) {
         throw new AppError(400, 'Error getting recipes...');
@@ -84,14 +84,14 @@ const searchRecipesByIngredients = expressAsyncHandler(async (req: Request, res:
         throw new AppError(404, 'No recipes found...');
     }
 
-    res.status(200).json(recipes);
+    res.status(200).json({ recipes, count });
 });
 
 const getUserRecipes = expressAsyncHandler(async (req: UserRequest, res: Response) => {
     const userId = req.user?.id;
     const limit = req.query.limit ? Number(req.query.limit) : 4;
     const offset = req.query.offset ? Number(req.query.offset) : 1;
-    const recipes = await findUserRecipes(limit, offset, userId);
+    const { recipes, count } = await findUserRecipes(limit, offset, userId);
 
     if (!recipes) {
         throw new AppError(400, 'Error getting recipes...');
@@ -101,7 +101,7 @@ const getUserRecipes = expressAsyncHandler(async (req: UserRequest, res: Respons
         throw new AppError(404, 'No recipes found...');
     }
 
-    res.status(200).json(recipes);
+    res.status(200).json({ recipes, count });
 });
 
 const getRecipeById = expressAsyncHandler(async (req: Request, res: Response) => {

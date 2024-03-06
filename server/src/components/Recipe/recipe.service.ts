@@ -14,8 +14,12 @@ import { createSteps } from '../Step/step.service';
 import Recipe from './Recipe.model';
 import { RecipeData, RecipeInterface } from './recipe.interface';
 
-export const searchRecipe = async (ingredients: string[], offset: number, limit: number): Promise<RecipeInterface[]> => {
-    const recipes = await Recipe.findAll({
+export const searchRecipe = async (
+    ingredients: string[],
+    offset: number,
+    limit: number
+): Promise<{ recipes: RecipeInterface[]; count: number }> => {
+    const { count, rows } = await Recipe.findAndCountAll({
         include: [
             {
                 model: Product,
@@ -34,26 +38,39 @@ export const searchRecipe = async (ingredients: string[], offset: number, limit:
         offset,
     });
 
-    return recipes.map((r): RecipeInterface => r.toJSON());
+    return {
+        recipes: rows.map((r): RecipeInterface => r.toJSON()),
+        count,
+    };
 };
 
-export const findRecipes = async (limit: number, offset: number): Promise<RecipeInterface[]> => {
-    const recipes = await Recipe.findAll({
+export const findRecipes = async (limit: number, offset: number): Promise<{ recipes: RecipeInterface[]; count: number }> => {
+    const { count, rows } = await Recipe.findAndCountAll({
         limit,
         offset,
     });
 
-    return recipes.map((r): RecipeInterface => r.toJSON());
+    return {
+        recipes: rows.map((r): RecipeInterface => r.toJSON()),
+        count: count,
+    };
 };
 
-export const findUserRecipes = async (limit: number, offset: number, userId: string | undefined): Promise<RecipeInterface[]> => {
-    const recipes = await Recipe.findAll({
+export const findUserRecipes = async (
+    limit: number,
+    offset: number,
+    userId: string | undefined
+): Promise<{ recipes: RecipeInterface[]; count: number }> => {
+    const { count, rows } = await Recipe.findAndCountAll({
         limit,
         offset,
         where: { userId },
     });
 
-    return recipes.map((r): RecipeInterface => r.toJSON());
+    return {
+        recipes: rows.map((r): RecipeInterface => r.toJSON()),
+        count: count,
+    };
 };
 
 export const insertRecipe = async (recipeData: RecipeData): Promise<RecipeInterface> => {

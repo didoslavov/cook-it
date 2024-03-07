@@ -16,8 +16,14 @@ import { User } from '../../store/auth/user.model';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { Observable, Subject, switchMap, takeUntil } from 'rxjs';
-import { ProfileHomeComponent } from '../../user/profile/profile-search/profile-search.component';
+import {
+  EMPTY,
+  Observable,
+  Subject,
+  catchError,
+  switchMap,
+  takeUntil,
+} from 'rxjs';
 
 @Component({
   selector: 'app-carousel',
@@ -56,10 +62,14 @@ export class CarouselComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['ingredients']) {
+    if (changes['ingredients'] && this.carouselType === 'search') {
       this.router.navigate([], {
         relativeTo: this.route,
-        queryParams: { ingredients: this.ingredients.join(',') },
+        queryParams: {
+          offset: this.currentOffset,
+          limit: this.limit,
+          ingredients: this.ingredients.join(','),
+        },
         queryParamsHandling: 'merge',
       });
     }
@@ -112,14 +122,19 @@ export class CarouselComponent implements OnInit, OnChanges {
       .set('limit', this.limit.toString());
 
     if (this.carouselType === 'search' && this.ingredients.length > 0) {
-      console.log(this.ingredients);
-
       queryParams = queryParams.set('ingredients', this.ingredients.join(','));
     }
 
     const method = this.getMethod();
 
-    return this.recipeService[method](queryParams);
+    return this.recipeService[method](queryParams).pipe(
+      catchError((error) => {
+        console.error('Error fetching recipes:', error);
+        this.recipes = [];
+        this.recipesCount = 0;
+        return EMPTY;
+      })
+    );
   }
 
   private getMethod():

@@ -16,18 +16,20 @@
     }
     @if (recipes.length) {
     <div class="carousel__pagination">
-        <a [routerLink]="['.']" [queryParams]="{ offset: currentOffset * limit, limit: limit }"
-            class="carousel__pagination--up">
+        <a [routerLink]="['.']" [queryParams]="{ offset: currentOffset, limit: limit }"
+            [class.disabled]="currentPage <= 1" class="carousel__pagination--up">
             <fa-icon [icon]="faArrowLeft"></fa-icon>
         </a>
         <div class="carousel__pagination--pages">
             @for (page of pagination; track $index) {
-            <a [routerLink]="['.']" [queryParams]="{ offset: $index * limit, limit: limit }" queryParamsHandling="merge"
-                class="carousel__pagination--page link">{{ $index + 1 }}</a>
+            <a [routerLink]="['.']" [queryParams]="{ offset: $index * limit, limit: limit }"
+                [class.active-page]="currentPage === $index + 1" class="carousel__pagination--pages-page active-page">{{
+                $index + 1 }}</a>
             }
         </div>
-        <a [routerLink]="['.']" [queryParams]="{ offset: currentOffset + limit, limit: limit }"
-            class="carousel__pagination--down">
+        <a [routerLink]="['.']"
+            [queryParams]="{offset: currentPage === pagination.length ? 0 : currentPage * limit, limit: limit}"
+            [class.disabled]="currentPage === pagination.length" class="carousel__pagination--down">
             <fa-icon [icon]="faArrowRight"></fa-icon>
         </a>
     </div>

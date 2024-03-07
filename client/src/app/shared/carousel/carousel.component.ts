@@ -1,4 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { Recipe, RecipeData } from '../../recipes/recipe.model';
@@ -20,7 +26,7 @@ import { ProfileHomeComponent } from '../../user/profile/profile-search/profile-
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
 })
-export class CarouselComponent implements OnInit {
+export class CarouselComponent implements OnInit, OnChanges {
   @Input() carouselType: 'all' | 'user' | 'search' = 'all';
   @Input() title: string = '';
   @Input() ingredients: string[] = [];
@@ -42,10 +48,21 @@ export class CarouselComponent implements OnInit {
   constructor(
     private recipeService: RecipeService,
     private store: Store,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.faArrowLeft = faAngleLeft;
     this.faArrowRight = faAngleRight;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['ingredients']) {
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: { ingredients: this.ingredients.join(',') },
+        queryParamsHandling: 'merge',
+      });
+    }
   }
 
   ngOnInit(): void {
@@ -95,6 +112,8 @@ export class CarouselComponent implements OnInit {
       .set('limit', this.limit.toString());
 
     if (this.carouselType === 'search' && this.ingredients.length > 0) {
+      console.log(this.ingredients);
+
       queryParams = queryParams.set('ingredients', this.ingredients.join(','));
     }
 

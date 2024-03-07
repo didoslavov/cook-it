@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  SimpleChanges,
-  OnChanges,
-} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { Recipe, RecipeData } from '../../recipes/recipe.model';
@@ -13,16 +7,11 @@ import { RecipeCardComponent } from '../../recipes/recipe-card/recipe-card.compo
 import { Store, select } from '@ngrx/store';
 import { getUserData } from '../../store/auth/auth.selectors';
 import { User } from '../../store/auth/user.model';
-import { ActivatedRoute, Router, RouterModule, UrlTree } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Observable, Subject, switchMap, takeUntil } from 'rxjs';
-import { FontawesomeObject } from '@fortawesome/fontawesome-svg-core';
-
-type RecipeServiceMethod =
-  | 'getRecipes'
-  | 'getUserRecipes'
-  | 'searchRecipesByIngredients';
+import { ProfileHomeComponent } from '../../user/profile/profile-search/profile-search.component';
 
 @Component({
   selector: 'app-carousel',
@@ -44,7 +33,11 @@ export class CarouselComponent implements OnInit {
   pagination: number[] = [];
 
   currentOffset = 0;
+  currentPage = 0;
+  recipesCount = 0;
   limit = 4;
+
+  private unsubscribe$ = new Subject<void>();
 
   constructor(
     private recipeService: RecipeService,
@@ -55,13 +48,17 @@ export class CarouselComponent implements OnInit {
     this.faArrowRight = faAngleRight;
   }
 
-  private unsubscribe$ = new Subject<void>();
-
   ngOnInit(): void {
     this.route.queryParams
       .pipe(
         switchMap((params) => {
           const offset = parseInt(params['offset'] || '0');
+          this.currentPage =
+            this.currentPage >= Math.ceil(this.pagination.length / this.limit)
+              ? Math.ceil(offset / this.limit + 1)
+              : this.currentPage;
+          this.currentOffset = offset <= 0 ? 0 : offset - this.limit;
+
           return this.fetchRecipes(offset);
         }),
         takeUntil(this.unsubscribe$)
@@ -69,12 +66,14 @@ export class CarouselComponent implements OnInit {
       .subscribe({
         next: (recipeData: RecipeData) => {
           this.recipes = recipeData.recipes;
-          this.pagination = new Array(Math.ceil(recipeData.count / this.limit))
+          this.recipesCount = recipeData.count;
+          this.pagination = new Array(Math.ceil(this.recipesCount / this.limit))
             .fill(0)
             .map((_, i) => i + 1);
         },
         error: () => {
           this.recipes = [];
+          this.recipesCount = 0;
         },
       });
 
@@ -108,12 +107,13 @@ export class CarouselComponent implements OnInit {
     | 'getRecipes'
     | 'getUserRecipes'
     | 'searchRecipesByIngredients' {
-    if (this.carouselType === 'user') {
-      return 'getUserRecipes';
-    } else if (this.carouselType === 'search' && this.ingredients.length > 0) {
-      return 'searchRecipesByIngredients';
-    } else {
-      return 'getRecipes';
+    switch (this.carouselType) {
+      case 'user':
+        return 'getUserRecipes';
+      case 'search':
+        return 'searchRecipesByIngredients';
+      default:
+        return 'getRecipes';
     }
   }
 }

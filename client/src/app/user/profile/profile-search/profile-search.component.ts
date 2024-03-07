@@ -11,6 +11,7 @@ import { CarouselComponent } from '../../../shared/carousel/carousel.component';
 import { HttpParams } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faTurnUp } from '@fortawesome/free-solid-svg-icons';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile-home',
@@ -27,17 +28,23 @@ export class ProfileHomeComponent implements OnInit {
 
   declare faArrowUp;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private recipeService: RecipeService
-  ) {
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute) {
     this.faArrowUp = faTurnUp;
     this.searchForm = this.formBuilder.group({
       searchQuery: ['', Validators.required],
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      const ingredientsParam = params['ingredients'];
+      if (ingredientsParam) {
+        this.ingredients = ingredientsParam.split(',');
+      } else {
+        this.ingredients = [];
+      }
+    });
+  }
 
   onSubmit(): void {
     if (this.searchForm.valid) {
@@ -45,21 +52,6 @@ export class ProfileHomeComponent implements OnInit {
       this.ingredients = searchQuery
         .split(',')
         .map((ingredient: string) => ingredient.trim());
-
-      let params = new HttpParams();
-      this.ingredients.forEach((ingredient: string) => {
-        params = params.append('ingredients', ingredient);
-      });
-
-      this.recipeService.searchRecipesByIngredients(params).subscribe({
-        next: (recipeData) => {
-          this.recipes = recipeData.recipes;
-          this.pagination = recipeData.count;
-        },
-        error: (error) => {
-          console.error('Error searching recipes:', error);
-        },
-      });
     }
   }
 }

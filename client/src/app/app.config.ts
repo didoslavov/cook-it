@@ -5,7 +5,7 @@ import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
-import { authInterceptor } from './interceptors/auth.interceptor';
+import { httpInterceptor } from './interceptors/http.interceptor';
 import { AuthEffects } from './store/auth/auth.effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { featureReducers, metaReducers } from './store/auth/auth.reducers';
@@ -14,7 +14,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideAnimations(),
-    provideHttpClient(withInterceptors([authInterceptor])),
+    provideHttpClient(withInterceptors([httpInterceptor])),
     provideStore(featureReducers, { metaReducers }),
     provideEffects([AuthEffects]),
     provideStoreDevtools({

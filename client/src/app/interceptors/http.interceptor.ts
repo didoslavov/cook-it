@@ -1,5 +1,5 @@
 import { HttpInterceptorFn } from '@angular/common/http';
-import { catchError, throwError } from 'rxjs';
+import { EMPTY, catchError, throwError } from 'rxjs';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment.development';
@@ -7,7 +7,7 @@ import { AuthApiActions } from '../store/auth/auth.actions';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
 
-export const authInterceptor: HttpInterceptorFn = (req, next) => {
+export const httpInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
   const store = inject(Store);
   const cookieService = inject(CookieService);
@@ -39,6 +39,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
           store.dispatch(AuthApiActions.logout());
           router.navigate(['/auth/login']);
           return throwError(() => 'Token is expired.');
+        case 404:
+          return throwError(() => error.message);
         case 409:
           store.dispatch(
             AuthApiActions.registrationFailure({ error: error.message })

@@ -88,14 +88,10 @@
 
 .selected {
   background-color: var(--color-accent);
+  pointer-events: none;
 
   .profile__aside--nav-list-item-link {
     color: var(--color-primary-dark);
-
-    &:hover {
-      color: var(--color-primary-light);
-      background-color: var(--color-primary-dark);
-    }
   }
 }
 

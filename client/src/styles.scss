@@ -115,8 +115,11 @@ main {
   box-shadow: var(--shadow);
 }
 
-.btn--cta:hover,
 .btn--cta:visited {
+  background-color: initial;
+}
+
+.btn--cta:hover {
   background-color: var(--color-accent);
   color: var(--color-primary-dark);
 }
@@ -133,8 +136,11 @@ main {
   box-shadow: var(--shadow);
 }
 
-.btn--accent:hover,
 .btn--accent:visited {
+  color: initial;
+}
+
+.btn--accent:hover {
   background-color: var(--color-primary-dark);
   color: var(--color-primary-light);
 }

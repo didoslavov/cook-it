@@ -6,9 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { RecipeService } from '../../../services/recipe.service';
 import { CarouselComponent } from '../../../shared/carousel/carousel.component';
-import { HttpParams } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faTurnUp } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute } from '@angular/router';
@@ -20,7 +18,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './profile-search.component.html',
   styleUrl: './profile-search.component.scss',
 })
-export class ProfileHomeComponent implements OnInit {
+export class ProfileSearchComponent implements OnInit {
   searchForm: FormGroup;
   recipes: Recipe[] | null = [];
   ingredients: string[] = [];

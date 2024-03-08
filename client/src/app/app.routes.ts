@@ -10,7 +10,7 @@ import { DeleteComponent } from './shared/delete/delete.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { ProfileRecipesComponent } from './user/profile/profile-recipes/profile-recipes.component';
-import { ProfileHomeComponent } from './user/profile/profile-search/profile-search.component';
+import { ProfileSearchComponent } from './user/profile/profile-search/profile-search.component';
 import { NewsComponent } from './user/profile/news/news.component';
 
 export const routes: Routes = [
@@ -58,7 +58,7 @@ export const routes: Routes = [
       },
       {
         path: 'search',
-        component: ProfileHomeComponent,
+        component: ProfileSearchComponent,
       },
       {
         path: 'news',

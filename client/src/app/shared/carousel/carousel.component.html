@@ -15,6 +15,7 @@
     </div>
     }
     @if (recipes.length) {
-    <app-pagination [count]="recipesCount" [ingredients]="ingredients" class="carousel__pagination" />
+    <app-pagination [count]="recipesCount" [ingredients]="ingredients" [currentOffset]="currentOffset"
+        [currentPage]="currentPage" [limit]="limit" [pagination]="pagination" class="carousel__pagination" />
     }
 </section>

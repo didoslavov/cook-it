@@ -1,0 +1,18 @@
+<div class="pagination">
+    <a [routerLink]="['.']" [queryParams]="{ offset: currentOffset, limit: limit, ingredients }"
+        [class.disabled]="currentPage <= 1" class="pagination__back">
+        <fa-icon [icon]="faArrowLeft"></fa-icon>
+    </a>
+    <div class="pagination__pages">
+        @for (page of pagination; track $index) {
+        <a [routerLink]="['.']" [queryParams]="{ offset: $index * limit, limit: limit, ingredients }"
+            [class.active-page]="currentPage === $index + 1" class="pagination__pages--page active-page">{{
+            $index + 1 }}</a>
+        }
+    </div>
+    <a [routerLink]="['.']"
+        [queryParams]="{offset: currentPage === pagination.length ? 0 : currentPage * limit, limit: limit, ingredients}"
+        [class.disabled]="currentPage === pagination.length" class="pagination__forward">
+        <fa-icon [icon]="faArrowRight"></fa-icon>
+    </a>
+</div>

@@ -20,6 +20,7 @@ export const searchRecipe = async (
     limit: number
 ): Promise<{ recipes: RecipeInterface[]; count: number }> => {
     const { count, rows } = await Recipe.findAndCountAll({
+        distinct: true,
         include: [
             {
                 model: Product,

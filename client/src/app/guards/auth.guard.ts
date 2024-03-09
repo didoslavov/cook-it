@@ -10,13 +10,11 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   store.pipe(select(getUserData)).subscribe((user: any) => {
     user = user?.user;
+
+    if (!user) {
+      router.navigate(['/auth/login']);
+    }
   });
 
-  if (!user) {
-    router.navigate(['/auth/login']);
-
-    return false;
-  }
-
-  return true;
+  return !user;
 };

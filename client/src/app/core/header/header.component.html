@@ -17,7 +17,7 @@
             <li><a class="main-nav-link" routerLink="/">Home</a></li>
             }
             @if(!user) {
-            <li><a class="btn btn--cta" [ngClass]="attentionSeeker" (mouseover)="attentionSeekerAnimation($event)"
+            <li><a class="btn btn--accent" [ngClass]="attentionSeeker" (mouseover)="attentionSeekerAnimation($event)"
                     (mouseout)="attentionSeekerAnimationRemove($event)" routerLink="/auth/register">Join now</a>
             </li>
             }

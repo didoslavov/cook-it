@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { HeroComponent } from './hero/hero.component';
 import { HowComponent } from './how/how.component';
 import { AboutComponent } from './about/about.component';
-import { FooterComponent } from '../core/footer/footer.component';
-import { TopButtonComponent } from './top-button/top-button.component';
+import { FooterComponent } from '../../core/footer/footer.component';
+import { TopButtonComponent } from '../../shared/top-button/top-button.component';
 
 @Component({
   selector: 'app-landing',

@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { RegisterComponent } from './user/register/register.component';
-import { LandingComponent } from './landing/landing.component';
+import { LandingComponent } from './pages/landing/landing.component';
 import { LoginComponent } from './user/login/login.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeFormComponent } from './recipes/create-recipe-form/create-recipe-form.component';

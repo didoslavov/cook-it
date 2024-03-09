@@ -1,4 +1,7 @@
 <section class="carousel" [ngClass]="{'search': carouselType === 'search'}">
+    @if (isLoading) {
+    <app-loader class="loader-container" />
+    } @else {
     @if (recipes.length) {
     @if (carouselType !== 'search') {
     <h2 class="carousel__heading">{{title}}</h2>
@@ -17,5 +20,6 @@
     @if (recipes.length) {
     <app-pagination [count]="recipesCount" [ingredients]="ingredients" [currentOffset]="currentOffset"
         [currentPage]="currentPage" [limit]="limit" [pagination]="pagination" class="carousel__pagination" />
+    }
     }
 </section>

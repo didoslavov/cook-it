@@ -25,6 +25,8 @@ import {
   takeUntil,
 } from 'rxjs';
 import { PaginationComponent } from '../pagination/pagination.component';
+import { LoadingService } from '../../services/loading.service';
+import { LoaderComponent } from '../loader/loader.component';
 
 @Component({
   selector: 'app-carousel',
@@ -35,6 +37,7 @@ import { PaginationComponent } from '../pagination/pagination.component';
     CommonModule,
     RouterModule,
     PaginationComponent,
+    LoaderComponent,
   ],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
@@ -53,18 +56,24 @@ export class CarouselComponent implements OnInit, OnChanges {
   currentPage = 0;
   recipesCount = 0;
   limit = 4;
+  isLoading = false;
 
   private unsubscribe$ = new Subject<void>();
 
   constructor(
     private recipeService: RecipeService,
+    private loadingService: LoadingService,
     private store: Store,
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['ingredients'] && this.carouselType === 'search') {
+    if (
+      changes['ingredients'] &&
+      !changes['ingredients'].firstChange &&
+      this.carouselType === 'search'
+    ) {
       this.router.navigate([], {
         relativeTo: this.route,
         queryParams: {
@@ -78,6 +87,16 @@ export class CarouselComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    this.store
+      .pipe(select(getUserData), takeUntil(this.unsubscribe$))
+      .subscribe((user: any) => {
+        this.user = user?.user;
+      });
+
+    this.loadingService
+      .getLoadingState()
+      .subscribe((isLoading) => (this.isLoading = isLoading));
+
     this.route.queryParams
       .pipe(
         switchMap((params) => {
@@ -105,12 +124,6 @@ export class CarouselComponent implements OnInit, OnChanges {
           this.recipesCount = 0;
         },
       });
-
-    this.store
-      .pipe(select(getUserData), takeUntil(this.unsubscribe$))
-      .subscribe((user: any) => {
-        this.user = user?.user;
-      });
   }
 
   ngOnDestroy(): void {
@@ -124,7 +137,7 @@ export class CarouselComponent implements OnInit, OnChanges {
       .set('limit', '4'.toString());
 
     if (this.carouselType === 'search' && this.ingredients.length > 0) {
-      queryParams = queryParams.set('ingredients', this.ingredients.join(','));
+      queryParams = queryParams.set('ingredients', this.ingredients.join(', '));
     }
 
     const method = this.getMethod();

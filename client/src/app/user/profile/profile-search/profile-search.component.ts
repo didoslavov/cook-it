@@ -37,7 +37,13 @@ export class ProfileSearchComponent implements OnInit {
     this.route.queryParams.subscribe((params) => {
       const ingredientsParam = params['ingredients'];
       if (ingredientsParam) {
-        this.ingredients = ingredientsParam.split(',');
+        try {
+          //? I need to further investigate this edge case.
+          //? When navigating in carouselType = 'search',
+          //? only with arrow(forward and back) there's an error,
+          //? ingredientsParams is string[].
+          this.ingredients = ingredientsParam.split(', ');
+        } catch (e) {}
       } else {
         this.ingredients = [];
       }
@@ -47,8 +53,9 @@ export class ProfileSearchComponent implements OnInit {
   onSubmit(): void {
     if (this.searchForm.valid) {
       const searchQuery = this.searchForm.value.searchQuery;
+
       this.ingredients = searchQuery
-        .split(',')
+        .split(', ')
         .map((ingredient: string) => ingredient.trim());
     }
   }

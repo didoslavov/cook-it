@@ -6,6 +6,8 @@ import { getUserData } from '../store/auth/auth.selectors';
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const store = inject(Store);
+
+  const userId = route.params['userId'];
   let user;
 
   store.pipe(select(getUserData)).subscribe((user: any) => {
@@ -13,6 +15,10 @@ export const authGuard: CanActivateFn = (route, state) => {
 
     if (!user) {
       router.navigate(['/auth/login']);
+    }
+
+    if (user.id !== userId) {
+      router.navigate(['/']);
     }
   });
 

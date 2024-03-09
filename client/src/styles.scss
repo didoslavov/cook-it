@@ -50,6 +50,10 @@ main {
   position: relative;
 }
 
+.loader-container {
+  grid-area: 1 / 2 / 2 / span 2;
+}
+
 .heading-primary,
 .heading-secondary,
 .heading-tertiary {

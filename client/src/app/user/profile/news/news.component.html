@@ -1,7 +1,9 @@
 <section class="news" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="150"
     (scrolled)="onScroll()">
     <div class="news__container">
-
+        @if(isLoading) {
+        <app-loader class="loader-container" />
+        }
         @for (article of visibleNews; track $index) {
         <article class="news__card"
             [ngClass]="{'reversed': $index % 2 === 0, 'border-odd': $index % 2 === 0, 'border-even': $index % 2 !== 0}">

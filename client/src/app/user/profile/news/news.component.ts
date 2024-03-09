@@ -8,6 +8,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Subscription, filter } from 'rxjs';
+import { LoadingService } from '../../../services/loading.service';
+import { LoaderComponent } from '../../../shared/loader/loader.component';
 
 @Component({
   selector: 'app-news',
@@ -17,21 +19,26 @@ import { Subscription, filter } from 'rxjs';
     CarouselComponent,
     InfiniteScrollModule,
     FontAwesomeModule,
+    LoaderComponent,
   ],
   templateUrl: './news.component.html',
   styleUrl: './news.component.scss',
 })
 export class NewsComponent implements OnInit, OnDestroy {
+  declare faCalendar;
+
   news: NewsData[] = [];
   visibleNews: NewsData[] = [];
+
   page = 1;
   pageSize = 20;
-  declare faCalendar;
+  isLoading = false;
 
   private declare navigationEndSubscription: Subscription;
 
   constructor(
     private newsService: RecipeService,
+    private loadingService: LoadingService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -39,6 +46,10 @@ export class NewsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.loadingService
+      .getLoadingState()
+      .subscribe((isLoading) => (this.isLoading = isLoading));
+
     this.route.queryParams.subscribe((params) => {
       this.page = parseInt(params['page'] || '1', 10);
     });

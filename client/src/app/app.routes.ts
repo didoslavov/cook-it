@@ -12,6 +12,7 @@ import { ProfileComponent } from './user/profile/profile.component';
 import { ProfileRecipesComponent } from './user/profile/profile-recipes/profile-recipes.component';
 import { ProfileSearchComponent } from './user/profile/profile-search/profile-search.component';
 import { NewsComponent } from './user/profile/news/news.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -27,6 +28,7 @@ export const routes: Routes = [
     path: 'recipes/create',
     component: RecipeFormComponent,
     data: { animation: 'isLeft' },
+    canActivate: [authGuard],
   },
   {
     path: 'recipes/:recipeId/details',
@@ -37,15 +39,18 @@ export const routes: Routes = [
     path: 'recipes/:recipeId/delete',
     component: DeleteComponent,
     data: { animation: 'isRight' },
+    canActivate: [authGuard],
   },
   {
     path: 'recipes/:recipeId/edit',
     component: EditRecipeFormComponent,
     data: { animation: 'isRight' },
+    canActivate: [authGuard],
   },
   {
     path: 'profile/:userId',
     component: ProfileComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: '',

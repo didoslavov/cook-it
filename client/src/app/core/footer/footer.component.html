@@ -7,19 +7,23 @@
     </div>
     <nav class="footer__nav">
         <ul class="footer__nav--list">
+            <li class="footer__nav--list-item"><a class="footer__nav--list-link" routerLink="/recipes"
+                    [queryParams]="{ offset: 0, limit: 4 }">All Recipes</a>
+            </li>
             @if(!user) {
             <li class="footer__nav--list-item"><a class="footer__nav--list-link" routerLink="/auth/login">Login</a>
             </li>
             <li class="footer__nav--list-item"><a class="footer__nav--list-link"
                     routerLink="/auth/register">Register</a>
             </li>
-            }
-            <li class="footer__nav--list-item"><a class="footer__nav--list-link" routerLink="/recipes"
-                    [queryParams]="{ offset: 0, limit: 4 }">All Recipes</a>
+            } @else {
+            <li class="footer__nav--list-item"><a class="footer__nav--list-link" routerLink="recipes/create"
+                    [queryParams]="{ offset: 0, limit: 4 }">Create Recipes</a>
             </li>
             <li class="footer__nav--list-item"><a class="footer__nav--list-link"
-                    routerLink="profile/{{user?.id}}/recipes" [queryParams]="{ offset: 0, limit: 4 }">My Recipes</a>
+                    routerLink="profile/{{user.id}}">Profile</a>
             </li>
+            }
         </ul>
     </nav>
     <div class="footer__copyright">

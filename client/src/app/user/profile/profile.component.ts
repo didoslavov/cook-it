@@ -16,23 +16,24 @@ import { filter } from 'rxjs/operators';
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent implements OnInit {
-  declare userId: string | null;
-  isRecipesRoute: boolean = false;
+  userId = '';
+  isRecipesRoute = false;
+  offset = 0;
+  limit = 4;
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.userId = params['userId'];
+      this.offset = params['offset'];
+      this.limit = params['limit'];
     });
 
     this.setRecipesRoute();
   }
 
   private setRecipesRoute(): void {
-    this.isRecipesRoute =
-      this.route.snapshot.firstChild?.routeConfig?.path === 'recipes';
-
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe(() => {

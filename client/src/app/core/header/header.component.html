@@ -4,10 +4,10 @@
     </a>
     <nav class="main-nav">
         <ul class="main-nav-list">
-            @if (!isRecipePage) {
+            @if (showRecipesLink || showCreateRecipeLink) {
             <li><a class="main-nav-link" routerLink="/recipes" [queryParams]="{ offset: 0, limit: 4 }">Recipes</a></li>
             }
-            @if (user) {
+            @if (user && !showCreateRecipeLink) {
             <li><a class="main-nav-link" routerLink="/recipes/create">Create Recipe</a></li>
             }
             @if (isHomePage) {

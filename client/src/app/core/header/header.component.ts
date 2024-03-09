@@ -33,7 +33,8 @@ export class HeaderComponent implements OnInit {
   declare attentionSeeker: string;
   declare user: User | null;
   declare isHomePage: boolean;
-  declare isRecipePage: boolean;
+  declare showRecipesLink: boolean;
+  declare showCreateRecipeLink: boolean;
 
   faCircleXmark = faCircleXmark;
   faBars = faBars;
@@ -62,9 +63,12 @@ export class HeaderComponent implements OnInit {
         this.isHomePage =
           this.router.url === '/' || this.router.url.includes('#');
 
-        this.isRecipePage =
-          this.router.url.includes('/recipes') &&
-          !this.router.url.includes('profile');
+        this.showRecipesLink =
+          this.router.url === '/' ||
+          this.router.url === '/recipes' ||
+          this.router.url.includes('/profile');
+
+        this.showCreateRecipeLink = this.router.url === '/recipes/create';
       }
     });
 

@@ -18,7 +18,8 @@
     border-bottom-right-radius: 20rem;
     display: flex;
     flex-direction: column;
-    flex: 1 1 20%;
+    position: sticky;
+    top: 9.5rem;
 
     &--nav {
       &-list {

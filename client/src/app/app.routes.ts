@@ -13,6 +13,7 @@ import { ProfileRecipesComponent } from './user/profile/profile-recipes/profile-
 import { ProfileSearchComponent } from './user/profile/profile-search/profile-search.component';
 import { NewsComponent } from './user/profile/news/news.component';
 import { authGuard } from './guards/auth.guard';
+import { guestGuard } from './guards/guest.guard';
 
 export const routes: Routes = [
   {
@@ -76,11 +77,13 @@ export const routes: Routes = [
     path: 'auth/register',
     component: RegisterComponent,
     data: { animation: 'isLeft' },
+    canActivate: [guestGuard],
   },
   {
     path: 'auth/login',
     component: LoginComponent,
     data: { animation: 'isRight' },
+    canActivate: [guestGuard],
   },
   {
     path: '**',

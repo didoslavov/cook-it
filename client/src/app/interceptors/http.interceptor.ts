@@ -1,19 +1,25 @@
 import { HttpInterceptorFn } from '@angular/common/http';
-import { EMPTY, catchError, throwError } from 'rxjs';
+import { EMPTY, catchError, finalize, throwError } from 'rxjs';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment.development';
 import { AuthApiActions } from '../store/auth/auth.actions';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
+import { LoadingService } from '../services/loading.service';
 
 export const httpInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
   const store = inject(Store);
   const cookieService = inject(CookieService);
+  const loadingService = inject(LoadingService);
+
+  loadingService.setLoadingState(true);
 
   if (req.url.startsWith(environment.newsApiUrl)) {
-    return next(req);
+    return next(req).pipe(
+      finalize(() => loadingService.setLoadingState(false))
+    );
   }
 
   const modifiedReq = req.clone({
@@ -49,6 +55,7 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
       }
 
       return throwError(() => error.message);
-    })
+    }),
+    finalize(() => loadingService.setLoadingState(false))
   );
 };

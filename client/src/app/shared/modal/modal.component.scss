@@ -44,6 +44,15 @@
 
     &--btn {
       text-transform: uppercase;
+
+      &:first-child {
+        background-color: var(--color-primary-dark);
+        color: var(--color-primary-light);
+      }
+
+      &:first-child:hover {
+        background-color: var(--color-error-icon);
+      }
     }
   }
 }

@@ -11,8 +11,7 @@
     @if(ingredients.length) {
     <app-carousel class="app-carousel" [carouselType]="'search'" [ingredients]="ingredients" />
     } @else {
-    <p class="search__no-content">Try searching for ingredients<span
-            class="animate__animated animate__heartBeat animate__infinite"><fa-icon [icon]="faArrowUp"
-                class="search__no-content--icon" /></span></p>
+    <p class="search__no-content">Try searching for ingredients<span class=""><fa-icon [icon]="faArrowUp"
+                animation="beat" class="search__no-content--icon" /></span></p>
     }
 </section>

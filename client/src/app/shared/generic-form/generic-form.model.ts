@@ -8,6 +8,8 @@ import { rePasswordValidators } from '../../validators/rePassword.validators';
 import { nameValidators } from '../../validators/name.validators';
 import { prepTimeValidators } from '../../validators/prepTime.validators';
 import { cookTimeValidators } from '../../validators/cookTime.validators';
+import { imageValidators } from '../../validators/image.validators';
+import { ingredientValidators } from '../../validators/ingredient.validators';
 
 export interface GenericFormData {
   userId?: string;
@@ -71,8 +73,15 @@ export class GenericFormModel {
         cookTimeValidators.required,
         cookTimeValidators.isNumber,
       ]),
-      img: new FormControl(data.img),
-      ingredient: new FormControl(data.ingredient),
+      img: new FormControl(data.img, [
+        imageValidators.required,
+        imageValidators.isImage,
+      ]),
+      ingredient: new FormControl(data.ingredient, [
+        ingredientValidators.required,
+        ingredientValidators.minLength,
+        ingredientValidators.maxLength,
+      ]),
       quantity: new FormControl(data.quantity),
       unit: new FormControl(data.unit),
       steps: new FormControl(data.steps),

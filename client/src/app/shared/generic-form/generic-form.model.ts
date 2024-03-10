@@ -1,4 +1,4 @@
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 export interface GenericFormData {
   userId?: string;
@@ -23,17 +23,12 @@ export class GenericFormModel {
   form: FormGroup;
 
   constructor(data: GenericFormData) {
-    const passwordValidators = [Validators.required, Validators.minLength(6)];
-
     this.form = new FormGroup({
       firstName: new FormControl(data.firstName),
       lastName: new FormControl(data.lastName),
       avatar: new FormControl(data.avatar),
-      email: new FormControl(data.email, [
-        Validators.required,
-        Validators.email,
-      ]),
-      password: new FormControl(data.password, passwordValidators),
+      email: new FormControl(data.email),
+      password: new FormControl(data.password),
       rePassword: new FormControl(data.rePassword),
       name: new FormControl(data.name),
       prepTime: new FormControl(data.prepTime),

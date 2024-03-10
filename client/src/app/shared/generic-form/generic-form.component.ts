@@ -202,7 +202,7 @@ export class GenericFormComponent implements OnInit, OnChanges {
   }
 
   onSubmit(): void {
-    const formData = this.formModel.form.value;
+    const formData = this.trimFormData(this.formModel.form.value);
 
     if (this.isRecipeEditForm()) {
       const updatedRecipe: Recipe = {
@@ -219,5 +219,17 @@ export class GenericFormComponent implements OnInit, OnChanges {
     } else {
       this.formSubmit.emit(formData);
     }
+  }
+
+  private trimFormData(formData: any): any {
+    const trimmedData = { ...formData };
+
+    for (const key in trimmedData) {
+      if (typeof trimmedData[key] === 'string') {
+        trimmedData[key] = trimmedData[key].trim();
+      }
+    }
+
+    return trimmedData;
   }
 }

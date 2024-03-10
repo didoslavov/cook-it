@@ -147,10 +147,6 @@
           transition: all 0.3s ease-in;
           position: relative;
 
-          &:hover {
-            outline: 1px solid var(--color-primary);
-          }
-
           &::selection {
             background-color: var(--color-primary-opacity);
           }

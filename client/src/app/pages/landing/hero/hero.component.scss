@@ -51,23 +51,6 @@
     &--icon-container {
       margin-left: 0.4rem;
       display: inline-block;
-      animation: bounce 2s infinite;
-    }
-
-    @keyframes bounce {
-      0%,
-      20%,
-      50%,
-      80%,
-      100% {
-        transform: translateY(0);
-      }
-      40% {
-        transform: translateY(-1.5rem);
-      }
-      60% {
-        transform: translateY(-0.7rem);
-      }
     }
   }
 }

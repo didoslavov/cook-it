@@ -7,6 +7,7 @@ import { passwordValidators } from '../../validators/password.validators';
 import { rePasswordValidators } from '../../validators/rePassword.validators';
 import { nameValidators } from '../../validators/name.validators';
 import { prepTimeValidators } from '../../validators/prepTime.validators';
+import { cookTimeValidators } from '../../validators/cookTime.validators';
 
 export interface GenericFormData {
   userId?: string;
@@ -66,7 +67,10 @@ export class GenericFormModel {
         prepTimeValidators.required,
         prepTimeValidators.isNumber,
       ]),
-      cookTime: new FormControl(data.cookTime),
+      cookTime: new FormControl(data.cookTime, [
+        cookTimeValidators.required,
+        cookTimeValidators.isNumber,
+      ]),
       img: new FormControl(data.img),
       ingredient: new FormControl(data.ingredient),
       quantity: new FormControl(data.quantity),

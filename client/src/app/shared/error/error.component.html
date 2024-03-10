@@ -1,0 +1,12 @@
+<div class="error__container">
+    <fa-icon [icon]="faExclamation" class="error__icon" />
+    <div class="error">
+        <ul class="error__list">
+            @for (error of errors; track $index) {
+            <li class="error__list--item">
+                {{error}}
+            </li>
+            }
+        </ul>
+    </div>
+</div>

@@ -1,4 +1,7 @@
 import { FormControl, FormGroup } from '@angular/forms';
+import { firstNameValidators } from '../../validators/firstName.validators';
+import { lastNameValidators } from '../../validators/lastName.validators';
+import { emailValidators } from '../../validators/email.validators';
 
 export interface GenericFormData {
   userId?: string;
@@ -24,10 +27,23 @@ export class GenericFormModel {
 
   constructor(data: GenericFormData) {
     this.form = new FormGroup({
-      firstName: new FormControl(data.firstName),
-      lastName: new FormControl(data.lastName),
+      firstName: new FormControl(data.firstName, [
+        firstNameValidators.required,
+        firstNameValidators.minLength,
+        firstNameValidators.maxLength,
+        firstNameValidators.charSet,
+      ]),
+      lastName: new FormControl(data.lastName, [
+        lastNameValidators.required,
+        lastNameValidators.minLength,
+        lastNameValidators.maxLength,
+        lastNameValidators.charSet,
+      ]),
       avatar: new FormControl(data.avatar),
-      email: new FormControl(data.email),
+      email: new FormControl(data.email, [
+        emailValidators.required,
+        emailValidators.isEmail,
+      ]),
       password: new FormControl(data.password),
       rePassword: new FormControl(data.rePassword),
       name: new FormControl(data.name),

@@ -1,7 +1,7 @@
-import { FormControl, Validators } from '@angular/forms';
-import { ImageUrlValidator } from './imageUrl.validators';
+import { AbstractControl, Validators } from '@angular/forms';
+import { imageUrlValidator } from './imageUrl.validators';
 
 export const avatarValidators = {
   required: Validators.required,
-  isImage: (control: FormControl) => ImageUrlValidator.validate(control),
+  isImage: (control: AbstractControl) => imageUrlValidator(control),
 };

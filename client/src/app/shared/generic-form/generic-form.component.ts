@@ -11,7 +11,12 @@ import {
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { GenericFormData, GenericFormModel } from './generic-form.model';
 import { RouterLink } from '@angular/router';
-import { faListOl, faPlus, faSpoon } from '@fortawesome/free-solid-svg-icons';
+import {
+  faExclamation,
+  faListOl,
+  faPlus,
+  faSpoon,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   Ingredient,
@@ -19,11 +24,18 @@ import {
   Recipe,
   RecipeData,
 } from '../../recipes/recipe.model';
+import { ErrorComponent } from '../error/error.component';
 
 @Component({
   selector: 'app-generic-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, FontAwesomeModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterLink,
+    FontAwesomeModule,
+    ErrorComponent,
+  ],
   templateUrl: './generic-form.component.html',
   styleUrl: './generic-form.component.scss',
 })
@@ -50,9 +62,15 @@ export class GenericFormComponent implements OnInit, OnChanges {
   formModel!: GenericFormModel;
   ingredientToEdit!: IngredientWithId | undefined;
 
-  faBtn = faPlus;
-  faSpoon = faSpoon;
-  faList = faListOl;
+  declare faBtn;
+  declare faSpoon;
+  declare faList;
+
+  constructor() {
+    this.faBtn = faPlus;
+    this.faSpoon = faSpoon;
+    this.faList = faListOl;
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if ('recipe' in changes && this.isRecipeEditForm()) {

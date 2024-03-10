@@ -3,6 +3,7 @@ import { firstNameValidators } from '../../validators/firstName.validators';
 import { lastNameValidators } from '../../validators/lastName.validators';
 import { emailValidators } from '../../validators/email.validators';
 import { avatarValidators } from '../../validators/avatar.validators';
+import { passwordValidators } from '../../validators/password.validators';
 
 export interface GenericFormData {
   userId?: string;
@@ -48,7 +49,10 @@ export class GenericFormModel {
         emailValidators.required,
         emailValidators.isEmail,
       ]),
-      password: new FormControl(data.password),
+      password: new FormControl(data.password, [
+        passwordValidators.required,
+        passwordValidators.minLength,
+      ]),
       rePassword: new FormControl(data.rePassword),
       name: new FormControl(data.name),
       prepTime: new FormControl(data.prepTime),

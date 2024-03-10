@@ -6,7 +6,7 @@ import { inject } from '@angular/core';
 
 export function imageUrlValidator(
   control: AbstractControl
-): Observable<{ [key: string]: any } | null> {
+): Observable<{ [key: string]: boolean } | null> {
   const http = inject(HttpClient);
   const url = control.value;
 

@@ -69,11 +69,7 @@ export class CarouselComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
-    if (
-      changes['ingredients'] &&
-      !changes['ingredients'].firstChange &&
-      this.carouselType === 'search'
-    ) {
+    if (changes['ingredients'] && this.carouselType === 'search') {
       this.router.navigate([], {
         relativeTo: this.route,
         queryParams: {

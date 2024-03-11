@@ -10,6 +10,7 @@ import { prepTimeValidators } from '../../validators/prepTime.validators';
 import { cookTimeValidators } from '../../validators/cookTime.validators';
 import { imageValidators } from '../../validators/image.validators';
 import { ingredientValidators } from '../../validators/ingredient.validators';
+import { quantityValidators } from '../../validators/quantity.validators';
 
 export interface GenericFormData {
   userId?: string;
@@ -82,7 +83,10 @@ export class GenericFormModel {
         ingredientValidators.minLength,
         ingredientValidators.maxLength,
       ]),
-      quantity: new FormControl(data.quantity),
+      quantity: new FormControl(data.quantity, [
+        quantityValidators.required,
+        quantityValidators.quantityFormatValidator,
+      ]),
       unit: new FormControl(data.unit),
       steps: new FormControl(data.steps),
       description: new FormControl(data.description),

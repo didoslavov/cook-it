@@ -39,3 +39,11 @@ export function isNumber(control: AbstractControl) {
 
   return isNaN(value) ? { isNotNumber: true } : null;
 }
+
+export function quantityFormatValidator(control: AbstractControl) {
+  const value = control.value;
+  const pattern =
+    /^(?:(?:\d+(?:\.\d+)?|\d+\/\d+)(?:\s*\/\s*\d+(?:\.\d+)?|\s*\/\s*\d+)?|\d+(?:\.\d+)?)$/;
+
+  return !pattern.test(value) ? { invalidQuantity: true } : null;
+}

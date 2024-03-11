@@ -12,6 +12,7 @@ import { imageValidators } from '../../validators/image.validators';
 import { ingredientValidators } from '../../validators/ingredient.validators';
 import { quantityValidators } from '../../validators/quantity.validators';
 import { stepsValidators } from '../../validators/steps.validators';
+import { descriptionValidators } from '../../validators/description.validators';
 
 export interface GenericFormData {
   userId?: string;
@@ -90,7 +91,10 @@ export class GenericFormModel {
       ]),
       unit: new FormControl(data.unit),
       steps: new FormControl(data.steps, [stepsValidators.required]),
-      description: new FormControl(data.description),
+      description: new FormControl(data.description, [
+        descriptionValidators.required,
+        descriptionValidators.minLength,
+      ]),
     });
   }
 }

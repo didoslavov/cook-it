@@ -11,6 +11,7 @@ import { cookTimeValidators } from '../../validators/cookTime.validators';
 import { imageValidators } from '../../validators/image.validators';
 import { ingredientValidators } from '../../validators/ingredient.validators';
 import { quantityValidators } from '../../validators/quantity.validators';
+import { stepsValidators } from '../../validators/steps.validators';
 
 export interface GenericFormData {
   userId?: string;
@@ -88,7 +89,7 @@ export class GenericFormModel {
         quantityValidators.quantityFormatValidator,
       ]),
       unit: new FormControl(data.unit),
-      steps: new FormControl(data.steps),
+      steps: new FormControl(data.steps, [stepsValidators.required]),
       description: new FormControl(data.description),
     });
   }

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { GenericFormComponent } from '../../shared/generic-form/generic-form.component';
-import { GenericFormData } from '../../shared/generic-form/generic-form.model';
+import { GenericFormComponent } from '../../../shared/generic-form/generic-form.component';
+import { GenericFormData } from '../../../shared/generic-form/generic-form.model';
 import { Router } from '@angular/router';
-import { User } from '../../store/auth/user.model';
+import { User } from '../../../store/auth/user.model';
 import { Store, select } from '@ngrx/store';
-import { getUserData } from '../../store/auth/auth.selectors';
-import { RecipeService } from '../../services/recipe.service';
+import { getUserData } from '../../../store/auth/auth.selectors';
+import { RecipeService } from '../../../services/recipe.service';
 import { Ingredient, Recipe, RecipeData } from '../recipe.model';
 
 @Component({

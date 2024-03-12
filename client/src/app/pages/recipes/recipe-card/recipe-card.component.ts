@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faClock, faInfo } from '@fortawesome/free-solid-svg-icons';
-import { Recipe } from '../../recipes/recipe.model';
+import { Recipe } from '../recipe.model';
 import { RouterModule } from '@angular/router';
 
 @Component({

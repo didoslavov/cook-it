@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Recipe } from '../../../recipes/recipe.model';
+import { Recipe } from '../../../pages/recipes/recipe.model';
 import {
   FormBuilder,
   FormGroup,

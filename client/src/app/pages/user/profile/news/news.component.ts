@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CarouselComponent } from '../../../shared/carousel/carousel.component';
 import { RecipeService } from '../../../services/recipe.service';
-import { NewsData } from '../../../recipes/recipe.model';
+import { NewsData } from '../../../pages/recipes/recipe.model';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';

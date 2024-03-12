@@ -7,9 +7,9 @@ import {
 } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
-import { Recipe, RecipeData } from '../../recipes/recipe.model';
+import { Recipe, RecipeData } from '../../pages/recipes/recipe.model';
 import { RecipeService } from '../../services/recipe.service';
-import { RecipeCardComponent } from '../../recipes/recipe-card/recipe-card.component';
+import { RecipeCardComponent } from '../../pages/recipes/recipe-card/recipe-card.component';
 import { Store, select } from '@ngrx/store';
 import { getUserData } from '../../store/auth/auth.selectors';
 import { User } from '../../store/auth/user.model';

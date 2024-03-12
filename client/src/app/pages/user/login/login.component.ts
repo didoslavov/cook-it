@@ -1,9 +1,9 @@
 import { Store } from '@ngrx/store';
-import { GenericFormComponent } from '../../shared/generic-form/generic-form.component';
-import { GenericFormData } from '../../shared/generic-form/generic-form.model';
+import { GenericFormComponent } from '../../../shared/generic-form/generic-form.component';
+import { GenericFormData } from '../../../shared/generic-form/generic-form.model';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthApiActions } from '../../store/auth/auth.actions';
+import { AuthApiActions } from '../../../store/auth/auth.actions';
 
 @Component({
   selector: 'app-login',

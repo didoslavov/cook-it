@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { RecipeService } from '../../services/recipe.service';
+import { RecipeService } from '../../../services/recipe.service';
 import { Recipe } from '../recipe.model';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { directionsState, ingredientsState } from '../../animations';
-import { User } from '../../store/auth/user.model';
+import { directionsState, ingredientsState } from '../../../animations';
+import { User } from '../../../store/auth/user.model';
 import { Store, select } from '@ngrx/store';
-import { getUserData } from '../../store/auth/auth.selectors';
+import { getUserData } from '../../../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-details',

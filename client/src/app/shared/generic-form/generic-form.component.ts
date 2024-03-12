@@ -24,7 +24,7 @@ import {
   IngredientWithId,
   Recipe,
   RecipeData,
-} from '../../recipes/recipe.model';
+} from '../../pages/recipes/recipe.model';
 import { ErrorComponent } from '../error/error.component';
 import { HttpClient } from '@angular/common/http';
 import { ErrorService } from '../../services/error.service';

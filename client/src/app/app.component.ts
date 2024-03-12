@@ -7,7 +7,7 @@ import { slider } from './animations';
 import { AuthPageActions } from './store/auth/auth.actions';
 import { Store } from '@ngrx/store';
 import { User } from './store/auth/user.model';
-import { RecipesComponent } from './recipes/recipes.component';
+import { RecipesComponent } from './pages/recipes/recipes.component';
 
 @Component({
   selector: 'app-root',

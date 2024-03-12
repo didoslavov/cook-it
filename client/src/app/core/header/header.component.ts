@@ -73,7 +73,11 @@ export class HeaderComponent implements OnInit {
     });
 
     this.store.pipe(select(getUserData)).subscribe((user: any) => {
-      this.user = user?.user;
+      if (user?.user) {
+        this.user = user.user;
+      } else {
+        this.user = user;
+      }
     });
 
     this.activatedRoute.fragment.subscribe(

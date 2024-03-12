@@ -20,8 +20,7 @@
             <li><a class="btn btn--accent" [ngClass]="attentionSeeker" (mouseover)="attentionSeekerAnimation($event)"
                     (mouseout)="attentionSeekerAnimationRemove($event)" routerLink="/auth/register">Join now</a>
             </li>
-            }
-            @if(user) {
+            } @else {
             <li class="main-nav-list__item-user"><button #menuBtn class="main-nav-list__item-btn"
                     (click)="toggleUserMenu()">{{user.firstName}}</button><img class="main-nav-list__item-img"
                     src="{{user.avatar || ('../../../assets/useravatar.png')}}" alt="user avatar" />

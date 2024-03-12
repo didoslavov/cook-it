@@ -1,5 +1,3 @@
-// local-storage.service.ts
-
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AuthApiActions } from '../store/auth/auth.actions';
@@ -15,6 +13,7 @@ export class LocalStorageService {
     const storedUserData = this.getItem('userData');
     if (storedUserData) {
       const user = JSON.parse(storedUserData);
+
       this.store.dispatch(AuthApiActions.loginSuccess({ user }));
     }
   }

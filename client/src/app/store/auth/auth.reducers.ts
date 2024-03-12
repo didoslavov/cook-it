@@ -3,7 +3,6 @@ import {
   ActionReducer,
   ActionReducerMap,
   MetaReducer,
-  State,
   createReducer,
   on,
 } from '@ngrx/store';

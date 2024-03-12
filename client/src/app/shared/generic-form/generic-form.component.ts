@@ -244,8 +244,10 @@ export class GenericFormComponent implements OnInit, OnChanges {
     } else {
       Object.keys(this.formModel.form.controls).forEach((input) => {
         const control = this.formModel.form.get(input);
+
         if (control && control.errors) {
           const currentErrors = control.errors as { [errorKey: string]: any };
+
           for (const errorKey in currentErrors) {
             if (currentErrors.hasOwnProperty(errorKey)) {
               this.errorService.setErrors(input, {

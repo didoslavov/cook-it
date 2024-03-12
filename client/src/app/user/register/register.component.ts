@@ -24,8 +24,7 @@ export class RegisterComponent {
   constructor(private store: Store, private router: Router) {}
 
   onSubmit(formData: GenericFormData): void {
-    const userData = { ...formData };
-    this.store.dispatch(AuthApiActions.registerUser({ userData }));
+    this.store.dispatch(AuthApiActions.registerUser({ userData: formData }));
 
     this.router.navigate(['/']);
   }

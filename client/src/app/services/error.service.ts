@@ -1,24 +1,53 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
+interface Error {
+  required: boolean;
+  isEmail: boolean;
+  isImage: boolean;
+  minLength: string;
+  maxLength: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class ErrorService {
-  private errorsSubject: BehaviorSubject<string[]> = new BehaviorSubject<
-    string[]
-  >([]);
-  public errors$: Observable<string[]> = this.errorsSubject.asObservable();
+  private errors: { [inputName: string]: { [errorKey: string]: any } } = {};
+  private errorsSubject: BehaviorSubject<{
+    [inputName: string]: { [errorKey: string]: any };
+  }> = new BehaviorSubject<{
+    [inputName: string]: { [errorKey: string]: any };
+  }>(this.errors);
+  public errors$: Observable<{
+    [inputName: string]: { [errorKey: string]: any };
+  }> = this.errorsSubject.asObservable();
 
   constructor() {}
 
-  public setErrors(errors: string[]) {
-    this.errorsSubject.next(errors);
+  public setErrors(inputName: string, errors: { [errorKey: string]: any }) {
+    const formattedErrors: { [errorKey: string]: any } = {};
+
+    for (const errorKey in errors) {
+      if (errors.hasOwnProperty(errorKey)) {
+        formattedErrors[errorKey] = true;
+      }
+    }
+
+    this.errors[inputName] = formattedErrors;
+    this.errorsSubject.next(this.errors);
   }
 
-  public clearError(error: string) {
-    const currentErrors = this.errorsSubject.getValue();
-    const updatedErrors = currentErrors.filter((e) => e !== error);
-    this.errorsSubject.next(updatedErrors);
+  public clearErrors(inputName: string) {
+    delete this.errors[inputName];
+    this.errorsSubject.next(this.errors);
+  }
+
+  public hasErrors(inputName: string): boolean {
+    return !!this.errors[inputName];
+  }
+
+  public getErrors(inputName: string): { [errorKey: string]: any } {
+    return this.errors[inputName] || {};
   }
 }

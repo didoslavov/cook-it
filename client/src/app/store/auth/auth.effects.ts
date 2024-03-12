@@ -56,6 +56,17 @@ export class AuthEffects {
     )
   );
 
+  registrationSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthApiActions.registrationSuccess),
+        tap(({ user }) => {
+          this.localStorageService.setItem('userData', user);
+        })
+      ),
+    { dispatch: false }
+  );
+
   loginUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthApiActions.loginUser),

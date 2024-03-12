@@ -12,6 +12,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { GenericFormData, GenericFormModel } from './generic-form.model';
 import { RouterLink } from '@angular/router';
 import {
+  IconDefinition,
   faExclamation,
   faListOl,
   faPlus,
@@ -25,6 +26,9 @@ import {
   RecipeData,
 } from '../../recipes/recipe.model';
 import { ErrorComponent } from '../error/error.component';
+import { HttpClient } from '@angular/common/http';
+import { ErrorService } from '../../services/error.service';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-generic-form',
@@ -61,12 +65,15 @@ export class GenericFormComponent implements OnInit, OnChanges {
   headingText!: string;
   formModel!: GenericFormModel;
   ingredientToEdit!: IngredientWithId | undefined;
+  hasErrors: boolean = false;
+  private errorsSubscription: Subscription | undefined;
+  private destroy$: Subject<void> = new Subject<void>();
 
   declare faBtn;
   declare faSpoon;
   declare faList;
 
-  constructor() {
+  constructor(private http: HttpClient, private errorService: ErrorService) {
     this.faBtn = faPlus;
     this.faSpoon = faSpoon;
     this.faList = faListOl;
@@ -89,8 +96,16 @@ export class GenericFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.formModel = new GenericFormModel(this.formData);
-    this.formModel.form.addControl('ingredients', new FormControl(''));
+    this.formModel = new GenericFormModel(this.formData, this.formType);
+    this.formModel.form.addControl('ingredients', new FormControl(null));
+
+    this.errorsSubscription = this.errorService.errors$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((errors) => {
+        this.hasErrors = Object.keys(errors).some(
+          (inputName) => Object.keys(errors[inputName]).length > 0
+        );
+      });
 
     this.headingText = this.isRegistrationForm()
       ? 'Sign Up for a Delicious Journey'
@@ -111,6 +126,12 @@ export class GenericFormComponent implements OnInit, OnChanges {
       : this.isRecipeEditForm()
       ? 'Edit'
       : '';
+  }
+
+  ngOnDestroy(): void {
+    if (this.errorsSubscription) {
+      this.errorsSubscription.unsubscribe();
+    }
   }
 
   isRegistrationForm(): boolean {
@@ -204,20 +225,38 @@ export class GenericFormComponent implements OnInit, OnChanges {
   onSubmit(): void {
     const formData = this.trimFormData(this.formModel.form.value);
 
-    if (this.isRecipeEditForm()) {
-      const updatedRecipe: Recipe = {
-        name: formData.name,
-        prepTime: formData.prepTime,
-        cookTime: formData.cookTime,
-        img: formData.img,
-        ingredients: this.ingredients,
-        steps: this.steps,
-        description: formData.description,
-      };
+    if (this.formModel.form.valid) {
+      if (this.isRecipeEditForm()) {
+        const updatedRecipe: Recipe = {
+          name: formData.name,
+          prepTime: formData.prepTime,
+          cookTime: formData.cookTime,
+          img: formData.img,
+          ingredients: this.ingredients,
+          steps: this.steps,
+          description: formData.description,
+        };
 
-      this.formSubmit.emit(updatedRecipe);
+        this.formSubmit.emit(updatedRecipe);
+      } else {
+        this.formSubmit.emit(formData);
+      }
     } else {
-      this.formSubmit.emit(formData);
+      Object.keys(this.formModel.form.controls).forEach((input) => {
+        const control = this.formModel.form.get(input);
+        if (control && control.errors) {
+          const currentErrors = control.errors as { [errorKey: string]: any };
+          for (const errorKey in currentErrors) {
+            if (currentErrors.hasOwnProperty(errorKey)) {
+              this.errorService.setErrors(input, {
+                [errorKey]: currentErrors[errorKey],
+              });
+            }
+          }
+        } else {
+          this.errorService.clearErrors(input);
+        }
+      });
     }
   }
 

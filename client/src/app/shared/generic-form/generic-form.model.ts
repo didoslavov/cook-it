@@ -13,6 +13,7 @@ import { ingredientValidators } from '../../validators/ingredient.validators';
 import { quantityValidators } from '../../validators/quantity.validators';
 import { stepsValidators } from '../../validators/steps.validators';
 import { descriptionValidators } from '../../validators/description.validators';
+import { HttpClient } from '@angular/common/http';
 
 export interface GenericFormData {
   userId?: string;
@@ -36,65 +37,133 @@ export interface GenericFormData {
 export class GenericFormModel {
   form: FormGroup;
 
-  constructor(data: GenericFormData) {
-    this.form = new FormGroup({
-      firstName: new FormControl(data.firstName, [
+  constructor(data: GenericFormData, formType: string) {
+    this.form = new FormGroup({});
+
+    switch (formType) {
+      case 'registration':
+        this.addRegistrationFormControls();
+        break;
+      case 'login':
+        this.addLoginFormControls();
+        break;
+      case 'create recipe':
+      case 'edit recipe':
+        this.addRecipeFormControls();
+        break;
+      default:
+        break;
+    }
+
+    if (data) {
+      this.form.patchValue(data);
+    }
+  }
+
+  private addRegistrationFormControls(): void {
+    this.form.addControl(
+      'firstName',
+      new FormControl(null, [
         firstNameValidators.required,
         firstNameValidators.minLength,
         firstNameValidators.maxLength,
-        firstNameValidators.charSet,
-      ]),
-      lastName: new FormControl(data.lastName, [
+      ])
+    );
+    this.form.addControl(
+      'lastName',
+      new FormControl(null, [
         lastNameValidators.required,
         lastNameValidators.minLength,
         lastNameValidators.maxLength,
-        lastNameValidators.charSet,
-      ]),
-      avatar: new FormControl(data.avatar, [
-        avatarValidators.required,
-        avatarValidators.isImage,
-      ]),
-      email: new FormControl(data.email, [
-        emailValidators.required,
-        emailValidators.isEmail,
-      ]),
-      password: new FormControl(data.password, [
+      ])
+    );
+    this.form.addControl(
+      'avatar',
+      new FormControl(null, [avatarValidators.required])
+    );
+    this.form.addControl(
+      'email',
+      new FormControl(null, [emailValidators.required, emailValidators.isEmail])
+    );
+    this.form.addControl(
+      'password',
+      new FormControl(null, [
         passwordValidators.required,
         passwordValidators.minLength,
-      ]),
-      rePassword: new FormControl(data.rePassword, [
+      ])
+    );
+    this.form.addControl(
+      'rePassword',
+      new FormControl(null, [
         rePasswordValidators.required,
         rePasswordValidators.minLength,
-        rePasswordValidators.matchPassword,
-      ]),
-      name: new FormControl(data.name, [nameValidators.required]),
-      prepTime: new FormControl(data.prepTime, [
+      ])
+    );
+  }
+
+  private addLoginFormControls(): void {
+    this.form.addControl(
+      'email',
+      new FormControl(null, [emailValidators.required, emailValidators.isEmail])
+    );
+    this.form.addControl(
+      'password',
+      new FormControl(null, [
+        passwordValidators.required,
+        passwordValidators.minLength,
+      ])
+    );
+  }
+
+  private addRecipeFormControls(): void {
+    this.form.addControl(
+      'name',
+      new FormControl(null, [nameValidators.required])
+    );
+    this.form.addControl(
+      'prepTime',
+      new FormControl(null, [
         prepTimeValidators.required,
         prepTimeValidators.isNumber,
-      ]),
-      cookTime: new FormControl(data.cookTime, [
+      ])
+    );
+    this.form.addControl(
+      'cookTime',
+      new FormControl(null, [
         cookTimeValidators.required,
         cookTimeValidators.isNumber,
-      ]),
-      img: new FormControl(data.img, [
-        imageValidators.required,
-        imageValidators.isImage,
-      ]),
-      ingredient: new FormControl(data.ingredient, [
+      ])
+    );
+    this.form.addControl(
+      'img',
+      new FormControl(null, [imageValidators.required])
+    );
+    this.form.addControl(
+      'ingredient',
+      new FormControl(null, [
         ingredientValidators.required,
         ingredientValidators.minLength,
         ingredientValidators.maxLength,
-      ]),
-      quantity: new FormControl(data.quantity, [
+      ])
+    );
+    this.form.addControl(
+      'quantity',
+      new FormControl(null, [
         quantityValidators.required,
         quantityValidators.quantityFormatValidator,
-      ]),
-      unit: new FormControl(data.unit),
-      steps: new FormControl(data.steps, [stepsValidators.required]),
-      description: new FormControl(data.description, [
+      ])
+    );
+    this.form.addControl('unit', new FormControl(null));
+    this.form.addControl(
+      'steps',
+      new FormControl(null, [stepsValidators.required])
+    );
+    this.form.addControl(
+      'description',
+      new FormControl(null, [
         descriptionValidators.required,
         descriptionValidators.minLength,
-      ]),
-    });
+      ])
+    );
   }
 }

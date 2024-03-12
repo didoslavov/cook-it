@@ -4,11 +4,12 @@
 
   .error {
     opacity: 0;
+    width: fit-content;
     visibility: hidden;
     pointer-events: none;
     position: absolute;
-    top: -6rem;
-    right: -26rem;
+    top: -2rem;
+    right: -28rem;
     font-size: 1.6rem;
     background-color: var(--color-primary-light);
     padding: 1rem 1.6rem;

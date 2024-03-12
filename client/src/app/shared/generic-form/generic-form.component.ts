@@ -4,6 +4,7 @@ import {
   EventEmitter,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   Output,
   SimpleChanges,
@@ -19,7 +20,6 @@ import {
   Recipe,
 } from '../../recipes/recipe.model';
 import { ErrorComponent } from '../error/error.component';
-import { HttpClient } from '@angular/common/http';
 import { ErrorService } from '../../services/error.service';
 import { Subject, Subscription, takeUntil } from 'rxjs';
 
@@ -36,7 +36,7 @@ import { Subject, Subscription, takeUntil } from 'rxjs';
   templateUrl: './generic-form.component.html',
   styleUrl: './generic-form.component.scss',
 })
-export class GenericFormComponent implements OnInit, OnChanges {
+export class GenericFormComponent implements OnInit, OnChanges, OnDestroy {
   @Input() formData!: GenericFormData;
   @Input() formType!:
     | 'registration'
@@ -66,7 +66,7 @@ export class GenericFormComponent implements OnInit, OnChanges {
   declare faSpoon;
   declare faList;
 
-  constructor(private http: HttpClient, private errorService: ErrorService) {
+  constructor(private errorService: ErrorService) {
     this.faBtn = faPlus;
     this.faSpoon = faSpoon;
     this.faList = faListOl;
@@ -123,6 +123,9 @@ export class GenericFormComponent implements OnInit, OnChanges {
 
   ngOnDestroy(): void {
     if (this.errorsSubscription) {
+      Object.keys(this.formData).forEach((i) =>
+        this.errorService.clearErrors(i)
+      );
       this.errorsSubscription.unsubscribe();
     }
   }

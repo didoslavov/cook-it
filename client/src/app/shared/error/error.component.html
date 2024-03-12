@@ -16,6 +16,11 @@
                 {{getFieldName(error.key)}} must be at least {{errorMessage.value['requiredLength']}}
                 } @else if (errorMessage.key === 'mismatch') {
                 Passwords not match.
+                } @else if (errorMessage.key === 'isNotNumber') {
+                {{error.key}} must be a number.
+                } @else if (errorMessage.key === 'invalidQuantity') {
+                {{error.key}} must be a number
+                <p>e.g. 1, 1.5 or in format e.g. 1/2.</p>
                 }
             </li>
             }

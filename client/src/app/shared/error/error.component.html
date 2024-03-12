@@ -2,10 +2,21 @@
     <fa-icon [icon]="faExclamation" class="error__icon" />
     <div class="error">
         <ul class="error__list">
-            @for (error of errors; track $index) {
+            @for (error of errors | keyvalue; track $index) {
+            @for(errorMessage of error.value| keyvalue; track $index) {
             <li class="error__list--item">
-                {{error}}
+                @if (errorMessage.key === 'required') {
+                {{error.key}} is {{errorMessage.key}}
+                } @else if(errorMessage.key === 'pattern') {
+                Please enter a valid {{error.key}}.
+                <p>e.g. john&#64;gmail.com</p>
+                } @else if (errorMessage.key === 'minlength') {
+                {{error.key}} must be at least {{errorMessage.value['requiredLength']}}
+                } @else if (errorMessage.key === 'maxlength') {
+                {{error.key}} must be at least {{errorMessage.value['requiredLength']}}
+                }
             </li>
+            }
             }
         </ul>
     </div>

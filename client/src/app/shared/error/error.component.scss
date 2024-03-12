@@ -7,22 +7,23 @@
     visibility: hidden;
     pointer-events: none;
     position: absolute;
-    top: -2rem;
-    right: -6.2rem;
+    top: -6rem;
+    right: -26rem;
     font-size: 1.6rem;
     background-color: var(--color-primary-light);
     padding: 1rem 1.6rem;
     border-radius: 1rem;
     color: var(--color-error-text);
     filter: drop-shadow(0.4rem 0.4rem 0.4rem var(--color-primary));
+    z-index: 999;
 
     &__icon {
-      font-size: 2.4rem;
+      font-size: 3.6rem;
       color: var(--color-error-icon);
       margin-left: 1rem;
       position: absolute;
-      top: 0.8rem;
-      right: 6rem;
+      top: -1rem;
+      right: -1rem;
 
       &:hover {
         cursor: pointer;

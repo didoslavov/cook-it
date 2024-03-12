@@ -3,7 +3,7 @@
     <form class="search__form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
         <div class="search__form--controls">
             <input type="text" placeholder="placeholder" id="search" class="search__form--controls-input"
-                formControlName="searchQuery" />
+                formControlName="searchQuery" [ngClass]="{'search-error': hasErrors}" />
             <label for="search" class="search__form--controls-label">Search</label>
         </div>
         <button type="submit" class="search__form--btn btn btn--full">Search</button>

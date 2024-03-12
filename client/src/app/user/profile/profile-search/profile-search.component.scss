@@ -39,10 +39,6 @@
         transition: all 0.3s ease-in;
         position: relative;
 
-        &:hover {
-          outline: 1px solid var(--color-primary);
-        }
-
         &::selection {
           background-color: var(--color-primary-opacity);
         }
@@ -103,4 +99,8 @@
       filter: drop-shadow(0.1rem 0.1rem 0.2rem var(--color-primary));
     }
   }
+}
+
+.search-error {
+  border: 2px solid var(--color-error-text);
 }

@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CarouselComponent } from '../../../shared/carousel/carousel.component';
 import { RecipeService } from '../../../services/recipe.service';
-import { NewsData } from '../../../pages/recipes/recipe.model';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
@@ -10,6 +9,7 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Subscription, filter } from 'rxjs';
 import { LoadingService } from '../../../services/loading.service';
 import { LoaderComponent } from '../../../shared/loader/loader.component';
+import { NewsData } from '../../../recipes/recipe.model';
 
 @Component({
   selector: 'app-news',

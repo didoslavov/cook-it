@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { Credentials, User, UserData } from './user.model';
+import { Credentials, User } from './user.model';
 import { GenericFormData } from '../../shared/generic-form/generic-form.model';
 
 export const AuthPageActions = createActionGroup({

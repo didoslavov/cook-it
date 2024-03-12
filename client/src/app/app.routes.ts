@@ -1,19 +1,19 @@
 import { Routes } from '@angular/router';
-import { RegisterComponent } from './pages/user/register/register.component';
+import { RegisterComponent } from './user/register/register.component';
 import { LandingComponent } from './pages/landing/landing.component';
-import { LoginComponent } from './pages/user/login/login.component';
-import { RecipesComponent } from './pages/recipes/recipes.component';
-import { RecipeFormComponent } from './pages/recipes/create-recipe-form/create-recipe-form.component';
-import { DetailsComponent } from './pages/recipes/details/details.component';
-import { EditRecipeFormComponent } from './pages/recipes/edit-recipe-form/edit-recipe-form.component';
+import { LoginComponent } from './user/login/login.component';
 import { DeleteComponent } from './shared/delete/delete.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
-import { ProfileComponent } from './pages/user/profile/profile.component';
-import { ProfileRecipesComponent } from './pages/user/profile/profile-recipes/profile-recipes.component';
-import { ProfileSearchComponent } from './pages/user/profile/profile-search/profile-search.component';
-import { NewsComponent } from './pages/user/profile/news/news.component';
+import { ProfileComponent } from './user/profile/profile.component';
+import { ProfileRecipesComponent } from './user/profile/profile-recipes/profile-recipes.component';
+import { ProfileSearchComponent } from './user/profile/profile-search/profile-search.component';
+import { NewsComponent } from './user/profile/news/news.component';
 import { authGuard } from './guards/auth.guard';
 import { guestGuard } from './guards/guest.guard';
+import { RecipesComponent } from './recipes/recipes.component';
+import { RecipeFormComponent } from './recipes/create-recipe-form/create-recipe-form.component';
+import { DetailsComponent } from './recipes/details/details.component';
+import { EditRecipeFormComponent } from './recipes/edit-recipe-form/edit-recipe-form.component';
 
 export const routes: Routes = [
   {

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Recipe } from '../../../pages/recipes/recipe.model';
 import {
   FormBuilder,
   FormGroup,
@@ -10,6 +9,7 @@ import { CarouselComponent } from '../../../shared/carousel/carousel.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faTurnUp } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute } from '@angular/router';
+import { Recipe } from '../../../recipes/recipe.model';
 
 @Component({
   selector: 'app-profile-home',

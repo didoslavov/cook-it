@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { GenericFormComponent } from '../../../shared/generic-form/generic-form.component';
 import { Ingredient, Recipe, RecipeData } from '../recipe.model';
-import { User } from '../../../store/auth/user.model';
-import { GenericFormData } from '../../../shared/generic-form/generic-form.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { RecipeService } from '../../../services/recipe.service';
-import { getUserData } from '../../../store/auth/auth.selectors';
+import { GenericFormComponent } from '../../shared/generic-form/generic-form.component';
+import { User } from '../../store/auth/user.model';
+import { GenericFormData } from '../../shared/generic-form/generic-form.model';
+import { RecipeService } from '../../services/recipe.service';
+import { getUserData } from '../../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-edit-recipe-form',

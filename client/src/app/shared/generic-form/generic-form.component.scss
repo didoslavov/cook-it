@@ -8,7 +8,7 @@
   background-size: cover;
 
   &__container {
-    height: 90vh;
+    // height: 90vh;
     background-color: var(--color-primary-opacity-light);
     backdrop-filter: blur(2px);
     display: grid;
@@ -16,7 +16,7 @@
     align-content: end;
 
     &--content {
-      height: 90%;
+      // height: 90%;
       width: 60%;
       padding: 9.6rem;
       justify-self: center;

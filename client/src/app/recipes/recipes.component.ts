@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CarouselComponent } from '../../shared/carousel/carousel.component';
+import { CarouselComponent } from '../shared/carousel/carousel.component';
 
 @Component({
   selector: 'app-recipes',

@@ -11,20 +11,13 @@ import {
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { GenericFormData, GenericFormModel } from './generic-form.model';
 import { RouterLink } from '@angular/router';
-import {
-  IconDefinition,
-  faExclamation,
-  faListOl,
-  faPlus,
-  faSpoon,
-} from '@fortawesome/free-solid-svg-icons';
+import { faListOl, faPlus, faSpoon } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   Ingredient,
   IngredientWithId,
   Recipe,
-  RecipeData,
-} from '../../pages/recipes/recipe.model';
+} from '../../recipes/recipe.model';
 import { ErrorComponent } from '../error/error.component';
 import { HttpClient } from '@angular/common/http';
 import { ErrorService } from '../../services/error.service';

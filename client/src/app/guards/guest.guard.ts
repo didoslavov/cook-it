@@ -8,9 +8,8 @@ export const guestGuard: CanActivateFn = (route, state) => {
   const store = inject(Store);
   let user;
 
-  store.pipe(select(getUserData)).subscribe((user: any) => {
-    user = user.user;
-    if (user) {
+  store.pipe(select(getUserData)).subscribe((userData: any) => {
+    if (userData) {
       router.navigate(['']);
     }
   });

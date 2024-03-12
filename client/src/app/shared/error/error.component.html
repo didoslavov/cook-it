@@ -6,14 +6,16 @@
             @for(errorMessage of error.value| keyvalue; track $index) {
             <li class="error__list--item">
                 @if (errorMessage.key === 'required') {
-                {{error.key}} is {{errorMessage.key}}
+                {{getFieldName(error.key)}} is {{errorMessage.key}}
                 } @else if(errorMessage.key === 'pattern') {
-                Please enter a valid {{error.key}}.
+                Please enter a valid {{getFieldName(error.key)}}.
                 <p>e.g. john&#64;gmail.com</p>
                 } @else if (errorMessage.key === 'minlength') {
-                {{error.key}} must be at least {{errorMessage.value['requiredLength']}}
+                {{getFieldName(error.key)}} must be at least {{errorMessage.value['requiredLength']}}
                 } @else if (errorMessage.key === 'maxlength') {
-                {{error.key}} must be at least {{errorMessage.value['requiredLength']}}
+                {{getFieldName(error.key)}} must be at least {{errorMessage.value['requiredLength']}}
+                } @else if (errorMessage.key === 'mismatch') {
+                Passwords not match.
                 }
             </li>
             }

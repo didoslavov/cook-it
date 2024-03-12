@@ -25,4 +25,10 @@ export class ErrorComponent implements OnInit {
       this.errors = errors;
     });
   }
+
+  getFieldName(key: string): string {
+    return key
+      .replace(/([a-z])([A-Z])/g, '$1 $2')
+      .replace(/\b\w/g, (c) => c.toUpperCase());
+  }
 }

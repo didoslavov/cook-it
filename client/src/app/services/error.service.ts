@@ -26,15 +26,7 @@ export class ErrorService {
   constructor() {}
 
   public setErrors(inputName: string, errors: { [errorKey: string]: any }) {
-    const formattedErrors: { [errorKey: string]: any } = {};
-
-    for (const errorKey in errors) {
-      if (errors.hasOwnProperty(errorKey)) {
-        formattedErrors[errorKey] = true;
-      }
-    }
-
-    this.errors[inputName] = formattedErrors;
+    this.errors[inputName] = errors;
     this.errorsSubject.next(this.errors);
   }
 

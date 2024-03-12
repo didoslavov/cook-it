@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Credentials, User, UserData } from '../store/auth/user.model';
+import { Credentials, User } from '../store/auth/user.model';
 import { Observable, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthApiActions } from '../store/auth/auth.actions';
+import { GenericFormData } from '../shared/generic-form/generic-form.model';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,7 @@ export class AuthenticationService {
     return token || null;
   }
 
-  register(userData: UserData): Observable<User> {
+  register(userData: GenericFormData): Observable<User> {
     return this.http
       .post<User>('/users/register', userData)
       .pipe(

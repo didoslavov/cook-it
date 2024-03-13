@@ -14,25 +14,27 @@ interface Error {
 })
 export class ErrorService {
   private errors: { [inputName: string]: { [errorKey: string]: any } } = {};
-  private errorsSubject: BehaviorSubject<{
+
+  private errors$$: BehaviorSubject<{
     [inputName: string]: { [errorKey: string]: any };
   }> = new BehaviorSubject<{
     [inputName: string]: { [errorKey: string]: any };
   }>(this.errors);
+
   public errors$: Observable<{
     [inputName: string]: { [errorKey: string]: any };
-  }> = this.errorsSubject.asObservable();
+  }> = this.errors$$.asObservable();
 
   constructor() {}
 
   public setErrors(inputName: string, errors: { [errorKey: string]: any }) {
     this.errors[inputName] = errors;
-    this.errorsSubject.next(this.errors);
+    this.errors$$.next(this.errors);
   }
 
   public clearErrors(inputName: string) {
     delete this.errors[inputName];
-    this.errorsSubject.next(this.errors);
+    this.errors$$.next(this.errors);
   }
 
   public hasErrors(inputName: string): boolean {

@@ -1,5 +1,5 @@
-import { HttpInterceptorFn } from '@angular/common/http';
-import { EMPTY, catchError, finalize, throwError } from 'rxjs';
+import { HttpInterceptorFn, HttpResponse } from '@angular/common/http';
+import { catchError, finalize, tap, throwError } from 'rxjs';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment.development';
@@ -7,12 +7,17 @@ import { AuthApiActions } from '../store/auth/auth.actions';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
 import { LoadingService } from '../services/loading.service';
+import {
+  Notification,
+  NotificationService,
+} from '../services/notification.service';
 
 export const httpInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
   const store = inject(Store);
   const cookieService = inject(CookieService);
   const loadingService = inject(LoadingService);
+  const notificationService = inject(NotificationService);
 
   loadingService.setLoadingState(true);
 
@@ -30,7 +35,28 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
   const isLoginRequest = req.url.includes('/login');
 
   return next(modifiedReq).pipe(
+    tap((event) => {
+      const notificationAction = req.url.includes('/create')
+        ? 'created'
+        : req.url.includes('/edit')
+        ? 'edited'
+        : req.url.includes('/delete')
+        ? 'deleted'
+        : '';
+
+      if (event instanceof HttpResponse && event.status === 200) {
+        notificationService.setNotification({
+          message: `Recipe ${notificationAction} successfully.`,
+          type: 'success',
+        });
+      }
+    }),
     catchError((error) => {
+      let notificationError: Notification = {
+        message: '',
+        type: '',
+      };
+
       switch (error.status) {
         case 400:
           store.dispatch(
@@ -44,15 +70,33 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
           cookieService.delete('auth');
           store.dispatch(AuthApiActions.logout());
           router.navigate(['/auth/login']);
+
+          notificationError = {
+            message: 'Token is expired, please sign in.',
+            type: 'error',
+          };
+
           return throwError(() => 'Token is expired.');
         case 404:
+          notificationError = {
+            message: error.message,
+            type: 'error',
+          };
+
           return throwError(() => error.message);
         case 409:
+          notificationError = {
+            message: error.message,
+            type: 'error',
+          };
+
           store.dispatch(
             AuthApiActions.registrationFailure({ error: error.message })
           );
           break;
       }
+
+      notificationService.setNotification(notificationError);
 
       return throwError(() => error.message);
     }),

@@ -12,15 +12,15 @@
     right: -28rem;
     font-size: 1.6rem;
     background-color: var(--color-primary-light);
-    padding: 1rem 1.6rem;
+    padding: 1.8rem 2.4rem;
     border-radius: 1rem;
-    color: var(--color-error-text);
+    color: var(--color-error);
     filter: drop-shadow(0.4rem 0.4rem 0.4rem var(--color-primary));
     z-index: 999;
 
     &__icon {
       font-size: 3.6rem;
-      color: var(--color-error-icon);
+      color: var(--color-error);
       margin-left: 1rem;
       position: absolute;
       top: -1rem;

@@ -23,18 +23,15 @@ export const routes: Routes = [
   {
     path: 'recipes',
     component: RecipesComponent,
-    data: { animation: 'isRight' },
   },
   {
     path: 'recipes/create',
     component: RecipeFormComponent,
-    data: { animation: 'isLeft' },
     canActivate: [authGuard],
   },
   {
     path: 'recipes/:recipeId/details',
     component: DetailsComponent,
-    data: { animation: 'isLeft' },
   },
   {
     path: 'recipes/:recipeId/delete',
@@ -71,12 +68,10 @@ export const routes: Routes = [
         component: NewsComponent,
       },
     ],
-    data: { animation: 'isRight' },
   },
   {
     path: 'auth/register',
     component: RegisterComponent,
-    data: { animation: 'isLeft' },
     canActivate: [guestGuard],
   },
   {
@@ -88,6 +83,5 @@ export const routes: Routes = [
   {
     path: '**',
     component: NotFoundComponent,
-    data: { animation: 'isLeft' },
   },
 ];

@@ -8,6 +8,22 @@ import {
   animate,
 } from '@angular/animations';
 
+export const fadeInAnimation = trigger('fadeInAnimation', [
+  transition('* => *', [
+    query(':enter', [style({ opacity: 0, position: 'relative' })], {
+      optional: true,
+    }),
+    query(
+      ':enter',
+      [
+        style({ opacity: 0 }),
+        animate('0.8s', style({ opacity: 1, position: 'relative' })),
+      ],
+      { optional: true }
+    ),
+  ]),
+]);
+
 export const slider = trigger('routeAnimations', [
   transition('* => isLeft', slideTo('left')),
   transition('* => isRight', slideTo('right')),
@@ -30,7 +46,7 @@ function slideTo(direction: string) {
         ':leave',
         [
           animate(
-            '700ms cubic-bezier(.54,.54,.8,.8)',
+            '500ms cubic-bezier(.54,.54,.8,.8)',
             style({ [direction]: '100%' })
           ),
         ],
@@ -40,7 +56,7 @@ function slideTo(direction: string) {
         ':enter',
         [
           animate(
-            '700ms cubic-bezier(.54,.54,.8,.8)',
+            '500ms cubic-bezier(.54,.54,.8,.8)',
             style({ [direction]: '0%' })
           ),
         ],

@@ -5,8 +5,10 @@ import {
   NavigationEnd,
   Router,
   RouterModule,
+  RouterOutlet,
 } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { fadeInAnimation } from '../../animations';
 
 @Component({
   selector: 'app-profile',
@@ -14,6 +16,7 @@ import { filter } from 'rxjs/operators';
   imports: [RouterModule, CommonModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
+  animations: [fadeInAnimation],
 })
 export class ProfileComponent implements OnInit {
   userId = '';
@@ -40,5 +43,13 @@ export class ProfileComponent implements OnInit {
         this.isRecipesRoute =
           this.route.snapshot.firstChild?.routeConfig?.path === 'recipes';
       });
+  }
+
+  prepareRoute(outlet: RouterOutlet) {
+    return (
+      outlet &&
+      outlet.activatedRouteData &&
+      outlet.activatedRouteData['animation']
+    );
   }
 }

@@ -24,7 +24,8 @@
             </div>
         </aside>
     </div>
-    <article class="profile__content" [ngClass]="{'bg': isRecipesRoute}">
-        <router-outlet></router-outlet>
+    <article class="profile__content" [ngClass]="{'bg': isRecipesRoute}"
+        [@fadeInAnimation]="outlet.isActivated ? outlet.activatedRoute : ''">
+        <router-outlet #outlet="outlet" />
     </article>
 </section>

@@ -1,14 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-interface Error {
-  required: boolean;
-  isEmail: boolean;
-  isImage: boolean;
-  minLength: string;
-  maxLength: string;
-}
-
 @Injectable({
   providedIn: 'root',
 })

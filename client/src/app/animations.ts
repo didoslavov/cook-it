@@ -50,6 +50,16 @@ function slideTo(direction: string) {
   ];
 }
 
+export const slideInOut = trigger('slideInOut', [
+  transition(':enter', [
+    style({ transform: 'translateX(100%)' }),
+    animate('400ms ease-in', style({ transform: 'translateX(0%)' })),
+  ]),
+  transition(':leave', [
+    animate('400ms ease-in', style({ transform: 'translateX(100%)' })),
+  ]),
+]);
+
 export const ingredientsState = trigger('ingredientsState', [
   state('inactive', style({ opacity: '0', transform: 'translate(-10rem)' })),
   state('active', style({ opacity: '1', transform: 'translate(0)' })),

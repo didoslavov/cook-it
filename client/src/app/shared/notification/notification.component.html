@@ -1,0 +1,11 @@
+<div class="notification">
+    @if(notification) {
+    <div class="notification__content">
+        <h4 class="notification__content--heading"><fa-icon
+                [icon]="notification.type === 'success' ? faCheck : faExclamation" />
+            {{notification.type}}</h4>
+        <p class="notification__content--text">{{notification.message}}</p>
+    </div>
+    <fa-icon [icon]="faXmark" class="notification__close" (click)="clearNotification()" />
+    }
+</div>

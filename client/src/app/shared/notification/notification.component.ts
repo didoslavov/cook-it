@@ -25,7 +25,6 @@ export class NotificationComponent implements OnInit {
   private notificationSubscription: Subscription | null = null;
   private notificationTimer: Subscription | null = null;
   private delayTimer: Subscription | null = null;
-  isNotificationVisible = false;
   isHovered = false;
 
   declare faXmark;
@@ -39,7 +38,7 @@ export class NotificationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.delayTimer = timer(4000).subscribe(() => {
+    this.delayTimer = timer(1000).subscribe(() => {
       this.subscribeToNotificationService();
     });
   }
@@ -47,9 +46,7 @@ export class NotificationComponent implements OnInit {
   ngOnDestroy() {
     this.clearNotificationTimer();
     this.clearDelayTimer();
-    if (this.notificationSubscription) {
-      this.notificationSubscription.unsubscribe();
-    }
+    this.notificationSubscription?.unsubscribe();
     this.clearNotification();
   }
 
@@ -73,7 +70,6 @@ export class NotificationComponent implements OnInit {
           this.notification = notification;
 
           if (this.notification) {
-            this.isNotificationVisible = true;
             this.startNotificationTimer();
           }
         },
@@ -101,8 +97,8 @@ export class NotificationComponent implements OnInit {
   }
 
   clearNotification() {
-    this.clearNotificationTimer();
-    this.isNotificationVisible = false;
+    this.notification = null;
     this.notificationService.clearNotification();
+    this.clearNotificationTimer();
   }
 }

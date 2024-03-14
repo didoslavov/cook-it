@@ -36,26 +36,27 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(modifiedReq).pipe(
     tap((event) => {
-      const notificationAction = req.url.includes('/create')
-        ? 'created'
-        : req.url.includes('/edit')
-        ? 'edited'
-        : req.url.includes('/delete')
-        ? 'deleted'
-        : '';
-
       if (event instanceof HttpResponse && event.status === 200) {
-        notificationService.setNotification({
-          message: `Recipe ${notificationAction} successfully.`,
-          type: 'success',
-        });
+        if (req.url.includes('/create')) {
+          notificationService.setNotification({
+            message: 'Recipe created successfully.',
+            type: 'success',
+          });
+        } else if (req.url.includes('/edit')) {
+          notificationService.setNotification({
+            message: 'Recipe updated successfully',
+            type: 'success',
+          });
+        } else if (req.url.includes('/delete')) {
+          notificationService.setNotification({
+            message: 'Recipe deleted successfully',
+            type: 'success',
+          });
+        }
       }
     }),
     catchError((error) => {
-      let notificationError: Notification = {
-        message: '',
-        type: '',
-      };
+      let notificationError: Notification | null = null;
 
       switch (error.status) {
         case 400:

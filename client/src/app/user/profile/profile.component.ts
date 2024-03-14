@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
   isRecipesRoute = false;
   offset = 0;
   limit = 4;
+  isFirstLoad = true;
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
@@ -41,15 +42,18 @@ export class ProfileComponent implements OnInit {
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe(() => {
         this.isRecipesRoute =
-          this.route.snapshot.firstChild?.routeConfig?.path === 'recipes';
+          this.route.snapshot.firstChild?.routeConfig?.path === 'recipes' ||
+          false;
+
+        if (this.isFirstLoad) {
+          this.isFirstLoad = false;
+        }
       });
   }
 
   prepareRoute(outlet: RouterOutlet) {
     return (
-      outlet &&
-      outlet.activatedRouteData &&
-      outlet.activatedRouteData['animation']
+      !this.isFirstLoad && outlet && outlet.isActivated && outlet.activatedRoute
     );
   }
 }

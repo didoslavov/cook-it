@@ -22,6 +22,7 @@ import {
 import { ErrorComponent } from '../error/error.component';
 import { ErrorService } from '../../services/error.service';
 import { Subject, Subscription, takeUntil } from 'rxjs';
+import { NotificationComponent } from '../notification/notification.component';
 
 @Component({
   selector: 'app-generic-form',
@@ -79,7 +80,7 @@ export class GenericFormComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   populateFormWithRecipeData(): void {
-    this.formModel.form.patchValue({
+    this.formModel?.form.patchValue({
       name: this.recipe.name,
       prepTime: this.recipe.prepTime,
       cookTime: this.recipe.cookTime,

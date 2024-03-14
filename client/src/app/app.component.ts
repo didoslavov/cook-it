@@ -8,6 +8,8 @@ import { AuthPageActions } from './store/auth/auth.actions';
 import { Store } from '@ngrx/store';
 import { User } from './store/auth/user.model';
 import { RecipesComponent } from './recipes/recipes.component';
+import { NotificationComponent } from './shared/notification/notification.component';
+import { NotificationService } from './services/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -18,14 +20,16 @@ import { RecipesComponent } from './recipes/recipes.component';
     HeaderComponent,
     FooterComponent,
     RecipesComponent,
+    NotificationComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   animations: [slider],
 })
 export class AppComponent implements OnInit {
-  constructor(private store: Store) {}
   declare user: User | null;
+
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.store.dispatch(AuthPageActions.loadStateFromLocalStorage());

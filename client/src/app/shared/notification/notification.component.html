@@ -1,11 +1,15 @@
 @if(notification) {
-<div class="notification" [@slideInOut] (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+<div class="notification"
+    [ngClass]="{'notification__success': notification.type === 'success', 'notification__error': notification.type === 'error'}"
+    [@slideInOut] (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
     <div class="notification__content">
         <h4 class="notification__content--heading"><fa-icon class="notification__content--icon"
+                [ngClass]="{'notification__content--icon-success': notification.type === 'success', 'notification__content--icon-error': notification.type === 'error'}"
                 [icon]="notification.type === 'success' ? faCheck : faExclamation" />
-            {{notification.type}}</h4>
+            {{notification.type.toUpperCase()}}</h4>
         <p class="notification__content--text">{{notification.message}}</p>
     </div>
-    <fa-icon [icon]="faXmark" class="notification__close" (click)="clearNotification()" />
+    <fa-icon [icon]="faXmark" class="notification__close"
+        [ngClass]="{'notification__close-error': notification.type === 'error'}" (click)="clearNotification()" />
 </div>
 }

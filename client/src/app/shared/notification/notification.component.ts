@@ -11,11 +11,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Subscription, timer } from 'rxjs';
 import { slideInOut } from '../../animations';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-notification',
   standalone: true,
-  imports: [FontAwesomeModule],
+  imports: [FontAwesomeModule, CommonModule],
   templateUrl: './notification.component.html',
   styleUrl: './notification.component.scss',
   animations: [slideInOut],
@@ -38,9 +39,7 @@ export class NotificationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.delayTimer = timer(1000).subscribe(() => {
-      this.subscribeToNotificationService();
-    });
+    this.subscribeToNotificationService();
   }
 
   ngOnDestroy() {
@@ -77,7 +76,7 @@ export class NotificationComponent implements OnInit {
   }
 
   private startNotificationTimer() {
-    this.notificationTimer = timer(4000).subscribe(() => {
+    this.notificationTimer = timer(2000).subscribe(() => {
       this.clearNotification();
     });
   }

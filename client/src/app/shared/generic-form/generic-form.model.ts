@@ -137,26 +137,10 @@ export class GenericFormModel {
       'img',
       new FormControl(null, [imageValidators.required])
     );
-    this.form.addControl(
-      'ingredient',
-      new FormControl(null, [
-        ingredientValidators.required,
-        ingredientValidators.minLength,
-        ingredientValidators.maxLength,
-      ])
-    );
-    this.form.addControl(
-      'quantity',
-      new FormControl(null, [
-        quantityValidators.required,
-        quantityValidators.quantityFormatValidator,
-      ])
-    );
+    this.form.addControl('ingredient', new FormControl(null));
+    this.form.addControl('quantity', new FormControl(null));
     this.form.addControl('unit', new FormControl(null));
-    this.form.addControl(
-      'steps',
-      new FormControl(null, [stepsValidators.required])
-    );
+    this.form.addControl('steps', new FormControl(null));
     this.form.addControl(
       'description',
       new FormControl(null, [

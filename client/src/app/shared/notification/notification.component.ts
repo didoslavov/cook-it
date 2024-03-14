@@ -10,6 +10,7 @@ import {
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import { Subscription, timer } from 'rxjs';
+import { slideInOut } from '../../animations';
 
 @Component({
   selector: 'app-notification',
@@ -17,11 +18,15 @@ import { Subscription, timer } from 'rxjs';
   imports: [FontAwesomeModule],
   templateUrl: './notification.component.html',
   styleUrl: './notification.component.scss',
+  animations: [slideInOut],
 })
 export class NotificationComponent implements OnInit {
   notification: Notification | null = null;
   private notificationSubscription: Subscription | null = null;
   private notificationTimer: Subscription | null = null;
+  private delayTimer: Subscription | null = null;
+  isNotificationVisible = false;
+  isHovered = false;
 
   declare faXmark;
   declare faExclamation;
@@ -34,32 +39,70 @@ export class NotificationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.notificationService.getNotification().subscribe({
-      next: (notification) => {
-        this.notification = notification;
-
-        if (this.notification) {
-          this.notificationTimer = timer(10000).subscribe(() => {
-            this.clearNotification();
-          });
-        }
-      },
+    this.delayTimer = timer(4000).subscribe(() => {
+      this.subscribeToNotificationService();
     });
   }
 
   ngOnDestroy() {
+    this.clearNotificationTimer();
+    this.clearDelayTimer();
     if (this.notificationSubscription) {
       this.notificationSubscription.unsubscribe();
     }
-
-    if (this.notificationTimer) {
-      this.notificationTimer.unsubscribe();
-    }
-
     this.clearNotification();
   }
 
+  onMouseEnter() {
+    this.isHovered = true;
+    this.clearNotificationTimer();
+  }
+
+  onMouseLeave() {
+    this.isHovered = false;
+    if (this.notification) {
+      this.startNotificationTimer();
+    }
+  }
+
+  private subscribeToNotificationService() {
+    this.notificationSubscription = this.notificationService
+      .getNotification()
+      .subscribe({
+        next: (notification) => {
+          this.notification = notification;
+
+          if (this.notification) {
+            this.isNotificationVisible = true;
+            this.startNotificationTimer();
+          }
+        },
+      });
+  }
+
+  private startNotificationTimer() {
+    this.notificationTimer = timer(4000).subscribe(() => {
+      this.clearNotification();
+    });
+  }
+
+  private clearNotificationTimer() {
+    if (this.notificationTimer) {
+      this.notificationTimer.unsubscribe();
+      this.notificationTimer = null;
+    }
+  }
+
+  private clearDelayTimer() {
+    if (this.delayTimer) {
+      this.delayTimer.unsubscribe();
+      this.delayTimer = null;
+    }
+  }
+
   clearNotification() {
+    this.clearNotificationTimer();
+    this.isNotificationVisible = false;
     this.notificationService.clearNotification();
   }
 }

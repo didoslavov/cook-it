@@ -1,7 +1,8 @@
-<div class="notification">
+@if(isNotificationVisible) {
+<div class="notification" [@slideInOut] (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
     @if(notification) {
     <div class="notification__content">
-        <h4 class="notification__content--heading"><fa-icon
+        <h4 class="notification__content--heading"><fa-icon class="notification__content--icon"
                 [icon]="notification.type === 'success' ? faCheck : faExclamation" />
             {{notification.type}}</h4>
         <p class="notification__content--text">{{notification.message}}</p>
@@ -9,3 +10,4 @@
     <fa-icon [icon]="faXmark" class="notification__close" (click)="clearNotification()" />
     }
 </div>
+}

@@ -36,7 +36,7 @@
     height: 2.2rem;
     top: -1rem;
     right: -1rem;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     font-size: 1.6rem;
@@ -55,4 +55,8 @@
       filter: drop-shadow(0 0 0.5rem var(--color-primary-dark));
     }
   }
+}
+
+.notification:hover .notification__close {
+  display: flex;
 }

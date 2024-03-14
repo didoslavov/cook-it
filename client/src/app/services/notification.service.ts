@@ -10,10 +10,7 @@ export interface Notification {
   providedIn: 'root',
 })
 export class NotificationService {
-  private notification$$ = new BehaviorSubject<Notification>({
-    type: '',
-    message: '',
-  });
+  private notification$$ = new BehaviorSubject<Notification | null>(null);
 
   constructor() {}
 
@@ -21,7 +18,11 @@ export class NotificationService {
     return this.notification$$.asObservable();
   }
 
-  setNotification(notification: Notification) {
+  setNotification(notification: Notification | null) {
     this.notification$$.next(notification);
+  }
+
+  clearNotification() {
+    this.notification$$.next(null);
   }
 }

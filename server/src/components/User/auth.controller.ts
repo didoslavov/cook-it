@@ -23,7 +23,7 @@ const register = expressAsyncHandler(async (req: Request, res: Response): Promis
     const user = await createUser(userData);
 
     if (!user) {
-        throw new AppError(400, 'Registration faild!');
+        throw new AppError(400, 'Registration failed!');
     }
 
     const token = createToken(user);

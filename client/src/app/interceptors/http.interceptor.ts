@@ -33,6 +33,8 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
   });
 
   const isLoginRequest = req.url.includes('/login');
+  const isRegisterRequest = req.url.includes('/register');
+  const currentUrl = router.routerState.snapshot.url;
 
   return next(modifiedReq).pipe(
     tap((event) => {
@@ -65,7 +67,19 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
               ? AuthApiActions.loginFailure({ error: error.message })
               : AuthApiActions.registrationFailure({ error: error.message })
           );
-          router.navigate(['/no-content']);
+
+          if (isLoginRequest || isRegisterRequest) {
+            notificationError = {
+              message: isRegisterRequest
+                ? 'Registration failed!'
+                : "User or password don't match!",
+              type: 'error',
+            };
+
+            router.navigate([currentUrl]);
+          } else {
+            router.navigate(['/no-content']);
+          }
           break;
         case 401:
           cookieService.delete('auth');

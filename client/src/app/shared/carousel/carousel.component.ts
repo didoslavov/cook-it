@@ -96,10 +96,9 @@ export class CarouselComponent implements OnInit, OnChanges {
       .pipe(
         switchMap((params) => {
           const offset = parseInt(params['offset'] || '0');
-          this.currentPage =
-            this.currentPage >= Math.ceil(this.pagination.length / this.limit)
-              ? Math.ceil(offset / this.limit + 1)
-              : this.currentPage;
+
+          this.currentPage = Math.floor(offset / this.limit) + 1;
+
           this.currentOffset = offset <= 0 ? 0 : offset - this.limit;
 
           return this.fetchRecipes(offset);
@@ -129,7 +128,7 @@ export class CarouselComponent implements OnInit, OnChanges {
   private fetchRecipes(offset: number): Observable<RecipeData> {
     let queryParams = new HttpParams()
       .set('offset', offset.toString())
-      .set('limit', '4'.toString());
+      .set('limit', this.limit.toString());
 
     if (this.carouselType === 'search' && this.ingredients.length > 0) {
       queryParams = queryParams.set('ingredients', this.ingredients.join(', '));

@@ -4,6 +4,8 @@ import { Inventory } from '../Inventory';
 import { Recipe } from '../Recipe';
 import { List } from '../List';
 import { UserList, hashPassword } from '../Shared';
+import Like from '../Shared/Relationships/Like/Like.model';
+import Save from '../Shared/Relationships/Save/Save.model';
 
 @Table({
     tableName: 'users',
@@ -34,6 +36,10 @@ class User extends Model<UserInterface> {
     declare recipes: Recipe[];
     @BelongsToMany(() => List, () => UserList)
     declare listId: number[];
+    @BelongsToMany(() => Recipe, () => Like)
+    declare likedRecipes: Recipe[];
+    @BelongsToMany(() => Recipe, () => Save)
+    declare savedRecipes: Recipe[];
 
     @BeforeSave
     static async hashUserPassword(user: User, options: any): Promise<void> {

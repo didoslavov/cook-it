@@ -1,10 +1,12 @@
-import { Model, DataType, Table, BelongsTo, BelongsToMany, Column } from 'sequelize-typescript';
+import { Model, DataType, Table, BelongsTo, BelongsToMany, Column, HasMany } from 'sequelize-typescript';
 import { User } from '../User';
 import { Ingredient, Product, ProductInterface } from '../Product';
 import { ProductRecipe } from '../Shared';
 import { RecipeInterface } from './recipe.interface';
 import { Step, StepInterface } from '../Step';
 import StepRecipe from '../Shared/Relationships/StepRecipe/StepRecipe.model';
+import Like from '../Shared/Relationships/Like/Like.model';
+import Save from '../Shared/Relationships/Save/Save.model';
 
 @Table({
     tableName: 'recipes',
@@ -59,6 +61,12 @@ class Recipe extends Model<RecipeInterface> {
 
     @BelongsToMany(() => Step, () => StepRecipe)
     declare steps: StepInterface[];
+
+    @HasMany(() => Like)
+    declare likes: Like[];
+
+    @HasMany(() => Save)
+    declare saves: Save[];
 }
 
 export default Recipe;

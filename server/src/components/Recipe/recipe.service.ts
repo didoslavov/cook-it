@@ -97,7 +97,7 @@ export const insertRecipe = async (recipeData: RecipeData): Promise<RecipeInterf
     const createdSteps = await createSteps(createdRecipe.id, steps);
 
     const mappedIngredients = createdIngredients.map((createdIngredient): Ingredient => {
-        const correspondingIngredient = ingredients.find((ingredient) => ingredient.name === createdIngredient.name);
+        const correspondingIngredient = ingredients.find((ingredient) => ingredient?.name === createdIngredient.name);
 
         return {
             id: createdIngredient.id,

@@ -32,22 +32,39 @@
       &-cta {
         display: flex;
         gap: 1rem;
-        font-size: 3.2rem;
+        font-size: 3.6rem;
 
-        &-like {
-          color: var(--color-error);
+        &-likes {
+          position: relative;
 
-          &:hover {
-            cursor: pointer;
+          &-like {
+            color: var(--color-error);
+
+            &:hover {
+              cursor: pointer;
+            }
           }
         }
 
-        &-bookmark {
-          color: var(--color-accent-dark);
+        &-bookmarks {
+          position: relative;
 
-          &:hover {
-            cursor: pointer;
+          &-bookmark {
+            color: var(--color-accent-dark);
+
+            &:hover {
+              cursor: pointer;
+            }
           }
+        }
+
+        span {
+          font-size: 1.4rem;
+          color: var(--color-primary-light);
+          position: absolute;
+          top: 50%;
+          right: 50%;
+          transform: translate(50%, -50%);
         }
       }
 

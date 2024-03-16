@@ -2,11 +2,11 @@ import { Model, DataType, Table, BelongsTo, BelongsToMany, Column, HasMany } fro
 import { User } from '../User';
 import { Ingredient, Product, ProductInterface } from '../Product';
 import { ProductRecipe } from '../Shared';
-import { RecipeInterface } from './recipe.interface';
+import { Bookmark, RecipeInterface } from './recipe.interface';
 import { Step, StepInterface } from '../Step';
 import StepRecipe from '../Shared/Relationships/StepRecipe/StepRecipe.model';
-import Like from '../Shared/Relationships/Like/Like.model';
-import Save from '../Shared/Relationships/Save/Save.model';
+import Like from '../Shared/Relationships/Like/LikeRecipe.model';
+import BookmarkRecipe from '../Shared/Relationships/BookmarkRecipe/BookmarkRecipe.model';
 
 @Table({
     tableName: 'recipes',
@@ -65,8 +65,8 @@ class Recipe extends Model<RecipeInterface> {
     @HasMany(() => Like)
     declare likes: Like[];
 
-    @HasMany(() => Save)
-    declare saves: Save[];
+    @HasMany(() => BookmarkRecipe)
+    declare bookmarks: BookmarkRecipe[];
 }
 
 export default Recipe;

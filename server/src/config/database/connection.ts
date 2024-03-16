@@ -7,8 +7,8 @@ import { Inventory } from '../../components/Inventory';
 import { ProductInventory, ProductList, ProductRecipe, TokensBlacklist, UserList } from '../../components/Shared';
 import StepRecipe from '../../components/Shared/Relationships/StepRecipe/StepRecipe.model';
 import { Step } from '../../components/Step';
-import Like from '../../components/Shared/Relationships/Like/Like.model';
-import Save from '../../components/Shared/Relationships/Save/Save.model';
+import Like from '../../components/Shared/Relationships/Like/LikeRecipe.model';
+import BookmarkRecipe from '../../components/Shared/Relationships/BookmarkRecipe/BookmarkRecipe.model';
 
 const sequelize = new Sequelize({
     database: process.env.DB_NAME,
@@ -24,7 +24,7 @@ const sequelize = new Sequelize({
         Step,
         List,
         Like,
-        Save,
+        BookmarkRecipe,
         Inventory,
         UserList,
         ProductRecipe,

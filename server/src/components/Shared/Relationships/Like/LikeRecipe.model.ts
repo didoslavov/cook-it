@@ -1,13 +1,13 @@
 import { Model, Column, DataType, ForeignKey, Table } from 'sequelize-typescript';
-import { SaveInterface } from './save.interface';
 import { User } from '../../../User';
 import { Recipe } from '../../../Recipe';
+import { LikeInterface } from './likeRecipe.interface';
 
 @Table({
-    tableName: 'saves',
-    modelName: 'Save',
+    tableName: 'likes',
+    modelName: 'LikeRecipe',
 })
-class Save extends Model<SaveInterface> {
+class LikeRecipe extends Model<LikeInterface> {
     @ForeignKey(() => User)
     @Column({ type: DataType.UUID, allowNull: false })
     declare userId: string;
@@ -17,4 +17,4 @@ class Save extends Model<SaveInterface> {
     declare recipeId: string;
 }
 
-export default Save;
+export default LikeRecipe;

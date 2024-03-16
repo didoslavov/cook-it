@@ -4,8 +4,8 @@ import { Inventory } from '../Inventory';
 import { Recipe } from '../Recipe';
 import { List } from '../List';
 import { UserList, hashPassword } from '../Shared';
-import Like from '../Shared/Relationships/Like/Like.model';
-import Save from '../Shared/Relationships/Save/Save.model';
+import LikeRecipe from '../Shared/Relationships/Like/LikeRecipe.model';
+import BookmarkRecipe from '../Shared/Relationships/BookmarkRecipe/BookmarkRecipe.model';
 
 @Table({
     tableName: 'users',
@@ -36,9 +36,9 @@ class User extends Model<UserInterface> {
     declare recipes: Recipe[];
     @BelongsToMany(() => List, () => UserList)
     declare listId: number[];
-    @BelongsToMany(() => Recipe, () => Like)
+    @BelongsToMany(() => Recipe, () => LikeRecipe)
     declare likedRecipes: Recipe[];
-    @BelongsToMany(() => Recipe, () => Save)
+    @BelongsToMany(() => Recipe, () => BookmarkRecipe)
     declare savedRecipes: Recipe[];
 
     @BeforeSave

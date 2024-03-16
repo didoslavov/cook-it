@@ -1,6 +1,5 @@
 import { WhereOptions } from 'sequelize';
 import { Ingredient } from '../Product';
-import { StepInterface } from '../Step';
 
 export interface RecipeInterface {
     id?: string;
@@ -10,6 +9,8 @@ export interface RecipeInterface {
     img: string;
     description: string;
     userId: string;
+    like?: Like;
+    bookmark?: Bookmark;
 }
 
 export interface RecipeData extends RecipeInterface {
@@ -20,3 +21,13 @@ export interface RecipeData extends RecipeInterface {
 export type CustomWhereOptions = WhereOptions<RecipeInterface> & {
     ingredients?: string[];
 };
+
+export interface Like {
+    liked: boolean;
+    likesCount: number;
+}
+
+export interface Bookmark {
+    bookmarked: boolean;
+    bookmarksCount: number;
+}

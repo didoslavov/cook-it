@@ -1,13 +1,13 @@
 import { Model, Column, DataType, ForeignKey, Table } from 'sequelize-typescript';
 import { User } from '../../../User';
 import { Recipe } from '../../../Recipe';
-import { LikeInterface } from './like.interface';
+import { BookmarkInterface } from './bookmarkRecipe.interface';
 
 @Table({
-    tableName: 'likes',
-    modelName: 'Like',
+    tableName: 'bookmarks',
+    modelName: 'BookmarkRecipe',
 })
-class Like extends Model<LikeInterface> {
+class BookmarkRecipe extends Model<BookmarkInterface> {
     @ForeignKey(() => User)
     @Column({ type: DataType.UUID, allowNull: false })
     declare userId: string;
@@ -17,4 +17,4 @@ class Like extends Model<LikeInterface> {
     declare recipeId: string;
 }
 
-export default Like;
+export default BookmarkRecipe;

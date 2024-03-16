@@ -8,6 +8,10 @@ export interface Recipe {
   steps?: string[];
   description?: string;
   userId?: string;
+  like?: { liked: boolean; likesCount: number };
+  likes?: { userId: string }[];
+  bookmarks?: { userId: string }[];
+  bookmark?: { bookmarked: boolean; bookmarksCount: number };
 }
 
 export interface RecipeData {
@@ -43,4 +47,13 @@ export interface NewsData {
     name: string;
     id: string;
   };
+}
+
+export interface Like {
+  liked: boolean;
+  likesCount: number;
+}
+export interface Bookmark {
+  bookmarked: boolean;
+  bookmarksCount: number;
 }

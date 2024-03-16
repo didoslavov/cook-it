@@ -15,6 +15,8 @@ import { RecipeFormComponent } from './recipes/create-recipe-form/create-recipe-
 import { DetailsComponent } from './recipes/details/details.component';
 import { EditRecipeFormComponent } from './recipes/edit-recipe-form/edit-recipe-form.component';
 import { ownerGuard } from './guards/owner.guard';
+import { LikedComponent } from './user/profile/liked/liked.component';
+import { BookmarkedComponent } from './user/profile/bookmarked/bookmarked.component';
 
 export const routes: Routes = [
   {
@@ -67,6 +69,14 @@ export const routes: Routes = [
       {
         path: 'news',
         component: NewsComponent,
+      },
+      {
+        path: 'liked',
+        component: LikedComponent,
+      },
+      {
+        path: 'bookmarked',
+        component: BookmarkedComponent,
       },
     ],
   },

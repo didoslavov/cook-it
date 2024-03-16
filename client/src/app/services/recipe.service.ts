@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Recipe, RecipeData } from '../recipes/recipe.model';
+import { Bookmark, Like, Recipe, RecipeData } from '../recipes/recipe.model';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 
@@ -59,10 +59,10 @@ export class RecipeService {
   }
 
   likeRecipe(recipeId: string) {
-    return this.http.post(`/recipe/${recipeId}/like`, {});
+    return this.http.post<Like>(`/recipes/${recipeId}/like`, {});
   }
 
   bookmarkRecipe(recipeId: string) {
-    return this.http.post(`/recipe/${recipeId}/bookmark`, {});
+    return this.http.post<Bookmark>(`/recipes/${recipeId}/bookmark`, {});
   }
 }

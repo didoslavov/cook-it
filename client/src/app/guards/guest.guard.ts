@@ -10,8 +10,6 @@ export const guestGuard: CanActivateFn = (route, state) => {
   const store = inject(Store);
   const notificationService = inject(NotificationService);
 
-  let user;
-
   return store.pipe(select(getUserData), take(1)).pipe(
     map((userData) => {
       if (userData) {

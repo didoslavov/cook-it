@@ -76,6 +76,58 @@ export const findUserRecipes = async (
     };
 };
 
+export const findLikedRecipes = async (
+    limit: number,
+    offset: number,
+    userId: string | undefined
+): Promise<{ recipes: RecipeInterface[]; count: number }> => {
+    const likedRecipeIds = await LikeRecipe.findAll({
+        where: { userId },
+        attributes: ['recipeId'],
+        limit,
+        offset,
+    });
+
+    const likedRecipeIdsArray = likedRecipeIds.map((like) => like.recipeId);
+
+    const { count, rows } = await Recipe.findAndCountAll({
+        where: { id: likedRecipeIdsArray },
+        limit,
+        offset,
+    });
+
+    return {
+        recipes: rows.map((r): RecipeInterface => r.toJSON()),
+        count: count,
+    };
+};
+
+export const findBookmarkedRecipes = async (
+    limit: number,
+    offset: number,
+    userId: string | undefined
+): Promise<{ recipes: RecipeInterface[]; count: number }> => {
+    const bookmarkedRecipeIds = await BookmarkRecipe.findAll({
+        where: { userId },
+        attributes: ['recipeId'],
+        limit,
+        offset,
+    });
+
+    const bookmarkedRecipeIdsArray = bookmarkedRecipeIds.map((bookmark) => bookmark.recipeId);
+
+    const { count, rows } = await Recipe.findAndCountAll({
+        where: { id: bookmarkedRecipeIdsArray },
+        limit,
+        offset,
+    });
+
+    return {
+        recipes: rows.map((r): RecipeInterface => r.toJSON()),
+        count: count,
+    };
+};
+
 export const insertRecipe = async (recipeData: RecipeData): Promise<RecipeInterface> => {
     const ingredients: Ingredient[] = recipeData.ingredients;
     const steps: string[] = recipeData.steps;

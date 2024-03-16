@@ -42,7 +42,8 @@ import { Recipe, RecipeData } from '../../recipes/recipe.model';
   styleUrl: './carousel.component.scss',
 })
 export class CarouselComponent implements OnInit, OnChanges {
-  @Input() carouselType: 'all' | 'user' | 'search' = 'all';
+  @Input() carouselType: 'all' | 'user' | 'search' | 'liked' | 'bookmarked' =
+    'all';
   @Input() title: string = '';
   @Input() ingredients: string[] = [];
 
@@ -149,12 +150,18 @@ export class CarouselComponent implements OnInit, OnChanges {
   private getMethod():
     | 'getRecipes'
     | 'getUserRecipes'
-    | 'searchRecipesByIngredients' {
+    | 'searchRecipesByIngredients'
+    | 'getUserLikedRecipes'
+    | 'getUserBookmarkedRecipes' {
     switch (this.carouselType) {
       case 'user':
         return 'getUserRecipes';
       case 'search':
         return 'searchRecipesByIngredients';
+      case 'liked':
+        return 'getUserLikedRecipes';
+      case 'bookmarked':
+        return 'getUserBookmarkedRecipes';
       default:
         return 'getRecipes';
     }

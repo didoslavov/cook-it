@@ -65,4 +65,16 @@ export class RecipeService {
   bookmarkRecipe(recipeId: string) {
     return this.http.post<Bookmark>(`/recipes/${recipeId}/bookmark`, {});
   }
+
+  getUserLikedRecipes(params: HttpParams) {
+    return this.http
+      .get<RecipeData>('/users/recipes/liked', { params })
+      .pipe(tap((recipes) => recipes));
+  }
+
+  getUserBookmarkedRecipes(params: HttpParams) {
+    return this.http
+      .get<RecipeData>('/users/recipes/bookmarked', { params })
+      .pipe(tap((recipes) => recipes));
+  }
 }

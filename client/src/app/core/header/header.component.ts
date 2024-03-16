@@ -66,6 +66,7 @@ export class HeaderComponent implements OnInit {
         this.showRecipesLink =
           this.router.url === '/' ||
           this.router.url === '/recipes' ||
+          this.router.url.includes('/details') ||
           this.router.url.includes('/profile');
 
         this.showCreateRecipeLink = this.router.url === '/recipes/create';

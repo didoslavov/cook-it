@@ -12,7 +12,9 @@ import { createStepRecipe, updateStepRecipe } from '../Shared/Relationships/Step
 import { Step } from '../Step';
 import { createSteps } from '../Step/step.service';
 import Recipe from './Recipe.model';
-import { RecipeData, RecipeInterface } from './recipe.interface';
+import { Bookmark, Like, RecipeData, RecipeInterface } from './recipe.interface';
+import LikeRecipe from '../Shared/Relationships/Like/LikeRecipe.model';
+import BookmarkRecipe from '../Shared/Relationships/BookmarkRecipe/BookmarkRecipe.model';
 
 export const searchRecipe = async (
     ingredients: string[],
@@ -211,13 +213,35 @@ export const findRecipeByPk = async (recipeId: string): Promise<RecipeData | und
                 attributes: ['step'],
                 through: { attributes: [] },
             },
+            {
+                model: LikeRecipe,
+                attributes: ['userId'],
+                where: { recipeId },
+                required: false,
+            },
+            {
+                model: BookmarkRecipe,
+                attributes: ['userId'],
+                where: { recipeId },
+                required: false,
+            },
         ],
     });
 
     if (recipe) {
         const steps = recipe.steps.map((s) => s.step);
+        const likesCount = await LikeRecipe.count({ where: { recipeId } });
+        const liked = !!recipe.userId && recipe.likes.some((like) => like.userId === recipe.userId);
+        const bookmarksCount = await BookmarkRecipe.count({ where: { recipeId } });
+        const bookmarked = !!recipe.userId && recipe.bookmarks.some((bookmark) => bookmark.userId === recipe.userId);
 
-        return { ...recipe.toJSON(), steps, ingredients: recipe.ingredients };
+        return {
+            ...recipe.toJSON(),
+            steps,
+            ingredients: recipe.ingredients,
+            like: { liked, likesCount },
+            bookmark: { bookmarked, bookmarksCount },
+        };
     }
 };
 
@@ -226,4 +250,26 @@ export const destroyRecipe = async (recipeId: string): Promise<number> => {
     await StepRecipe.destroy({ where: { recipeId } });
 
     return await Recipe.destroy({ where: { id: recipeId } });
+};
+
+export const like = async (recipeId: string, userId: string): Promise<Like> => {
+    const like = await LikeRecipe.create({ recipeId, userId });
+    const likesCount = await LikeRecipe.count({ where: { recipeId } });
+
+    if (like) {
+        return { liked: true, likesCount };
+    }
+
+    return { liked: false, likesCount };
+};
+
+export const bookmark = async (recipeId: string, userId: string): Promise<Bookmark> => {
+    const bookmark = await BookmarkRecipe.create({ recipeId, userId });
+    const bookmarksCount = await BookmarkRecipe.count({ where: { recipeId } });
+
+    if (bookmark) {
+        return { bookmarked: true, bookmarksCount };
+    }
+
+    return { bookmarked: false, bookmarksCount };
 };

@@ -57,4 +57,12 @@ export class RecipeService {
   deleteRecipe(recipeId: string) {
     return this.http.delete<RecipeData>(`/recipes/${recipeId}/delete`);
   }
+
+  likeRecipe(recipeId: string) {
+    return this.http.post(`/recipe/${recipeId}/like`, {});
+  }
+
+  bookmarkRecipe(recipeId: string) {
+    return this.http.post(`/recipe/${recipeId}/bookmark`, {});
+  }
 }

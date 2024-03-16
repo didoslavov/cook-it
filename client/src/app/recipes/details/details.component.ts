@@ -27,7 +27,10 @@ import { faBookmark, faHeart } from '@fortawesome/free-regular-svg-icons';
   animations: [ingredientsState, directionsState, iconAnimation],
 })
 export class DetailsComponent implements OnInit {
-  recipe: Recipe = {};
+  recipe: Recipe = {
+    like: { liked: false, likesCount: 0 },
+    bookmark: { bookmarked: false, bookmarksCount: 0 },
+  };
   recipeId = '';
   showIngredients = true;
   showDirections = false;
@@ -88,14 +91,16 @@ export class DetailsComponent implements OnInit {
   }
 
   onLike() {
-    this.recipeService
-      .likeRecipe(this.recipeId)
-      .subscribe((like) => (this.isLiked = like.liked));
+    this.recipeService.likeRecipe(this.recipeId).subscribe((like) => {
+      this.isLiked = true;
+      this.recipe.like!.likesCount = like.likesCount;
+    });
   }
 
   onBookmark() {
-    this.recipeService
-      .bookmarkRecipe(this.recipeId)
-      .subscribe((bookamrk) => (this.isBookmarked = bookamrk.bookmarked));
+    this.recipeService.bookmarkRecipe(this.recipeId).subscribe((bookamrk) => {
+      this.isBookmarked = true;
+      this.recipe.bookmark!.bookmarksCount = bookamrk.bookmarksCount;
+    });
   }
 }

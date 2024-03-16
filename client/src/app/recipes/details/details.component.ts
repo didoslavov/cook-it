@@ -3,32 +3,53 @@ import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from '../recipe.model';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { directionsState, ingredientsState } from '../../animations';
+import {
+  directionsState,
+  iconAnimation,
+  ingredientsState,
+} from '../../animations';
 import { User } from '../../store/auth/user.model';
 import { Store, select } from '@ngrx/store';
 import { getUserData } from '../../store/auth/auth.selectors';
+import {
+  faBookmark as faBookmarkFull,
+  faHeart as faHeartFull,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faBookmark, faHeart } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FontAwesomeModule],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
-  animations: [ingredientsState, directionsState],
+  animations: [ingredientsState, directionsState, iconAnimation],
 })
 export class DetailsComponent implements OnInit {
   recipe: Recipe = {};
-  recipeId: string = '';
-  showIngredients: boolean = true;
-  showDirections: boolean = false;
+  recipeId = '';
+  showIngredients = true;
+  showDirections = false;
+  isLiked = false;
+  isBookmarked = false;
 
   declare user: User | null;
+  declare faHeart;
+  declare faHeartFull;
+  declare faBookmark;
+  declare faBookmarkFull;
 
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
     private store: Store
-  ) {}
+  ) {
+    this.faHeart = faHeart;
+    this.faHeartFull = faHeartFull;
+    this.faBookmark = faBookmark;
+    this.faBookmarkFull = faBookmarkFull;
+  }
 
   ngOnInit() {
     this.store.pipe(select(getUserData)).subscribe((user: any) => {
@@ -58,5 +79,13 @@ export class DetailsComponent implements OnInit {
       this.showDirections = !this.showDirections;
       this.showIngredients = !this.showIngredients;
     }
+  }
+
+  onLike() {
+    this.isLiked = !this.isLiked;
+  }
+
+  onBookmark() {
+    this.isBookmarked = !this.isBookmarked;
   }
 }

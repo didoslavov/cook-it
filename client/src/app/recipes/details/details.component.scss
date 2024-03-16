@@ -23,20 +23,52 @@
     }
 
     &--chips {
+      padding-left: 2rem;
       display: flex;
-      gap: 2rem;
+      align-items: center;
+      gap: 4rem;
       margin-bottom: 6rem;
 
-      &-times {
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: var(--color-accent-dark);
-        padding: 0.4rem 0.6rem;
-        border: 1px solid var(--color-primary);
-        border-radius: 1rem;
+      &-cta {
+        display: flex;
+        gap: 1rem;
+        font-size: 3.2rem;
 
-        i {
-          color: var(--color-primary-dark);
+        &-like {
+          color: var(--color-error);
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
+        &-bookmark {
+          color: var(--color-accent-dark);
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+
+      &-info {
+        display: flex;
+        gap: 1rem;
+
+        &-times {
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+          font-size: 1.2rem;
+          font-weight: 700;
+          color: var(--color-primary);
+          padding: 0.4rem 0.6rem;
+          border-radius: 1rem;
+
+          i {
+            font-size: 2rem;
+            color: var(--color-primary-dark);
+          }
         }
       }
     }
@@ -257,6 +289,11 @@
 .active {
   color: var(--color-accent-dark);
   text-shadow: 1px 1px 1px var(--color-accent-dark);
+}
+
+.cta-active {
+  // pointer-events: none;
+  cursor: initial;
 }
 
 @media screen and (max-width: 1200px) {

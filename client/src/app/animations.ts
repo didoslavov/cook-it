@@ -87,3 +87,15 @@ export const directionsState = trigger('directionsState', [
   state('active', style({ opacity: '1', transform: 'translate(0)' })),
   transition('inactive <=> active', animate('700ms ease-in-out')),
 ]);
+
+export const iconAnimation = trigger('iconAnimation', [
+  state(
+    'false',
+    style({
+      transform: 'rotate(-360deg)',
+      opacity: 1,
+    })
+  ),
+  transition('false => true', [animate('600ms ease-in')]),
+  transition('true => false', [animate('300ms ease-out')]),
+]);

@@ -9,6 +9,8 @@ import {
     updateRecipe,
     findUserRecipes,
     searchRecipe,
+    like,
+    bookmark,
 } from './recipe.service';
 import { AppError, mapValidationError } from '../Shared';
 import { validationResult } from 'express-validator';
@@ -127,4 +129,40 @@ const deleteRecipe = expressAsyncHandler(async (req: Request, res: Response) => 
     res.status(200).json('Recipe deleted');
 });
 
-export { getRecipes, getUserRecipes, createRecipe, getRecipeById, editRecipe, deleteRecipe, searchRecipesByIngredients };
+const likeRecipe = expressAsyncHandler(async (req: UserRequest, res: Response) => {
+    const { recipeId } = req.params;
+    const userId = req.user?.id;
+
+    const likedRecipe = await like(recipeId, userId!);
+
+    if (!likedRecipe) {
+        throw new AppError(204, 'Something went wrong, recipe not liked.');
+    }
+
+    res.status(200).json(likedRecipe);
+});
+
+const bookmarkRecipe = expressAsyncHandler(async (req: UserRequest, res: Response) => {
+    const { recipeId } = req.params;
+    const userId = req.user?.id;
+
+    const bookmarkedRecipe = await bookmark(recipeId, userId!);
+
+    if (!bookmarkedRecipe) {
+        throw new AppError(204, 'Something went wrong, recipe not bookmarkd.');
+    }
+
+    res.status(200).json(bookmarkedRecipe);
+});
+
+export {
+    getRecipes,
+    getUserRecipes,
+    createRecipe,
+    getRecipeById,
+    editRecipe,
+    deleteRecipe,
+    searchRecipesByIngredients,
+    likeRecipe,
+    bookmarkRecipe,
+};

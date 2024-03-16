@@ -31,8 +31,8 @@ export class DetailsComponent implements OnInit {
   recipeId = '';
   showIngredients = true;
   showDirections = false;
-  isLiked = false;
-  isBookmarked = false;
+  isLiked: boolean | undefined = false;
+  isBookmarked: boolean | undefined = false;
 
   declare user: User | null;
   declare faHeart;
@@ -60,9 +60,15 @@ export class DetailsComponent implements OnInit {
       this.recipeId = params['recipeId'];
 
       if (this.recipeId) {
-        this.recipeService
-          .getRecipeById(this.recipeId)
-          .subscribe((recipe) => (this.recipe = recipe));
+        this.recipeService.getRecipeById(this.recipeId).subscribe((recipe) => {
+          this.isLiked = recipe.likes?.some(
+            (like) => like.userId === this.user?.id
+          );
+          this.isBookmarked = recipe.bookmarks?.some(
+            (like) => like.userId === this.user?.id
+          );
+          this.recipe = recipe;
+        });
       }
     });
   }
@@ -82,10 +88,14 @@ export class DetailsComponent implements OnInit {
   }
 
   onLike() {
-    this.isLiked = !this.isLiked;
+    this.recipeService
+      .likeRecipe(this.recipeId)
+      .subscribe((like) => (this.isLiked = like.liked));
   }
 
   onBookmark() {
-    this.isBookmarked = !this.isBookmarked;
+    this.recipeService
+      .bookmarkRecipe(this.recipeId)
+      .subscribe((bookamrk) => (this.isBookmarked = bookamrk.bookmarked));
   }
 }

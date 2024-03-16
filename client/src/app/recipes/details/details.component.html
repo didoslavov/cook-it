@@ -18,6 +18,7 @@
                 <h2 class="details__header--heading">{{recipe.name}}</h2>
                 <p class="details__header--description">{{recipe.description}}</p>
                 <div class="details__header--chips">
+                    @if (user?.id !== recipe.userId) {
                     <div class="details__header--chips-cta">
                         <fa-icon (click)="onLike()" [@iconAnimation]="isLiked" [ngClass]="{'cta-active': isLiked}"
                             class="details__header--chips-cta-like" [icon]="isLiked ? faHeartFull : faHeart" />
@@ -25,11 +26,12 @@
                             [ngClass]="{'cta-active': isBookmarked}" class="details__header--chips-cta-bookmark"
                             [icon]="isBookmarked ? faBookmarkFull : faBookmark" />
                     </div>
+                    }
                     <div class="details__header--chips-info">
                         <p class="details__header--chips-info-times"><i class="fa-regular fa-clock"></i> Prep Time:
-                            {{recipe.prepTime}}</p>
+                            {{recipe.prepTime}} min</p>
                         <p class="details__header--chips-info-times"><i class="fa-solid fa-clock"></i> Cook Time:
-                            {{recipe.cookTime}}</p>
+                            {{recipe.cookTime}} min</p>
                     </div>
                 </div>
             </header>

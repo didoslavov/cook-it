@@ -11,9 +11,23 @@
     }
     } @else {
     <div class="carousel__no-content">
-        <p class="no-recipes">No recipes found</p>
+        <p class="no-recipes">
+            @if (carouselType === 'user') {
+            No recipes found
+            } @else if(carouselType === 'liked') {
+            You didn't like any recipes yet.
+            } @else {
+            You didn't bookmark any recipes yet.
+            }
+        </p>
         @if(user) {
-        <a routerLink="/recipes/create" class="btn btn--accent">Create one</a>.
+        <a routerLink="{{carouselType === 'user' ? '/recipes/create' : '/recipes' }}" class="btn btn--accent">
+            @if (carouselType === 'user') {
+            Create one
+            } @else {
+            Explore recipes
+            }
+        </a>.
         }
     </div>
     }

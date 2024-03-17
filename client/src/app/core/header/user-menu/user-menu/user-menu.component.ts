@@ -43,7 +43,7 @@ export class UserMenuComponent implements OnInit, OnDestroy {
     this.userDataSubscription = this.store
       .pipe(select(getUserData))
       .subscribe((user: any) => {
-        this.userId = user?.user.id;
+        this.userId = user?.user?.id;
       });
   }
 

@@ -315,6 +315,14 @@ export const like = async (recipeId: string, userId: string): Promise<Like> => {
     return { liked: false, likesCount };
 };
 
+export const deleteLike = async (recipeId: string, userId: string): Promise<Like> => {
+    await LikeRecipe.destroy({ where: { recipeId, userId } });
+
+    const likesCount = await LikeRecipe.count({ where: { recipeId } });
+
+    return { liked: false, likesCount };
+};
+
 export const bookmark = async (recipeId: string, userId: string): Promise<Bookmark> => {
     const bookmark = await BookmarkRecipe.create({ recipeId, userId });
     const bookmarksCount = await BookmarkRecipe.count({ where: { recipeId } });
@@ -322,6 +330,14 @@ export const bookmark = async (recipeId: string, userId: string): Promise<Bookma
     if (bookmark) {
         return { bookmarked: true, bookmarksCount };
     }
+
+    return { bookmarked: false, bookmarksCount };
+};
+
+export const deleteBookmark = async (recipeId: string, userId: string): Promise<Bookmark> => {
+    await BookmarkRecipe.destroy({ where: { recipeId, userId } });
+
+    const bookmarksCount = await BookmarkRecipe.count({ where: { recipeId } });
 
     return { bookmarked: false, bookmarksCount };
 };

@@ -18,7 +18,7 @@
                 <h2 class="details__header--heading">{{recipe.name}}</h2>
                 <p class="details__header--description">{{recipe.description}}</p>
                 <div class="details__header--chips">
-                    @if (user?.id !== recipe.userId) {
+                    @if (user && user.id !== recipe.userId) {
                     <div class="details__header--chips-cta">
                         <div class="details__header--chips-cta-likes" [@iconAnimation]="isLiked" (click)="onLike()">
                             <fa-icon class="details__header--chips-cta-likes-like"

@@ -62,8 +62,16 @@ export class RecipeService {
     return this.http.post<Like>(`/recipes/${recipeId}/like`, {});
   }
 
+  removeLike(recipeId: string) {
+    return this.http.delete<Like>(`/recipes/${recipeId}/like/delete`);
+  }
+
   bookmarkRecipe(recipeId: string) {
     return this.http.post<Bookmark>(`/recipes/${recipeId}/bookmark`, {});
+  }
+
+  removeBookmark(recipeId: string) {
+    return this.http.delete<Bookmark>(`/recipes/${recipeId}/bookmark/delete`);
   }
 
   getUserLikedRecipes(params: HttpParams) {

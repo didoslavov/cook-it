@@ -49,7 +49,11 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
             message: 'Recipe updated successfully',
             type: 'success',
           });
-        } else if (req.url.includes('/delete')) {
+        } else if (
+          req.url.includes('/delete') &&
+          !req.url.includes('/like') &&
+          !req.url.includes('/bookmark')
+        ) {
           notificationService.setNotification({
             message: 'Recipe deleted successfully',
             type: 'success',

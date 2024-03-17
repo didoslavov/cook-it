@@ -91,16 +91,38 @@ export class DetailsComponent implements OnInit {
   }
 
   onLike() {
-    this.recipeService.likeRecipe(this.recipeId).subscribe((like) => {
-      this.isLiked = true;
-      this.recipe.like!.likesCount = like.likesCount;
-    });
+    if (this.user && this.user.id !== this.recipe.userId) {
+      if (this.isLiked) {
+        this.recipeService.removeLike(this.recipeId).subscribe((like) => {
+          this.isLiked = like.liked;
+          this.recipe.like!.likesCount = like.likesCount;
+        });
+      } else {
+        this.recipeService.likeRecipe(this.recipeId).subscribe((like) => {
+          this.isLiked = like.liked;
+          this.recipe.like!.likesCount = like.likesCount;
+        });
+      }
+    }
   }
 
   onBookmark() {
-    this.recipeService.bookmarkRecipe(this.recipeId).subscribe((bookamrk) => {
-      this.isBookmarked = true;
-      this.recipe.bookmark!.bookmarksCount = bookamrk.bookmarksCount;
-    });
+    if (this.user && this.user.id !== this.recipe.userId) {
+      if (this.isBookmarked) {
+        this.recipeService
+          .removeBookmark(this.recipeId)
+          .subscribe((bookmark) => {
+            this.isBookmarked = bookmark.bookmarked;
+            this.recipe.bookmark!.bookmarksCount = bookmark.bookmarksCount;
+          });
+      } else {
+        this.recipeService
+          .bookmarkRecipe(this.recipeId)
+          .subscribe((bookmark) => {
+            this.isBookmarked = bookmark.bookmarked;
+            this.recipe.bookmark!.bookmarksCount = bookmark.bookmarksCount;
+          });
+      }
+    }
   }
 }

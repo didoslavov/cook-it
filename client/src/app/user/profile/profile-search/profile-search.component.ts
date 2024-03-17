@@ -56,6 +56,7 @@ export class ProfileSearchComponent implements OnInit, OnDestroy {
       const ingredientsParam = params['ingredients'];
       if (ingredientsParam) {
         try {
+          this.searchForm.get('searchQuery')?.setValue(ingredientsParam);
           this.ingredients = ingredientsParam.split(', ');
         } catch (e) {}
       } else {

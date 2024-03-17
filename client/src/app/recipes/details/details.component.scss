@@ -32,10 +32,24 @@
       &-cta {
         display: flex;
         gap: 1rem;
-        font-size: 3.6rem;
+        font-size: 4.4rem;
+
+        span {
+          font-size: 1.2rem;
+          color: var(--color-primary-dark);
+          font-weight: 700;
+          position: absolute;
+          top: 50%;
+          right: 50%;
+          transform: translate(50%, -50%);
+        }
 
         &-likes {
           position: relative;
+
+          span.liked {
+            color: var(--color-primary-light);
+          }
 
           &-like {
             color: var(--color-error);
@@ -49,6 +63,14 @@
         &-bookmarks {
           position: relative;
 
+          span.bookmarked {
+            color: var(--color-primary-light);
+          }
+
+          span {
+            transform: translate(50%, -80%);
+          }
+
           &-bookmark {
             color: var(--color-accent-dark);
 
@@ -56,15 +78,6 @@
               cursor: pointer;
             }
           }
-        }
-
-        span {
-          font-size: 1.4rem;
-          color: var(--color-primary-light);
-          position: absolute;
-          top: 50%;
-          right: 50%;
-          transform: translate(50%, -50%);
         }
       }
 
@@ -306,11 +319,6 @@
 .active {
   color: var(--color-accent-dark);
   text-shadow: 1px 1px 1px var(--color-accent-dark);
-}
-
-.cta-active {
-  pointer-events: none;
-  cursor: initial;
 }
 
 @media screen and (max-width: 1200px) {

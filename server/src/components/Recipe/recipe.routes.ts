@@ -9,6 +9,8 @@ import {
     searchRecipesByIngredients,
     likeRecipe,
     bookmarkRecipe,
+    removeLike,
+    removeBookmark,
 } from './recipe.controller';
 const recipeRouter = Router();
 
@@ -19,6 +21,8 @@ recipeRouter.post('/create', authMiddleware(), createRecipe);
 recipeRouter.put('/:recipeId/edit', authMiddleware(), editRecipe);
 recipeRouter.delete('/:recipeId/delete', authMiddleware(), deleteRecipe);
 recipeRouter.post('/:recipeId/like', authMiddleware(), likeRecipe);
+recipeRouter.delete('/:recipeId/like/delete', authMiddleware(), removeLike);
 recipeRouter.post('/:recipeId/bookmark', authMiddleware(), bookmarkRecipe);
+recipeRouter.delete('/:recipeId/bookmark/delete', authMiddleware(), removeBookmark);
 
 export default recipeRouter;

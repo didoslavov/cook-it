@@ -5,6 +5,7 @@ import { map, switchMap, take } from 'rxjs/operators';
 import { NotificationService } from '../services/notification.service';
 import { RecipeService } from '../services/recipe.service';
 import { inject } from '@angular/core';
+import { AuthState } from '../store/auth/user.model';
 
 export const ownerGuard: CanActivateFn = (route, state) => {
   const store = inject(Store);
@@ -15,13 +16,13 @@ export const ownerGuard: CanActivateFn = (route, state) => {
   return store.pipe(
     select(getUserData),
     take(1),
-    map((userData) => userData?.id),
+    map((userData: any) => userData.user.id),
     switchMap((userId) => {
       const recipeId = route.params['recipeId'];
 
       return recipeService.getRecipeById(recipeId).pipe(
         map((recipe) => {
-          const ownerId = recipe?.userId;
+          const ownerId = recipe.userId;
 
           if (userId !== ownerId) {
             notificationService.setNotification({

@@ -11,12 +11,13 @@ import Like from '../../components/Shared/Relationships/Like/LikeRecipe.model';
 import BookmarkRecipe from '../../components/Shared/Relationships/BookmarkRecipe/BookmarkRecipe.model';
 
 const sequelize = new Sequelize({
-    database: process.env.DB_NAME,
+    database: process.env.DATABASE_NAME,
     dialect: 'mysql',
-    username: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    host: process.env.DB_HOST,
-    port: Number(process.env.DB_PORT),
+    username: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
+    host: process.env.DATABASE_HOST,
+    port: Number(process.env.DATABASE_PORT),
+    ssl: true,
     models: [
         User,
         Product,

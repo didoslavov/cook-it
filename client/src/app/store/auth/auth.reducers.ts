@@ -56,7 +56,12 @@ const authReducer = createReducer(
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
-  return localStorageSync({ keys: ['userData'], rehydrate: true })(reducer);
+  return localStorageSync({
+    keys: ['userData'],
+    mergeReducer(state) {
+      return state;
+    },
+  })(reducer);
 }
 export const featureReducers: ActionReducerMap<any> = {
   auth: authReducer,

@@ -5,7 +5,7 @@
       rgba(104, 119, 102, 0.7) 0%,
       rgba(104, 119, 102, 0.7) 100%
     ),
-    url("../../../assets/no-content-bg.jpg");
+    url("../../../assets/no-content-bg.avif");
   background-size: cover;
 
   &__container {
@@ -24,7 +24,7 @@
       &-heading {
         font-size: 40rem;
         letter-spacing: 3rem;
-        background: url("../../../assets/heading-bg-clip.jpg") -3rem -14rem /
+        background: url("../../../assets/heading-bg-clip.avif") -3rem -14rem /
           cover;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -36,7 +36,7 @@
           display: inline-block;
           width: 23rem;
           height: 32rem;
-          background: url("../../../assets/avocado.png") center 2rem / cover
+          background: url("../../../assets/avocado.avif") center 2rem / cover
             no-repeat;
           margin-right: 3rem;
         }

@@ -1,56 +1,56 @@
 import { Routes } from '@angular/router';
-import { RegisterComponent } from './user/register/register.component';
-import { LandingComponent } from './pages/landing/landing.component';
-import { LoginComponent } from './user/login/login.component';
-import { DeleteComponent } from './shared/delete/delete.component';
-import { NotFoundComponent } from './shared/not-found/not-found.component';
-import { ProfileComponent } from './user/profile/profile.component';
-import { ProfileRecipesComponent } from './user/profile/profile-recipes/profile-recipes.component';
-import { ProfileSearchComponent } from './user/profile/profile-search/profile-search.component';
-import { NewsComponent } from './user/profile/news/news.component';
 import { authGuard } from './guards/auth.guard';
 import { guestGuard } from './guards/guest.guard';
-import { RecipesComponent } from './recipes/recipes.component';
-import { RecipeFormComponent } from './recipes/create-recipe-form/create-recipe-form.component';
-import { DetailsComponent } from './recipes/details/details.component';
-import { EditRecipeFormComponent } from './recipes/edit-recipe-form/edit-recipe-form.component';
 import { ownerGuard } from './guards/owner.guard';
-import { LikedComponent } from './user/profile/liked/liked.component';
-import { BookmarkedComponent } from './user/profile/bookmarked/bookmarked.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: LandingComponent,
+    loadComponent: () =>
+      import('./pages/landing/landing.component').then(
+        (m) => m.LandingComponent
+      ),
   },
   {
     path: 'recipes',
-    component: RecipesComponent,
+    loadComponent: () =>
+      import('./recipes/recipes.component').then((m) => m.RecipesComponent),
   },
   {
     path: 'recipes/create',
-    component: RecipeFormComponent,
+    loadComponent: () =>
+      import('./recipes/create-recipe-form/create-recipe-form.component').then(
+        (m) => m.RecipeFormComponent
+      ),
     canActivate: [authGuard],
   },
   {
     path: 'recipes/:recipeId/details',
-    component: DetailsComponent,
+    loadComponent: () =>
+      import('./recipes/details/details.component').then(
+        (m) => m.DetailsComponent
+      ),
   },
   {
     path: 'recipes/:recipeId/delete',
-    component: DeleteComponent,
-    data: { animation: 'isRight' },
+    loadComponent: () =>
+      import('./shared/delete/delete.component').then((m) => m.DeleteComponent),
     canActivate: [authGuard, ownerGuard],
   },
   {
     path: 'recipes/:recipeId/edit',
-    component: EditRecipeFormComponent,
-    data: { animation: 'isRight' },
+    loadComponent: () =>
+      import('./recipes/edit-recipe-form/edit-recipe-form.component').then(
+        (m) => m.EditRecipeFormComponent
+      ),
     canActivate: [authGuard, ownerGuard],
   },
   {
     path: 'profile/:userId',
-    component: ProfileComponent,
+    loadComponent: () =>
+      import('./user/profile/profile.component').then(
+        (m) => m.ProfileComponent
+      ),
     canActivate: [authGuard],
     children: [
       {
@@ -60,39 +60,60 @@ export const routes: Routes = [
       },
       {
         path: 'recipes',
-        component: ProfileRecipesComponent,
+        loadComponent: () =>
+          import(
+            './user/profile/profile-recipes/profile-recipes.component'
+          ).then((m) => m.ProfileRecipesComponent),
       },
       {
         path: 'search',
-        component: ProfileSearchComponent,
+        loadComponent: () =>
+          import('./user/profile/profile-search/profile-search.component').then(
+            (m) => m.ProfileSearchComponent
+          ),
       },
       {
         path: 'news',
-        component: NewsComponent,
+        loadComponent: () =>
+          import('./user/profile/news/news.component').then(
+            (m) => m.NewsComponent
+          ),
       },
       {
         path: 'liked',
-        component: LikedComponent,
+        loadComponent: () =>
+          import('./user/profile/liked/liked.component').then(
+            (m) => m.LikedComponent
+          ),
       },
       {
         path: 'bookmarked',
-        component: BookmarkedComponent,
+        loadComponent: () =>
+          import('./user/profile/bookmarked/bookmarked.component').then(
+            (m) => m.BookmarkedComponent
+          ),
       },
     ],
   },
   {
     path: 'auth/register',
-    component: RegisterComponent,
+    loadComponent: () =>
+      import('./user/register/register.component').then(
+        (m) => m.RegisterComponent
+      ),
     canActivate: [guestGuard],
   },
   {
     path: 'auth/login',
-    component: LoginComponent,
-    data: { animation: 'isRight' },
+    loadComponent: () =>
+      import('./user/login/login.component').then((m) => m.LoginComponent),
     canActivate: [guestGuard],
   },
   {
     path: '**',
-    component: NotFoundComponent,
+    loadComponent: () =>
+      import('./shared/not-found/not-found.component').then(
+        (m) => m.NotFoundComponent
+      ),
   },
 ];

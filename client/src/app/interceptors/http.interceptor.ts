@@ -82,6 +82,11 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
 
             router.navigate([currentUrl]);
           } else {
+            notificationError = {
+              message: 'Resource not found.',
+              type: 'error',
+            };
+
             router.navigate(['/no-content']);
           }
           break;

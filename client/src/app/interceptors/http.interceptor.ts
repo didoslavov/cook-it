@@ -2,7 +2,7 @@ import { HttpInterceptorFn, HttpResponse } from '@angular/common/http';
 import { catchError, finalize, tap, throwError } from 'rxjs';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 import { AuthApiActions } from '../store/auth/auth.actions';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';

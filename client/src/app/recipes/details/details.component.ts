@@ -128,7 +128,7 @@ export class DetailsComponent implements OnInit {
             this.recipe.bookmark!.bookmarksCount = bookmark.bookmarksCount;
 
             this.notificationService.setNotification({
-              message: `You bookmarked ${this.recipe.name}`,
+              message: `You removed ${this.recipe.name} from bookmarks`,
               type: 'success',
             });
           });
@@ -140,7 +140,7 @@ export class DetailsComponent implements OnInit {
             this.recipe.bookmark!.bookmarksCount = bookmark.bookmarksCount;
 
             this.notificationService.setNotification({
-              message: `You removed ${this.recipe.name} from bookmarks`,
+              message: `You bookmarked ${this.recipe.name}`,
               type: 'success',
             });
           });

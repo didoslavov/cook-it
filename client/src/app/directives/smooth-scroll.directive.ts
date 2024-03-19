@@ -1,4 +1,10 @@
-import { Directive, HostListener, Input } from '@angular/core';
+import {
+  Directive,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output,
+} from '@angular/core';
 
 @Directive({
   selector: '[smoothScroll]',
@@ -6,6 +12,7 @@ import { Directive, HostListener, Input } from '@angular/core';
 })
 export class SmoothScrollDirective {
   @Input() duration = 500;
+  @Output() scrollStarted = new EventEmitter<void>();
 
   @HostListener('click')
   onClick(): void {
@@ -16,6 +23,8 @@ export class SmoothScrollDirective {
   private scrollTo(target: number, duration: number): void {
     const start = window.scrollY;
     const startTime = performance.now();
+
+    this.scrollStarted.emit();
 
     function scrollStep(timestamp: number): void {
       const elapsed = timestamp - startTime;

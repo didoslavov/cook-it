@@ -89,6 +89,14 @@ export class HeaderComponent implements OnInit {
   scrollTo(section: string | null) {
     section &&
       document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
+
+    this.removeFragmentFromUrl();
+  }
+
+  removeFragmentFromUrl(): void {
+    const currentUrl = this.router.url;
+    const urlWithoutFragment = currentUrl.split('#')[0];
+    this.router.navigateByUrl(urlWithoutFragment);
   }
 
   attentionSeekerAnimation($event: Event) {

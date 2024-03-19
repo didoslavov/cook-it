@@ -17,6 +17,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBookmark, faHeart } from '@fortawesome/free-regular-svg-icons';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-details',
@@ -46,7 +47,8 @@ export class DetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
-    private store: Store
+    private store: Store,
+    private notificationService: NotificationService
   ) {
     this.faHeart = faHeart;
     this.faHeartFull = faHeartFull;
@@ -96,11 +98,21 @@ export class DetailsComponent implements OnInit {
         this.recipeService.removeLike(this.recipeId).subscribe((like) => {
           this.isLiked = like.liked;
           this.recipe.like!.likesCount = like.likesCount;
+
+          this.notificationService.setNotification({
+            message: `You removed like for ${this.recipe.name}`,
+            type: 'success',
+          });
         });
       } else {
         this.recipeService.likeRecipe(this.recipeId).subscribe((like) => {
           this.isLiked = like.liked;
           this.recipe.like!.likesCount = like.likesCount;
+
+          this.notificationService.setNotification({
+            message: `You liked ${this.recipe.name}`,
+            type: 'success',
+          });
         });
       }
     }
@@ -114,6 +126,11 @@ export class DetailsComponent implements OnInit {
           .subscribe((bookmark) => {
             this.isBookmarked = bookmark.bookmarked;
             this.recipe.bookmark!.bookmarksCount = bookmark.bookmarksCount;
+
+            this.notificationService.setNotification({
+              message: `You bookmarked ${this.recipe.name}`,
+              type: 'success',
+            });
           });
       } else {
         this.recipeService
@@ -121,6 +138,11 @@ export class DetailsComponent implements OnInit {
           .subscribe((bookmark) => {
             this.isBookmarked = bookmark.bookmarked;
             this.recipe.bookmark!.bookmarksCount = bookmark.bookmarksCount;
+
+            this.notificationService.setNotification({
+              message: `You removed ${this.recipe.name} from bookmarks`,
+              type: 'success',
+            });
           });
       }
     }

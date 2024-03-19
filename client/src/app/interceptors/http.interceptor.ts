@@ -53,16 +53,6 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
             message: 'Recipe deleted successfully',
             type: 'success',
           });
-        } else if (req.url.includes('/like')) {
-          notificationService.setNotification({
-            message: 'Recipe liked successfully',
-            type: 'success',
-          });
-        } else if (req.url.includes('/bookmark')) {
-          notificationService.setNotification({
-            message: 'Recipe bookmarked successfully',
-            type: 'success',
-          });
         }
       }
     }),

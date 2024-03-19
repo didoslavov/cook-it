@@ -22,7 +22,7 @@
               "root": "../..",
               "prefix": "^NG_APP_"
             },
-            "outputPath": "dist/client",
+            "outputPath": "dist",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],

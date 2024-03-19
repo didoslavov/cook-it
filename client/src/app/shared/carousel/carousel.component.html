@@ -12,11 +12,11 @@
     } @else {
     <div class="carousel__no-content">
         <p class="no-recipes">
-            @if (carouselType === 'user') {
+            @if (carouselType === 'user' || carouselType === 'all') {
             No recipes found
             } @else if(carouselType === 'liked') {
             You didn't like any recipes yet.
-            } @else {
+            } @else if(carouselType === 'bookmarked') {
             You didn't bookmark any recipes yet.
             }
         </p>

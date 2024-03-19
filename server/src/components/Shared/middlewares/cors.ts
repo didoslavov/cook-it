@@ -5,8 +5,8 @@ export default () =>
         const allowedOrigins = ['http://localhost:4200', 'https://cookit-3j6u.onrender.com'];
 
         const origin: string | undefined = req.headers.origin;
-        res.setHeader('Access-Control-Allow-Origin', 'https://cookit-3j6u.onrender.com');
         if (origin && allowedOrigins.includes(origin)) {
+            res.setHeader('Access-Control-Allow-Origin', origin);
         }
 
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS');

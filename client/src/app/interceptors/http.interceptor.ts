@@ -18,7 +18,6 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
   const cookieService = inject(CookieService);
   const loadingService = inject(LoadingService);
   const notificationService = inject(NotificationService);
-
   loadingService.setLoadingState(true);
 
   if (req.url.startsWith(environment.newsApiUrl)) {
@@ -49,13 +48,19 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
             message: 'Recipe updated successfully',
             type: 'success',
           });
-        } else if (
-          req.url.includes('/delete') &&
-          !req.url.includes('/like') &&
-          !req.url.includes('/bookmark')
-        ) {
+        } else if (req.url.includes('/delete')) {
           notificationService.setNotification({
             message: 'Recipe deleted successfully',
+            type: 'success',
+          });
+        } else if (req.url.includes('/like')) {
+          notificationService.setNotification({
+            message: 'Recipe liked successfully',
+            type: 'success',
+          });
+        } else if (req.url.includes('/bookmark')) {
+          notificationService.setNotification({
+            message: 'Recipe bookmarked successfully',
             type: 'success',
           });
         }

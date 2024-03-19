@@ -2,7 +2,7 @@ import { Response, Request, NextFunction } from 'express';
 
 export default () =>
     (req: Request, res: Response, next: NextFunction): void => {
-        const allowedOrigins = ['http://localhost:4200', 'https://cookit-3j6u.onrender.com/'];
+        const allowedOrigins = ['http://localhost:4200', 'https://cookit-3j6u.onrender.com'];
 
         const origin: string | undefined = req.headers.origin;
         if (origin && allowedOrigins.includes(origin)) {

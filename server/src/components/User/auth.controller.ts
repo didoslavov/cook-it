@@ -57,7 +57,7 @@ const login = expressAsyncHandler(async (req: Request, res: Response): Promise<v
     const token = createToken(user);
     const userData = { id: user.id, firstName: user.firstName, lastName: user.lastName, avatar: user.avatar, email: user.email };
 
-    res.cookie('auth', token, { httpOnly: true, sameSite: 'none', secure: true });
+    res.cookie('auth', token, { httpOnly: true, sameSite: 'none', secure: true, domain: 'cookit-3j6u.onrender.com', path: '/' });
 
     res.status(200).json({ user: userData });
 });

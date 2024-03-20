@@ -99,3 +99,22 @@
 .bg {
   background-color: transparent;
 }
+
+@media screen and (max-width: 900px) {
+  .profile {
+    height: 100vh;
+    flex-direction: column;
+
+    &__aside {
+      height: auto;
+
+      &--nav-list {
+        flex-direction: row;
+      }
+
+      &--bubles {
+        display: none;
+      }
+    }
+  }
+}

@@ -355,10 +355,17 @@
 }
 
 @media screen and (max-width: 900px) {
+  .form {
+    height: 100vh;
+  }
+
   .form__container {
     display: flex;
+    height: 100vh;
     align-items: center;
     justify-content: center;
+    padding-bottom: 12rem;
+
     &--content {
       width: 60%;
 
@@ -391,20 +398,24 @@
 
     &--content {
       border-radius: 1rem 1rem 0 0;
-      height: 60%;
+      height: 70%;
       width: 80%;
       padding: 0;
 
       &-controls {
+        &-label {
+          left: 7.6rem;
+        }
+
         &-btn {
           top: 0.5rem;
-          right: -3rem;
+          right: 1rem;
         }
 
         &-input {
           &:focus + {
             .form__container--content-controls-label {
-              transform: translate(-160%, 0);
+              transform: translate(-100%, 0);
               width: auto;
             }
           }

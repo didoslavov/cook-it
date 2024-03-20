@@ -28,7 +28,7 @@
             }
         </ul>
         @if(showUserMenu) {
-        <app-user-menu />
+        <app-user-menu [logout]="logout" />
         }
     </nav>
     <button class="main-nav__mobile-button" (click)="toggleMobileNav()">
@@ -41,26 +41,31 @@
     @if(showMobileNav){
     <div class="main-nav__mobile-overlay animate__animated animate__fadeInRight">
         <ul class="main-nav__mobile-list">
-            <li><a class="main-nav-link main-nav__mobile-link" routerLink="#how" (click)="closeMobileNav()">How it
-                    works</a>
+            @if (user) {
+            <li><a class="main-nav-link main-nav__mobile-link" routerLink="/profile/{{user.id}}"
+                    (click)="closeMobileNav()">Profile</a>
             </li>
-            <li><a class="main-nav-link main-nav__mobile-link" routerLink="/my-recipes"
-                    (click)="closeMobileNav()">Personal
+            }
+            <li><a class="main-nav-link main-nav__mobile-link" routerLink="/profile/{{user?.id}}/recipes"
+                    [queryParams]="{ offset: 0, limit: 4 }" (click)="closeMobileNav()">Personal
                     Recipes</a>
             </li>
-            <li><a class="main-nav-link main-nav__mobile-link" routerLink="/dashboard"
-                    (click)="closeMobileNav()">Recipes</a>
+            <li><a class="main-nav-link main-nav__mobile-link" routerLink="/recipes"
+                    [queryParams]="{ offset: 0, limit: 4 }" (click)="closeMobileNav()">Recipes</a>
             </li>
-            <li><a class="main-nav-link main-nav__mobile-link" routerLink="#about" (click)="closeMobileNav()">About</a>
+            <li><a class="main-nav-link main-nav__mobile-link" routerLink="" fragment="How"
+                    (click)="closeMobileNav()">How it
+                    works</a>
+            </li>
+            <li><a class="main-nav-link main-nav__mobile-link" routerLink="" fragment="About"
+                    (click)="closeMobileNav()">About</a>
             </li>
             @if (!user) {
             <li><a class="btn btn--cta" routerLink="/auth/register" (click)="closeMobileNav()">Join now</a></li>
-            } @else {
-            <li><a class="main-nav-link main-nav__mobile-link" routerLink="/user" (click)="closeMobileNav()">Profile</a>
-            </li>
-            <li><a class="main-nav-link main-nav__mobile-link" routerLink="" (click)="closeMobileNav()">Logout</a>
-            </li>
             }
+            <li><a class="main-nav-link main-nav__mobile-link" routerLink="" (click)="closeMobileNav()"
+                    (click)="logout()">Logout</a>
+            </li>
         </ul>
     </div>
     }

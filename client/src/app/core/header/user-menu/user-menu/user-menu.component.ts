@@ -1,6 +1,7 @@
 import {
   Component,
   ElementRef,
+  Input,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -22,6 +23,7 @@ import { Subscription } from 'rxjs';
   styleUrl: './user-menu.component.scss',
 })
 export class UserMenuComponent implements OnInit, OnDestroy {
+  @Input() logout!: Function;
   @ViewChild('menu') menu!: ElementRef;
 
   userDataSubscription: Subscription = new Subscription();
@@ -30,11 +32,7 @@ export class UserMenuComponent implements OnInit, OnDestroy {
   declare faUser;
   declare faLogout;
 
-  constructor(
-    private store: Store,
-    private router: Router,
-    private notificationService: NotificationService
-  ) {
+  constructor(private store: Store) {
     this.faUser = faUser;
     this.faLogout = faRightFromBracket;
   }
@@ -49,16 +47,5 @@ export class UserMenuComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.userDataSubscription.unsubscribe();
-  }
-
-  logout() {
-    this.notificationService.setNotification({
-      message: 'Logged out successfully',
-      type: 'success',
-    });
-
-    this.store.dispatch(AuthApiActions.logout());
-
-    this.router.navigate(['/']);
   }
 }

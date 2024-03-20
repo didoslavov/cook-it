@@ -56,7 +56,7 @@
 @media screen and (max-width: 900px) {
   .carousel {
     height: 100vh;
-    grid-template-columns: repeat(2, 40%) minmax(12.6rem, max-content);
+    grid-template-columns: repeat(1, 40%) minmax(12.6rem, max-content);
     grid-template-rows: repeat(3, 1fr);
     justify-items: center;
     gap: 2rem 0;
@@ -64,38 +64,41 @@
     overflow: scroll;
     justify-content: center;
 
-    .carousel__heading {
+    &__heading {
       grid-area: 1 / 1 / 2 / -1;
       justify-self: center;
     }
 
-    .carousel__arrows {
-      grid-area: 2 / 3 / 4 / -1;
+    &__pagination {
+      grid-area: 4 / 1 / 4 / -1;
       margin: 0;
       align-self: center;
+    }
+
+    &__no-content {
+      grid-area: 1 / 1 / 2 / -1;
     }
   }
 }
 
 @media screen and (max-width: 500px) {
   .carousel {
-    grid-template-columns: 1fr;
+    grid-template-columns: max-content;
+    grid-template-rows: repeat(6, 1fr);
 
     gap: 4rem;
 
-    & __no-content,
+    &__no-content,
     &__heading {
       grid-area: 1 / 1 / 2 / -1;
       justify-self: center;
       margin-bottom: 2rem;
     }
 
-    .carousel__arrows {
-      grid-area: auto;
-      justify-self: center;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
+    &__pagination {
+      grid-area: 6 / 1 / 6 / -1;
+      margin: 0;
+      align-self: center;
     }
   }
 }

@@ -1,5 +1,5 @@
-import { HttpInterceptorFn, HttpResponse } from '@angular/common/http';
-import { catchError, finalize, tap, throwError } from 'rxjs';
+import { HttpInterceptorFn } from '@angular/common/http';
+import { catchError, finalize, throwError } from 'rxjs';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
@@ -36,26 +36,6 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
   const currentUrl = router.routerState.snapshot.url;
 
   return next(modifiedReq).pipe(
-    tap((event) => {
-      if (event instanceof HttpResponse && event.status === 200) {
-        if (req.url.includes('/create')) {
-          notificationService.setNotification({
-            message: 'Recipe created successfully.',
-            type: 'success',
-          });
-        } else if (req.url.includes('/edit')) {
-          notificationService.setNotification({
-            message: 'Recipe updated successfully',
-            type: 'success',
-          });
-        } else if (req.url.includes('/delete')) {
-          notificationService.setNotification({
-            message: 'Recipe deleted successfully',
-            type: 'success',
-          });
-        }
-      }
-    }),
     catchError((error) => {
       let notificationError: Notification | null = null;
 

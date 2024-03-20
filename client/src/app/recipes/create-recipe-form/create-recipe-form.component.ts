@@ -7,6 +7,7 @@ import { User } from '../../store/auth/user.model';
 import { GenericFormData } from '../../shared/generic-form/generic-form.model';
 import { RecipeService } from '../../services/recipe.service';
 import { getUserData } from '../../store/auth/auth.selectors';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-recipe-form',
@@ -36,7 +37,8 @@ export class RecipeFormComponent implements OnInit {
   constructor(
     private router: Router,
     private store: Store,
-    private recipeService: RecipeService
+    private recipeService: RecipeService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -74,8 +76,19 @@ export class RecipeFormComponent implements OnInit {
     };
 
     this.recipeService.addRecipe(recipeData).subscribe({
-      next: (v) => this.router.navigate(['/recipes']),
-      error: (err) => console.error(err),
+      next: () => {
+        this.notificationService.setNotification({
+          message: `Recipe ${recipeData.name} created successfully.`,
+          type: 'success',
+        });
+        this.router.navigate(['/recipes']);
+      },
+      error: (err) =>
+        this.notificationService.setNotification({
+          message: `There was a problem creating the recipe.
+        ${err.message}`,
+          type: 'error',
+        }),
     });
   }
 }

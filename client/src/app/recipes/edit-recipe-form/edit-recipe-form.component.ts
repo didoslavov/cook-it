@@ -7,6 +7,7 @@ import { User } from '../../store/auth/user.model';
 import { GenericFormData } from '../../shared/generic-form/generic-form.model';
 import { RecipeService } from '../../services/recipe.service';
 import { getUserData } from '../../store/auth/auth.selectors';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-edit-recipe-form',
@@ -29,7 +30,8 @@ export class EditRecipeFormComponent {
     private router: Router,
     private route: ActivatedRoute,
     private store: Store,
-    private recipeService: RecipeService
+    private recipeService: RecipeService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -90,8 +92,20 @@ export class EditRecipeFormComponent {
     };
 
     this.recipeService.editRecipe(this.recipeId, recipeData).subscribe({
-      next: (v) => this.router.navigate([`/recipes/${this.recipeId}/details`]),
-      error: (err) => console.error(err),
+      next: () => {
+        this.notificationService.setNotification({
+          message: `Recipe ${recipeData.name} updated successfully`,
+          type: 'success',
+        });
+
+        this.router.navigate([`/recipes/${this.recipeId}/details`]);
+      },
+      error: (err) =>
+        this.notificationService.setNotification({
+          message: `There was a problem updating the recipe.
+          ${err.message}`,
+          type: 'error',
+        }),
     });
   }
 }

@@ -18,6 +18,8 @@ import { User } from '../../store/auth/user.model';
 import { Store, select } from '@ngrx/store';
 import { getUserData } from '../../store/auth/auth.selectors';
 import { UserMenuComponent } from './user-menu/user-menu/user-menu.component';
+import { NotificationService } from '../../services/notification.service';
+import { AuthApiActions } from '../../store/auth/auth.actions';
 
 @Component({
   selector: 'app-header',
@@ -45,7 +47,8 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private store: Store,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private notificationService: NotificationService
   ) {
     this.renderer.listen('window', 'click', (e: Event) => {
       if (
@@ -124,5 +127,16 @@ export class HeaderComponent implements OnInit {
 
   closeUserMenu(): void {
     this.showUserMenu = false;
+  }
+
+  logout() {
+    this.notificationService.setNotification({
+      message: 'Logged out successfully',
+      type: 'success',
+    });
+
+    this.store.dispatch(AuthApiActions.logout());
+
+    this.router.navigate(['/']);
   }
 }

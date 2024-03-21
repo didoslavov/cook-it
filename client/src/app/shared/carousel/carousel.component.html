@@ -22,7 +22,7 @@
         </p>
         @if(user) {
         <a routerLink="{{carouselType === 'user' ? '/recipes/create' : '/recipes' }}" class="btn btn--accent">
-            @if (carouselType === 'user') {
+            @if (carouselType === 'user' || carouselType === 'all') {
             Create one
             } @else {
             Explore recipes

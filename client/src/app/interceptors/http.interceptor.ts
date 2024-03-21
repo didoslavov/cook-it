@@ -68,12 +68,13 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
         case 401:
           cookieService.delete('auth');
           store.dispatch(AuthApiActions.logout());
-          router.navigate(['/auth/login']);
 
           notificationError = {
-            message: 'Token is expired, please sign in.',
+            message: 'Session is expired, please sign in again.',
             type: 'error',
           };
+
+          router.navigate(['/auth/login']);
 
           return throwError(() => 'Token is expired.');
         case 404:

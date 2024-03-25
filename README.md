@@ -23,6 +23,8 @@
 
 ## Project Overview
 
+#### Watch video overview of the project
+
 [![Your Video](https://img.youtube.com/vi/Dm_pLo4hx94/0.jpg)](https://www.youtube.com/watch?v=Dm_pLo4hx94)
 
 **Cook-It** is designed to simplify the process of managing recipes, providing users with a platform to explore, create, and organize their favorite recipes. With features like user authentication, CRUD operations on recipes, and search functionality, Cook-It offers a seamless cooking experience for enthusiasts of all levels.

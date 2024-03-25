@@ -23,12 +23,7 @@
 
 ## Project Overview
 
-<div style="width: 50%; margin: 0 auto;">
-  <video width="100%" height="auto" controls autoplay>
-    <source src="https://www.youtube.com/embed/Dm_pLo4hx94" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-</div>
+[![Your Video](https://img.youtube.com/vi/Dm_pLo4hx94/0.jpg)](https://www.youtube.com/watch?v=Dm_pLo4hx94)
 
 **Cook-It** is designed to simplify the process of managing recipes, providing users with a platform to explore, create, and organize their favorite recipes. With features like user authentication, CRUD operations on recipes, and search functionality, Cook-It offers a seamless cooking experience for enthusiasts of all levels.
 

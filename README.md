@@ -1,10 +1,10 @@
-**Backend Packages**
+**Backend**
 
-[![Node.js](https://img.shields.io/badge/Node.js-✓-green)]() [![Express.js](https://img.shields.io/badge/Express.js-✓-lightgrey)]() [![MySQL](https://img.shields.io/badge/MySQL-✓-blue)]() [![Sequelize](https://img.shields.io/badge/Sequelize-✓-blueviolet)]() [![JWT](https://img.shields.io/badge/JWT-✓-blue)]() [![Bcrypt](https://img.shields.io/badge/Bcrypt-✓-blueviolet)]()
+[![Node.js](https://img.shields.io/badge/Node.js-✓-green)]() [![Express.js](https://img.shields.io/badge/Express.js-✓-lightgrey)]() [![TypeScript](https://img.shields.io/badge/TypeScript-✓-blue)]() [![MySQL](https://img.shields.io/badge/MySQL-✓-blue)]() [![Sequelize](https://img.shields.io/badge/Sequelize-✓-blueviolet)]() [![JWT](https://img.shields.io/badge/JWT-✓-blue)]() [![Bcrypt](https://img.shields.io/badge/Bcrypt-✓-blueviolet)]()
 
-**Frontend Packages**
+**Frontend**
 
-[![Angular](https://img.shields.io/badge/Angular-✓-red)]() [![TypeScript](https://img.shields.io/badge/TypeScript-✓-blue)]() [![FontAwesome](https://img.shields.io/badge/FontAwesome-✓-orange)]() [![RxJS](https://img.shields.io/badge/RxJS-✓-red)]() [![Supabase](https://img.shields.io/badge/Supabase-✓-blue)]() [![Animate.css](https://img.shields.io/badge/Animate.css-✓-orange)]() [![Ngx Cookie Service](https://img.shields.io/badge/Ngx%20Cookie%20Service-✓-green)]() [![Ngx Infinite Scroll](https://img.shields.io/badge/Ngx%20Infinite%20Scroll-✓-green)]()
+[![Angular](https://img.shields.io/badge/Angular-✓-red)]() [![TypeScript](https://img.shields.io/badge/TypeScript-✓-blue)]() [![FontAwesome](https://img.shields.io/badge/FontAwesome-✓-blue)]() [![RxJS](https://img.shields.io/badge/RxJS-✓-pink)]() [![Supabase](https://img.shields.io/badge/Supabase-✓-green)]() [![Animate.css](https://img.shields.io/badge/Animate.css-✓-yellow)]() [![Ngx Cookie Service](https://img.shields.io/badge/Ngx%20Cookie%20Service-✓-purple)]() [![Ngx Infinite Scroll](https://img.shields.io/badge/Ngx%20Infinite%20Scroll-✓-orange)]() [![NEWS API](https://img.shields.io/badge/NEWS%20API-✓-blue)]()
 
 # Cook-It
 
@@ -25,19 +25,19 @@
 
 #### Watch video overview of the project
 
+-   **DEMO**: [Cook IT](https://cookit-3j6u.onrender.com/)
+
 [![Your Video](https://img.youtube.com/vi/Dm_pLo4hx94/0.jpg)](https://www.youtube.com/watch?v=Dm_pLo4hx94)
 
 **Cook-It** is designed to simplify the process of managing recipes, providing users with a platform to explore, create, and organize their favorite recipes. With features like user authentication, CRUD operations on recipes, and search functionality, Cook-It offers a seamless cooking experience for enthusiasts of all levels.
 
 ## Deployed Project Showcase
 
-Cook-It backend and frontend are deployed separately. The backend API and the frontend application is deployed on are deployed on [Render](https://render.com/). Database is deployed on [Aiven](https://aiven.io/) Below are the deployment details:
-
--   **Try it**: [Cook IT](https://cookit-3j6u.onrender.com/)
+Cook-It services are deployed separately. The backend API and the frontend application is deployed on are deployed on [Render](https://render.com/). Database is deployed on [Aiven](https://aiven.io/) Below are the deployment details:
 
 ### Note
 
-Due to free nature of deployment plans, the api is put to sleep due to inactivity. It may take up to a minute to "wake up". Please give a time. :)
+Due to free nature of deployment plans, the api is put to sleep due to inactivity. It may take up to a minute to "wake up". Please give it a time. :)
 
 ## Key Features
 
@@ -91,7 +91,7 @@ Feel free to explore each directory for more detailed information on their conte
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/didoslavov/rButler.git
+git clone https://github.com/didoslavov/cook-it.git
 ```
 
 #### Server Setup
@@ -155,11 +155,11 @@ git clone https://github.com/didoslavov/rButler.git
 5. Start the client in development mode:
 
     ```bash
-    npm run dev
+    ng serve
     ```
 
-6. Client setup complete! Open the following link in your web browser:
-   http://localhost:5173
+6. Client setup is completed! Open the following link in your web browser:
+   http://localhost:4200
 
 ## API Endpoints
 

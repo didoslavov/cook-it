@@ -180,6 +180,16 @@
               visibility: hidden;
             }
           }
+
+          &.file {
+            text-align: center;
+            color: var(--color-primary);
+            cursor: pointer;
+
+            &::file-selector-button {
+              display: none;
+            }
+          }
         }
 
         &-btn {

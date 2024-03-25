@@ -26,6 +26,20 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
     );
   }
 
+  if (req.url.startsWith(environment.supabaseUrl)) {
+    const modifiedReq = req.clone({
+      setHeaders: {
+        Authorization: `Bearer ${environment.supabaseApiKey}`,
+      },
+    });
+
+    return next(modifiedReq).pipe(
+      finalize(() => {
+        loadingService.setLoadingState(false);
+      })
+    );
+  }
+
   const modifiedReq = req.clone({
     url: environment.apiUrl + req.url,
     withCredentials: true,

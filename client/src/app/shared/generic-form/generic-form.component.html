@@ -21,7 +21,8 @@
                 </div>
                 <div class="form__container--content-controls">
                     <input type="file" placeholder="placeholder" id="img"
-                        class="form__container--content-controls-input" formControlName="img" />
+                        class="form__container--content-controls-input" formControlName="img"
+                        (change)="onFileChange($event)" />
                     <label for="img" class="form__container--content-controls-label">Avatar</label>
                 </div>
                 }
@@ -66,9 +67,10 @@
                     <label for="cookTime" class="form__container--content-controls-label">Cook Time (min)</label>
                 </div>
                 <div class="form__container--content-controls">
-                    <input type="text" placeholder="placeholder" id="img"
-                        class="form__container--content-controls-input" formControlName="img" />
-                    <label for="img" class="form__container--content-controls-label">Image</label>
+                    <input type="file" placeholder="placeholder" id="image"
+                        class="form__container--content-controls-input file" formControlName="img"
+                        (change)="onFileChange($event)" />
+                    <label for="image" class="form__container--content-controls-label">Image</label>
                 </div>
                 <div class="form__container--content-controls">
                     <input type="text" placeholder="placeholder" id="ingredient"

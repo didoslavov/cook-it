@@ -61,7 +61,8 @@ export class GenericFormComponent implements OnInit, OnChanges, OnDestroy {
   formModel!: GenericFormModel;
   ingredientToEdit!: IngredientWithId | undefined;
   hasErrors: boolean = false;
-  image: string = '';
+  image: File | null = null;
+
   private errorsSubscription: Subscription | undefined;
   private destroy$: Subject<void> = new Subject<void>();
 
@@ -219,55 +220,59 @@ export class GenericFormComponent implements OnInit, OnChanges, OnDestroy {
       name: this.recipe.name,
       prepTime: this.recipe.prepTime,
       cookTime: this.recipe.cookTime,
-      img: this.recipe.img,
       description: this.recipe.description,
     });
+  }
+
+  onFileChange(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const file: File = event.target.files[0];
+      this.image = file;
+    }
   }
 
   onSubmit(): void {
     const formData = this.trimFormData(this.formModel.form.value);
 
-    this.supabaseService
-      .uploadImage(formData.img.split('\\').pop())
-      .subscribe((img) => {
-        if (this.formModel.form.valid) {
-          if (this.isRecipeEditForm()) {
-            const updatedRecipe: Recipe = {
-              name: formData.name,
-              prepTime: formData.prepTime,
-              cookTime: formData.cookTime,
-              img,
-              ingredients: this.ingredients,
-              steps: this.steps,
-              description: formData.description,
+    this.supabaseService.uploadImage(this.image!).subscribe((img) => {
+      if (this.formModel.form.valid) {
+        if (this.isRecipeEditForm()) {
+          const updatedRecipe: Recipe = {
+            name: formData.name,
+            prepTime: formData.prepTime,
+            cookTime: formData.cookTime,
+            img,
+            ingredients: this.ingredients,
+            steps: this.steps,
+            description: formData.description,
+          };
+
+          this.formSubmit.emit(updatedRecipe);
+        } else {
+          this.formSubmit.emit({ ...formData, img });
+        }
+      } else {
+        Object.keys(this.formModel.form.controls).forEach((input) => {
+          const control = this.formModel.form.get(input);
+
+          if (control && control.errors) {
+            const currentErrors = control.errors as {
+              [errorKey: string]: any;
             };
 
-            this.formSubmit.emit(updatedRecipe);
-          } else {
-            this.formSubmit.emit({ ...formData, img });
-          }
-        } else {
-          Object.keys(this.formModel.form.controls).forEach((input) => {
-            const control = this.formModel.form.get(input);
-
-            if (control && control.errors) {
-              const currentErrors = control.errors as {
-                [errorKey: string]: any;
-              };
-
-              for (const errorKey in currentErrors) {
-                if (currentErrors.hasOwnProperty(errorKey)) {
-                  this.errorService.setErrors(input, {
-                    [errorKey]: currentErrors[errorKey],
-                  });
-                }
+            for (const errorKey in currentErrors) {
+              if (currentErrors.hasOwnProperty(errorKey)) {
+                this.errorService.setErrors(input, {
+                  [errorKey]: currentErrors[errorKey],
+                });
               }
-            } else {
-              this.errorService.clearErrors(input);
             }
-          });
-        }
-      });
+          } else {
+            this.errorService.clearErrors(input);
+          }
+        });
+      }
+    });
   }
 
   private trimFormData(formData: any): any {

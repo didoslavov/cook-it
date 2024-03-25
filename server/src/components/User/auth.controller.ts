@@ -20,6 +20,8 @@ const register = expressAsyncHandler(async (req: Request, res: Response): Promis
         throw new AppError(409, 'User already exist!');
     }
 
+    console.log(userData);
+
     const user = await createUser(userData);
 
     if (!user) {
@@ -55,7 +57,7 @@ const login = expressAsyncHandler(async (req: Request, res: Response): Promise<v
     }
 
     const token = createToken(user);
-    const userData = { id: user.id, firstName: user.firstName, lastName: user.lastName, avatar: user.avatar, email: user.email };
+    const userData = { id: user.id, firstName: user.firstName, lastName: user.lastName, img: user.img, email: user.email };
 
     res.cookie('auth', token, { sameSite: 'none', secure: true });
 

@@ -1,8 +1,16 @@
 import { Injectable } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { BehaviorSubject, Observable, from } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+
+interface FileBody extends Blob {
+  lastModified: number;
+  name: string;
+  size: number;
+  type: string;
+  webkitRelativePath: string;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -17,11 +25,11 @@ export class SupabaseService {
     this.supabaseInstance = createClient(SUPABASE_URL, SUPABASE_KEY);
   }
 
-  uploadImage(file: File): Observable<string> {
+  uploadImage(file: FileBody): Observable<string> {
     return from(
       this.supabaseInstance.storage
         .from('images')
-        .upload(`/${Date.now()}_${file}`, file, {
+        .upload(`/${Date.now()}_${file?.name}`, file, {
           cacheControl: '3600',
           upsert: false,
         })

@@ -1,10 +1,10 @@
-**Backend Stack**
+**Backend Packages**
 
 [![Node.js](https://img.shields.io/badge/Node.js-✓-green)]() [![Express.js](https://img.shields.io/badge/Express.js-✓-lightgrey)]() [![MySQL](https://img.shields.io/badge/MySQL-✓-blue)]() [![Sequelize](https://img.shields.io/badge/Sequelize-✓-blueviolet)]() [![JWT](https://img.shields.io/badge/JWT-✓-blue)]() [![Bcrypt](https://img.shields.io/badge/Bcrypt-✓-blueviolet)]()
 
-**Frontend Stack**
+**Frontend Packages**
 
-[![Angular](https://img.shields.io/badge/Angular-✓-red)]() [![TypeScript](https://img.shields.io/badge/TypeScript-✓-blue)]()
+[![Angular](https://img.shields.io/badge/Angular-✓-red)]() [![TypeScript](https://img.shields.io/badge/TypeScript-✓-blue)]() [![FontAwesome](https://img.shields.io/badge/FontAwesome-✓-orange)]() [![RxJS](https://img.shields.io/badge/RxJS-✓-red)]() [![Supabase](https://img.shields.io/badge/Supabase-✓-blue)]() [![Animate.css](https://img.shields.io/badge/Animate.css-✓-orange)]() [![Ngx Cookie Service](https://img.shields.io/badge/Ngx%20Cookie%20Service-✓-green)]() [![Ngx Infinite Scroll](https://img.shields.io/badge/Ngx%20Infinite%20Scroll-✓-green)]()
 
 # Cook-It
 
@@ -23,13 +23,20 @@
 
 ## Project Overview
 
+<div style="width: 50%; margin: 0 auto;">
+  <video width="100%" height="auto" controls autoplay>
+    <source src="https://www.youtube.com/embed/Dm_pLo4hx94" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
 **Cook-It** is designed to simplify the process of managing recipes, providing users with a platform to explore, create, and organize their favorite recipes. With features like user authentication, CRUD operations on recipes, and search functionality, Cook-It offers a seamless cooking experience for enthusiasts of all levels.
 
 ## Deployed Project Showcase
 
 Cook-It backend and frontend are deployed separately. The backend API and the frontend application is deployed on are deployed on [Render](https//render.com). Database is deployed on [Aiven](https//aiven.io) Below are the deployment details:
 
--   **Frontend Application**: [Cook IT](https://cookit-3j6u.onrender.com/)
+-   **Try it**: [Cook IT](https://cookit-3j6u.onrender.com/)
 
 ### Note
 

@@ -20,8 +20,6 @@ const register = expressAsyncHandler(async (req: Request, res: Response): Promis
         throw new AppError(409, 'User already exist!');
     }
 
-    console.log(userData);
-
     const user = await createUser(userData);
 
     if (!user) {

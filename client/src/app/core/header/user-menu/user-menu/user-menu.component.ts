@@ -40,8 +40,6 @@ export class UserMenuComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log(this.logout);
-
     this.userDataSubscription = this.store
       .pipe(select(getUserData))
       .subscribe((user: any) => {

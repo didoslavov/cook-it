@@ -8,11 +8,14 @@ interface ImportMetaEnv {
    * @see Docs https://github.com/chihab/dotenv-run/packages/angular#node_env.
    */
   readonly NODE_ENV: string;
-  NG_APP_NEWS_API_KEY: string;
-  NG_APP_NEWS_API_URL: string;
-  NG_APP_API_URL: string;
   // Add your environment variables below
   // readonly NG_APP_API_URL: string;
+  readonly NG_APP_NEWS_API_KEY: string;
+  readonly NG_APP_NEWS_API_URL: string;
+  readonly NG_APP_API_URL: string;
+  readonly NG_APP_SUPABASE_URL: string;
+  readonly NG_APP_SUPABASE_BUCKET: string;
+  readonly NG_APP_SUPABASE_API_KEY: string;
   [key: string]: any;
 }
 

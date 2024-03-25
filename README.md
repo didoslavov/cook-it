@@ -31,7 +31,7 @@
 
 ## Deployed Project Showcase
 
-Cook-It backend and frontend are deployed separately. The backend API and the frontend application is deployed on are deployed on [Render](https//render.com). Database is deployed on [Aiven](https//aiven.io) Below are the deployment details:
+Cook-It backend and frontend are deployed separately. The backend API and the frontend application is deployed on are deployed on [Render](https://render.com/). Database is deployed on [Aiven](https://aiven.io/) Below are the deployment details:
 
 -   **Try it**: [Cook IT](https://cookit-3j6u.onrender.com/)
 

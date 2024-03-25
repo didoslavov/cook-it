@@ -6,13 +6,15 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Store, select } from '@ngrx/store';
 import { getUserData } from '../../../../store/auth/auth.selectors';
 import { Subscription } from 'rxjs';
 import { NotificationService } from '../../../../services/notification.service';
+import { AuthenticationService } from '../../../../services/authentication.service';
+import { AuthApiActions } from '../../../../store/auth/auth.actions';
 
 @Component({
   selector: 'app-user-menu',
@@ -22,7 +24,6 @@ import { NotificationService } from '../../../../services/notification.service';
   styleUrl: './user-menu.component.scss',
 })
 export class UserMenuComponent implements OnInit, OnDestroy {
-  @Input() logout!: Function;
   @ViewChild('menu') menu!: ElementRef;
 
   userDataSubscription: Subscription = new Subscription();
@@ -33,7 +34,8 @@ export class UserMenuComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private router: Router
   ) {
     this.faUser = faUser;
     this.faLogout = faRightFromBracket;
@@ -57,6 +59,8 @@ export class UserMenuComponent implements OnInit, OnDestroy {
       type: 'success',
     });
 
-    this.logout();
+    this.store.dispatch(AuthApiActions.logout());
+
+    this.router.navigate(['/']);
   }
 }

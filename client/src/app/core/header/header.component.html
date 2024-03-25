@@ -1,72 +1,77 @@
 <header class="header">
-    <a routerLink="/" fragment="Hero">
-        <img class="logo" src="../../../assets/logo.png" alt="Cook it Logo" />
-    </a>
-    <nav class="main-nav">
-        <ul class="main-nav-list">
-            @if (showRecipesLink || showCreateRecipeLink) {
-            <li><a class="main-nav-link" routerLink="/recipes" [queryParams]="{ offset: 0, limit: 4 }">Recipes</a></li>
-            }
-            @if (user && !showCreateRecipeLink) {
-            <li><a class="main-nav-link" routerLink="/recipes/create">Create Recipe</a></li>
-            }
-            @if (isHomePage) {
-            <li><a class="main-nav-link" routerLink="" fragment="How">How it works</a></li>
-            <li><a class="main-nav-link" routerLink="" fragment="About">About</a></li>
-            } @else {
-            <li><a class="main-nav-link" routerLink="/">Home</a></li>
-            }
-            @if(!user) {
-            <li><a class="btn btn--accent" [ngClass]="attentionSeeker" (mouseover)="attentionSeekerAnimation($event)"
-                    (mouseout)="attentionSeekerAnimationRemove($event)" routerLink="/auth/register">Join now</a>
-            </li>
-            } @else {
-            <li class="main-nav-list__item-user"><button #menuBtn class="main-nav-list__item-btn"
-                    (click)="toggleUserMenu()">{{user.firstName}}</button><img class="main-nav-list__item-img"
-                    src="{{user.avatar || ('../../../assets/useravatar.png')}}" alt="user avatar" />
-            </li>
-            }
-        </ul>
-        @if(showUserMenu) {
-        <app-user-menu [logout]="logout" />
+        <a routerLink="/" fragment="Hero">
+                <img class="logo" src="../../../assets/logo.png" alt="Cook it Logo" />
+        </a>
+        <nav class="main-nav">
+                <ul class="main-nav-list">
+                        @if (showRecipesLink || showCreateRecipeLink) {
+                        <li><a class="main-nav-link" routerLink="/recipes"
+                                        [queryParams]="{ offset: 0, limit: 4 }">Recipes</a></li>
+                        }
+                        @if (user && !showCreateRecipeLink) {
+                        <li><a class="main-nav-link" routerLink="/recipes/create">Create Recipe</a></li>
+                        }
+                        @if (isHomePage) {
+                        <li><a class="main-nav-link" routerLink="" fragment="How">How it works</a></li>
+                        <li><a class="main-nav-link" routerLink="" fragment="About">About</a></li>
+                        } @else {
+                        <li><a class="main-nav-link" routerLink="/">Home</a></li>
+                        }
+                        @if(!user) {
+                        <li><a class="btn btn--accent" [ngClass]="attentionSeeker"
+                                        (mouseover)="attentionSeekerAnimation($event)"
+                                        (mouseout)="attentionSeekerAnimationRemove($event)"
+                                        routerLink="/auth/register">Join now</a>
+                        </li>
+                        } @else {
+                        <li class="main-nav-list__item-user"><button #menuBtn class="main-nav-list__item-btn"
+                                        (click)="toggleUserMenu()">{{user.firstName}}</button><img
+                                        class="main-nav-list__item-img"
+                                        src="{{user.img || ('../../../assets/useravatar.png')}}" alt="user avatar" />
+                        </li>
+                        }
+                </ul>
+                @if(showUserMenu) {
+                <app-user-menu [logout]="logout" />
+                }
+        </nav>
+        <button class="main-nav__mobile-button" (click)="toggleMobileNav()">
+                @if(!showMobileNav) {
+                <fa-icon [icon]="faBars" class="main-nav__mobile-icon"></fa-icon>
+                } @else if(showMobileNav) {
+                <fa-icon [icon]="faCircleXmark" class="main-nav__mobile-icon"></fa-icon>
+                }
+        </button>
+        @if(showMobileNav){
+        <div class="main-nav__mobile-overlay animate__animated animate__fadeInRight">
+                <ul class="main-nav__mobile-list">
+                        @if (user) {
+                        <li><a class="main-nav-link main-nav__mobile-link" routerLink="/profile/{{user.id}}"
+                                        (click)="closeMobileNav()">Profile</a>
+                        </li>
+                        }
+                        <li><a class="main-nav-link main-nav__mobile-link" routerLink="/profile/{{user?.id}}/recipes"
+                                        [queryParams]="{ offset: 0, limit: 4 }" (click)="closeMobileNav()">Personal
+                                        Recipes</a>
+                        </li>
+                        <li><a class="main-nav-link main-nav__mobile-link" routerLink="/recipes"
+                                        [queryParams]="{ offset: 0, limit: 4 }" (click)="closeMobileNav()">Recipes</a>
+                        </li>
+                        <li><a class="main-nav-link main-nav__mobile-link" routerLink="" fragment="How"
+                                        (click)="closeMobileNav()">How it
+                                        works</a>
+                        </li>
+                        <li><a class="main-nav-link main-nav__mobile-link" routerLink="" fragment="About"
+                                        (click)="closeMobileNav()">About</a>
+                        </li>
+                        @if (!user) {
+                        <li><a class="btn btn--cta" routerLink="/auth/register" (click)="closeMobileNav()">Join now</a>
+                        </li>
+                        }
+                        <li><a class="main-nav-link main-nav__mobile-link" routerLink="" (click)="closeMobileNav()"
+                                        (click)="logout()">Logout</a>
+                        </li>
+                </ul>
+        </div>
         }
-    </nav>
-    <button class="main-nav__mobile-button" (click)="toggleMobileNav()">
-        @if(!showMobileNav) {
-        <fa-icon [icon]="faBars" class="main-nav__mobile-icon"></fa-icon>
-        } @else if(showMobileNav) {
-        <fa-icon [icon]="faCircleXmark" class="main-nav__mobile-icon"></fa-icon>
-        }
-    </button>
-    @if(showMobileNav){
-    <div class="main-nav__mobile-overlay animate__animated animate__fadeInRight">
-        <ul class="main-nav__mobile-list">
-            @if (user) {
-            <li><a class="main-nav-link main-nav__mobile-link" routerLink="/profile/{{user.id}}"
-                    (click)="closeMobileNav()">Profile</a>
-            </li>
-            }
-            <li><a class="main-nav-link main-nav__mobile-link" routerLink="/profile/{{user?.id}}/recipes"
-                    [queryParams]="{ offset: 0, limit: 4 }" (click)="closeMobileNav()">Personal
-                    Recipes</a>
-            </li>
-            <li><a class="main-nav-link main-nav__mobile-link" routerLink="/recipes"
-                    [queryParams]="{ offset: 0, limit: 4 }" (click)="closeMobileNav()">Recipes</a>
-            </li>
-            <li><a class="main-nav-link main-nav__mobile-link" routerLink="" fragment="How"
-                    (click)="closeMobileNav()">How it
-                    works</a>
-            </li>
-            <li><a class="main-nav-link main-nav__mobile-link" routerLink="" fragment="About"
-                    (click)="closeMobileNav()">About</a>
-            </li>
-            @if (!user) {
-            <li><a class="btn btn--cta" routerLink="/auth/register" (click)="closeMobileNav()">Join now</a></li>
-            }
-            <li><a class="main-nav-link main-nav__mobile-link" routerLink="" (click)="closeMobileNav()"
-                    (click)="logout()">Logout</a>
-            </li>
-        </ul>
-    </div>
-    }
 </header>

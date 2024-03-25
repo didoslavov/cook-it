@@ -9,16 +9,13 @@ import { nameValidators } from '../../validators/name.validators';
 import { prepTimeValidators } from '../../validators/prepTime.validators';
 import { cookTimeValidators } from '../../validators/cookTime.validators';
 import { imageValidators } from '../../validators/image.validators';
-import { ingredientValidators } from '../../validators/ingredient.validators';
-import { quantityValidators } from '../../validators/quantity.validators';
-import { stepsValidators } from '../../validators/steps.validators';
 import { descriptionValidators } from '../../validators/description.validators';
 
 export interface GenericFormData {
   userId?: string;
   firstName?: string;
   lastName?: string;
-  avatar?: string;
+  // avatar?: string;
   email?: string;
   password?: string;
   rePassword?: string;
@@ -76,10 +73,7 @@ export class GenericFormModel {
         lastNameValidators.maxLength,
       ])
     );
-    this.form.addControl(
-      'avatar',
-      new FormControl(null, [avatarValidators.required])
-    );
+    this.form.addControl('img', new FormControl(null));
     this.form.addControl(
       'email',
       new FormControl(null, [emailValidators.required, emailValidators.isEmail])

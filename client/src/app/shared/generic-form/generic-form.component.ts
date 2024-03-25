@@ -23,6 +23,7 @@ import { ErrorComponent } from '../error/error.component';
 import { ErrorService } from '../../services/error.service';
 import { Subject, Subscription, takeUntil } from 'rxjs';
 import { NotificationComponent } from '../notification/notification.component';
+import { SupabaseService } from '../../services/supabase.service';
 
 @Component({
   selector: 'app-generic-form',
@@ -60,6 +61,7 @@ export class GenericFormComponent implements OnInit, OnChanges, OnDestroy {
   formModel!: GenericFormModel;
   ingredientToEdit!: IngredientWithId | undefined;
   hasErrors: boolean = false;
+  image: string = '';
   private errorsSubscription: Subscription | undefined;
   private destroy$: Subject<void> = new Subject<void>();
 
@@ -67,7 +69,10 @@ export class GenericFormComponent implements OnInit, OnChanges, OnDestroy {
   declare faSpoon;
   declare faList;
 
-  constructor(private errorService: ErrorService) {
+  constructor(
+    private errorService: ErrorService,
+    private supabaseService: SupabaseService
+  ) {
     this.faBtn = faPlus;
     this.faSpoon = faSpoon;
     this.faList = faListOl;
@@ -77,16 +82,6 @@ export class GenericFormComponent implements OnInit, OnChanges, OnDestroy {
     if ('recipe' in changes && this.isRecipeEditForm()) {
       this.populateFormWithRecipeData();
     }
-  }
-
-  populateFormWithRecipeData(): void {
-    this.formModel?.form.patchValue({
-      name: this.recipe.name,
-      prepTime: this.recipe.prepTime,
-      cookTime: this.recipe.cookTime,
-      img: this.recipe.img,
-      description: this.recipe.description,
-    });
   }
 
   ngOnInit(): void {
@@ -219,44 +214,60 @@ export class GenericFormComponent implements OnInit, OnChanges, OnDestroy {
     stepsControl?.setValue(item);
   }
 
+  populateFormWithRecipeData(): void {
+    this.formModel?.form.patchValue({
+      name: this.recipe.name,
+      prepTime: this.recipe.prepTime,
+      cookTime: this.recipe.cookTime,
+      img: this.recipe.img,
+      description: this.recipe.description,
+    });
+  }
+
   onSubmit(): void {
     const formData = this.trimFormData(this.formModel.form.value);
 
-    if (this.formModel.form.valid) {
-      if (this.isRecipeEditForm()) {
-        const updatedRecipe: Recipe = {
-          name: formData.name,
-          prepTime: formData.prepTime,
-          cookTime: formData.cookTime,
-          img: formData.img,
-          ingredients: this.ingredients,
-          steps: this.steps,
-          description: formData.description,
-        };
+    this.supabaseService
+      .uploadImage(formData.img.split('\\').pop())
+      .subscribe((img) => {
+        if (this.formModel.form.valid) {
+          if (this.isRecipeEditForm()) {
+            const updatedRecipe: Recipe = {
+              name: formData.name,
+              prepTime: formData.prepTime,
+              cookTime: formData.cookTime,
+              img,
+              ingredients: this.ingredients,
+              steps: this.steps,
+              description: formData.description,
+            };
 
-        this.formSubmit.emit(updatedRecipe);
-      } else {
-        this.formSubmit.emit(formData);
-      }
-    } else {
-      Object.keys(this.formModel.form.controls).forEach((input) => {
-        const control = this.formModel.form.get(input);
-
-        if (control && control.errors) {
-          const currentErrors = control.errors as { [errorKey: string]: any };
-
-          for (const errorKey in currentErrors) {
-            if (currentErrors.hasOwnProperty(errorKey)) {
-              this.errorService.setErrors(input, {
-                [errorKey]: currentErrors[errorKey],
-              });
-            }
+            this.formSubmit.emit(updatedRecipe);
+          } else {
+            this.formSubmit.emit({ ...formData, img });
           }
         } else {
-          this.errorService.clearErrors(input);
+          Object.keys(this.formModel.form.controls).forEach((input) => {
+            const control = this.formModel.form.get(input);
+
+            if (control && control.errors) {
+              const currentErrors = control.errors as {
+                [errorKey: string]: any;
+              };
+
+              for (const errorKey in currentErrors) {
+                if (currentErrors.hasOwnProperty(errorKey)) {
+                  this.errorService.setErrors(input, {
+                    [errorKey]: currentErrors[errorKey],
+                  });
+                }
+              }
+            } else {
+              this.errorService.clearErrors(input);
+            }
+          });
         }
       });
-    }
   }
 
   private trimFormData(formData: any): any {

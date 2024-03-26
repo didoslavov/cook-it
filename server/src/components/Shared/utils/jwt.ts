@@ -1,5 +1,5 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
-const secret = process.env.SECRET || 'Potato';
+const secret = process.env.JWT_SECRET || 'Potato';
 
 export function createToken(data: string | object): string {
     return jwt.sign(data, secret, { expiresIn: '1d' });

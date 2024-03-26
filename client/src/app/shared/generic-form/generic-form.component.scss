@@ -49,6 +49,11 @@
           display: block;
           width: 80%;
           margin-top: 2rem;
+
+          &:disabled {
+            cursor: not-allowed;
+            background-color: var(--color-primary);
+          }
         }
 
         &-link {

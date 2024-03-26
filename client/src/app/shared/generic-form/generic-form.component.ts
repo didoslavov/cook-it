@@ -22,8 +22,8 @@ import {
 import { ErrorComponent } from '../error/error.component';
 import { ErrorService } from '../../services/error.service';
 import { Subject, Subscription, takeUntil } from 'rxjs';
-import { NotificationComponent } from '../notification/notification.component';
 import { SupabaseService } from '../../services/supabase.service';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-generic-form',
@@ -62,6 +62,7 @@ export class GenericFormComponent implements OnInit, OnChanges, OnDestroy {
   ingredientToEdit!: IngredientWithId | undefined;
   hasErrors: boolean = false;
   image: File | null = null;
+  isLoading: boolean | null = null;
 
   private errorsSubscription: Subscription | undefined;
   private destroy$: Subject<void> = new Subject<void>();
@@ -72,7 +73,8 @@ export class GenericFormComponent implements OnInit, OnChanges, OnDestroy {
 
   constructor(
     private errorService: ErrorService,
-    private supabaseService: SupabaseService
+    private supabaseService: SupabaseService,
+    private loadingService: LoadingService
   ) {
     this.faBtn = faPlus;
     this.faSpoon = faSpoon;
@@ -88,6 +90,8 @@ export class GenericFormComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit(): void {
     this.formModel = new GenericFormModel(this.formData, this.formType);
     this.formModel.form.addControl('ingredients', new FormControl(null));
+
+    this.subscribeToLoadingState();
 
     this.errorsSubscription = this.errorService.errors$
       .pipe(takeUntil(this.destroy$))
@@ -125,6 +129,57 @@ export class GenericFormComponent implements OnInit, OnChanges, OnDestroy {
       );
       this.errorsSubscription.unsubscribe();
     }
+  }
+
+  onFileChange(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const file: File = event.target.files[0];
+      this.image = file;
+    }
+  }
+
+  onSubmit(): void {
+    const formData = this.trimFormData(this.formModel.form.value);
+
+    this.supabaseService.uploadImage(this.image!).subscribe((img) => {
+      if (this.formModel.form.valid) {
+        if (this.isRecipeEditForm()) {
+          const updatedRecipe: Recipe = {
+            name: formData.name,
+            prepTime: formData.prepTime,
+            cookTime: formData.cookTime,
+            img,
+            ingredients: this.ingredients,
+            steps: this.steps,
+            description: formData.description,
+          };
+
+          this.formSubmit.emit(updatedRecipe);
+        } else {
+          this.formSubmit.emit({ ...formData, img });
+        }
+      } else {
+        Object.keys(this.formModel.form.controls).forEach((input) => {
+          const control = this.formModel.form.get(input);
+
+          if (control && control.errors) {
+            const currentErrors = control.errors as {
+              [errorKey: string]: any;
+            };
+
+            for (const errorKey in currentErrors) {
+              if (currentErrors.hasOwnProperty(errorKey)) {
+                this.errorService.setErrors(input, {
+                  [errorKey]: currentErrors[errorKey],
+                });
+              }
+            }
+          } else {
+            this.errorService.clearErrors(input);
+          }
+        });
+      }
+    });
   }
 
   isRegistrationForm(): boolean {
@@ -215,63 +270,26 @@ export class GenericFormComponent implements OnInit, OnChanges, OnDestroy {
     stepsControl?.setValue(item);
   }
 
-  populateFormWithRecipeData(): void {
+  private subscribeToLoadingState(): void {
+    this.loadingService
+      .getLoadingState()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((loading: boolean) => {
+        this.isLoading = loading;
+        if (loading) {
+          this.formModel.form.disable();
+        } else {
+          this.formModel.form.enable();
+        }
+      });
+  }
+
+  private populateFormWithRecipeData() {
     this.formModel?.form.patchValue({
       name: this.recipe.name,
       prepTime: this.recipe.prepTime,
       cookTime: this.recipe.cookTime,
       description: this.recipe.description,
-    });
-  }
-
-  onFileChange(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      const file: File = event.target.files[0];
-      this.image = file;
-    }
-  }
-
-  onSubmit(): void {
-    const formData = this.trimFormData(this.formModel.form.value);
-
-    this.supabaseService.uploadImage(this.image!).subscribe((img) => {
-      if (this.formModel.form.valid) {
-        if (this.isRecipeEditForm()) {
-          const updatedRecipe: Recipe = {
-            name: formData.name,
-            prepTime: formData.prepTime,
-            cookTime: formData.cookTime,
-            img,
-            ingredients: this.ingredients,
-            steps: this.steps,
-            description: formData.description,
-          };
-
-          this.formSubmit.emit(updatedRecipe);
-        } else {
-          this.formSubmit.emit({ ...formData, img });
-        }
-      } else {
-        Object.keys(this.formModel.form.controls).forEach((input) => {
-          const control = this.formModel.form.get(input);
-
-          if (control && control.errors) {
-            const currentErrors = control.errors as {
-              [errorKey: string]: any;
-            };
-
-            for (const errorKey in currentErrors) {
-              if (currentErrors.hasOwnProperty(errorKey)) {
-                this.errorService.setErrors(input, {
-                  [errorKey]: currentErrors[errorKey],
-                });
-              }
-            }
-          } else {
-            this.errorService.clearErrors(input);
-          }
-        });
-      }
     });
   }
 

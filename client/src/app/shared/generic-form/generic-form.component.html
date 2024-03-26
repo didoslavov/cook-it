@@ -103,7 +103,8 @@
                     <label for="description" class="form__container--content-controls-label">Cooking Description</label>
                 </div>
                 }
-                <input class="form__container--content-form-btn btn btn--full" type="submit" [value]="buttonText" />
+                <input [disabled]="isLoading" class="form__container--content-form-btn btn btn--full" type="submit"
+                    [value]="buttonText" />
             </form>
             <div [ngClass]="ingredients.length || steps.length ? 'opened' : ''" class="form__container--content-info">
                 <div class="ingredients">

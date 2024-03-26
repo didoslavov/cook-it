@@ -23,9 +23,9 @@
 
 ## Project Overview
 
-#### Watch video overview of the project
-
 -   **DEMO**: [Cook IT](https://cookit-3j6u.onrender.com/)
+
+#### Watch video overview of the project 
 
 [![Your Video](https://img.youtube.com/vi/Dm_pLo4hx94/0.jpg)](https://www.youtube.com/watch?v=Dm_pLo4hx94)
 

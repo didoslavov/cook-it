@@ -10,12 +10,12 @@
                 } @else if(errorMessage.key === 'pattern') {
                 Please enter a valid {{getFieldName(error.key)}}.
                 <p>e.g. john&#64;gmail.com</p>
-                } @else if (errorMessage.key === 'minlength') {
-                {{getFieldName(error.key)}} must be at least {{errorMessage.value['requiredLength']}}
-                } @else if (errorMessage.key === 'maxlength') {
-                {{getFieldName(error.key)}} must be at least {{errorMessage.value['requiredLength']}}
                 } @else if (errorMessage.key === 'mismatch') {
                 Passwords not match.
+                } @else if (errorMessage.key === 'maxlength') {
+                {{getFieldName(error.key)}} must be at least {{errorMessage.value['requiredLength']}}
+                } @else if (errorMessage.key === 'minlength') {
+                {{getFieldName(error.key)}} must be at least {{errorMessage.value['requiredLength']}}
                 } @else if (errorMessage.key === 'isNotNumber') {
                 {{getFieldName(error.key)}} must be a number.
                 } @else if (errorMessage.key === 'invalidQuantity') {

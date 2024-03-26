@@ -89,6 +89,7 @@ export class GenericFormModel {
       new FormControl(null, [
         rePasswordValidators.required,
         rePasswordValidators.minLength,
+        rePasswordValidators.matchPassword,
       ])
     );
   }

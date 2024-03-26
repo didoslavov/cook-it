@@ -11,6 +11,7 @@ resources
 *.userosscache
 *.sln.docstates
 *.env
+server/dist
 
 
 # User-specific files (MonoDevelop/Xamarin Studio)

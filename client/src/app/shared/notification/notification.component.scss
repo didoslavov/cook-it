@@ -6,7 +6,7 @@
   right: 4rem;
   border-radius: 1rem;
   position: fixed;
-  z-index: 99999;
+  z-index: 1000;
 
   &__success {
     background-color: var(--color-notification-success);

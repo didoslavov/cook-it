@@ -11,6 +11,7 @@
   display: grid;
   border-radius: 1rem;
   box-shadow: var(--shadow);
+  z-index: 9999;
 
   animation: fadeInDown 0.5s ease-in-out;
 

@@ -18,11 +18,13 @@ import {
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBookmark, faHeart } from '@fortawesome/free-regular-svg-icons';
 import { NotificationService } from '../../services/notification.service';
+import { LoadingService } from '../../services/loading.service';
+import { LoaderComponent } from '../../shared/loader/loader.component';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [CommonModule, RouterModule, FontAwesomeModule],
+  imports: [CommonModule, RouterModule, FontAwesomeModule, LoaderComponent],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
   animations: [ingredientsState, directionsState, iconAnimation],
@@ -37,6 +39,7 @@ export class DetailsComponent implements OnInit {
   showDirections = false;
   isLiked: boolean | undefined = false;
   isBookmarked: boolean | undefined = false;
+  isLoading: boolean | undefined = false;
 
   declare user: User | null;
   declare faHeart;
@@ -48,7 +51,8 @@ export class DetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private recipeService: RecipeService,
     private store: Store,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private loadingService: LoadingService
   ) {
     this.faHeart = faHeart;
     this.faHeartFull = faHeartFull;
@@ -60,6 +64,10 @@ export class DetailsComponent implements OnInit {
     this.store.pipe(select(getUserData)).subscribe((user: any) => {
       this.user = user?.user;
     });
+
+    this.loadingService
+      .getLoadingState()
+      .subscribe((loading) => (this.isLoading = loading));
 
     this.route.params.subscribe((params) => {
       this.recipeId = params['recipeId'];

@@ -1,6 +1,7 @@
 <header class="header">
         <a routerLink="/" fragment="Hero">
-                <img class="logo" src="../../../assets/logo.png" alt="Cook it Logo" />
+                <img class="logo" width="500" height="563" priority="" ngSrc="../../../assets/logo.png"
+                        alt="Cook it Logo" />
         </a>
         <nav class="main-nav">
                 <ul class="main-nav-list">
@@ -26,8 +27,8 @@
                         } @else {
                         <li class="main-nav-list__item-user"><button #menuBtn class="main-nav-list__item-btn"
                                         (click)="toggleUserMenu()">{{user.firstName}}</button><img
-                                        class="main-nav-list__item-img"
-                                        src="{{user.img || ('../../../assets/useravatar.png')}}" alt="user avatar" />
+                                        class="main-nav-list__item-img" width="980" height="981"
+                                        ngSrc="{{user.img || ('../../../assets/useravatar.png')}}" alt="user avatar" />
                         </li>
                         }
                 </ul>

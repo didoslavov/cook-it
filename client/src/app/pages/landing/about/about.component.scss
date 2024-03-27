@@ -14,7 +14,8 @@
     &--img {
       mask: url(https://assets.codepen.io/1101822/circles-mask-whole.svg)
         no-repeat center;
-      max-width: 100%;
+      width: 100%;
+      height: auto;
     }
   }
 

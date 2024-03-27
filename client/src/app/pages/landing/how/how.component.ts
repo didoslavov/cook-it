@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -10,7 +11,7 @@ import {
 @Component({
   selector: 'app-how',
   standalone: true,
-  imports: [FontAwesomeModule, RouterModule],
+  imports: [FontAwesomeModule, RouterModule, NgOptimizedImage],
   templateUrl: './how.component.html',
   styleUrl: './how.component.scss',
 })

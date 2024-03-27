@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -24,7 +24,13 @@ import { AuthApiActions } from '../../store/auth/auth.actions';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule, RouterModule, UserMenuComponent],
+  imports: [
+    CommonModule,
+    FontAwesomeModule,
+    RouterModule,
+    UserMenuComponent,
+    NgOptimizedImage,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })

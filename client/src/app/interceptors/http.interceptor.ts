@@ -18,7 +18,6 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
   const cookieService = inject(CookieService);
   const loadingService = inject(LoadingService);
   const notificationService = inject(NotificationService);
-  loadingService.setLoadingState(true);
 
   if (req.url.startsWith(environment.newsApiUrl)) {
     return next(req).pipe(
@@ -38,6 +37,12 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
         loadingService.setLoadingState(false);
       })
     );
+  }
+
+  if (req.url.includes('like') || req.url.includes('bookmark')) {
+    loadingService.setLoadingState(false);
+  } else {
+    loadingService.setLoadingState(true);
   }
 
   const modifiedReq = req.clone({

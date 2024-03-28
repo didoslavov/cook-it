@@ -1,7 +1,6 @@
 .loader {
   font-size: 6.2rem;
   display: inline;
-  font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
   color: var(--color-primary-dark);
   box-sizing: border-box;
@@ -10,11 +9,12 @@
   letter-spacing: 2px;
   position: relative;
 }
+
 .loader::after {
   content: "Loading";
   position: absolute;
   left: 0;
-  top: 0;
+  top: 0.8rem;
   color: var(--color-accent-dark);
   height: 100%;
   overflow: hidden;

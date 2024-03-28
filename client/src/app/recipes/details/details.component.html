@@ -1,5 +1,7 @@
-@if (!isLoading) {
 <section class="details">
+    @if (isLoading) {
+    <app-loader class="details__loader" />
+    }
     <div class="details__container">
         <media class="details__container--img">
             <img class="" src="{{recipe.img}}" alt="Good looking meal">
@@ -70,4 +72,3 @@
         </div>
     </div>
 </section>
-}

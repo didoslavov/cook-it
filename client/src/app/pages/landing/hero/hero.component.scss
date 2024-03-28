@@ -79,6 +79,19 @@
 }
 
 @media screen and (max-width: 900px) {
+  .bg-video {
+    display: none;
+  }
+
+  .section-hero {
+    background: linear-gradient(
+        0deg,
+        var(--color-primary-opacity-light) 0%,
+        var(--color-primary-opacity-light) 100%
+      ),
+      url("../../../../assets/about-image.avif");
+  }
+
   .hero {
     display: flex;
     flex-direction: column;

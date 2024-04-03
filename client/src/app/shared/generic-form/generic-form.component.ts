@@ -139,47 +139,50 @@ export class GenericFormComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   onSubmit(): void {
+    if (this.formModel.form.value.some((v: string) => v.trim() === '')) return;
+
     const formData = this.trimFormData(this.formModel.form.value);
 
-    this.supabaseService.uploadImage(this.image!).subscribe((img) => {
-      if (this.formModel.form.valid) {
-        if (this.isRecipeEditForm()) {
-          const updatedRecipe: Recipe = {
-            name: formData.name,
-            prepTime: formData.prepTime,
-            cookTime: formData.cookTime,
-            img,
-            ingredients: this.ingredients,
-            steps: this.steps,
-            description: formData.description,
-          };
-
-          this.formSubmit.emit(updatedRecipe);
-        } else {
-          this.formSubmit.emit({ ...formData, img });
-        }
-      } else {
-        Object.keys(this.formModel.form.controls).forEach((input) => {
-          const control = this.formModel.form.get(input);
-
-          if (control && control.errors) {
-            const currentErrors = control.errors as {
-              [errorKey: string]: any;
+    if (formData)
+      this.supabaseService.uploadImage(this.image!).subscribe((img) => {
+        if (this.formModel.form.valid) {
+          if (this.isRecipeEditForm()) {
+            const updatedRecipe: Recipe = {
+              name: formData.name,
+              prepTime: formData.prepTime,
+              cookTime: formData.cookTime,
+              img,
+              ingredients: this.ingredients,
+              steps: this.steps,
+              description: formData.description,
             };
 
-            for (const errorKey in currentErrors) {
-              if (currentErrors.hasOwnProperty(errorKey)) {
-                this.errorService.setErrors(input, {
-                  [errorKey]: currentErrors[errorKey],
-                });
-              }
-            }
+            this.formSubmit.emit(updatedRecipe);
           } else {
-            this.errorService.clearErrors(input);
+            this.formSubmit.emit({ ...formData, img });
           }
-        });
-      }
-    });
+        } else {
+          Object.keys(this.formModel.form.controls).forEach((input) => {
+            const control = this.formModel.form.get(input);
+
+            if (control && control.errors) {
+              const currentErrors = control.errors as {
+                [errorKey: string]: any;
+              };
+
+              for (const errorKey in currentErrors) {
+                if (currentErrors.hasOwnProperty(errorKey)) {
+                  this.errorService.setErrors(input, {
+                    [errorKey]: currentErrors[errorKey],
+                  });
+                }
+              }
+            } else {
+              this.errorService.clearErrors(input);
+            }
+          });
+        }
+      });
   }
 
   isRegistrationForm(): boolean {
@@ -205,11 +208,11 @@ export class GenericFormComponent implements OnInit, OnChanges, OnDestroy {
 
     if (
       ingredientControl &&
-      ingredientControl.value &&
+      ingredientControl.value.trim() &&
       quantityControl &&
-      quantityControl.value &&
+      quantityControl.value.trim() &&
       unitControl &&
-      unitControl.value
+      unitControl.value.trim()
     ) {
       const ingredient = {
         id: this.ingredientToEdit?.id,
@@ -255,7 +258,7 @@ export class GenericFormComponent implements OnInit, OnChanges, OnDestroy {
   onAddStep(): void {
     const stepsControl = this.formModel.form.get('steps');
 
-    if (stepsControl && stepsControl.value) {
+    if (stepsControl && stepsControl.value.trim()) {
       this.addStep.emit(stepsControl.value);
       stepsControl.setValue('');
     }

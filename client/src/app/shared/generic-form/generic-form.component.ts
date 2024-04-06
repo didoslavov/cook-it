@@ -139,8 +139,6 @@ export class GenericFormComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   onSubmit(): void {
-    if (this.formModel.form.value.some((v: string) => v.trim() === '')) return;
-
     const formData = this.trimFormData(this.formModel.form.value);
 
     if (formData)
